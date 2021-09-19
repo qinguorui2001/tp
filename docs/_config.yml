@@ -1,5 +1,5 @@
 title: "TA^2"
-theme: minima
+theme: jekyll-theme-merlot
 
 header_pages:
   - UserGuide.md
