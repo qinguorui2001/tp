@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### QIN GUORUI
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/qinguorui2001.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/qinguorui2001)]
+[[portfolio](team/qinguorui2001.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: Code quality reviewer
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
 ### Johnny Doe
 
