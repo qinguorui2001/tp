@@ -255,16 +255,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user**
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+TA<sup>2</sup> is developed for Teaching Assistants(TA) and Professors in the School of Computing(SOC) at the National 
+University of Singapore(NUS).
+
+**Profile:**
+* has a need to manage student submissions
+* has a need to take note of student inquiries
+* has a need to organise information across modules
+* (for TAs) has a need to organise own tasks and tasks as a TA
+* has no time to organise information manually
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+ 
+**Value proposition**
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+TA<sup>2</sup> aims to help SOC TAs and professors by managing student submissions in an 
+efficient manner. Without the need to manually keep track of information in a separate document, they
+will be able to save more time. As users who are able to type fast, they will be able to manage module
+information(student submissions etc.) much faster than when using a mouse/GUI driven app.
 
 ### User stories
 
