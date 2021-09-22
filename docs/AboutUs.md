@@ -9,16 +9,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Project Advisor
-
 ### Lim Wei Chang
 
 <img src="images/weichang18.png" width="200px">
@@ -28,6 +18,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Team Lead
 * Responsibilities: Integration
+
+### QIN GUORUI
+
+<img src="images/qinguorui2001.png" width="200px">
+
+[[github](http://github.com/qinguorui2001)]
+[[portfolio](team/qinguorui2001.md)]
+
+* Role: Code quality reviewer
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
 
 ### Yeo Yiheng
 
