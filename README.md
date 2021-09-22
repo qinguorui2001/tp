@@ -1,6 +1,6 @@
 [![Java CI](https://github.com/AY2122S1-CS2103T-T13-2/tp/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/AY2122S1-CS2103T-T13-2/tp/actions/workflows/gradle.yml)
 
-![Ui](docs/images/UiMockUp.png)
+![Ui](docs/images/Ui.png)
 
 #TA^2
 
@@ -15,3 +15,4 @@
 ## Acknowledgement
 * **This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).**
   * For the detailed documentation of  AddressBook-Level3 project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
+  
