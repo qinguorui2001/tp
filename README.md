@@ -5,7 +5,7 @@
 #TA^2
 
 * This is **a project done by Software Engineering (SE) students**.
-* The project simulates an ongoing software project for a desktop application designed to help teacher assistants with organising their
+* The project simulates an ongoing software project for a desktop application designed to help teaching assistants with organising their
   own modules as well as keeping track of their students' work.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
