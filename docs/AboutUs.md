@@ -19,6 +19,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Team Lead
 * Responsibilities: Integration
 
+### Clifford Kaleb Toh Jing Zhe
+
+<img src="images/droffilc13.png" width="200px">
+
+[[github](http://github.com/droffilc13)]
+[[portfolio](team/droffilc13.md)]
+
+* Role: Developer
+* Responsibilities: Scheduling and tracking
+
 ### QIN GUORUI
 
 <img src="images/qinguorui2001.png" width="200px">
@@ -28,6 +38,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Code quality reviewer
 * Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+
 
 ### Yeo Yiheng
 
