@@ -38,15 +38,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Documentation
 
-### Jean Doe
+### Zheng Tao Jun
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/taojun99.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/TaoJun99)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: Testing
 
 ### James Doe
 
