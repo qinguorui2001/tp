@@ -9,15 +9,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lim Wei Chang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/weichang18.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
+[[github](http://github.com/weichang18)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
+* Role: Team Lead
+* Responsibilities: Integration
 
 ### Clifford Kaleb Toh Jing Zhe
 
@@ -29,14 +29,25 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Scheduling and tracking
 
-### Johnny Doe
+### QIN GUORUI
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/qinguorui2001.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/qinguorui2001)]
+[[portfolio](team/qinguorui2001.md)]
+
+* Role: Code quality reviewer
+* Responsibilities: Looks after code quality, ensures adherence to coding standards, etc.
+
+
+### Yeo Yiheng
+
+<img src="images/yeo-yiheng.png" width="200px">
+
+[[github](http://github.com/yeo-yiheng)] [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Documentation
 
 ### Jean Doe
 
