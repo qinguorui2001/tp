@@ -9,7 +9,7 @@
   own modules as well as keeping track of their students' work.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
-* It is named `TA^2` as it is designed to be the assistant to teacher assistants.
+* It is named `TA^2` as it is designed to be the assistant to teaching assistants.
 * This project is a **part of the se-education.org** initiative.
   
 ## Acknowledgement
