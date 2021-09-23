@@ -8,36 +8,36 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.assignment.Assignment;
 
 public class AssignmentListPanel extends UiPart<Region> {
     private static final String FXML = "AssignmentListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AssignmentListPanel.class);
 
     @javafx.fxml.FXML
-    private ListView<Person> assignmentListView;
+    private ListView<Assignment> assignmentListView;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public AssignmentListPanel(ObservableList<Person> personList) {
+    public AssignmentListPanel(ObservableList<Assignment> assignmentList) {
         super(FXML);
-        assignmentListView.setItems(personList);
-        assignmentListView.setCellFactory(listView -> new AssignmentListPanel.PersonListViewCell());
+        assignmentListView.setItems(assignmentList);
+        assignmentListView.setCellFactory(listView -> new AssignmentListPanel.AssignmentListViewCell());
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Assignment} using a {@code AssignmentCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    class AssignmentListViewCell extends ListCell<Assignment> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
-            if (empty || person == null) {
+        protected void updateItem(Assignment assignment, boolean empty) {
+            super.updateItem(assignment, empty);
+            if (empty || assignment == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new AssignmentCard(assignment, getIndex() + 1).getRoot());
             }
         }
     }
