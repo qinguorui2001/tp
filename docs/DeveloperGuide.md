@@ -270,15 +270,24 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
+| Priority | As a …​                                 | I want to …​                               | So that I can…​                                                     |
+| -------- | ------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | tutor for the first use                    | see all commands available                    | recall commands and use them properly when I forget how to use the app |
+| `* * *`  | tutor                                      | add a new student or professor                |                                                                        |
+| `* * *`  | tutor                                      | delete a student or professor                 | remove entries that I no longer need                                   |
+| `* * *`  | tutor                                      | find a person by name or module               | locate details of persons without having to go through the entire list |
+| `* * *`  | tutor                                      | assign tasks to students                      |                                                                        |
+| `* * *`  | tutor                                      | delete tasks assigned before                  | remove the outdated assignments for students                           |
+| `* * *`  | tutor                                      | mark students' tasks as done                  | record students' progress more easily                                  |
+| `* *`    | tutor teaching online                      | access the web links used for teaching        | access information from teaching websites immediately                  |
+| `* *`    | tutor for several modules                  | organize student data according to module     | manage my tasks of different modules in an organised manner            |
+| `* *`    | student and tutor                          | organise my tasks in order of deadline        | manage my time better                                                  |
+| `*`      | easily frustrated tutor                    | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                 |
+| `*`      | busy tutor                                 | list certain people I interacted frequently   | save time searching their name whenever I start app                    |
+| `*`      | tutor with many persons in the contact book| sort persons by name                          | locate a person easily                                                 |
+| `*`      | responsible tutor                          | track students' progress on their assignments | identify and reach out to those who need help                          |
+| `*`      | tutor                                      | list all students I am teaching               | ensure I added right and correct number of people before               |
+| `*`      | clumsy tutor                               | undo actions                                  | recover information that I accidentally delete                         |
 *{More to be added}*
 
 ### Use cases
@@ -322,7 +331,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **t-**: Symbol for an assignment list related command
+* **p-**: Symbol for a person related command
+* **e-**: Symbol for an email related command
+* **m-**: Symbol for a module related command
+* **n-**: Symbol for a name related command
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
