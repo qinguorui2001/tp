@@ -255,16 +255,25 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user**
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+TA<sup>2</sup> is developed for Teaching Assistants(TA) and Professors in the School of Computing(SOC) at the National 
+University of Singapore(NUS).
+
+**Profile:**
+* has a need to manage student submissions
+* has a need to take note of student inquiries
+* has a need to organise information across modules
+* (for TAs) has a need to organise own tasks and tasks as a TA
+* has no time to organise information manually
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+ 
+**Value proposition**
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+TA<sup>2</sup> aims to help SOC TAs and professors by managing student submissions in an 
+efficient manner. Without the need to manually keep track of information in a separate document, they
+will be able to save more time. As users who are able to type fast, they will be able to manage module
+information(student submissions etc.) much faster than when using a mouse/GUI driven app.
 
 ### User stories
 
@@ -290,9 +299,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  TA<sup>2</sup> shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  TA<sup>2</sup> deletes the person
 
     Use case ends.
 
@@ -304,9 +313,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TA<sup>2</sup> shows an error message.
 
       Use case resumes at step 2.
+
+
+**Use case: Find a person**
+
+**MSS**
+1. User requests to find a person with the specified keyword(s)
+2. TA<sup>2</sup> shows a list of persons with matching keyword(s)
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The format of the command is invalid.
+  * 1a1. TA<sup>2</sup> shows an error message.
+  
+    Use case resumes at step 1
+* 2a. No persons match the specified keyword(s).
+
+    Use case ends.
 
 *{More to be added}*
 
