@@ -46,8 +46,8 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 [[github](http://github.com/yeo-yiheng)] [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: Documentation
+* Role: Developer and Documentation
+* Responsibilities: Ensures proper code documentation and  adherence to the documentation standards.
 
 ### Zheng Tao Jun
 
