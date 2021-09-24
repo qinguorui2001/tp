@@ -279,14 +279,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor                                      | assign tasks to students                      |                                                                        |
 | `* * *`  | tutor                                      | delete tasks assigned before                  | remove the outdated assignments for students                           |
 | `* * *`  | tutor                                      | mark students' tasks as done                  | record students' progress more easily                                  |
-| `* *`    | tutor teaching online                      | access the web links used for teaching        | access information from teaching websites immediately                  |
-| `* *`    | tutor for several modules                  | organize student data according to module     | manage my tasks of different modules in an organised manner            |
-| `* *`    | student and tutor                          | organise my tasks in order of deadline        | manage my time better                                                  |
-| `*`      | easily frustrated tutor                    | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                 |
-| `*`      | busy tutor                                 | list certain people I interacted frequently   | save time searching their name whenever I start app                    |
-| `*`      | tutor with many persons in the contact book| sort persons by name                          | locate a person easily                                                 |
-| `*`      | responsible tutor                          | track students' progress on their assignments | identify and reach out to those who need help                          |
-| `*`      | tutor                                      | list all students I am teaching               | ensure I added right and correct number of people before               |
+| `* * *`  | tutor teaching online                      | access the web links used for teaching        | access information from teaching websites immediately                  |
+| `* * *`  | tutor for several modules                  | organize student data according to module     | manage my tasks of different modules in an organised manner            |
+| `* * *`  | student and tutor                          | organise my tasks in order of deadline        | manage my time better                                                  |
+| `* * *`  | easily frustrated tutor                    | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                 |
+| `* * *`  | tutor with many persons in the contact book| sort persons by name                          | locate a person easily                                                 |
+| `* * *`  | responsible tutor                          | track students' progress on their assignments | identify and reach out to those who need help                          |
+| `* * *`  | tutor                                      | list all students I am teaching               | ensure I added right and correct number of people before               |
+| `* *`    | busy tutor                                 | list certain people I interacted frequently   | save time searching their name whenever I start app                    |
 | `*`      | clumsy tutor                               | undo actions                                  | recover information that I accidentally delete                         |
 *{More to be added}*
 
@@ -333,9 +333,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **t-**: Symbol for an assignment list related command
 * **p-**: Symbol for a person related command
-* **e-**: Symbol for an email related command
-* **m-**: Symbol for a module related command
-* **n-**: Symbol for a name related command
+* **e/**: Symbol for a requirement to state email address
+* **m/**: Symbol for a requirement to state the module
+* **n/**: Symbol for a requirement to state a name
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
