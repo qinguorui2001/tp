@@ -255,44 +255,62 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user**
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+TA<sup>2</sup> is developed for Teaching Assistants(TA) and Professors in the School of Computing(SOC) at the National 
+University of Singapore(NUS).
+
+**Profile:**
+* has a need to manage student submissions
+* has a need to take note of student inquiries
+* has a need to organise information across modules
+* (for TAs) has a need to organise own tasks and tasks as a TA
+* has no time to organise information manually
 * can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+ 
+**Value proposition**
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
-
+TA<sup>2</sup> aims to help SOC TAs and professors by managing student submissions in an 
+efficient manner. Without the need to manually keep track of information in a separate document, they
+will be able to save more time. As users who are able to type fast, they will be able to manage module
+information(student submissions etc.) much faster than when using a mouse/GUI driven app.
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
+| Priority | As a …​                                 | I want to …​                               | So that I can…​                                                     |
+| -------- | ------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | tutor for the first use                    | see all commands available                    | recall commands and use them properly when I forget how to use the app |
+| `* * *`  | tutor                                      | add a new student or professor                |                                                                        |
+| `* * *`  | tutor                                      | delete a student or professor                 | remove entries that I no longer need                                   |
+| `* * *`  | tutor                                      | find a person by name or module               | locate details of persons without having to go through the entire list |
+| `* * *`  | tutor                                      | assign tasks to students                      |                                                                        |
+| `* * *`  | tutor                                      | delete tasks assigned before                  | remove the outdated assignments for students                           |
+| `* * *`  | tutor                                      | mark students' tasks as done                  | record students' progress more easily                                  |
+| `* * *`  | tutor teaching online                      | access the web links used for teaching        | access information from teaching websites immediately                  |
+| `* * *`  | tutor for several modules                  | organize student data according to module     | manage my tasks of different modules in an organised manner            |
+| `* * *`  | student and tutor                          | organise my tasks in order of deadline        | manage my time better                                                  |
+| `* * *`  | easily frustrated tutor                    | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                 |
+| `* * *`  | tutor with many persons in the contact book| sort persons by name                          | locate a person easily                                                 |
+| `* * *`  | responsible tutor                          | track students' progress on their assignments | identify and reach out to those who need help                          |
+| `* * *`  | tutor                                      | list all students I am teaching               | ensure I added right and correct number of people before               |
+| `* *`    | busy tutor                                 | list certain people I interacted frequently   | save time searching their name whenever I start app                    |
+| `*`      | clumsy tutor                               | undo actions                                  | recover information that I accidentally delete                         |
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC02 - Delete a person**
 
 **MSS**
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  TA<sup>2</sup> shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  TA<sup>2</sup> deletes the person
 
     Use case ends.
 
@@ -304,7 +322,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. TA<sup>2</sup> shows an error message.
 
       Use case resumes at step 2.
 
@@ -332,13 +350,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Find a person**
+
+**MSS**
+1. User requests to find a person with the specified keyword(s)
+2. TA<sup>2</sup> shows a list of persons with matching keyword(s)
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The format of the command is invalid.
+  * 1a1. TA<sup>2</sup> shows an error message.
+  
+    Use case resumes at step 1
+* 2a. No persons match the specified keyword(s).
+
+    Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. System should respond within 2 seconds of user request.
+5. Should be a single user product.
+6. Data should be stored in a human editable text file.
+7. Data cannot be stored in DBMS. 
+8. Size of products should not exceed 100MB.
+9. Size of documents should not exceed 15MB per file.
 
 *{More to be added}*
 
@@ -346,7 +388,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **t-**: Symbol for an assignment list related command
+* **p-**: Symbol for a person related command
+* **e/**: Symbol for a requirement to state email address
+* **m/**: Symbol for a requirement to state the module
+* **n/**: Symbol for a requirement to state a name
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
