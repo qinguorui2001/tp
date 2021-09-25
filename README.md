@@ -2,7 +2,7 @@
 
 ![Ui](docs/images/Ui.png)
 
-# TA^2
+# TA<sup>2</sup>
 
 * This is **a project done by Software Engineering (SE) students**.
 * The project simulates an ongoing software project for a desktop application designed to help teaching assistants with organising their
