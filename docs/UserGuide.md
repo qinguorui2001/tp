@@ -44,7 +44,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 **:information_source: Notes about the command format:**<br>
 
-* `t-` specifies an assignment list related command, whereas `-p` specifies a person related command.
+* `a-` specifies an assignment list related command, whereas `-p` specifies a person related command.
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `p-add n/NAME`, `NAME` is a parameter which can be used as `p-add n/John Doe`.
@@ -131,46 +131,46 @@ Examples:
 * `p-list` followed by `p-delete 2` deletes the 2nd person in the address book.
 * `p-find n/Betsy` followed by `p-delete 1` deletes the 1st person in the results of the `p-find` command.
 
-### Adding an assignment with deadline: `t-deadline`
+### Adding an assignment with deadline: `a-add`
 
 Adds an assignment with deadline to a person in the address book.
 
-Format: `t-deadline n/NAME d/DESCRIPTION by/DD/MM/YYYY [HHMM]`
+Format: `a-add n/NAME d/DESCRIPTION by/DD/MM/YYYY [HHMM]`
 
 Examples:
-* `t-deadline n/John Doe d/Lab1 by/ 21/08/2021`
-* `t-deadline n/Betsy Crowe d/Assignment2 by/ 22/09/2021 1200`
+* `a-add n/John Doe d/Lab1 by/ 21/08/2021`
+* `a-add n/Betsy Crowe d/Assignment2 by/ 22/09/2021 1200`
 
-### Deleting an assignment with deadline : `t-delete`
+### Deleting an assignment with deadline : `a-delete`
 
 Deletes the specified assignment with deadline from a person in the address book.
 
-Format: `t-delete n/NAME INDEX`
+Format: `a-delete n/NAME INDEX`
 
 * Deletes the deadline of person `NAME` at the specified `INDEX`.
 * The index refers to the index number shown in the displayed assignment list.
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `t-delete n/Wei Chang 10` deletes the 10th assignment in Wei Chang’s assignment list.
+* `a-delete n/Wei Chang 10` deletes the 10th assignment in Wei Chang’s assignment list.
 
-### Marking an assignment with deadline as done: `t-done`
+### Marking an assignment with deadline as done: `a-done`
 
 Marks a specified assignment's deadline of a person as done in the address book.
 
-Format: `t-done n/NAME INDEX`
+Format: `a-done n/NAME INDEX`
 
 Examples:
-* `t-done n/John Doe 4` marks the 4th assignment in John Doe’s assignment list as done.
+* `a-done n/John Doe 4` marks the 4th assignment in John Doe’s assignment list as done.
 
-### Showing person’s assignment list: `t-show`
+### Showing person’s assignment list: `a-show`
 
 Shows the assignment list of the specified person in the address book.
 
-Format: `t-show INDEX`
+Format: `a-show INDEX`
 
 Examples:
-* `t-show 2` renders the 2nd person’s assignment list on the right side of the app.
+* `a-show 2` renders the 2nd person’s assignment list on the right side of the app.
 * The index refers to the index shown in the displayed person list.
   ![result for 'show assignment list'](images/showAssignmentListResult.png)
 
@@ -222,7 +222,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
-**t-deadline** | `t-deadline n/NAME d/DESCRIPTION by/DD/MM/YYYY [HHMM]` <br> e.g., `t-deadline n/John Doe d/Lab1 by/ 21/08/2021`
-**t-delete** | `t-delete n/NAME INDEX` <br> e.g., `t-delete n/Wei Chang 10`
-**t-done** | `t-done n/NAME INDEX` <br> e.g., `t-done n/John Doe 4`
-**t-list** | `t-show INDEX` <br> e.g., `t-show 2`
+**a-add** | `a-add n/NAME d/DESCRIPTION by/DD/MM/YYYY [HHMM]` <br> e.g., `a-add n/John Doe d/Lab1 by/ 21/08/2021`
+**a-delete** | `a-delete n/NAME INDEX` <br> e.g., `a-delete n/Wei Chang 10`
+**a-done** | `a-done n/NAME INDEX` <br> e.g., `a-done n/John Doe 4`
+**a-list** | `a-show INDEX` <br> e.g., `a-show 2`
