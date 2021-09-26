@@ -344,6 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
 **Use case: UC03 - List all person in the address book**
 
 **MSS**
@@ -354,6 +355,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 * 2a. The list is empty.
   Use case ends.
+  
+  
+**Use case: UC05 - Add a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User enters a new person's information.
+4. AddressBook adds the person
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The given command format is wrong.
+
+    * 3a1. AddressBook shows an error message related to wrong format.
+
+      Use case resumes at step 2.
+  
+* 3b. The added person is already in the list.
+    * 3b1. AddressBook requests to add another person.
+
+      Use case resumes at step 2.
+
 
 *{More to be added}*
 
