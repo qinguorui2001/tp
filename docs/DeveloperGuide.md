@@ -279,22 +279,49 @@ information(student submissions etc.) much faster than when using a mouse/GUI dr
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
+| Priority | As a …​                                 | I want to …​                               | So that I can…​                                                     |
+| -------- | ------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | tutor for the first use                    | see all commands available                    | recall commands and use them properly when I forget how to use the app |
+| `* * *`  | tutor                                      | add a new student or professor                |                                                                        |
+| `* * *`  | tutor                                      | delete a student or professor                 | remove entries that I no longer need                                   |
+| `* * *`  | tutor                                      | find a person by name or module               | locate details of persons without having to go through the entire list |
+| `* * *`  | tutor                                      | assign tasks to students                      |                                                                        |
+| `* * *`  | tutor                                      | delete tasks assigned before                  | remove the outdated assignments for students                           |
+| `* * *`  | tutor                                      | mark students' tasks as done                  | record students' progress more easily                                  |
+| `* * *`  | tutor teaching online                      | access the web links used for teaching        | access information from teaching websites immediately                  |
+| `* * *`  | tutor for several modules                  | organize student data according to module     | manage my tasks of different modules in an organised manner            |
+| `* * *`  | student and tutor                          | organise my tasks in order of deadline        | manage my time better                                                  |
+| `* * *`  | easily frustrated tutor                    | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                 |
+| `* * *`  | tutor with many persons in the contact book| sort persons by name                          | locate a person easily                                                 |
+| `* * *`  | responsible tutor                          | track students' progress on their assignments | identify and reach out to those who need help                          |
+| `* * *`  | tutor                                      | list all students I am teaching               | ensure I added right and correct number of people before               |
+| `* *`    | busy tutor                                 | list certain people I interacted frequently   | save time searching their name whenever I start app                    |
+| `*`      | clumsy tutor                               | undo actions                                  | recover information that I accidentally delete                         |
 *{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC01 - Find a person**
+
+**MSS**
+1. User requests to find a person with the specified keyword(s)
+2. TA<sup>2</sup> shows a list of persons with matching keyword(s)
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The format of the command is invalid.
+  * 1a1. TA<sup>2</sup> shows an error message.
+  
+    Use case resumes at step 1
+* 2a. No persons match the specified keyword(s).
+
+    Use case ends.
+
+**Use case: UC02 - Delete a person**
 
 **MSS**
 
@@ -318,23 +345,42 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 
-**Use case: Find a person**
+**Use case: UC03 - List all person in the address book**
 
 **MSS**
-1. User requests to find a person with the specified keyword(s)
-2. TA<sup>2</sup> shows a list of persons with matching keyword(s)
 
-   Use case ends.
+1. User requests to list persons
+2. TA<sup>2</sup> shows a list of persons
+
+**Extensions**
+* 2a. The list is empty.
+  Use case ends.
+  
+  
+**Use case: UC05 - Add a person**
+
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User enters a new person's information.
+4. AddressBook adds the person
+
+    Use case ends.
 
 **Extensions**
 
-* 1a. The format of the command is invalid.
-  * 1a1. TA<sup>2</sup> shows an error message.
-  
-    Use case resumes at step 1
-* 2a. No persons match the specified keyword(s).
+* 3a. The given command format is wrong.
 
-    Use case ends.
+    * 3a1. AddressBook shows an error message related to wrong format.
+
+      Use case resumes at step 2.
+  
+* 3b. The added person is already in the list.
+    * 3b1. AddressBook requests to add another person.
+
+      Use case resumes at step 2.
+
 
 *{More to be added}*
 
@@ -356,7 +402,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **t-**: Symbol for an assignment list related command
+* **p-**: Symbol for a person related command
+* **e/**: Symbol for a requirement to state email address
+* **m/**: Symbol for a requirement to state the module
+* **n/**: Symbol for a requirement to state a name
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
