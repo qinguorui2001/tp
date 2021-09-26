@@ -14,7 +14,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/weichang18.png" width="200px">
 
 [[github](http://github.com/weichang18)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/weichang18.md)]
 
 * Role: Team Lead
 * Responsibilities: Integration
@@ -44,17 +44,18 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/yeo-yiheng.png" width="200px">
 
-[[github](http://github.com/yeo-yiheng)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/yeo-yiheng)] 
+[[portfolio](team/yeo-yiheng.md)]
 
-* Role: Developer
-* Responsibilities: Documentation
+* Role: Developer and Documentation
+* Responsibilities: Ensures proper code documentation and  adherence to the documentation standards.
 
 ### Zheng Tao Jun
 
 <img src="images/taojun99.png" width="200px">
 
 [[github](http://github.com/TaoJun99)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/taojun99.md)]
 
 * Role: Developer
 * Responsibilities: Testing

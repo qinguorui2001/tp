@@ -303,6 +303,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
+**Use case: UC01 - Find a person**
+
+**MSS**
+1. User requests to find a person with the specified keyword(s)
+2. TA<sup>2</sup> shows a list of persons with matching keyword(s)
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The format of the command is invalid.
+  * 1a1. TA<sup>2</sup> shows an error message.
+  
+    Use case resumes at step 1
+* 2a. No persons match the specified keyword(s).
+
+    Use case ends.
+
 **Use case: UC02 - Delete a person**
 
 **MSS**
@@ -326,6 +344,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+
+**Use case: UC03 - List all person in the address book**
+
+**MSS**
+
+1. User requests to list persons
+2. TA<sup>2</sup> shows a list of persons
+
+**Extensions**
+* 2a. The list is empty.
+  Use case ends.
+  
+  
 **Use case: UC05 - Add a person**
 
 **MSS**
@@ -350,23 +381,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: Find a person**
-
-**MSS**
-1. User requests to find a person with the specified keyword(s)
-2. TA<sup>2</sup> shows a list of persons with matching keyword(s)
-
-   Use case ends.
-
-**Extensions**
-
-* 1a. The format of the command is invalid.
-  * 1a1. TA<sup>2</sup> shows an error message.
-  
-    Use case resumes at step 1
-* 2a. No persons match the specified keyword(s).
-
-    Use case ends.
 
 *{More to be added}*
 
