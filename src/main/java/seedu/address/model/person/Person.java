@@ -2,11 +2,17 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.Description;
+import seedu.address.model.assignment.DueDate;
+import seedu.address.model.assignment.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +29,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final ArrayList<Assignment> assignments = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -34,6 +41,9 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        // TODO: change constructor to accommodate assignments
+        assignments.add(new Assignment(new Description(name + " This is a test assignment"),
+                new DueDate(LocalDateTime.now()), Status.createPendingStatus()));
     }
 
     public Name getName() {
@@ -50,6 +60,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public ArrayList<Assignment> getAssignments() {
+        return assignments;
     }
 
     /**
