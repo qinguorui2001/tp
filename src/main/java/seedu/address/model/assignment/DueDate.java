@@ -17,11 +17,12 @@ public class DueDate {
     //TODO: change VALIDATION INDEX
     //public static final String VALIDATION_REGEX = "\\d{3,}";
 
+    public final String value;
+
     private final LocalDate date;
     private final LocalDateTime dateTime;
     private final LocalTime time;
 
-    public final String value;
 
     /**
      * Constructs a {@code DueDate}.
