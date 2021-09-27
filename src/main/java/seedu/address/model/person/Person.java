@@ -2,7 +2,9 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -43,7 +45,7 @@ public class Person {
         this.tags.addAll(tags);
         // TODO: change constructor to accommodate assignments
         assignments.add(new Assignment(new Description(name + " This is a test assignment"),
-                new DueDate(LocalDateTime.now()), Status.createPendingStatus()));
+                new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
     }
 
     public Name getName() {
