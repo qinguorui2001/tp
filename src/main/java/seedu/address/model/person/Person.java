@@ -20,17 +20,17 @@ public class Person {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Module module;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, email, address, tags);
+    public Person(Name name, Email email, Module module, Set<Tag> tags) {
+        requireAllNonNull(name, email, module, tags);
         this.name = name;
         this.email = email;
-        this.address = address;
+        this.module = module;
         this.tags.addAll(tags);
     }
 
@@ -42,8 +42,8 @@ public class Person {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Module getModule() {
+        return module;
     }
 
     /**
@@ -84,25 +84,24 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getModule().equals(getModule())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, address, tags);
+        return Objects.hash(name, email, module, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Module: ")
+                .append(getModule());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
