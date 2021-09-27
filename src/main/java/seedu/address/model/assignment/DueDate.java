@@ -15,8 +15,8 @@ public class DueDate {
     protected static final DateTimeFormatter PARSE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
     //Todo change the TOW REGEX.
-    private static final String VALIDATION_DATE_REGEX = "(((0[1-9]|1[0-9]|2[0-8])[/](0[1-9]|1[012]))|((29|30|31)" +
-            "[/](0[13578]|1[02]))|((29|30)[/](0[4,6,9]|11))[/][0-9]{4})";
+    private static final String VALIDATION_DATE_REGEX = "(((0[1-9]|1[0-9]|2[0-8])[/](0[1-9]|1[012]))|((29|30|31)"
+            + "[/](0[13578]|1[02]))|((29|30)[/](0[4,6,9]|11))[/][0-9]{4})";
     private static final String VALIDATION_TIME_REGEX = ",([0-1]?0[0-9]|2[0-3])[0-5][0-9]";
 
     private final String value;
