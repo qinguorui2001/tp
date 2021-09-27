@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DueDate {
+
     public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format dd/MM/yyyy,HHmm";
 
     protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
@@ -23,16 +24,29 @@ public class DueDate {
     private final LocalDateTime dateTime;
     private final LocalTime time;
 
+    /**
+     * Constructs a {@code DueDate}.
+     *
+     * @param date Date of due date.
+     * @param time Time of due date.
+     */
     public DueDate(String date, String time) {
         requireNonNull(date);
         requireNonNull(time);
-        //checkArgument(isValidDueDate(date.toString() + time.toString()), MESSAGE_CONSTRAINTS);
+        // TODO: use Validation regex to verify dateTime format
+        // checkArgument(isValidDueDate(date.toString() + time.toString()), MESSAGE_CONSTRAINTS);
+        //checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
         this.time = LocalTime.parse(time, PARSE_TIME_FORMAT);
         this.dateTime = LocalDateTime.of(this.date, this.time);
         this.value = this.dateTime.format(OUTPUT_FORMAT);
     }
 
+    /**
+     * Constructs a {@code DueDate}.
+     *
+     * @param date Date of due date.
+     */
     public DueDate(String date) {
         this(date, "2359");
     }
@@ -64,5 +78,13 @@ public class DueDate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public LocalTime getTime() {
+        return time;
     }
 }
