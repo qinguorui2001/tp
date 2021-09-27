@@ -34,7 +34,6 @@ public class ParserUtilTest {
     private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_DATE = "11/11/2021";
-    private static final String VALID_DATE_TIME = "11/11/2021,1655";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
