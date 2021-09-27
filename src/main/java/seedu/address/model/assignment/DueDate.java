@@ -17,8 +17,8 @@ public class DueDate {
     //public static final String VALIDATION_REGEX = "\\d{3,}";
 
     private final LocalDate date;
-    private final LocalTime time;
     private final LocalDateTime dateTime;
+    private final LocalTime time;
     public final String value;
 
     /**
