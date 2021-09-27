@@ -16,7 +16,7 @@ public class Status {
      */
     private Status(AssignmentStatus assignmentStatus) {
         requireNonNull(assignmentStatus);
-        this.value = assignmentStatus.toString();
+        this.value = assignmentStatus.toString().toLowerCase();
     }
 
     public static Status createCompletedStatus() {

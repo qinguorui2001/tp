@@ -43,6 +43,7 @@ public class AssignmentCard extends UiPart<Region> {
         //todo change representation of dateTime
         dueDate.setText(assignment.getDueDate().value.toString());
         status.getChildren().add(new Label(assignment.getStatus().toString()));
+        status.setId(assignment.getStatus().value);
     }
 
     @Override
