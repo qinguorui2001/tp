@@ -9,16 +9,18 @@ import java.time.format.DateTimeFormatter;
 
 public class DueDate {
     public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format dd/MM/yyyy HHmm";
-    //TODO: decide which parse, output format to keep
+
     protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
     protected static final DateTimeFormatter PARSE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
+
     //TODO: change VALIDATION INDEX
     //public static final String VALIDATION_REGEX = "\\d{3,}";
 
     private final LocalDate date;
     private final LocalDateTime dateTime;
     private final LocalTime time;
+
     public final String value;
 
     /**
