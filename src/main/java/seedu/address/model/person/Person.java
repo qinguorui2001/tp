@@ -43,7 +43,7 @@ public class Person {
         this.tags.addAll(tags);
         // TODO: change constructor to accommodate assignments
         assignments.add(new Assignment(new Description(name + " This is a test assignment"),
-                new DueDate(LocalDateTime.now()), Status.createCompletedStatus()));
+                new DueDate(LocalDateTime.now()), Status.createLateStatus()));
     }
 
     public Name getName() {
