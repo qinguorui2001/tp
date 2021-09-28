@@ -52,8 +52,7 @@ class DueDateTest {
         assertFalse(DueDate.isValidTime("2400")); // invalid hour
         assertFalse(DueDate.isValidTime("0060")); // invalid minutes
         assertFalse(DueDate.isValidTime("2460")); // invalid hour and minutes
-
-
+        
         // valid DueDate
         assertTrue(DueDate.isValidTime("2359")); //  maximum hour and minutes
         assertTrue(DueDate.isValidTime("0000")); // minimum hour and minutes
