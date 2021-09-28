@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,43 +22,37 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Module module;
     private final Set<Tag> tags = new HashSet<>();
     private final ArrayList<Assignment> assignments = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Email email, Module module, Set<Tag> tags) {
+        requireAllNonNull(name, email, module, tags);
         this.name = name;
-        this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.module = module;
         this.tags.addAll(tags);
         // TODO: change constructor to accommodate assignments
         assignments.add(new Assignment(new Description(name + " This is a test assignment"),
-                new DueDate(LocalDateTime.now()), Status.createPendingStatus()));
+                new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
     }
 
     public Name getName() {
         return name;
     }
 
-    public Phone getPhone() {
-        return phone;
-    }
-
     public Email getEmail() {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Module getModule() {
+        return module;
     }
 
     public ArrayList<Assignment> getAssignments() {
@@ -103,28 +96,25 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getModule().equals(getModule())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, email, module, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Phone: ")
-                .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
-                .append("; Address: ")
-                .append(getAddress());
+                .append("; Module: ")
+                .append(getModule());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
