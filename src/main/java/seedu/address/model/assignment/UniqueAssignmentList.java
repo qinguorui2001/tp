@@ -1,31 +1,32 @@
 package seedu.address.model.assignment;
 
+import static java.util.Objects.requireNonNull;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
+import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 
 /**
  * A list of assignments that enforces uniqueness between its elements and does not allow nulls.
  * An assignment is considered unique by comparing using {@code Assignment#isSameAssignment(Assignment)}. As such, adding and updating of
- * assignments uses Assignment#isSameAssignment(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
- * as to ensure that the person with exactly the same fields will be removed.
+ * assignments uses Assignment#isSameAssignment(Person) for equality to ensure that the assignment being added or updated is
+ * unique in terms of identity in the UniqueAssignmentList. However, the removal of an assignment uses Assignment#equals(Object)
+ * to ensure that the assignment with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
+ * @see Assignment#isSameAssignment(Assignment)
  */
 public class UniqueAssignmentList implements Iterable<Assignment>{
+
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -37,6 +38,7 @@ public class UniqueAssignmentList implements Iterable<Assignment>{
         internalList.addAll(assignments);
         return internalUnmodifiableList;
     }
+
     /**
      * Returns true if the list contains an equivalent assignment as the given argument.
      */
@@ -68,11 +70,11 @@ public class UniqueAssignmentList implements Iterable<Assignment>{
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new AssignmentNotFoundException();
         }
 
         if (!target.isSameAssignment(editedAssignment) && contains(editedAssignment)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateAssignmentException();
         }
 
         internalList.set(index, editedAssignment);
@@ -85,8 +87,17 @@ public class UniqueAssignmentList implements Iterable<Assignment>{
     public void delete(Assignment toDelete) {
         requireNonNull(toDelete);
         if (!internalList.remove(toDelete)) {
-            throw new PersonNotFoundException();
+            throw new AssignmentNotFoundException();
         }
+    }
+
+    public void done(Assignment toDone) {
+        requireNonNull(toDone);
+        if (!internalList.contains(toDone)) {
+            throw new AssignmentNotFoundException();
+        }
+        setAssignment(toDone, new Assignment(toDone.getDescription(), toDone.getDueDate(),
+                Status.createCompletedStatus()));
     }
 
     public void setAssignments(UniqueAssignmentList replacement) {
