@@ -1,7 +1,6 @@
 package seedu.address.model.assignment;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -10,22 +9,22 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 
 /**
  * A list of assignments that enforces uniqueness between its elements and does not allow nulls.
- * An assignment is considered unique by comparing using {@code Assignment#isSameAssignment(Assignment)}. As such, adding and updating of
- * assignments uses Assignment#isSameAssignment(Person) for equality to ensure that the assignment being added or updated is
- * unique in terms of identity in the UniqueAssignmentList. However, the removal of an assignment uses Assignment#equals(Object)
+ * An assignment is considered unique by comparing using {@code Assignment#isSameAssignment(Assignment)}.
+ * As such, adding and updating of assignments uses Assignment#isSameAssignment(Person) for equality to ensure
+ * that the assignment being added or updated is unique in terms of identity in the UniqueAssignmentList.
+ * However, the removal of an assignment uses Assignment#equals(Object)
  * to ensure that the assignment with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Assignment#isSameAssignment(Assignment)
  */
-public class UniqueAssignmentList implements Iterable<Assignment>{
+public class UniqueAssignmentList implements Iterable<Assignment> {
 
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
@@ -91,6 +90,10 @@ public class UniqueAssignmentList implements Iterable<Assignment>{
         }
     }
 
+    /**
+     * Marks the equivalent assignment as done from the list.
+     * The assignment must exist in the list.
+     */
     public void done(Assignment toDone) {
         requireNonNull(toDone);
         if (!internalList.contains(toDone)) {
