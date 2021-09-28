@@ -10,8 +10,8 @@ import java.time.format.DateTimeFormatter;
 
 public class DueDate {
     public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format dd/MM/yyyy HHmm";
-    public static final String DATE_VALIDATION_REGEX
-            = "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}$";
+    public static final String DATE_VALIDATION_REGEX =
+            "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}$";
     public static final String TIME_VALIDATION_REGEX = "^(00|[0,1][0-9]||2[0-3])([0-5][0-9])$";
 
     protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
