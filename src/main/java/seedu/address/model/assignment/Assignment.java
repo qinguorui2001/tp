@@ -85,6 +85,5 @@ public class Assignment {
                 .append(getStatus());
         return builder.toString();
     }
-
 }
 
