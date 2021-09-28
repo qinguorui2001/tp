@@ -29,8 +29,9 @@ public class ModuleTest {
         assertFalse(Module.isValidModule(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Module.isValidModule("Blk 456, Den Road, #01-355"));
-        assertTrue(Module.isValidModule("-")); // one character
-        assertTrue(Module.isValidModule("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Module.isValidModule("GER1000")); // 3 letter prefix
+        assertTrue(Module.isValidModule("CS1231")); // 2 letter prefix
+        assertTrue(Module.isValidModule("CS2103T")); // 1 postfix
+        assertTrue(Module.isValidModule("ACC2232T")); // 3 letter prefix + 1 postfix
     }
 }

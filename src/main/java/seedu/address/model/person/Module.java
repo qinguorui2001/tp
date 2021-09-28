@@ -9,18 +9,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Module {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Modules can take any values, and it should not be blank";
 
     /*
      * The first character of the module must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * otherwise " " (a blank string) becomes a valid input. Otherwise, detect
+     * if the module code matches a 2/3 letter - 4 number - optional one letter pattern.
+     *
      */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String VALIDATION_REGEX = "([a-zA-Z]{2,3})([0-9]{4})([a-zA-Z])?";
 
     public final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code module}.
      *
      * @param module A valid module.
      */
@@ -31,7 +33,7 @@ public class Module {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid module.
      */
     public static boolean isValidModule(String test) {
         return test.matches(VALIDATION_REGEX);

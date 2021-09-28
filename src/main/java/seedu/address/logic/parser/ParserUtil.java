@@ -50,18 +50,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String module} into an {@code Module}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code module} is invalid.
      */
-    public static Module parseModule(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Module.isValidModule(trimmedAddress)) {
+    public static Module parseModule(String module) throws ParseException {
+        requireNonNull(module);
+        String trimmedModule = module.trim();
+        if (!Module.isValidModule(trimmedModule)) {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
-        return new Module(trimmedAddress);
+        return new Module(trimmedModule);
     }
 
     /**
