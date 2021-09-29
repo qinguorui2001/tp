@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
 
 
 public class DueDate {
-    public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format dd/MM/yyyy HHmm";
+    public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format d/MM/yyyy HHmm";
 
-    protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
+    protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy");
     protected static final DateTimeFormatter PARSE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
 

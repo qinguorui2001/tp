@@ -14,17 +14,21 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
+import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AssignmentTest {
+
+    // TODO: to remove
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Person person = new PersonBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+        Assignment assignment = new AssignmentBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> assignment.getDescription());
     }
 
     @Test
-    public void isSamePerson() {
+    public void isSameAssignment() {
+
         // same object -> returns true
         assertTrue(ALICE.isSamePerson(ALICE));
 

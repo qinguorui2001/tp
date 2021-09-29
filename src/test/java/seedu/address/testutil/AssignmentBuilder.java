@@ -61,7 +61,7 @@ public class AssignmentBuilder {
     /**
      * Sets the {@code Status} to pending of the {@code Assignment} that we are building.
      */
-    public AssignmentBuilder withCPendingStatus() {
+    public AssignmentBuilder withPendingStatus() {
         this.status = Status.createPendingStatus();
         return this;
     }
