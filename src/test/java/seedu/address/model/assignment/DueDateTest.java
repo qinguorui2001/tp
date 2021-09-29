@@ -37,8 +37,10 @@ class DueDateTest {
         assertTrue(DueDate.isValidDate("11/1/2021")); // double digit for day and double digit for month
         assertTrue(DueDate.isValidDate("31/12/9999")); // maximum values for day, month and year
         assertTrue(DueDate.isValidDate("01/02/2021")); // day and month with prefix 0
-        assertTrue(DueDate.isValidDate("01/1/2021")); // day with prefix 0
-        assertTrue(DueDate.isValidDate("1/01/2021")); //  month with prefix 0
+        assertTrue(DueDate.isValidDate("01/1/2021")); // day with prefix 0 with single digit month
+        assertTrue(DueDate.isValidDate("1/01/2021")); // month with prefix 0 with single digit day
+        assertTrue(DueDate.isValidDate("11/01/2021")); // month with prefix 0 with double digit day
+        assertTrue(DueDate.isValidDate("01/11/2021")); // day with prefix 0 with double digit month
     }
 
     @Test
@@ -54,7 +56,7 @@ class DueDateTest {
         assertFalse(DueDate.isValidTime("2460")); // invalid hour and minutes
 
         // valid DueDate
-        assertTrue(DueDate.isValidTime("2359")); //  maximum hour and minutes
+        assertTrue(DueDate.isValidTime("2359")); // maximum hour and minutes
         assertTrue(DueDate.isValidTime("0000")); // minimum hour and minutes
         assertTrue(DueDate.isValidTime("0059")); // minimum hour and maximum minutes
         assertTrue(DueDate.isValidTime("2300")); // maximum hour and minimum minutes
