@@ -135,11 +135,11 @@ Examples:
 
 Adds an assignment with deadline to a person in the address book.
 
-Format: `a-add n/NAME d/DESCRIPTION by/DD/MM/YYYY [HHMM]`
+Format: `a-add n/NAME d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
 
 Examples:
-* `a-add n/John Doe d/Lab1 by/ 21/08/2021`
-* `a-add n/Betsy Crowe d/Assignment2 by/ 22/09/2021 1200`
+* `a-add n/John Doe d/Lab1 by/ 21/8/2021`
+* `a-add n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
 
 ### Deleting an assignment with deadline : `a-delete`
 
@@ -222,7 +222,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
-**a-add** | `a-add n/NAME d/DESCRIPTION by/DD/MM/YYYY [HHMM]` <br> e.g., `a-add n/John Doe d/Lab1 by/ 21/08/2021`
+**a-add** | `a-add n/NAME d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `a-add n/John Doe d/Lab1 by/ 21/8/2021`
 **a-delete** | `a-delete n/NAME INDEX` <br> e.g., `a-delete n/Wei Chang 10`
 **a-done** | `a-done n/NAME INDEX` <br> e.g., `a-done n/John Doe 4`
 **a-list** | `a-show INDEX` <br> e.g., `a-show 2`
