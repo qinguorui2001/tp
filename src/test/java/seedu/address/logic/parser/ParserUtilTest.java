@@ -15,19 +15,27 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.DueDate;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
+<<<<<<< HEAD
     private static final String INVALID_PHONE = "+651234";
+=======
+    private static final String INVALID_MODULE = " ";
+>>>>>>> b01f418a6b8c90cb9527e59741846e601b6b4128
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_DATE = "41/12/2011";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
+<<<<<<< HEAD
     private static final String VALID_PHONE = "123456";
+=======
+    private static final String VALID_MODULE = "CS1231S";
+>>>>>>> b01f418a6b8c90cb9527e59741846e601b6b4128
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_DATE = "11/11/2021";
     private static final String VALID_TAG_1 = "friend";
@@ -79,34 +87,32 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parsePhone_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+    public void parseModule_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseModule((String) null));
     }
 
     @Test
-    public void parsePhone_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_PHONE));
+<<<<<<< HEAD
+=======
+    public void parseModule_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseModule(INVALID_MODULE));
     }
 
     @Test
-    public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+    public void parseModule_validValueWithoutWhitespace_returnsAddress() throws Exception {
+        Module expectedModule = new Module(VALID_MODULE);
+        assertEquals(expectedModule, ParserUtil.parseModule(VALID_MODULE));
     }
 
     @Test
-    public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+    public void parseModule_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
+        String addressWithWhitespace = WHITESPACE + VALID_MODULE + WHITESPACE;
+        Module expectedModule = new Module(VALID_MODULE);
+        assertEquals(expectedModule, ParserUtil.parseModule(addressWithWhitespace));
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
-    }
-
-    @Test
+>>>>>>> b01f418a6b8c90cb9527e59741846e601b6b4128
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
     }
