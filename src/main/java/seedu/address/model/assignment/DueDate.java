@@ -1,6 +1,7 @@
 package seedu.address.model.assignment;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,15 +10,21 @@ import java.time.format.DateTimeFormatter;
 
 public class DueDate {
 
-    public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format dd/MM/yyyy,HHmm";
+    public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
+    public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
+    public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm";
 
     protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
     protected static final DateTimeFormatter PARSE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
-    //Todo change the TOW REGEX.
-    private static final String VALIDATION_DATE_REGEX = "(((0[1-9]|1[0-9]|2[0-8])[/](0[1-9]|1[012]))|((29|30|31)"
-            + "[/](0[13578]|1[02]))|((29|30)[/](0[4,6,9]|11))[/][0-9]{4})";
-    private static final String VALIDATION_TIME_REGEX = ",([0-1]?0[0-9]|2[0-3])[0-5][0-9]";
+
+    private static final String DATE_VALIDATION_REGEX =
+            "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}$";
+    private static final String TIME_VALIDATION_REGEX = "^(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
+    private static final String DATE_AND_TIME_VALIDATION_REGEX =
+            "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}(,)"
+                    + "(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
+    private static final String LATEST_TIME_IN_DAY = "2359";
 
     private final String value;
 
@@ -34,9 +41,8 @@ public class DueDate {
     public DueDate(String date, String time) {
         requireNonNull(date);
         requireNonNull(time);
-        // TODO: use Validation regex to verify dateTime format
-        // checkArgument(isValidDueDate(date.toString() + time.toString()), MESSAGE_CONSTRAINTS);
-        //checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS_TIME);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
         this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
         this.time = LocalTime.parse(time, PARSE_TIME_FORMAT);
         this.dateTime = LocalDateTime.of(this.date, this.time);
@@ -49,19 +55,35 @@ public class DueDate {
      * @param date Date of due date.
      */
     public DueDate(String date) {
-        this(date, "2359");
+        this(date, LATEST_TIME_IN_DAY);
     }
 
-    public static boolean isValidOnlyDate(String date) {
-        return !date.contains(",") && date.matches(VALIDATION_DATE_REGEX);
+    /**
+     * Returns true if a given string is a valid date.
+     */
+    public static boolean isValidDate(String test) {
+        return test.matches(DATE_VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string is a valid Time.
+     */
+    public static boolean isValidTime(String test) {
+        return test.matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if the date and time is valid.
+     */
     public static boolean isValidDateAndTime(String date) {
-        return date.contains(",") && date.matches(VALIDATION_TIME_REGEX) && date.matches(VALIDATION_DATE_REGEX);
+        return date.matches(DATE_AND_TIME_VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if date is valid due date form.
+     */
     public static boolean isValidDueDate(String date) {
-        return isValidOnlyDate(date) || isValidDateAndTime(date);
+        return isValidDate(date) || isValidDateAndTime(date);
     }
 
     @Override
@@ -79,13 +101,5 @@ public class DueDate {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public LocalTime getTime() {
-        return time;
     }
 }

@@ -77,7 +77,7 @@ public class ParserUtil {
         String trimmedDueDate = dueDate.trim();
         String splitString = ",";
         if (!DueDate.isValidDueDate(trimmedDueDate)) {
-            throw new ParseException(DueDate.MESSAGE_CONSTRAINTS);
+            throw new ParseException(DueDate.MESSAGE_CONSTRAINTS_DUE_DATE);
         } else if (!dueDate.contains(splitString)) {
             return new DueDate(trimmedDueDate);
         } else {
