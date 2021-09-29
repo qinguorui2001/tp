@@ -73,10 +73,10 @@ public class DueDateTest {
         assertFalse(DueDate.isValidDueDate(" ")); // spaces only
         assertFalse(DueDate.isValidDueDate("^")); // only non-alphanumeric characters
         assertFalse(DueDate.isValidDueDate("11/11/2021*")); // contains non-alphanumeric characters
-        assertFalse(DueDate.isValidDueDate("11/11/2021,1588")); // contains the wrong time
-        assertFalse(DueDate.isValidDueDate("111/188/2021*")); // contains wrong day and month
+        assertFalse(DueDate.isValidDueDate("11/11/2021,1588")); // contains the invalid time
+        assertFalse(DueDate.isValidDueDate("111/188/2021*")); // contains invalid day and month
         assertFalse(DueDate.isValidDueDate("11/11/2021 1444")); // no comma but space between time and date
-        assertFalse(DueDate.isValidDueDate("11/11/2021,744")); // wrong format for time part
+        assertFalse(DueDate.isValidDueDate("11/11/2021,744")); // invalid format for time
 
         // valid dueDate
         assertTrue(DueDate.isValidDueDate("11/11/2021")); // date only

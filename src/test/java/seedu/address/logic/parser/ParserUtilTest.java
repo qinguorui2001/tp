@@ -21,23 +21,16 @@ import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
-<<<<<<< HEAD
-    private static final String INVALID_PHONE = "+651234";
-=======
     private static final String INVALID_MODULE = " ";
->>>>>>> b01f418a6b8c90cb9527e59741846e601b6b4128
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_DATE = "41/12/2011";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
-<<<<<<< HEAD
-    private static final String VALID_PHONE = "123456";
-=======
     private static final String VALID_MODULE = "CS1231S";
->>>>>>> b01f418a6b8c90cb9527e59741846e601b6b4128
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_DATE = "11/11/2021";
+    private static final String VALID_TIME = "1200";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -92,8 +85,6 @@ public class ParserUtilTest {
     }
 
     @Test
-<<<<<<< HEAD
-=======
     public void parseModule_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseModule(INVALID_MODULE));
     }
@@ -112,7 +103,6 @@ public class ParserUtilTest {
     }
 
     @Test
->>>>>>> b01f418a6b8c90cb9527e59741846e601b6b4128
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
     }
@@ -153,8 +143,9 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsDateAndTime() throws Exception {
-        DueDate expectedDueDate = new DueDate(VALID_DATE);
-        assertEquals(expectedDueDate, ParserUtil.parseDate(VALID_DATE));
+        DueDate expectedDueDate = new DueDate(VALID_DATE, VALID_TIME);
+        String validDateAndTime = VALID_DATE + "," + VALID_TIME;
+        assertEquals(expectedDueDate, ParserUtil.parseDate(validDateAndTime));
     }
 
     @Test
