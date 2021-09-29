@@ -13,18 +13,17 @@ public class DueDate {
     public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
     public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
     public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm";
+    public static final String DATE_VALIDATION_REGEX =
+            "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}$";
+    public static final String TIME_VALIDATION_REGEX = "^(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
+    public static final String DATE_AND_TIME_VALIDATION_REGEX =
+              "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}(,)"
+                      + "(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
+    public static final String LATEST_TIME_IN_DAY = "2359";
 
     protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
     protected static final DateTimeFormatter PARSE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
-
-    private static final String DATE_VALIDATION_REGEX =
-            "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}$";
-    private static final String TIME_VALIDATION_REGEX = "^(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
-    private static final String DATE_AND_TIME_VALIDATION_REGEX =
-            "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}(,)"
-                    + "(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
-    private static final String LATEST_TIME_IN_DAY = "2359";
 
     public final String value;
 
