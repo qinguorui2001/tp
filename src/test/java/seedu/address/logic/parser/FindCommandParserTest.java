@@ -9,6 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -25,10 +26,26 @@ public class FindCommandParserTest {
         // no leading and trailing whitespaces
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")));
-        assertParseSuccess(parser, "Alice Bob", expectedFindCommand);
+        assertParseSuccess(parser, "n/Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
+        assertParseSuccess(parser, "n/ \n Alice \n \t Bob  \t", expectedFindCommand);
+
+        //  finding a module
+        FindCommand expectedFindCommandWithModule =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("CS1101S")));
+        assertParseSuccess(parser, "m/CS1101S", expectedFindCommandWithModule);
+
+        // finding both name and module
+        FindCommand expectedFindCommandWithBoth =
+                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob", "CS1101S")));
+        assertParseSuccess(parser, "n/Alice Bob m/CS1101S", expectedFindCommandWithBoth);
+    }
+
+    @Test
+    public void parse_invalidArgs_returnsError() {
+        // no prefix n/ or m/
+        assertParseFailure(parser, "Alice Bob CS1101S", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
 }
