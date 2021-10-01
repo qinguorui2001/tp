@@ -97,14 +97,21 @@ public class DueDate {
         return true;
     }
 
+    /**
+     * Creates a due date based on the format in the Json file
+     *
+     * @param dueDate dueDate in the Json file
+     * @return the corresponding dueDate
+     */
     public static DueDate createDueDate(String dueDate) {
         requireNonNull(dueDate);
         checkArgument(isValidDueDateOutput(dueDate), OUTPUT_CONSTRAINTS);
         LocalDateTime dateTime = LocalDateTime.parse(dueDate, OUTPUT_FORMAT);
         return new DueDate(dateTime);
     }
-     /**
-     * Returns true if the date and time is valid.
+
+    /**
+     * * Returns true if the date and time is valid.
      */
     public static boolean isValidDateAndTime(String date) {
         return date.matches(DATE_AND_TIME_VALIDATION_REGEX);

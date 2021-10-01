@@ -42,7 +42,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         List<Assignment> assignmentList = new ArrayList<>();
 
-                Person person = new Person(name, email, module, assignmentList, tagList);
+        Person person = new Person(name, email, module, assignmentList, tagList);
 
         return new AddCommand(person);
     }

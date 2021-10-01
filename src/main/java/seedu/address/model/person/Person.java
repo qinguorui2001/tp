@@ -5,9 +5,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.*;
 
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.Description;
-import seedu.address.model.assignment.DueDate;
-import seedu.address.model.assignment.Status;
 import seedu.address.model.tag.Tag;
 
 /**

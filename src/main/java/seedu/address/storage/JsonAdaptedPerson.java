@@ -76,7 +76,7 @@ class JsonAdaptedPerson {
         }
         final List<Assignment> modelAssignments = new ArrayList<>();
         for (JsonAdaptedAssignment assignment : assignments) {
-             modelAssignments.add(assignment.toModelType());
+            modelAssignments.add(assignment.toModelType());
         }
 
         if (name == null) {

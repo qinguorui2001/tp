@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;

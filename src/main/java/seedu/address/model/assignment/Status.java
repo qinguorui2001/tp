@@ -1,8 +1,5 @@
 package seedu.address.model.assignment;
 
-import java.time.format.DateTimeParseException;
-import java.util.Objects;
-
 import static java.util.Objects.requireNonNull;
 
 public class Status {
@@ -36,6 +33,12 @@ public class Status {
         return new Status(AssignmentStatus.LATE);
     }
 
+    /**
+     * Creates a status based on the status string in the Json file
+     *
+     * @param value the status string in the Json file
+     * @return the corresponding Status
+     */
     public static Status createStatus(String value) {
         AssignmentStatus currentStatus = AssignmentStatus.PENDING;
         for (AssignmentStatus status: AssignmentStatus.values()) {
