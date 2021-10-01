@@ -21,7 +21,7 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
                 .anyMatch(keyword -> {
                     boolean result;
                     result = StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword)
-                    || StringUtil.containsWordIgnoreCase(person.getModule().moduleCode, keyword);
+                            || StringUtil.containsWordIgnoreCase(person.getModule().moduleCode, keyword);
                     return result;
                 });
     }

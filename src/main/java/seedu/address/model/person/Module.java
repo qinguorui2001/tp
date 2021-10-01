@@ -9,7 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Module {
 
-    public static final String MESSAGE_CONSTRAINTS = "Modules can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Modules must be in the form"
+            + " XX(X)1111(X), where X is any letter, 1 is any number and values in brackets"
+            + " are optional, and it should not be blank";
 
     /*
      * The first character of the module must not be a whitespace,

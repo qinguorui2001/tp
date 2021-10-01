@@ -10,15 +10,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.person.Module.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.person.Module.VALIDATION_REGEX;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
 public class FindCommandParser implements Parser<FindCommand> {
 
-    private final String NAME_PREFIX = "n/";
-    private final String MODULE_PREFIX = "m/";
-    private final String WHITESPACE = "|\\s+";
+    // Serves as regex to match for name prefix
+    private final Prefix namePrefix = new Prefix("n/");
+
+    // Serves as regex to match for module prefix
+    private final Prefix modulePrefix = new Prefix("m/");
+
+    // Serves as regex to match for any whitespace with an OR
+    private final String orWhitespace = "|\\s+";
+
+    // Serves as regex to match for any whitespace
+    private final String whitespace = "\\s+";
+
+    // Serves as regex to match for both name and module prefix, along with whitespaces
+    private final Prefix nameModulePrefix = new Prefix("(\\s*([nm]/))+|(\\s+)");
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -33,28 +46,36 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        // Default Regex
+        // Regex depends on user input
         String regex;
 
-        Pattern namePattern = Pattern.compile(NAME_PREFIX);
-        Pattern modulePattern = Pattern.compile(MODULE_PREFIX);
+        Pattern namePattern = Pattern.compile(namePrefix.getPrefix());
+        Pattern modulePattern = Pattern.compile(modulePrefix.getPrefix());
         Matcher nameMatcher = namePattern.matcher(trimmedArgs);
         Matcher moduleMatcher = modulePattern.matcher(trimmedArgs);
         boolean hasName = nameMatcher.find();
         boolean hasModule = moduleMatcher.find();
 
+        // Represents simply which branch it matches
+        int mode;
+
         if (hasName && hasModule) {
-            regex = "(\\s*([nm]/))+|(\\s+)";
+            // Branch 0
+            regex = nameModulePrefix.getPrefix();
+            mode = 0;
         } else if (hasName) {
-            regex = NAME_PREFIX + WHITESPACE;
+            // Branch 1
+            regex = namePrefix + orWhitespace;
+            mode = 1;
         } else if (hasModule) {
-            regex = MODULE_PREFIX + WHITESPACE;
+            // Branch 2
+            regex = modulePrefix + orWhitespace;
+            mode = 2;
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        // New regex matches our search by name / module prefixes of n/ or m/
-        String[] nameKeywords = trimmedArgs.split(regex);
+        String[] nameKeywords = generateKeywords(trimmedArgs, regex, mode);
 
         ArrayList<String> keywords = new ArrayList<>();
         for (String str : nameKeywords) {
@@ -64,6 +85,70 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         return new FindCommand(new NameContainsKeywordsPredicate(keywords));
+    }
+
+    /**
+     * Generates the keywords based on the given user input, corresponding regex and
+     * mode which defines what kind of input is further given by the user.
+     *
+     * @param input user input in command line
+     * @param regex chosen regex to parse user input
+     * @param mode mode which defines what input the user has given
+     * @return a String array that contains the generated keywords
+     * @throws ParseException if the user input does not match defined command usage
+     */
+    public String[] generateKeywords(String input, String regex, int mode) throws ParseException {
+
+        String[] tempReturn = input.split(regex);
+
+        if (mode == 0) {
+            // Both name and module
+            // Splits by module prefix
+            String[] splitByModulePrefix = input.split(modulePrefix.getPrefix());
+
+            String[] splitByWhiteSpace;
+
+            // Splits modules by whitespace if m/ comes after n/
+            if (!splitByModulePrefix[0].equals("") && splitByModulePrefix[0].charAt(0) == 'n') {
+                splitByWhiteSpace = splitByModulePrefix[1].split(whitespace);
+            } else {
+                // Throw error and restate command use
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+
+            // Check each module fits the constraints
+            checkModuleValidity(splitByWhiteSpace);
+
+            // Past here, modules are all valid
+        } else if (mode == 1) {
+            // Only name
+            return tempReturn;
+        } else if (mode == 2) {
+            // Only module
+            checkModuleValidity(tempReturn);
+        }
+
+        return tempReturn;
+    }
+
+    /**
+     * Checks if the provided modules are valid.
+     *
+     * @param modules an array of modules to be checked for validity
+     * @throws ParseException if any one of the modules do not match a valid module code
+     */
+    private void checkModuleValidity(String[] modules) throws ParseException {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        pattern = Pattern.compile(VALIDATION_REGEX);
+        for (String s : modules) {
+            matcher = pattern.matcher(s);
+            if (!matcher.find() && !Objects.equals(s, "")) {
+                throw new ParseException(MESSAGE_CONSTRAINTS);
+            }
+        }
     }
 
 }

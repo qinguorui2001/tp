@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: n/NAME_KEYWORD [MORE_KEYWORDS] m/MODULE_KEYWORD [MORE_KEYWORDS]...\n"
-            + "Both types of keywords are optional, but at least one is necessary"
+            + "Both types of keywords are optional, but at least one is necessary\n"
             + "Example: " + COMMAND_WORD + " n/alice bob charlie m/CS1101S";
 
     private final NameContainsKeywordsPredicate predicate;
