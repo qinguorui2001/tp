@@ -10,11 +10,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class DueDate {
-    public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format dd/MM/yyyy HHmm";
+
+    public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
+    public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
+    public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm";
     public static final String OUTPUT_CONSTRAINTS = "Due dates saved should be in a format dd MMM yyyy, hh:mm a";
+
     public static final String DATE_VALIDATION_REGEX =
             "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}$";
     public static final String TIME_VALIDATION_REGEX = "^(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
+    public static final String DATE_AND_TIME_VALIDATION_REGEX =
+              "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}(,)"
+                      + "(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
     public static final String LATEST_TIME_IN_DAY = "2359";
 
     protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
@@ -27,7 +34,6 @@ public class DueDate {
     private final LocalDateTime dateTime;
     private final LocalTime time;
 
-
     /**
      * Constructs a {@code DueDate}.
      *
@@ -37,8 +43,8 @@ public class DueDate {
     public DueDate(String date, String time) {
         requireNonNull(date);
         requireNonNull(time);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS_TIME);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
         this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
         this.time = LocalTime.parse(time, PARSE_TIME_FORMAT);
         this.dateTime = LocalDateTime.of(this.date, this.time);
@@ -51,12 +57,7 @@ public class DueDate {
      * @param date Date of due date.
      */
     public DueDate(String date) {
-        requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
-        this.time = LocalTime.parse(LATEST_TIME_IN_DAY, PARSE_TIME_FORMAT);
-        this.dateTime = LocalDateTime.of(this.date, this.time);
-        this.value = this.dateTime.format(OUTPUT_FORMAT);
+        this(date, LATEST_TIME_IN_DAY);
     }
     /**
      * Constructs a {@code DueDate}.
@@ -75,7 +76,6 @@ public class DueDate {
      */
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
-
     }
 
     /**
@@ -86,9 +86,9 @@ public class DueDate {
     }
 
     /**
-     * Returns true if a given string is a valid DueDate.
+     * Returns true if a given string is a valid DueDate output.
      */
-    public static boolean isValidDueDate(String test) {
+    public static boolean isValidDueDateOutput(String test) {
         try {
             OUTPUT_FORMAT.parse(test);
         } catch (DateTimeParseException e) {
@@ -99,10 +99,25 @@ public class DueDate {
 
     public static DueDate createDueDate(String dueDate) {
         requireNonNull(dueDate);
-        checkArgument(isValidDueDate(dueDate), OUTPUT_CONSTRAINTS);
+        checkArgument(isValidDueDateOutput(dueDate), OUTPUT_CONSTRAINTS);
         LocalDateTime dateTime = LocalDateTime.parse(dueDate, OUTPUT_FORMAT);
         return new DueDate(dateTime);
     }
+     /**
+     * Returns true if the date and time is valid.
+     */
+    public static boolean isValidDateAndTime(String date) {
+        return date.matches(DATE_AND_TIME_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if date is valid due date form.
+     */
+    public static boolean isValidDueDate(String date) {
+        return isValidDate(date) || isValidDateAndTime(date);
+    }
+
+
     @Override
     public String toString() {
         return value;
@@ -118,13 +133,5 @@ public class DueDate {
     @Override
     public int hashCode() {
         return value.hashCode();
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public LocalTime getTime() {
-        return time;
     }
 }

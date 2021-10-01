@@ -1,32 +1,36 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Module;
-import seedu.address.model.person.Name;
-import seedu.address.model.tag.Tag;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.DueDate;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Module;
+import seedu.address.model.person.Name;
+import seedu.address.model.tag.Tag;
+
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_MODULE = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_DATE = "41/12/2011";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_MODULE = "CS1231S";
     private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_DATE = "11/11/2021";
+    private static final String VALID_TIME = "1200";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -119,6 +123,36 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    }
+
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        DueDate expectedDueDate = new DueDate(VALID_DATE);
+        assertEquals(expectedDueDate, ParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDateAndTime() throws Exception {
+        DueDate expectedDueDate = new DueDate(VALID_DATE, VALID_TIME);
+        String validDateAndTime = VALID_DATE + "," + VALID_TIME;
+        assertEquals(expectedDueDate, ParserUtil.parseDate(validDateAndTime));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+        String dueDateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        DueDate expectedDueDate = new DueDate(VALID_DATE);
+        assertEquals(expectedDueDate, ParserUtil.parseDate(dueDateWithWhitespace));
     }
 
     @Test

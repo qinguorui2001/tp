@@ -64,8 +64,8 @@ class JsonAdaptedAssignment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     DueDate.class.getSimpleName()));
         }
-        if (!DueDate.isValidDueDate(dueDate)) {
-            throw new IllegalValueException(DueDate.MESSAGE_CONSTRAINTS);
+        if (!DueDate.isValidDueDateOutput(dueDate)) {
+            throw new IllegalValueException(DueDate.OUTPUT_CONSTRAINTS);
         }
 
         final DueDate modelDueDate = DueDate.createDueDate(dueDate);
