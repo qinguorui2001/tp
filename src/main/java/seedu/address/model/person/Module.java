@@ -19,7 +19,7 @@ public class Module {
      */
     public static final String VALIDATION_REGEX = "([a-zA-Z]{2,3})([0-9]{4})([a-zA-Z])?";
 
-    public final String value;
+    public final String moduleCode;
 
     /**
      * Constructs an {@code module}.
@@ -29,7 +29,7 @@ public class Module {
     public Module(String module) {
         requireNonNull(module);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
-        value = module;
+        moduleCode = module;
     }
 
     /**
@@ -41,19 +41,19 @@ public class Module {
 
     @Override
     public String toString() {
-        return value;
+        return moduleCode;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Module // instanceof handles nulls
-                && value.equals(((Module) other).value)); // state check
+                && moduleCode.equals(((Module) other).moduleCode)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return moduleCode.hashCode();
     }
 
 }
