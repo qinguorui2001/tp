@@ -1,5 +1,8 @@
 package seedu.address.model.assignment;
 
+import java.time.format.DateTimeParseException;
+import java.util.Objects;
+
 import static java.util.Objects.requireNonNull;
 
 public class Status {
@@ -7,7 +10,9 @@ public class Status {
         COMPLETED, PENDING, LATE
     }
 
-    private final String value;
+    public static final String MESSAGE_CONSTRAINTS = "Status of assignment should be clearly defined!";
+
+    public final String value;
 
     /**
      * Constructs a {@code Status}.
@@ -29,6 +34,27 @@ public class Status {
 
     public static Status createLateStatus() {
         return new Status(AssignmentStatus.LATE);
+    }
+
+    public static Status createStatus(String value) {
+        AssignmentStatus currentStatus = AssignmentStatus.PENDING;
+        for (AssignmentStatus status: AssignmentStatus.values()) {
+            if (value.equals(status.toString())) {
+                currentStatus = status;
+            }
+        }
+        return new Status(currentStatus);
+    }
+    /**
+     * Returns true if a given string is a valid Status.
+     */
+    public static boolean isValidStatus(String test) {
+        for (AssignmentStatus status: AssignmentStatus.values()) {
+            if (test.equals(status.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

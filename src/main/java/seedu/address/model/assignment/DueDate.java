@@ -7,9 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DueDate {
     public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format dd/MM/yyyy HHmm";
+    public static final String OUTPUT_CONSTRAINTS = "Due dates saved should be in a format dd MMM yyyy, hh:mm a";
     public static final String DATE_VALIDATION_REGEX =
             "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}$";
     public static final String TIME_VALIDATION_REGEX = "^(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
@@ -56,7 +58,18 @@ public class DueDate {
         this.dateTime = LocalDateTime.of(this.date, this.time);
         this.value = this.dateTime.format(OUTPUT_FORMAT);
     }
-
+    /**
+     * Constructs a {@code DueDate}.
+     *
+     * @param dateTime Date and time of dueDate
+     */
+    public DueDate(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        this.dateTime = dateTime;
+        this.date = dateTime.toLocalDate();
+        this.time = dateTime.toLocalTime();
+        this.value = this.dateTime.format(OUTPUT_FORMAT);
+    }
     /**
      * Returns true if a given string is a valid date.
      */
@@ -72,6 +85,24 @@ public class DueDate {
         return test.matches(TIME_VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if a given string is a valid DueDate.
+     */
+    public static boolean isValidDueDate(String test) {
+        try {
+            OUTPUT_FORMAT.parse(test);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static DueDate createDueDate(String dueDate) {
+        requireNonNull(dueDate);
+        checkArgument(isValidDueDate(dueDate), OUTPUT_CONSTRAINTS);
+        LocalDateTime dateTime = LocalDateTime.parse(dueDate, OUTPUT_FORMAT);
+        return new DueDate(dateTime);
+    }
     @Override
     public String toString() {
         return value;

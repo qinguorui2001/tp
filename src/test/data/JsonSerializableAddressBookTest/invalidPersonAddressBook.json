@@ -2,6 +2,7 @@
   "persons": [ {
     "name": "Hans Muster",
     "email": "invalid@email!3e",
-    "module": "CS1010J"
+    "module": "CS1010J",
+    "assignments": [ ]
   } ]
 }

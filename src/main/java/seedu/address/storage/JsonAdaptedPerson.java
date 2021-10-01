@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
@@ -26,21 +27,26 @@ class JsonAdaptedPerson {
     private final String name;
     private final String email;
     private final String module;
+    private final List<JsonAdaptedAssignment> assignments = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
-            @JsonProperty("email") String email, @JsonProperty("address") String module,
+            @JsonProperty("email") String email, @JsonProperty("module") String module,
+            @JsonProperty("assignments") List<JsonAdaptedAssignment> assignments,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.email = email;
         this.module = module;
+        this.assignments.addAll(assignments);
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+
     }
 
     /**
@@ -50,6 +56,9 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         email = source.getEmail().value;
         module = source.getModule().value;
+        assignments.addAll(source.getAssignments().stream()
+                .map(JsonAdaptedAssignment::new)
+                .collect(Collectors.toList()));
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -64,6 +73,10 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+        final List<Assignment> modelAssignments = new ArrayList<>();
+        for (JsonAdaptedAssignment assignment : assignments) {
+             modelAssignments.add(assignment.toModelType());
         }
 
         if (name == null) {
@@ -91,7 +104,8 @@ class JsonAdaptedPerson {
         final Module modelModule = new Module(module);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelEmail, modelModule, modelTags);
+
+        return new Person(modelName, modelEmail, modelModule, modelAssignments, modelTags);
     }
 
 }

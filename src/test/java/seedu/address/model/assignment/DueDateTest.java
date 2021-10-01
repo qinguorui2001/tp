@@ -7,10 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 class DueDateTest {
-    @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DueDate(null));
-    }
+//    @Test
+//    public void constructor_null_throwsNullPointerException() {
+//        assertThrows(NullPointerException.class, () -> new DueDate(null));
+//    }
 
     @Test
     public void constructor_invalidDueDate_throwsIllegalArgumentException() {
@@ -61,4 +61,5 @@ class DueDateTest {
         assertTrue(DueDate.isValidTime("0059")); // minimum hour and maximum minutes
         assertTrue(DueDate.isValidTime("2300")); // maximum hour and minimum minutes
     }
+
 }

@@ -2,11 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Description;
@@ -26,21 +22,21 @@ public class Person {
 
     // Data fields
     private final Module module;
+    private final List<Assignment> assignments = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
-    private final ArrayList<Assignment> assignments = new ArrayList<>();
+
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Email email, Module module, Set<Tag> tags) {
-        requireAllNonNull(name, email, module, tags);
+    public Person(Name name, Email email, Module module, List<Assignment> assignments, Set<Tag> tags) {
+        requireAllNonNull(name, email, module, assignments, tags);
         this.name = name;
         this.email = email;
         this.module = module;
         this.tags.addAll(tags);
         // TODO: change constructor to accommodate assignments
-        assignments.add(new Assignment(new Description(name + " This is a test assignment"),
-                new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
+        this.assignments.addAll(assignments);
     }
 
     public Name getName() {
@@ -55,7 +51,7 @@ public class Person {
         return module;
     }
 
-    public ArrayList<Assignment> getAssignments() {
+    public List<Assignment> getAssignments() {
         return assignments;
     }
 
@@ -98,13 +94,14 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getModule().equals(getModule())
+                && otherPerson.getAssignments().equals(getAssignments())
                 && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, module, tags);
+        return Objects.hash(name, email, module, assignments, tags);
     }
 
     @Override
@@ -115,6 +112,12 @@ public class Person {
                 .append(getEmail())
                 .append("; Module: ")
                 .append(getModule());
+
+        List<Assignment> assignments = getAssignments();
+        if (!assignments.isEmpty()) {
+            builder.append("; Assignments: ");
+            assignments.forEach(builder::append);
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

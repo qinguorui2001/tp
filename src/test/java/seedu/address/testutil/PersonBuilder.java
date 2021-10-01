@@ -1,8 +1,11 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,6 +25,7 @@ public class PersonBuilder {
     private Name name;
     private Email email;
     private Module module;
+    private List<Assignment> assignmentList;
     private Set<Tag> tags;
 
     /**
@@ -31,6 +35,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
         module = new Module(DEFAULT_MODULE);
+        assignmentList = new ArrayList<>();
         tags = new HashSet<>();
     }
 
@@ -41,6 +46,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         email = personToCopy.getEmail();
         module = personToCopy.getModule();
+        assignmentList = personToCopy.getAssignments();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -76,8 +82,17 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code assignmentList} into a {@code List<Assignment>}
+     * and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withAssignmentList(String[]... assignmentList) {
+        this.assignmentList = SampleDataUtil.getAssignmentList(assignmentList);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, email, module, tags);
+        return new Person(name, email, module, assignmentList, tags);
     }
 
 }

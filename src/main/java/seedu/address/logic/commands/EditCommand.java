@@ -7,6 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Name;
@@ -22,7 +23,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "p-edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -85,9 +86,10 @@ public class EditCommand extends Command {
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Module updatedModule = editPersonDescriptor.getModule().orElse(personToEdit.getModule());
+        List<Assignment> assignmentList = personToEdit.getAssignments();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedEmail, updatedModule, updatedTags);
+        return new Person(updatedName, updatedEmail, updatedModule, assignmentList, updatedTags);
     }
 
     @Override
@@ -127,7 +129,7 @@ public class EditCommand extends Command {
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setEmail(toCopy.email);
-            setAddress(toCopy.module);
+            setModule(toCopy.module);
             setTags(toCopy.tags);
         }
 
@@ -154,13 +156,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Module module) {
+        public void setModule(Module module) {
             this.module = module;
         }
 
         public Optional<Module> getModule() {
             return Optional.ofNullable(module);
         }
+
 
         /**
          * Sets {@code tags} to this object's {@code tags}.

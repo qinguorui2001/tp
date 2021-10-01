@@ -24,6 +24,13 @@ public class Assignment {
         this.status = status;
     }
 
+    public Assignment(String[] strings) {
+        this.description = new Description(strings[0]);
+        this.dueDate = DueDate.createDueDate(strings[1]);
+        this.status = Status.createStatus(strings[2]);
+
+    }
+
     public Description getDescription() {
         return description;
     }
