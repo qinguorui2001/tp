@@ -42,7 +42,7 @@ public class AssignmentCard extends UiPart<Region> {
         description.setText(assignment.getDescription().description);
         dueDate.setText(assignment.getDueDate().value.toString());
         status.getChildren().add(new Label(assignment.getStatus().toString()));
-        status.setId(assignment.getStatus().value);
+        status.setId(assignment.getStatus().toString());
     }
 
     @Override
