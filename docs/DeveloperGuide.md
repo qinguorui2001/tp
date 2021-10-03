@@ -381,7 +381,73 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: UC06 - Add an assignment**
 
+**MSS**
+
+1. User enters the assignment information
+2. TA<sup>2</sup> shows the assignment information is added
+
+   Use case ends
+
+**Extensions**
+
+* 1a. The assignment information already exists in that person's assignment list.
+  
+    * 1a1. TA<sup>2</sup> shows message that the assignment already exists.
+  
+    Use case ends.
+
+* 1b. The given instruction format is invalid.
+
+    * 1b1 TA<sup>2</sup> shows an error message.
+  
+    Use case resumes at step 1.
+
+**Use case: UC07 - Delete an assignment**
+
+**MSS**
+
+1. User requests to list assignments of a person
+2. TA<sup>2</sup> shows a list of assignments
+3. User requests to delete a specific assignment in the list
+4. TA<sup>2</sup> deletes the assignment
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TA<sup>2</sup> shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Mark an assignment**
+
+**MSS**
+
+1. User enters the information of assignment tends to be done
+2. TA<sup>2</sup> shows the assignment is done
+
+   Use case ends
+
+**Extensions**
+
+* 1a. The assignment doesn't exist in the assignment list.
+
+  Use case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. TA<sup>2</sup> shows an error message.
+
+      Use case resumes at step 1.
+  
 *{More to be added}*
 
 ### Non-Functional Requirements
