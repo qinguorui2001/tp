@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TA<sup>2</sup> can get your contact management tasks done faster than traditional GUI apps.
+Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing School of Computing contacts and assignments, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,9 +14,9 @@ Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `ta^2.jar` from [here](https://github.com/Droffilc13/ip/releases/tag/A-Release).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your TA<sup>2</sup>.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,13 +24,13 @@ Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`p-list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`p-add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` to the TA<sup>2</sup>.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`p-delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`p-clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
 
@@ -61,7 +61,7 @@ Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing 
 * If a parameter is expected only once in the command but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `p-list`, `exit` and `p-clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -77,7 +77,7 @@ Format: `help`
 
 ### Adding a person: `p-add`
 
-Adds a person to the address book.
+Adds a person to the contact list.
 
 Format: `p-add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 
@@ -91,7 +91,7 @@ Examples:
 
 ### Listing all persons : `p-list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the contact list.
 
 Format: `p-list`
 
@@ -119,7 +119,7 @@ Examples:
 
 ### Deleting a person : `p-delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the contact list.
 
 Format: `p-delete INDEX`
 
@@ -128,12 +128,12 @@ Format: `p-delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `p-list` followed by `p-delete 2` deletes the 2nd person in the address book.
+* `p-list` followed by `p-delete 2` deletes the 2nd person in the contact list.
 * `p-find n/Betsy` followed by `p-delete 1` deletes the 1st person in the results of the `p-find` command.
 
 ### Adding an assignment with deadline: `a-add`
 
-Adds an assignment with deadline to a person in the address book.
+Adds an assignment with deadline to a person in the contact list.
 
 Format: `a-add n/NAME d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
 
@@ -143,7 +143,7 @@ Examples:
 
 ### Deleting an assignment with deadline : `a-delete`
 
-Deletes the specified assignment with deadline from a person in the address book.
+Deletes the specified assignment with deadline from a person in the contact list.
 
 Format: `a-delete n/NAME INDEX`
 
@@ -156,7 +156,7 @@ Examples:
 
 ### Marking an assignment with deadline as done: `a-done`
 
-Marks a specified assignment's deadline of a person as done in the address book.
+Marks a specified assignment's deadline of a person as done.
 
 Format: `a-done n/NAME INDEX`
 
@@ -165,7 +165,7 @@ Examples:
 
 ### Showing person’s assignment list: `a-show`
 
-Shows the assignment list of the specified person in the address book.
+Shows the assignment list of the specified person in a separate assignment list window.
 
 Format: `a-show INDEX`
 
@@ -176,7 +176,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from TA<sup>2</sup>.
 
 Format: `clear`
 
@@ -188,14 +188,14 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TA<sup>2</sup> data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta^2.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TA<sup>2<> will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -207,7 +207,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TA<sup>2</sup> home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -215,12 +215,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**p-add** | `p-add n/NAME e/EMAIL m/MODULES [t/TAG]…​` <br> e.g., `add n/James Ho m/CS2100 e/jamesho@example.com t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**p-delete** | `p-delete INDEX`<br> e.g., `p-delete 3`
+**p-edit** | `p-edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`p-edit 2 n/James Lee e/jameslee@example.com`
+**p-find** | `p-find KEYWORD [MORE_KEYWORDS]`<br> e.g., `p-find James Jake`
+**p-list** | `list`
 **Help** | `help`
 **a-add** | `a-add n/NAME d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `a-add n/John Doe d/Lab1 by/ 21/8/2021`
 **a-delete** | `a-delete n/NAME INDEX` <br> e.g., `a-delete n/Wei Chang 10`
