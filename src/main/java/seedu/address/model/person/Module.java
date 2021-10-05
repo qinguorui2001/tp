@@ -9,7 +9,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Module {
 
-    public static final String MESSAGE_CONSTRAINTS = "Modules can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Modules must be in the form"
+            + " XX(X)1111(X), where X is any letter, 1 is any number and values in brackets"
+            + " are optional, and it should not be blank";
 
     /*
      * The first character of the module must not be a whitespace,
@@ -19,7 +21,7 @@ public class Module {
      */
     public static final String VALIDATION_REGEX = "([a-zA-Z]{2,3})([0-9]{4})([a-zA-Z])?";
 
-    public final String value;
+    public final String moduleCode;
 
     /**
      * Constructs an {@code module}.
@@ -29,7 +31,7 @@ public class Module {
     public Module(String module) {
         requireNonNull(module);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
-        value = module;
+        moduleCode = module;
     }
 
     /**
@@ -41,19 +43,19 @@ public class Module {
 
     @Override
     public String toString() {
-        return value;
+        return moduleCode;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Module // instanceof handles nulls
-                && value.equals(((Module) other).value)); // state check
+                && moduleCode.equals(((Module) other).moduleCode)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return moduleCode.hashCode();
     }
 
 }
