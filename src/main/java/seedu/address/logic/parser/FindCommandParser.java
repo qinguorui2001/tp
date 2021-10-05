@@ -33,6 +33,13 @@ public class FindCommandParser implements Parser<FindCommand> {
     // Serves as regex to match for both name and module prefix, along with whitespaces
     private final Prefix nameModulePrefix = new Prefix("(\\s*([nm]/))+|(\\s+)");
 
+    // Serves as the constant values for different branches
+    private enum Mode {
+        NAME_MODULE,
+        NAME,
+        MODULE
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
@@ -57,20 +64,20 @@ public class FindCommandParser implements Parser<FindCommand> {
         boolean hasModule = moduleMatcher.find();
 
         // Represents simply which branch it matches
-        int mode;
+        Mode mode;
 
         if (hasName && hasModule) {
             // Branch 0
             regex = nameModulePrefix.getPrefix();
-            mode = 0;
+            mode = Mode.NAME_MODULE;
         } else if (hasName) {
             // Branch 1
             regex = namePrefix + orWhitespace;
-            mode = 1;
+            mode = Mode.NAME;
         } else if (hasModule) {
             // Branch 2
             regex = modulePrefix + orWhitespace;
-            mode = 2;
+            mode = Mode.MODULE;
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
@@ -97,11 +104,11 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @return a String array that contains the generated keywords
      * @throws ParseException if the user input does not match defined command usage
      */
-    public String[] generateKeywords(String input, String regex, int mode) throws ParseException {
+    public String[] generateKeywords(String input, String regex, Mode mode) throws ParseException {
 
         String[] tempReturn = input.split(regex);
 
-        if (mode == 0) {
+        if (mode.equals(Mode.NAME_MODULE)) {
             // Both name and module
             // Splits by module prefix
             String[] splitByModulePrefix = input.split(modulePrefix.getPrefix());
@@ -120,10 +127,10 @@ public class FindCommandParser implements Parser<FindCommand> {
             checkModuleValidity(splitByWhiteSpace);
 
             // Past here, modules are all valid
-        } else if (mode == 1) {
+        } else if (mode.equals(Mode.NAME)) {
             // Only name
             return tempReturn;
-        } else if (mode == 2) {
+        } else if (mode.equals(Mode.MODULE)) {
             // Only module
             checkModuleValidity(tempReturn);
         }
