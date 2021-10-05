@@ -1,11 +1,9 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
 import java.util.List;
@@ -40,7 +38,7 @@ public class ShowCommand extends Command {
         }
 
         Person personToShow = lastShownList.get(targetIndex.getZeroBased());
-        model.getFilteredAssignmentList(personToShow);
+        model.updateFilteredAssignmentList(personToShow);
         return new CommandResult(String.format(MESSAGE_SHOW_ASSIGNMENT_SUCCESS, personToShow.getName()));
     }
 
