@@ -21,14 +21,14 @@ public class ModuleTest {
 
     @Test
     public void isValidModule() {
-        // null address
+        // null Module
         assertThrows(NullPointerException.class, () -> Module.isValidModule(null));
 
-        // invalid addresses
+        // invalid Modules
         assertFalse(Module.isValidModule("")); // empty string
         assertFalse(Module.isValidModule(" ")); // spaces only
 
-        // valid addresses
+        // valid Modules
         assertTrue(Module.isValidModule("GER1000")); // 3 letter prefix
         assertTrue(Module.isValidModule("CS1231")); // 2 letter prefix
         assertTrue(Module.isValidModule("CS2103T")); // 1 postfix
