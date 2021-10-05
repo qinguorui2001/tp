@@ -24,7 +24,6 @@ public class TypicalPersons {
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withEmail("alice@example.com")
             .withModule("CS2103T")
-            //.withAssignmentList(new String[] {"Assignment 1", "15 Sep 2021, 01:00 PM", "COMPLETED"})
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com")

@@ -32,7 +32,6 @@ public class Person {
         this.email = email;
         this.module = module;
         this.tags.addAll(tags);
-        // TODO: change constructor to accommodate assignments
         this.assignments.addAll(assignments);
     }
 

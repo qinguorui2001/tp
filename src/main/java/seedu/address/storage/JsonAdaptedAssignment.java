@@ -31,7 +31,7 @@ class JsonAdaptedAssignment {
     }
 
     /**
-     * Converts a given {@code Tag} into this class for Jackson use.
+     * Converts a given {@code Assignment} into this class for Jackson use.
      */
     public JsonAdaptedAssignment(Assignment source) {
         description = source.getDescription().description;
@@ -45,7 +45,7 @@ class JsonAdaptedAssignment {
     }
 
     /**
-     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
+     * Converts this Jackson-friendly adapted tag object into the model's {@code Assignment} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
