@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.assignment.Assignment;
@@ -115,7 +116,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         boolean isPersonListEmpty = getPersonList().size() == 0;
 
         if (isPersonListEmpty) {
-            return null;
+            return FXCollections.observableArrayList();
         }
         return assignments.asUnmodifiableObservableList(getPersonList().get(index.getZeroBased()).getAssignments());
     }
