@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1101S_MISSION;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1231S_TUTORIAL;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS2106_PROJECT;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS1231S_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
@@ -33,6 +34,11 @@ public class AssignmentTest {
         editedCs1101sAssignment = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
                 .withDescription("I like CS").build();
         assertFalse(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(editedCs1101sAssignment));
+
+        // different status, all other attributes same -> return true
+        Assignment editedCs2106Lab = new AssignmentBuilder(ASSIGNMENT_CS2106_PROJECT)
+                .withPendingStatus().build();
+        assertTrue(ASSIGNMENT_CS2106_PROJECT.isSameAssignment(editedCs2106Lab));
 
         // description differs in case, all other attributes same -> returns false
         Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
@@ -80,6 +86,10 @@ public class AssignmentTest {
         Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB).withLateStatus().build();
         assertFalse(ASSIGNMENT_CS3230_LAB.equals(editedCs3230Lab));
 
+        // different status, change from late to pending -> returns false
+        Assignment editedCs2106Project = new AssignmentBuilder(ASSIGNMENT_CS2106_PROJECT).withPendingStatus().build();
+        assertFalse(ASSIGNMENT_CS2106_PROJECT.equals(editedCs2106Project));
+
         // different due date -> returns false
         editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
                 .withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS1231S_TUTORIAL).build();
@@ -89,6 +99,7 @@ public class AssignmentTest {
         editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
                 .withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS3230_LAB).build();
         assertFalse(ASSIGNMENT_CS3230_LAB.equals(editedCs3230Lab));
+
         // same date but different time -> returns false
         editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
                 .withDueDate(VALID_DATE_CS3230_LAB, VALID_TIME_CS1231S_TUTORIAL).build();

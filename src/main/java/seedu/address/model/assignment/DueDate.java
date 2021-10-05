@@ -22,7 +22,7 @@ public class DueDate {
                       + "(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
     public static final String LATEST_TIME_IN_DAY = "2359";
 
-    protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy");
+    protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
     protected static final DateTimeFormatter PARSE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
 
