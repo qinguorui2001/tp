@@ -85,4 +85,5 @@ public class LogicManager implements Logic {
     public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
         return model.getFilteredAssignmentList(index);
     }
+
 }

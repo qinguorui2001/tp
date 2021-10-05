@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -114,6 +116,28 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    //=========== Person ================================================================================
+
+    @Override
+    public boolean hasAssignment(Name name, Assignment toAdd) {
+        return addressBook.hasAssignment(name, toAdd);
+    }
+
+    @Override
+    public void addAssignment(Name name, Assignment toAdd) {
+        addressBook.addAssignment(name, toAdd);
+    }
+
+    @Override
+    public void deleteAssignment(Name name, Assignment toDelete) {
+        addressBook.removeAssignment(name, toDelete);
+    }
+
+    @Override
+    public void markAssignment(Name name, Assignment toMark) {
+        addressBook.markAssignment(name, toMark);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -153,7 +177,14 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
         //TODO: check validity of Index
+        requireNonNull(index);
         return this.addressBook.getAssignmentList(index);
+    }
+
+    @Override
+    public List<Assignment> getFilteredAssignmentList(Name name) {
+        requireNonNull(name);
+        return this.addressBook.getAssignmentList(name);
     }
 
 }

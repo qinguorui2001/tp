@@ -2,16 +2,12 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.Description;
-import seedu.address.model.assignment.DueDate;
-import seedu.address.model.assignment.Status;
+import seedu.address.model.assignment.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +23,7 @@ public class Person {
     // Data fields
     private final Module module;
     private final Set<Tag> tags = new HashSet<>();
-    private final ArrayList<Assignment> assignments = new ArrayList<>();
+    private final UniqueAssignmentList assignments;
 
     /**
      * Every field must be present and not null.
@@ -39,6 +35,7 @@ public class Person {
         this.module = module;
         this.tags.addAll(tags);
         // TODO: change constructor to accommodate assignments
+        assignments = new UniqueAssignmentList();
         assignments.add(new Assignment(new Description(name + " This is a test assignment"),
                 new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
     }
@@ -55,7 +52,7 @@ public class Person {
         return module;
     }
 
-    public ArrayList<Assignment> getAssignments() {
+    public UniqueAssignmentList getAssignments() {
         return assignments;
     }
 
@@ -77,7 +74,11 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && isSameName(otherPerson.getName());
+    }
+
+    public boolean isSameName(Name name) {
+        return this.getName().equals(name);
     }
 
     /**
@@ -95,7 +96,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
+        return otherPerson.getAssignments().equals(getAssignments())
+                && otherPerson.getName().equals(getName())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getModule().equals(getModule())
                 && otherPerson.getTags().equals(getTags());
@@ -104,7 +106,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, module, tags);
+        return Objects.hash(assignments, name, email, module, tags);
     }
 
     @Override
@@ -123,5 +125,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

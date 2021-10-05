@@ -3,7 +3,6 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,8 +32,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     /**
      * Returns the assignment list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Assignment> asUnmodifiableObservableList(ArrayList<Assignment> assignments) {
-        internalList.addAll(assignments);
+    public ObservableList<Assignment> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
