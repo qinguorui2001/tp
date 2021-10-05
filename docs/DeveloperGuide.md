@@ -361,25 +361,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User enters a new person's information.
-4. AddressBook adds the person
+1. User enters a new person's information
+2. TA<sup>2</sup> shows the person is added
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given command format is wrong.
+* 1a. The given command format is invalid.
 
-    * 3a1. AddressBook shows an error message related to wrong format.
+    * 1a1. TA<sup>2</sup> shows an error message related to invalid format.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
   
-* 3b. The added person is already in the list.
-    * 3b1. AddressBook requests to add another person.
+* 1b. The added person is already in the list.
 
-      Use case resumes at step 2.
+    * 1b1. TA<sup>2</sup> requests to add another person.
+
+      Use case resumes at step 1.
 
 
 *{More to be added}*
@@ -407,6 +406,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **e/**: Symbol for a requirement to state email address
 * **m/**: Symbol for a requirement to state the module
 * **n/**: Symbol for a requirement to state a name
+* **TA**: Abbreviation for the tutor
+* **UC**: Abbreviation for the use case
+* **SOC**: Abbreviation for the school of computing
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
