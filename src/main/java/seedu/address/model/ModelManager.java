@@ -23,7 +23,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private FilteredList<Assignment> filteredAssignments;
+    private ObservableList<Assignment> assignmentsList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,7 +37,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredAssignments = new FilteredList<>(this.addressBook.getAssignmentList(filteredPersons.get(0)));
+        assignmentsList = new FilteredList<>(this.addressBook.emptyAssignmentList());
     }
 
     public ModelManager() {
@@ -155,12 +155,12 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Assignment> getFilteredAssignmentList() {
-        return filteredAssignments;
+        return assignmentsList;
     }
 
     @Override
     public void updateFilteredAssignmentList(Person person) {
-        ObservableList<Assignment> assignments = this.addressBook.getAssignmentList(person);
-        this.filteredAssignments = new FilteredList<>(assignments);
+        ObservableList<Assignment> personAssignments = this.addressBook.getAssignmentList(person);
+        this.assignmentsList = new FilteredList<>(personAssignments);
     }
 }

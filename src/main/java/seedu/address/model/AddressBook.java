@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -113,6 +114,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Assignment> getAssignmentList(Person person) {
         return assignments.asUnmodifiableObservableList(person.getAssignments());
+    }
+
+    public ObservableList<Assignment> emptyAssignmentList() {
+        return assignments.asUnmodifiableObservableList(new ArrayList<>());
     }
 
     @Override
