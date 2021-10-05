@@ -152,7 +152,6 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
-        //TODO: check validity of Index
         return this.addressBook.getAssignmentList(index);
     }
 

@@ -2,94 +2,96 @@ package seedu.address.model.assignment;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1101S_MISSION;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1231S_TUTORIAL;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS3230_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS1231S_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS1231S_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS3230_LAB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.Person;
 import seedu.address.testutil.AssignmentBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AssignmentTest {
-
-    // TODO: to remove
-    @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Assignment assignment = new AssignmentBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> assignment.getDescription());
-    }
-
     @Test
     public void isSameAssignment() {
-
         // same object -> returns true
-        assertTrue(ALICE.isSamePerson(ALICE));
+        assertTrue(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(ASSIGNMENT_CS1101S_MISSION));
 
         // null -> returns false
-        assertFalse(ALICE.isSamePerson(null));
+        assertFalse(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(null));
 
-        // same name, all other attributes different -> returns true
-        Person editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSamePerson(editedAlice));
+        // same description, all other attributes different -> returns true
+        Assignment editedCs1101sAssignment = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
+                .withLateStatus().withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS1231S_TUTORIAL).build();
+        assertTrue(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(editedCs1101sAssignment));
 
-        // different name, all other attributes same -> returns false
-        editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSamePerson(editedAlice));
+        // different description, all other attributes same -> returns false
+        editedCs1101sAssignment = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
+                .withDescription("I like CS").build();
+        assertFalse(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(editedCs1101sAssignment));
 
-        // name differs in case, all other attributes same -> returns false
-        Person editedBob = new PersonBuilder(BOB).withName(VALID_NAME_BOB.toLowerCase()).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        // description differs in case, all other attributes same -> returns false
+        Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDescription(VALID_DESCRIPTION_CS3230_LAB.toLowerCase()).build();
+        assertFalse(ASSIGNMENT_CS3230_LAB.isSameAssignment(editedCs3230Lab));
 
-        // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_NAME_BOB + " ";
-        editedBob = new PersonBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSamePerson(editedBob));
+        // description has trailing spaces, all other attributes same -> returns false
+        String nameWithTrailingSpaces = VALID_DESCRIPTION_CS3230_LAB + " ";
+        editedCs3230Lab = new AssignmentBuilder().withDescription(nameWithTrailingSpaces).build();
+        assertFalse(ASSIGNMENT_CS3230_LAB.isSameAssignment(editedCs3230Lab));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        Person aliceCopy = new PersonBuilder(ALICE).build();
-        assertTrue(ALICE.equals(aliceCopy));
+        Assignment cs3230LabCopy = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB).build();
+        assertTrue(cs3230LabCopy.equals(ASSIGNMENT_CS3230_LAB));
 
         // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
+        assertTrue(ASSIGNMENT_CS3230_LAB.equals(ASSIGNMENT_CS3230_LAB));
 
         // null -> returns false
-        assertFalse(ALICE.equals(null));
+        assertFalse(ASSIGNMENT_CS3230_LAB.equals(null));
 
         // different type -> returns false
-        assertFalse(ALICE.equals(5));
+        assertFalse(ASSIGNMENT_CS3230_LAB.equals(5));
 
-        // different person -> returns false
-        assertFalse(ALICE.equals(BOB));
+        // different assignment -> returns false
+        assertFalse(ASSIGNMENT_CS3230_LAB.equals(ASSIGNMENT_CS1231S_TUTORIAL));
 
-        // different name -> returns false
-        Person editedAlice = new PersonBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different description -> returns false
+        Assignment editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL)
+                .withDescription(VALID_DESCRIPTION_CS3230_LAB).build();
+        assertFalse(ASSIGNMENT_CS1231S_TUTORIAL.equals(editedCs1231sTutorial));
 
-        // different phone -> returns false
-        editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different status, change from pending to late -> returns false
+        editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL).withLateStatus().build();
+        assertFalse(ASSIGNMENT_CS1231S_TUTORIAL.equals(editedCs1231sTutorial));
 
-        // different email -> returns false
-        editedAlice = new PersonBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different status, change from pending to completed -> returns false
+        editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL).withCompletedStatus().build();
+        assertFalse(ASSIGNMENT_CS1231S_TUTORIAL.equals(editedCs1231sTutorial));
 
-        // different address -> returns false
-        editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different status, change from completed to late -> returns false
+        Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB).withLateStatus().build();
+        assertFalse(ASSIGNMENT_CS3230_LAB.equals(editedCs3230Lab));
 
-        // different tags -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
+        // different due date -> returns false
+        editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS1231S_TUTORIAL).build();
+        assertFalse(ASSIGNMENT_CS3230_LAB.equals(editedCs3230Lab));
+
+        // same time but different date -> returns false
+        editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS3230_LAB).build();
+        assertFalse(ASSIGNMENT_CS3230_LAB.equals(editedCs3230Lab));
+        // same date but different time -> returns false
+        editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDueDate(VALID_DATE_CS3230_LAB, VALID_TIME_CS1231S_TUTORIAL).build();
+        assertFalse(ASSIGNMENT_CS3230_LAB.equals(editedCs3230Lab));
     }
 }

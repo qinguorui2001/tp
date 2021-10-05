@@ -7,7 +7,7 @@ import seedu.address.model.assignment.Status;
 
 public class AssignmentBuilder {
     public static final String DEFAULT_DESCRIPTION = "Assignment description";
-    public static final String DEFAULT_DATE = "28/9/2021";
+    public static final String DEFAULT_DATE = "28/09/2021";
     public static final String DEFAULT_TIME = "1800";
     public static final Status DEFAULT_STATUS = Status.createPendingStatus();
 
@@ -45,8 +45,8 @@ public class AssignmentBuilder {
     /**
      * Sets the {@code DueDate} of the {@code Assignment} that we are building.
      */
-    public AssignmentBuilder withDueDate(String dueDate) {
-        this.dueDate = new DueDate(dueDate);
+    public AssignmentBuilder withDueDate(String date, String time) {
+        this.dueDate = new DueDate(date, time);
         return this;
     }
 

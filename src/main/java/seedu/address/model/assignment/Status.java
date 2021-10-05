@@ -3,32 +3,31 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 
 public class Status {
-    enum AssignmentStatus {
-        COMPLETED, PENDING, LATE
-    }
-
     public final String value;
 
+    enum StatusType {
+        COMPLETED, LATE, PENDING
+    }
+
     /**
-     * Constructs a {@code Status}.
-     *
-     * @param assignmentStatus A valid tag name.
+     * Initialises Status class
      */
-    private Status(AssignmentStatus assignmentStatus) {
-        requireNonNull(assignmentStatus);
-        this.value = assignmentStatus.toString().toLowerCase();
+    private Status(StatusType value) {
+        requireNonNull(value);
+
+        this.value = value.toString().toLowerCase();
     }
 
     public static Status createCompletedStatus() {
-        return new Status(AssignmentStatus.COMPLETED);
+        return new Status(StatusType.COMPLETED);
     }
 
     public static Status createPendingStatus() {
-        return new Status(AssignmentStatus.PENDING);
+        return new Status(StatusType.PENDING);
     }
 
     public static Status createLateStatus() {
-        return new Status(AssignmentStatus.LATE);
+        return new Status(StatusType.LATE);
     }
 
     @Override
@@ -46,6 +45,7 @@ public class Status {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
         return '[' + value.toUpperCase() + ']';
     }
