@@ -114,7 +114,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Assignment> getAssignmentList(Index index) {
         boolean isPersonListEmpty = getPersonList().size() == 0;
 
-        if(isPersonListEmpty) {
+        if (isPersonListEmpty) {
             return null;
         }
         return assignments.asUnmodifiableObservableList(getPersonList().get(index.getZeroBased()).getAssignments());
