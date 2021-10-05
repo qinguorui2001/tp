@@ -111,10 +111,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    /* TODO: Change implementation so that the selected person assignment list is displayed */
     @Override
-    public ObservableList<Assignment> getAssignmentList(Index index) {
-        return assignments.asUnmodifiableObservableList(getPersonList().get(index.getZeroBased()).getAssignments());
+    public ObservableList<Assignment> getAssignmentList(Person person) {
+        return assignments.asUnmodifiableObservableList(person.getAssignments());
     }
 
     @Override

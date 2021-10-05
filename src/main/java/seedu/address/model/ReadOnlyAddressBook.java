@@ -20,6 +20,6 @@ public interface ReadOnlyAddressBook {
      * Returns an unmodifiable view of the assignment list.
      * This list will not contain any duplicate assignments.
      */
-    ObservableList<Assignment> getAssignmentList(Index index);
+    ObservableList<Assignment> getAssignmentList(Person person);
 
 }

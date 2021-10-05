@@ -151,7 +151,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
+        public ObservableList<Assignment> getFilteredAssignmentList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }

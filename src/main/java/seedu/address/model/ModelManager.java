@@ -150,10 +150,11 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //=========== Filtered Assignment List Accessors =============================================================
+
     @Override
-    public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
-        //TODO: check validity of Index
-        return this.addressBook.getAssignmentList(index);
+    public ObservableList<Assignment> getFilteredAssignmentList(Person person) {
+        return this.addressBook.getAssignmentList(person);
     }
 
 }

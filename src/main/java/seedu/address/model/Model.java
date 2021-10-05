@@ -82,11 +82,12 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered assignment list */
-    ObservableList<Assignment> getFilteredAssignmentList(Index index);
+    ObservableList<Assignment> getFilteredAssignmentList(Person person);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
 }

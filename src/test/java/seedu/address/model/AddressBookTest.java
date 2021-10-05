@@ -100,8 +100,9 @@ public class AddressBookTest {
             return persons;
         }
 
+        // TODO:
         @Override
-        public ObservableList<Assignment> getAssignmentList(Index index) {
+        public ObservableList<Assignment> getAssignmentList(Person person) {
             throw new AssertionError("This method does not have test cases for now");
         }
     }
