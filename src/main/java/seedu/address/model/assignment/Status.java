@@ -7,7 +7,7 @@ public class Status {
         COMPLETED, PENDING, LATE
     }
 
-    private final String value;
+    public final String value;
 
     /**
      * Constructs a {@code Status}.

@@ -361,27 +361,92 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User enters a new person's information.
-4. AddressBook adds the person
+1. User enters a new person's information
+2. TA<sup>2</sup> shows the person is added
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The given command format is wrong.
+* 1a. The given command format is invalid.
 
-    * 3a1. AddressBook shows an error message related to wrong format.
+    * 1a1. TA<sup>2</sup> shows an error message related to invalid format.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
   
-* 3b. The added person is already in the list.
-    * 3b1. AddressBook requests to add another person.
+* 1b. The added person is already in the list.
+
+    * 1b1. TA<sup>2</sup> requests to add another person.
+
+      Use case resumes at step 1.
+
+**Use case: UC06 - Add an assignment**
+
+**MSS**
+
+1. User enters the assignment information
+2. TA<sup>2</sup> shows the assignment information is added
+
+   Use case ends
+
+**Extensions**
+
+* 1a. The assignment information already exists in that person's assignment list.
+  
+    * 1a1. TA<sup>2</sup> shows message that the assignment already exists.
+  
+    Use case ends.
+
+* 1b. The given instruction format is invalid.
+
+    * 1b1 TA<sup>2</sup> shows an error message.
+  
+    Use case resumes at step 1.
+
+**Use case: UC07 - Delete an assignment**
+
+**MSS**
+
+1. User requests to list assignments of a person
+2. TA<sup>2</sup> shows a list of assignments
+3. User requests to delete a specific assignment in the list
+4. TA<sup>2</sup> deletes the assignment
+
+   Use case ends
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. TA<sup>2</sup> shows an error message.
 
       Use case resumes at step 2.
 
+**Use case: UC08 - Mark an assignment**
 
+**MSS**
+
+1. User enters the information of assignment tends to be done
+2. TA<sup>2</sup> shows the assignment is done
+
+   Use case ends
+
+**Extensions**
+
+* 1a. The assignment doesn't exist in the assignment list.
+
+  Use case ends.
+
+* 1b. The given index is invalid.
+
+    * 1b1. TA<sup>2</sup> shows an error message.
+
+      Use case resumes at step 1.
+  
 *{More to be added}*
 
 ### Non-Functional Requirements
@@ -407,6 +472,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **e/**: Symbol for a requirement to state email address
 * **m/**: Symbol for a requirement to state the module
 * **n/**: Symbol for a requirement to state a name
+* **TA**: Abbreviation for the tutor
+* **UC**: Abbreviation for the use case
+* **SOC**: Abbreviation for the school of computing
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

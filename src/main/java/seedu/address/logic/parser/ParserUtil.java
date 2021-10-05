@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assignment.DueDate;
 import seedu.address.model.assignment.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Module;
@@ -78,6 +79,28 @@ public class ParserUtil {
             throw new ParseException(Module.MESSAGE_CONSTRAINTS);
         }
         return new Module(trimmedModule);
+    }
+
+    /**
+     * Parses a {@code String dueDate} into a {@code dueDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dueDate} is invalid.
+     */
+    public static DueDate parseDate(String dueDate) throws ParseException {
+        requireNonNull(dueDate);
+        String trimmedDueDate = dueDate.trim();
+        String splitString = ",";
+        if (!DueDate.isValidDueDate(trimmedDueDate)) {
+            throw new ParseException(DueDate.MESSAGE_CONSTRAINTS_DUE_DATE);
+        } else if (!dueDate.contains(splitString)) {
+            return new DueDate(trimmedDueDate);
+        } else {
+            String[] dateAndTime = trimmedDueDate.split(splitString);
+            String date = dateAndTime[0];
+            String time = dateAndTime[1];
+            return new DueDate(date, time);
+        }
     }
 
     /**

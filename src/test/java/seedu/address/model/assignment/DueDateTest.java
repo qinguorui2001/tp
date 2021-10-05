@@ -1,10 +1,10 @@
 package seedu.address.model.assignment;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 class DueDateTest {
     @Test
@@ -60,5 +60,27 @@ class DueDateTest {
         assertTrue(DueDate.isValidTime("0000")); // minimum hour and minutes
         assertTrue(DueDate.isValidTime("0059")); // minimum hour and maximum minutes
         assertTrue(DueDate.isValidTime("2300")); // maximum hour and minimum minutes
+    }
+
+    @Test
+    public void isValidDueDate() {
+        // null dueDate
+        assertThrows(NullPointerException.class, () -> DueDate.isValidDueDate(null));
+
+        // invalid dueDate
+        assertFalse(DueDate.isValidDueDate("")); // empty string
+        assertFalse(DueDate.isValidDueDate(" ")); // spaces only
+        assertFalse(DueDate.isValidDueDate("^")); // only non-alphanumeric characters
+        assertFalse(DueDate.isValidDueDate("11/11/2021*")); // contains non-alphanumeric characters
+        assertFalse(DueDate.isValidDueDate("11/11/2021,1588")); // contains invalid time
+        assertFalse(DueDate.isValidDueDate("111/188/2021*")); // contains invalid day and month
+        assertFalse(DueDate.isValidDueDate("11/11/2021 1444")); // no comma but space between time and date
+        assertFalse(DueDate.isValidDueDate("11/11/2021,744")); // invalid format for time
+
+        // valid dueDate
+        assertTrue(DueDate.isValidDueDate("11/11/2021")); // date only
+        assertTrue(DueDate.isValidDueDate("02/02/2011,1650")); // prefix 0 for day and month
+        assertTrue(DueDate.isValidDueDate("11/1/2021,1541")); // single digit for month
+        assertTrue(DueDate.isValidDueDate("1/11/2021,1400")); // single digit for day
     }
 }
