@@ -170,20 +170,18 @@ public class AddCommandTest {
         public void markAssignment(Name name, Assignment toMark) {
 
         }
-
-      /* @Override
+        /* @Override
         public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
            throw new AssertionError("This method should not be called.");
         }
-      */
-      
+        */
         @Override
-        public ObservableList<Assignment> getFilteredAssignmentList() {
+        public void updateFilteredAssignmentList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredAssignmentList(Person person) {
+        public ObservableList<Assignment> getFilteredAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
 

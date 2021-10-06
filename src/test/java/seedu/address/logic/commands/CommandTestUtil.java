@@ -35,12 +35,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
-/*
+    /*
     public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_NAME_AMY;
     public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_NAME_BOB;
     public static final String DUEDATE_DESC_AMY = " " + PREFIX_DUEDATE + VALID_NAME_AMY;
     public static final String DUEDATE_DESC_BOB = " " + PREFIX_DUEDATE + VALID_NAME_BOB;
-*/
+    */
     public static final String VALID_DESCRIPTION_CS1231S_TUTORIAL = "CS1231S Tutorial 10";
     public static final String VALID_DESCRIPTION_CS2106_PROJECT = "CS2106 Final Network Project";
     public static final String VALID_DESCRIPTION_CS3230_LAB = "CS3230 Lab Week 4";

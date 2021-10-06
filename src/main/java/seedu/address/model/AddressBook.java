@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -18,6 +20,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueAssignmentList assignments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -28,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        assignments = new UniqueAssignmentList();
     }
 
     public AddressBook() {}
@@ -150,21 +154,27 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-   /* public ObservableList<Assignment> getAssignmentList(Index index) {
-        if (getPersonList().size() != 0) {
-            return getPersonList().get(index.getZeroBased()).getAssignments().asUnmodifiableObservableList();
-        }
-        return null;
-    }
-*/
-    @Override
+    /* public ObservableList<Assignment> getAssignmentList(Index index) {
+         if (getPersonList().size() != 0) {
+             return getPersonList().get(index.getZeroBased()).getAssignments().asUnmodifiableObservableList();
+         }
+         return null;
+     }
+    */
+    // Consider this
     public List<Assignment> getAssignmentList(Name name) {
-        return persons.assignmentsOfPersonWithSameName(name).asUnmodifiableObservableList();
+        return persons.assignmentsOfPersonWithSameName(name).asUnmodifiableObservableList(new ArrayList<>());
     }
-  
-    @Override
+
+    /*   @Override
     public ObservableList<Assignment> getAssignmentList(Person person) {
         return assignments.asUnmodifiableObservableList(person.getAssignments());
+    }
+    */
+
+    @Override
+    public ObservableList<Assignment> getAssignmentList(Person person) {
+        return null;
     }
 
     public ObservableList<Assignment> emptyAssignmentList() {

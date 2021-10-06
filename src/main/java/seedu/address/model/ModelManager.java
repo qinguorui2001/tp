@@ -177,14 +177,13 @@ public class ModelManager implements Model {
 
     //=========== Filtered Assignment List Accessors =============================================================
 
-  /*  @Override
+    /*  @Override
     public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
         //TODO: check validity of Index
         requireNonNull(index);
         return this.addressBook.getAssignmentList(index);
     }
-  */
-  
+    */
     @Override
     public List<Assignment> getFilteredAssignmentList(Name name) {
         requireNonNull(name);
