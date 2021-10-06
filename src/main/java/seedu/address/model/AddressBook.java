@@ -2,10 +2,10 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.person.Person;
@@ -111,10 +111,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    /* TODO: Change implementation so that the selected person assignment list is displayed */
     @Override
-    public ObservableList<Assignment> getAssignmentList(Index index) {
-        return assignments.asUnmodifiableObservableList(getPersonList().get(index.getZeroBased()).getAssignments());
+    public ObservableList<Assignment> getAssignmentList(Person person) {
+        return assignments.asUnmodifiableObservableList(person.getAssignments());
+    }
+
+    public ObservableList<Assignment> emptyAssignmentList() {
+        return assignments.asUnmodifiableObservableList(new ArrayList<>());
     }
 
     @Override
