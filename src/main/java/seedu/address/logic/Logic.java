@@ -4,7 +4,6 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -51,5 +50,5 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /** Returns an unmodifiable view of the filtered list of assignments */
-    ObservableList<Assignment> getFilteredAssignmentList(Index index);
+    ObservableList<Assignment> getFilteredAssignmentList();
 }

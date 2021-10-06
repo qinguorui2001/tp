@@ -40,7 +40,9 @@ public class Person {
         this.tags.addAll(tags);
         // TODO: change constructor to accommodate assignments
         assignments.add(new Assignment(new Description(name + " This is a test assignment"),
-                new DueDate("06/09/2021", "2359"), Status.createPendingStatus()));
+                new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
+        assignments.add(new Assignment(new Description(name + " xxx"),
+                new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
     }
 
     public Name getName() {
