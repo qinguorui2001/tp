@@ -1,10 +1,5 @@
 package seedu.address.logic.parser;
 
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-import java.util.Arrays;
-
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -125,7 +120,8 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
                 splitByWhiteSpace = splitByModulePrefix[1].split(whitespace);
             } else {
                 // Throw error and restate command use
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindPersonCommand.MESSAGE_USAGE));
             }
 
             // Check each module fits the constraints

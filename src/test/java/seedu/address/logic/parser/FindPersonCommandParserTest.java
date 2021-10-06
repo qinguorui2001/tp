@@ -11,7 +11,7 @@ import static seedu.address.model.person.Module.MESSAGE_CONSTRAINTS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-public class FindCommandParserTest {
+public class FindPersonCommandParserTest {
 
     private FindPersonCommandParser parser = new FindPersonCommandParser();
 
