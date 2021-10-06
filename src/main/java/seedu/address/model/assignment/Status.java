@@ -3,12 +3,12 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 
 public class Status {
-    public final String value;
     public static final String MESSAGE_CONSTRAINTS = "Status of assignment should be clearly defined!";
+    public final String value;
+
     enum StatusType {
         COMPLETED, LATE, PENDING
     }
-
 
     /**
      * Initialises Status class
