@@ -14,7 +14,7 @@ import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 /**
  * A list of assignments that enforces uniqueness between its elements and does not allow nulls.
  * An assignment is considered unique by comparing using {@code Assignment#isSameAssignment(Assignment)}.
- * As such, adding and updating of assignments uses Assignment#isSameAssignment(Person) for equality to ensure
+ * As such, adding and updating of assignments uses Assignment#isSameAssignment(Assignment) for equality to ensure
  * that the assignment being added or updated is unique in terms of identity in the UniqueAssignmentList.
  * However, the removal of an assignment uses Assignment#equals(Object)
  * to ensure that the assignment with exactly the same fields will be removed.

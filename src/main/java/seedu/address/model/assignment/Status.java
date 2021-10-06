@@ -3,34 +3,32 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 
 public class Status {
-    enum AssignmentStatus {
-        COMPLETED, PENDING, LATE
+    public final String value;
+    public static final String MESSAGE_CONSTRAINTS = "Status of assignment should be clearly defined!";
+    enum StatusType {
+        COMPLETED, LATE, PENDING
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "Status of assignment should be clearly defined!";
-
-    public final String value;
 
     /**
-     * Constructs a {@code Status}.
-     *
-     * @param assignmentStatus A valid tag name.
+     * Initialises Status class
      */
-    private Status(AssignmentStatus assignmentStatus) {
-        requireNonNull(assignmentStatus);
-        this.value = assignmentStatus.toString();
+    private Status(StatusType value) {
+        requireNonNull(value);
+
+        this.value = value.toString().toLowerCase();
     }
 
     public static Status createCompletedStatus() {
-        return new Status(AssignmentStatus.COMPLETED);
+        return new Status(StatusType.COMPLETED);
     }
 
     public static Status createPendingStatus() {
-        return new Status(AssignmentStatus.PENDING);
+        return new Status(StatusType.PENDING);
     }
 
     public static Status createLateStatus() {
-        return new Status(AssignmentStatus.LATE);
+        return new Status(StatusType.LATE);
     }
 
     /**
@@ -40,8 +38,8 @@ public class Status {
      * @return the corresponding Status
      */
     public static Status createStatus(String value) {
-        AssignmentStatus currentStatus = AssignmentStatus.PENDING;
-        for (AssignmentStatus status: AssignmentStatus.values()) {
+        StatusType currentStatus = StatusType.PENDING;
+        for (StatusType status: StatusType.values()) {
             if (value.equals(status.toString())) {
                 currentStatus = status;
             }
@@ -52,7 +50,7 @@ public class Status {
      * Returns true if a given string is a valid Status.
      */
     public static boolean isValidStatus(String test) {
-        for (AssignmentStatus status: AssignmentStatus.values()) {
+        for (StatusType status: StatusType.values()) {
             if (test.equals(status.toString())) {
                 return true;
             }
@@ -75,7 +73,8 @@ public class Status {
     /**
      * Format state as text for viewing.
      */
+    @Override
     public String toString() {
-        return '[' + value + ']';
+        return '[' + value.toUpperCase() + ']';
     }
 }
