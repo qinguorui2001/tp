@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -150,13 +152,42 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasAssignment(Name name, Assignment toAdd) {
+            return false;
+        }
+
+        @Override
+        public void addAssignment(Name name, Assignment toAdd) {
+
+        }
+
+        @Override
+        public void deleteAssignment(Name name, Assignment toDelete) {
+
+        }
+
+        @Override
+        public void markAssignment(Name name, Assignment toMark) {
+
+        }
+        /* @Override
+        public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
+           throw new AssertionError("This method should not be called.");
+        }
+        */
+        @Override
+        public void updateFilteredAssignmentList(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Assignment> getFilteredAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredAssignmentList(Person person) {
-            throw new AssertionError("This method should not be called.");
+        public List<Assignment> getFilteredAssignmentList(Name name) {
+            return null;
         }
     }
 
