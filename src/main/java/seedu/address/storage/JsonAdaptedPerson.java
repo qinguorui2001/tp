@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         email = source.getEmail().value;
-        module = source.getModule().value;
+        module = source.getModule().moduleCode;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

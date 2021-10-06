@@ -34,6 +34,7 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      * Returns the assignment list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Assignment> asUnmodifiableObservableList(ArrayList<Assignment> assignments) {
+        internalList.clear();
         internalList.addAll(assignments);
         return internalUnmodifiableList;
     }
