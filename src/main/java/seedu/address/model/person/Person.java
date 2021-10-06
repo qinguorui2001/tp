@@ -38,6 +38,8 @@ public class Person {
         assignments = new UniqueAssignmentList();
         assignments.add(new Assignment(new Description(name + " This is a test assignment"),
                 new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
+        assignments.add(new Assignment(new Description(name + " xxx"),
+                new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
     }
 
     public Name getName() {

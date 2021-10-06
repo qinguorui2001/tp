@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -84,7 +83,7 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered assignment list */
-    ObservableList<Assignment> getFilteredAssignmentList(Index index);
+    ObservableList<Assignment> getFilteredAssignmentList();
 
     /** Returns an unmodifiable view of the filtered assignment list */
     List<Assignment> getFilteredAssignmentList(Name name);
@@ -102,4 +101,6 @@ public interface Model {
     void deleteAssignment(Name name, Assignment toDelete);
 
     void markAssignment(Name name, Assignment toMark);
+
+    void updateFilteredAssignmentList(Person person);
 }

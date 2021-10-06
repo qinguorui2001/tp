@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -26,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private ObservableList<Assignment> assignmentsList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        assignmentsList = new FilteredList<>(this.addressBook.emptyAssignmentList());
     }
 
     public ModelManager() {
@@ -174,17 +175,30 @@ public class ModelManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
-    @Override
+    //=========== Filtered Assignment List Accessors =============================================================
+
+  /*  @Override
     public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
         //TODO: check validity of Index
         requireNonNull(index);
         return this.addressBook.getAssignmentList(index);
     }
-
+  */
+  
     @Override
     public List<Assignment> getFilteredAssignmentList(Name name) {
         requireNonNull(name);
         return this.addressBook.getAssignmentList(name);
     }
 
+    @Override
+    public ObservableList<Assignment> getFilteredAssignmentList() {
+        return assignmentsList;
+    }
+
+    @Override
+    public void updateFilteredAssignmentList(Person person) {
+        ObservableList<Assignment> personAssignments = this.addressBook.getAssignmentList(person);
+        this.assignmentsList = new FilteredList<>(personAssignments);
+    }
 }

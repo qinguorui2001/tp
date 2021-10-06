@@ -7,6 +7,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.assignment.Assignment;
 
+/**
+ * An UI component that displays information of a {@code Assignment}.
+ */
 public class AssignmentCard extends UiPart<Region> {
 
     private static final String FXML = "AssignmentListCard.fxml";
@@ -40,9 +43,9 @@ public class AssignmentCard extends UiPart<Region> {
         this.assignment = assignment;
         id.setText(displayedIndex + ". ");
         description.setText(assignment.getDescription().description);
-        //todo change representation of dateTime
         dueDate.setText(assignment.getDueDate().toString());
         status.getChildren().add(new Label(assignment.getStatus().toString()));
+        status.setId(assignment.getStatus().value);
     }
 
     @Override
