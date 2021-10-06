@@ -55,10 +55,11 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
         email = source.getEmail().value;
-        module = source.getModule().value;
+        module = source.getModule().moduleCode;
         assignments.addAll(source.getAssignments().stream()
                 .map(JsonAdaptedAssignment::new)
                 .collect(Collectors.toList()));
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));

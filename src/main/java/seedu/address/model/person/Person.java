@@ -33,6 +33,7 @@ public class Person {
         this.module = module;
         this.tags.addAll(tags);
         this.assignments.addAll(assignments);
+
     }
 
     public Name getName() {

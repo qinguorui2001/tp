@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
@@ -100,8 +99,9 @@ public class AddressBookTest {
             return persons;
         }
 
+        // TODO:
         @Override
-        public ObservableList<Assignment> getAssignmentList(Index index) {
+        public ObservableList<Assignment> getAssignmentList(Person person) {
             throw new AssertionError("This method does not have test cases for now");
         }
     }
