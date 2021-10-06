@@ -15,4 +15,3 @@
 ## Acknowledgement
 * **This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).**
   * For the detailed documentation of  AddressBook-Level3 project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-  
