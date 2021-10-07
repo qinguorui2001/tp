@@ -85,11 +85,17 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
     }
 
+    // TODO:
+    public ObservableList<Assignment> getPersonAssignmentList(Name name) {
+        throw new AssertionError("This method does not have test cases for now");
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Assignment> assignments = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -100,16 +106,15 @@ public class AddressBookTest {
             return persons;
         }
 
-        // TODO:
         @Override
-        public ObservableList<Assignment> getPersonAssignmentList(Name name) {
-            throw new AssertionError("This method does not have test cases for now");
+        public void updateAssignmentList(Person person) {
         }
 
         @Override
-        public ObservableList<Assignment> emptyAssignmentList() {
-            return null;
+        public ObservableList<Assignment> getAssignmentsList() {
+            return assignments;
         }
+
     }
 
 }

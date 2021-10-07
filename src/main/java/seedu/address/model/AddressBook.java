@@ -140,6 +140,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.personWithSameName(name).getAssignments().done(key);
     }
 
+    /**
+     * Retrieve the assignment list of the identified person {@code name} from this {@code AddressBook's person list}.
+     * Person with {@code name} must exist in the person list.
+     */
+    public ObservableList<Assignment> getPersonAssignmentList(Name name) {
+        return persons.assignmentsOfPersonWithSameName(name).asUnmodifiableObservableList();
+    }
+
     //// util methods
 
     @Override
@@ -152,25 +160,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    @Override
-    public ObservableList<Assignment> getPersonAssignmentList(Name name) {
-        return persons.assignmentsOfPersonWithSameName(name).asUnmodifiableObservableList();
-    }
 
     @Override
-    public ObservableList<Assignment> emptyAssignmentList() {
-        UniqueAssignmentList emptyList = new UniqueAssignmentList();
-        emptyList.add(new Assignment(new Description("This is a test assignment"),
-                new DueDate("31/12/2021", "2359"), Status.createPendingStatus()));
-        return emptyList.asUnmodifiableObservableList();
-    }
-
-    public UniqueAssignmentList updateAssignmentList(Person person) {
+    public void updateAssignmentList(Person person) {
         this.assignments.setAssignments(person.getAssignments());
-        return this.assignments;
     }
 
-
+    @Override
+    public ObservableList<Assignment> getAssignmentsList() {
+        return assignments.asUnmodifiableObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {

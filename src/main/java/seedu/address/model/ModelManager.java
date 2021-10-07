@@ -39,7 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        assignmentsList = new FilteredList<>(this.addressBook.emptyAssignmentList());
+        assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
     }
 
     public ModelManager() {
@@ -179,6 +179,15 @@ public class ModelManager implements Model {
 
     //=========== Filtered Assignment List Accessors =============================================================
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Assignment} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Assignment> getFilteredAssignmentList() {
+        return assignmentsList;
+    }
+
     @Override
     public List<Assignment> getPersonAssignmentList(Name name) {
         requireNonNull(name);
@@ -186,13 +195,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Assignment> getFilteredAssignmentList() {
-        return assignmentsList;
-    }
-
-    @Override
     public void updateFilteredAssignmentList(Person person) {
-        ObservableList<Assignment> personAssignments = this.addressBook.updateAssignmentList(person).asUnmodifiableObservableList();
-        this.assignmentsList = new FilteredList<>(personAssignments);
+        this.addressBook.updateAssignmentList(person);
+        this.assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
     }
 }

@@ -36,14 +36,6 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     public ObservableList<Assignment> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
-    /*
-    public ObservableList<Assignment> asUnmodifiableObservableList(ArrayList<Assignment> assignments) {
-        internalList.clear();
-        internalList.addAll(assignments);
-        return internalUnmodifiableList;
-    }
-
-     */
 
     /**
      * Returns true if the list contains an equivalent assignment as the given argument.
@@ -110,6 +102,10 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
                 Status.createCompletedStatus()));
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     * {@code replacement} must not contain duplicate assignments.
+     */
     public void setAssignments(UniqueAssignmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
