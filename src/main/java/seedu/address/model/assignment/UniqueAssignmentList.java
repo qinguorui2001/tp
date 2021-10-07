@@ -29,19 +29,21 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-    /*
-    public ObservableList<Assignment> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
-    }
-    */
+
     /**
      * Returns the assignment list as an unmodifiable {@code ObservableList}.
      */
+    public ObservableList<Assignment> asUnmodifiableObservableList() {
+        return internalUnmodifiableList;
+    }
+    /*
     public ObservableList<Assignment> asUnmodifiableObservableList(ArrayList<Assignment> assignments) {
         internalList.clear();
         internalList.addAll(assignments);
         return internalUnmodifiableList;
     }
+
+     */
 
     /**
      * Returns true if the list contains an equivalent assignment as the given argument.

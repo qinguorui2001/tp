@@ -186,7 +186,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Assignment> getFilteredAssignmentList(Name name) {
+        public List<Assignment> getPersonAssignmentList(Name name) {
             return null;
         }
     }

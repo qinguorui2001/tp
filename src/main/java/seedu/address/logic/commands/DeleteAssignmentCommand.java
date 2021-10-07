@@ -45,7 +45,7 @@ public class DeleteAssignmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Assignment> lastShownList = model.getFilteredAssignmentList(name);
+        List<Assignment> lastShownList = model.getPersonAssignmentList(name);
 
         if (lastShownList.size() == 0) {
             throw new CommandException(Messages.MESSAGE_ASSIGNMENTS_EMPTY);

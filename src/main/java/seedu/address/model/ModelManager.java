@@ -93,6 +93,8 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== Person ================================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -117,7 +119,7 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Person ================================================================================
+    //=========== Assignment ================================================================================
 
     @Override
     public boolean hasAssignment(Name name, Assignment toAdd) {
@@ -177,17 +179,10 @@ public class ModelManager implements Model {
 
     //=========== Filtered Assignment List Accessors =============================================================
 
-    /*  @Override
-    public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
-        //TODO: check validity of Index
-        requireNonNull(index);
-        return this.addressBook.getAssignmentList(index);
-    }
-    */
     @Override
-    public List<Assignment> getFilteredAssignmentList(Name name) {
+    public List<Assignment> getPersonAssignmentList(Name name) {
         requireNonNull(name);
-        return this.addressBook.getAssignmentList(name);
+        return this.addressBook.getPersonAssignmentList(name);
     }
 
     @Override
@@ -197,7 +192,7 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredAssignmentList(Person person) {
-        ObservableList<Assignment> personAssignments = this.addressBook.getAssignmentList(person);
+        ObservableList<Assignment> personAssignments = this.addressBook.updateAssignmentList(person).asUnmodifiableObservableList();
         this.assignmentsList = new FilteredList<>(personAssignments);
     }
 }

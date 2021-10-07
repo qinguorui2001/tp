@@ -86,7 +86,7 @@ public interface Model {
     ObservableList<Assignment> getFilteredAssignmentList();
 
     /** Returns an unmodifiable view of the filtered assignment list */
-    List<Assignment> getFilteredAssignmentList(Name name);
+    List<Assignment> getPersonAssignmentList(Name name);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
