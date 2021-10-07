@@ -15,13 +15,13 @@ public class Assignment {
     private final Status status;
 
     /**
-     * Every field must be present and not null.
+     * Initialises Assignment with every field needing to be present and not null.
      */
     public Assignment(Description description, DueDate dueDate, Status status) {
         requireAllNonNull(description, dueDate, status);
         this.description = description;
         this.dueDate = dueDate;
-        this.status = status;
+        this.status = Status.createPendingStatus();
     }
 
     public Description getDescription() {
@@ -37,8 +37,8 @@ public class Assignment {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both assignments have the same description.
+     * This defines a weaker notion of equality between two assignments.
      */
     public boolean isSameAssignment(Assignment otherAssignment) {
         if (otherAssignment == this) {
@@ -50,8 +50,8 @@ public class Assignment {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both assignments have the same identity and data fields.
+     * This defines a stronger notion of equality between two assignments.
      */
     @Override
     public boolean equals(Object other) {
