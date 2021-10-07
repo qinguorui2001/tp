@@ -33,7 +33,7 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
-            @JsonProperty("email") String email, @JsonProperty("address") String module,
+            @JsonProperty("email") String email, @JsonProperty("module") String module,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.email = email;
