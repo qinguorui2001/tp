@@ -17,7 +17,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.*;
 
-public class EditCommandParserTest {
+public class EditPersonCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
