@@ -6,10 +6,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
@@ -45,14 +48,25 @@ public class MarkAssignmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Assignment> lastShownList = model.getFilteredAssignmentList(name);
+        // Get Person that match the name
+        List<Person> filteredPersonList =
+                model.getFilteredPersonList()
+                        .stream()
+                        .filter(person -> person.isSameName(name))
+                        .collect(Collectors.toList());
 
+        if (filteredPersonList.size() == 0) {
+            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        }
+
+        Person selectedPerson = filteredPersonList.get(0);
+        List<Assignment> lastShownList = model.getFilteredAssignmentList(selectedPerson);
         if (lastShownList.size() == 0) {
-            throw new CommandException(Messages.MESSAGE_ASSIGNMENTS_EMPTY);
+            throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
         Assignment assignmentToMark = lastShownList.get(targetIndex.getZeroBased());
-        model.markAssignment(name, assignmentToMark);
+        model.markAssignment(selectedPerson, assignmentToMark);
         return new CommandResult(String.format(MESSAGE_MARK_ASSIGNMENT_SUCCESS, assignmentToMark));
     }
 

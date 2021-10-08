@@ -1,14 +1,19 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUEDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
 
 /**
  * Adds an assignment to the person's assignment list.
@@ -46,11 +51,23 @@ public class AddAssignmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasAssignment(name, assignmentToAdd)) {
+        // Get Person that match the name
+        List<Person> filteredPersonList =
+                model.getFilteredPersonList()
+                        .stream()
+                        .filter(person -> person.isSameName(name))
+                        .collect(Collectors.toList());
+
+        if (filteredPersonList.size() == 0) {
+            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        }
+
+        Person selectedPerson = filteredPersonList.get(0);
+        if (model.hasAssignment(selectedPerson, assignmentToAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
-        model.addAssignment(name, assignmentToAdd);
+        model.addAssignment(selectedPerson, assignmentToAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, assignmentToAdd));
     }
