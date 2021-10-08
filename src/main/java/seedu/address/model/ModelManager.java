@@ -121,16 +121,12 @@ public class ModelManager implements Model {
 
     @Override
     public boolean hasAssignment(Name name, Assignment toAdd) {
-        requireNonNull(name);
-        requireNonNull(toAdd);
-
         return addressBook.hasAssignment(name, toAdd);
     }
 
     @Override
     public void addAssignment(Name name, Assignment toAdd) {
         addressBook.addAssignment(name, toAdd);
-        updateFilteredAssignmentList();
     }
 
     @Override
@@ -188,12 +184,6 @@ public class ModelManager implements Model {
         return this.addressBook.getAssignmentList(index);
     }
     */
-
-    /**
-     * Returns the assignment list for the specific name.
-     * @param name The name of person.
-     * @return The person's assignment list.
-     */
     @Override
     public List<Assignment> getFilteredAssignmentList(Name name) {
         requireNonNull(name);

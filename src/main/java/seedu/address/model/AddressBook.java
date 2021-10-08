@@ -20,7 +20,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final List<UniqueAssignmentList> personsAssignments;
+    private final UniqueAssignmentList assignments;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,7 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        personsAssignments = new ArrayList<UniqueAssignmentList>();
+        assignments = new UniqueAssignmentList();
     }
 
     public AddressBook() {}
@@ -163,22 +163,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     */
     // Consider this
     public List<Assignment> getAssignmentList(Name name) {
-        return persons.assignmentsOfPersonWithSameName(name).asUnmodifiableObservableList();
+        return persons.assignmentsOfPersonWithSameName(name).asUnmodifiableObservableList(new ArrayList<>());
     }
+
+    /*   @Override
+    public ObservableList<Assignment> getAssignmentList(Person person) {
+        return assignments.asUnmodifiableObservableList(person.getAssignments());
+    }
+    */
 
     @Override
     public ObservableList<Assignment> getAssignmentList(Person person) {
-        return person.getAssignments().asUnmodifiableObservableList();
+        return null;
     }
 
-
-    /*@Override
-    public ObservableList<Assignment> getAssignmentList(Person person) {
-        return null;
-    }*/
-
     public ObservableList<Assignment> emptyAssignmentList() {
-        return assignments.asUnmodifiableObservableList();
+        return assignments.asUnmodifiableObservableList(new ArrayList<>());
     }
 
     @Override
