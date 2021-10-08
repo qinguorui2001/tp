@@ -123,6 +123,13 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         internalList.setAll(assignments);
     }
 
+    /**
+     * Removes all assignments within the UniqueAssignmentList
+     */
+    public void clearAllAssignments() {
+        internalList.clear();
+    }
+
     @Override
     public Iterator<Assignment> iterator() {
         return internalList.iterator();

@@ -22,7 +22,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -153,22 +152,22 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public boolean hasAssignment(Name name, Assignment toAdd) {
+        public boolean hasAssignment(Person person, Assignment toAdd) {
             return false;
         }
 
         @Override
-        public void addAssignment(Name name, Assignment toAdd) {
+        public void addAssignment(Person person, Assignment toAdd) {
 
         }
 
         @Override
-        public void deleteAssignment(Name name, Assignment toDelete) {
+        public void deleteAssignment(Person person, Assignment toDelete) {
 
         }
 
         @Override
-        public void markAssignment(Name name, Assignment toMark) {
+        public void markAssignment(Person person, Assignment toMark) {
 
         }
 
@@ -183,7 +182,7 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public List<Assignment> getFilteredAssignmentList(Name name) {
+        public List<Assignment> getFilteredAssignmentList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }
