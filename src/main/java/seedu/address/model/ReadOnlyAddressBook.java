@@ -2,8 +2,6 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.UniqueAssignmentList;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
