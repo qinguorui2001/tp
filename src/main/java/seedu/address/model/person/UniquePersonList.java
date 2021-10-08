@@ -160,7 +160,7 @@ public class UniquePersonList implements Iterable<Person> {
      * @param name The name of the person.
      * @return The assignment list of that person.
      */
-    public UniqueAssignmentList assignmentsOfPersonWithSameName(Name name) {
+    public UniqueAssignmentList getPersonAssignmentList(Name name) {
         return personWithSameName(name).getAssignments();
     }
 }

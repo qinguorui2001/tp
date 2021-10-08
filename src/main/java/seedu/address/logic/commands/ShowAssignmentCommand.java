@@ -1,16 +1,19 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
-public class ShowCommand extends Command {
+/**
+ * Shows the assignment list of the person identified using it's displayed index from the address book.
+ */
+public class ShowAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "a-show";
 
@@ -24,7 +27,7 @@ public class ShowCommand extends Command {
 
     private final Index targetIndex;
 
-    public ShowCommand(Index targetIndex) {
+    public ShowAssignmentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -45,7 +48,7 @@ public class ShowCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ShowCommand // instanceof handles nulls
-                && targetIndex.equals(((ShowCommand) other).targetIndex)); // state check
+                || (other instanceof ShowAssignmentCommand // instanceof handles nulls
+                && targetIndex.equals(((ShowAssignmentCommand) other).targetIndex)); // state check
     }
 }
