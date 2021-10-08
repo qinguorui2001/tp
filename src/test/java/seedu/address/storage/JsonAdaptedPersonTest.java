@@ -25,7 +25,8 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_MODULE = BENSON.getModule().toString();
-    private static final List<JsonAdaptedAssignment> VALID_ASSIGNMENTS = BENSON.getAssignments().stream()
+    private static final List<JsonAdaptedAssignment> VALID_ASSIGNMENTS = BENSON.getAssignments()
+            .asUnmodifiableObservableList().stream()
             .map(JsonAdaptedAssignment::new)
             .collect(Collectors.toList());
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -37,7 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        assignmentsList = new FilteredList<>(this.addressBook.emptyAssignmentList());
+        assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
     }
 
     public ModelManager() {
@@ -91,6 +93,8 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== Person ================================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -113,6 +117,28 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    //=========== Assignment ================================================================================
+
+    @Override
+    public boolean hasAssignment(Name name, Assignment toAdd) {
+        return addressBook.hasAssignment(name, toAdd);
+    }
+
+    @Override
+    public void addAssignment(Name name, Assignment toAdd) {
+        addressBook.addAssignment(name, toAdd);
+    }
+
+    @Override
+    public void deleteAssignment(Name name, Assignment toDelete) {
+        addressBook.removeAssignment(name, toDelete);
+    }
+
+    @Override
+    public void markAssignment(Name name, Assignment toMark) {
+        addressBook.markAssignment(name, toMark);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -153,14 +179,24 @@ public class ModelManager implements Model {
 
     //=========== Filtered Assignment List Accessors =============================================================
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Assignment} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public ObservableList<Assignment> getFilteredAssignmentList() {
         return assignmentsList;
     }
 
     @Override
+    public List<Assignment> getFilteredAssignmentList(Name name) {
+        requireNonNull(name);
+        return this.addressBook.getPersonAssignmentList(name);
+    }
+
+    @Override
     public void updateFilteredAssignmentList(Person person) {
-        ObservableList<Assignment> personAssignments = this.addressBook.getAssignmentList(person);
-        this.assignmentsList = new FilteredList<>(personAssignments);
+        this.addressBook.updateAssignmentList(person);
+        this.assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
     }
 }

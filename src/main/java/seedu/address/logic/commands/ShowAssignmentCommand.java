@@ -11,22 +11,23 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Shows the assignment list of the person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class ShowAssignmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "p-delete";
+    public static final String COMMAND_WORD = "a-show";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Shows the assignments assigned to the person identified by the "
+            + "index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_SHOW_ASSIGNMENT_SUCCESS = "Showing assignments assigned to the person: %1$s";
 
     private final Index targetIndex;
 
-    public DeleteCommand(Index targetIndex) {
+    public ShowAssignmentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -39,15 +40,15 @@ public class DeleteCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        Person personToShow = lastShownList.get(targetIndex.getZeroBased());
+        model.updateFilteredAssignmentList(personToShow);
+        return new CommandResult(String.format(MESSAGE_SHOW_ASSIGNMENT_SUCCESS, personToShow.getName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                || (other instanceof ShowAssignmentCommand // instanceof handles nulls
+                && targetIndex.equals(((ShowAssignmentCommand) other).targetIndex)); // state check
     }
 }

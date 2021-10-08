@@ -7,16 +7,18 @@ import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1231S_TUTOR
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS2106_PROJECT;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS3230_LAB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.AssignmentBuilder;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
 
 public class AssignmentTest {
+
+
     @Test
     public void isSameAssignment() {
         // same object -> returns true
@@ -81,7 +83,6 @@ public class AssignmentTest {
         // different status, change from pending to completed -> returns false
         editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL).withCompletedStatus().build();
         assertFalse(ASSIGNMENT_CS1231S_TUTORIAL.equals(editedCs1231sTutorial));
-
         // different status, change from completed to late -> returns false
         Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB).withLateStatus().build();
         assertFalse(ASSIGNMENT_CS3230_LAB.equals(editedCs3230Lab));
@@ -104,5 +105,6 @@ public class AssignmentTest {
         editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
                 .withDueDate(VALID_DATE_CS3230_LAB, VALID_TIME_CS1231S_TUTORIAL).build();
         assertFalse(ASSIGNMENT_CS3230_LAB.equals(editedCs3230Lab));
+
     }
 }

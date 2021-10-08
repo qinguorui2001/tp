@@ -15,10 +15,15 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+
+    /**
+     * Updates the assignment list in AddressBook.
+     */
+    void updateAssignmentList(Person person);
+
     /**
      * Returns an unmodifiable view of the assignment list.
      * This list will not contain any duplicate assignments.
      */
-    ObservableList<Assignment> getAssignmentList(Person person);
-
+    ObservableList<Assignment> getAssignmentsList();
 }

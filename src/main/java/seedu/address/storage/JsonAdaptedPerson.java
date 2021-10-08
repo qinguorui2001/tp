@@ -56,7 +56,7 @@ class JsonAdaptedPerson {
         name = source.getName().fullName;
         email = source.getEmail().value;
         module = source.getModule().moduleCode;
-        assignments.addAll(source.getAssignments().stream()
+        assignments.addAll(source.getAssignments().asUnmodifiableObservableList().stream()
                 .map(JsonAdaptedAssignment::new)
                 .collect(Collectors.toList()));
 
@@ -106,7 +106,10 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelEmail, modelModule, modelAssignments, modelTags);
+        Person p = new Person(modelName, modelEmail, modelModule, modelTags);
+        p.getAssignments().setAssignments(modelAssignments);
+
+        return p;
     }
 
 }

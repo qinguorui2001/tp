@@ -4,7 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.*;
 
-import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,21 +19,35 @@ public class Person {
 
     // Data fields
     private final Module module;
-    private final List<Assignment> assignments = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
+    private final UniqueAssignmentList assignments;
 
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Email email, Module module, List<Assignment> assignments, Set<Tag> tags) {
-        requireAllNonNull(name, email, module, assignments, tags);
+    public Person(Name name, Email email, Module module, Set<Tag> tags) {
+        requireAllNonNull(name, email, module, tags);
         this.name = name;
         this.email = email;
         this.module = module;
         this.tags.addAll(tags);
-        this.assignments.addAll(assignments);
+        assignments = new UniqueAssignmentList();
+    }
 
+    /**
+     * Constructor for creating a person with assignments
+     */
+    public Person(Name name, Email email, Module module, List<Assignment> assignmentList, Set<Tag> tags) {
+        requireAllNonNull(name, email, module, tags);
+        this.name = name;
+        this.email = email;
+        this.module = module;
+        this.tags.addAll(tags);
+        assignments = new UniqueAssignmentList();
+        for (Assignment assignment:assignmentList) {
+            assignments.add(assignment);
+        }
     }
 
     public Name getName() {
@@ -48,7 +62,7 @@ public class Person {
         return module;
     }
 
-    public List<Assignment> getAssignments() {
+    public UniqueAssignmentList getAssignments() {
         return assignments;
     }
 
@@ -70,7 +84,11 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && isSameName(otherPerson.getName());
+    }
+
+    public boolean isSameName(Name name) {
+        return this.getName().equals(name);
     }
 
     /**
@@ -98,7 +116,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, email, module, assignments, tags);
+        return Objects.hash(assignments, name, email, module, tags);
     }
 
     @Override
@@ -110,10 +128,10 @@ public class Person {
                 .append("; Module: ")
                 .append(getModule());
 
-        List<Assignment> assignments = getAssignments();
+        UniqueAssignmentList assignments = getAssignments();
         if (!assignments.isEmpty()) {
             builder.append("; Assignments: ");
-            assignments.forEach(builder::append);
+            assignments.asUnmodifiableObservableList().forEach(builder::append);
         }
 
         Set<Tag> tags = getTags();
@@ -123,5 +141,4 @@ public class Person {
         }
         return builder.toString();
     }
-
 }

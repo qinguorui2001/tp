@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
@@ -14,9 +14,9 @@ import static seedu.address.model.person.Module.MESSAGE_CONSTRAINTS;
 import static seedu.address.model.person.Module.VALIDATION_REGEX;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindPersonCommand object
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
     // Serves as regex to match for name prefix
     private final Prefix namePrefix = new Prefix("n/");
@@ -41,16 +41,16 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindPersonCommand
+     * and returns a FindPersonCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindCommand parse(String args) throws ParseException {
+    public FindPersonCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
         // Regex depends on user input
@@ -79,7 +79,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             regex = modulePrefix + orWhitespace;
             mode = Mode.MODULE;
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
         String[] nameKeywords = generateKeywords(trimmedArgs, regex, mode);
@@ -91,7 +91,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         }
 
-        return new FindCommand(new NameContainsKeywordsPredicate(keywords));
+        return new FindPersonCommand(new NameContainsKeywordsPredicate(keywords));
     }
 
     /**
@@ -120,7 +120,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                 splitByWhiteSpace = splitByModulePrefix[1].split(whitespace);
             } else {
                 // Throw error and restate command use
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        FindPersonCommand.MESSAGE_USAGE));
             }
 
             // Check each module fits the constraints
