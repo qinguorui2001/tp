@@ -12,6 +12,4 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_DUEDATE = new Prefix("by/");
-    // Used only when index is not the only argument in the command.
-    public static final Prefix PREFIX_INDEX = new Prefix("i/");
 }

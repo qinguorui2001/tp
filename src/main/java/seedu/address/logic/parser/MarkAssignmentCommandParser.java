@@ -8,7 +8,6 @@ import seedu.address.model.person.Name;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
@@ -21,17 +20,19 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkAssignmentCommand parse(String args) throws ParseException {
+        String indexString = args.replaceAll("[^0-9]", "");
+        args = args.replaceAll("[0-9]", "");
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INDEX);
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INDEX)
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         MarkAssignmentCommand.MESSAGE_USAGE));
             }
 
-            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+            Index index = ParserUtil.parseIndex(indexString);
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             return new MarkAssignmentCommand(name, index);
         } catch (ParseException pe) {
