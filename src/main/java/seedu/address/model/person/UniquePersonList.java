@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -134,33 +132,5 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
-    }
-
-    /**
-     * Returns the person with the given name.
-     * @param name Name of a person.
-     * @return The person has that name.
-     */
-    public Person personWithSameName(Name name) {
-
-        List<Person> filteredPersonList =
-                internalList
-                        .stream()
-                            .filter(person -> person.isSameName(name))
-                                        .collect(Collectors.toList());
-
-        if (filteredPersonList.size() == 0) {
-            return null;
-        }
-        return filteredPersonList.get(0);
-    }
-
-    /**
-     * Returns the assignment list with given name.
-     * @param name The name of the person.
-     * @return The assignment list of that person.
-     */
-    public UniqueAssignmentList assignmentsOfPersonWithSameName(Name name) {
-        return personWithSameName(name).getAssignments();
     }
 }

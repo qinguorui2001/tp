@@ -2,14 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.UniqueAssignmentList;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -19,6 +17,8 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    /* The person whose assignment is displayed on the Ui */
+    private Person activePerson;
     private final UniquePersonList persons;
     private final UniqueAssignmentList assignments;
 
@@ -113,36 +113,65 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Returns true if an assignment with the same identity as {@code assignment} exists in the person's assignment
      * list.
      */
-    public boolean hasAssignment(Name name, Assignment assignment) {
+    public boolean hasAssignment(Person person, Assignment assignment) {
         requireNonNull(assignment);
-        return persons.personWithSameName(name).getAssignments().contains(assignment);
+        return person.getAssignments().contains(assignment);
     }
 
     /**
      * Adds an assignment to the person's assignment list.
      * The assignment must not already exist in the person's assignment list.
      */
-    public void addAssignment(Name name, Assignment assignment) {
-        persons.personWithSameName(name).getAssignments().add(assignment);
+    public void addAssignment(Person person, Assignment assignment) {
+        person.getAssignments().add(assignment);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook's person assignment list}.
      * {@code key} must exist in the person assignment list.
      */
-    public void removeAssignment(Name name, Assignment key) {
-        persons.personWithSameName(name).getAssignments().delete(key);
+    public void removeAssignment(Person person, Assignment key) {
+        person.getAssignments().delete(key);
     }
 
     /**
      * Marks {@code key} from this {@code AddressBook's person assignment list}.
      * {@code key} must exist in the person assignment list.
      */
-    public void markAssignment(Name name, Assignment key) {
-        persons.personWithSameName(name).getAssignments().done(key);
+    public void markAssignment(Person person, Assignment key) {
+        person.getAssignments().done(key);
+    }
+
+    /**
+     * Retrieve the assignment list of the identified person {@code name} from this {@code AddressBook's person list}.
+     */
+    public ObservableList<Assignment> getPersonAssignmentList(Person person) {
+        return person.getAssignments().asUnmodifiableObservableList();
     }
 
     //// util methods
+
+    /**
+     * Changes the person whose assignment list is displayed. Changes {@code activePerson} to null which represents
+     * no assignment list selected if the person indicated does not exist in {@code AddressBook's person list}.
+     * @param person
+     */
+    public void changeActivePerson(Person person) {
+        if (!hasPerson(person)) {
+            this.activePerson = null;
+        } else {
+            this.activePerson = person;
+        }
+    }
+
+    /**
+     * Returns true if the active person is same as the person.
+     * @param person the Person which is queried to find if he/she is the current activePerson
+     * @return true if the person is the current activePerson
+     */
+    public boolean isActivePerson(Person person) {
+        return person.equals(activePerson);
+    }
 
     @Override
     public String toString() {
@@ -154,31 +183,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    /* public ObservableList<Assignment> getAssignmentList(Index index) {
-         if (getPersonList().size() != 0) {
-             return getPersonList().get(index.getZeroBased()).getAssignments().asUnmodifiableObservableList();
-         }
-         return null;
-     }
-    */
-    // Consider this
-    public List<Assignment> getAssignmentList(Name name) {
-        return persons.assignmentsOfPersonWithSameName(name).asUnmodifiableObservableList(new ArrayList<>());
-    }
-
-    /*   @Override
-    public ObservableList<Assignment> getAssignmentList(Person person) {
-        return assignments.asUnmodifiableObservableList(person.getAssignments());
-    }
-    */
 
     @Override
-    public ObservableList<Assignment> getAssignmentList(Person person) {
-        return null;
+    public void updateAssignmentList(Person person) {
+        if (activePerson == null) {
+            this.assignments.clearAllAssignments();
+        } else {
+            this.assignments.setAssignments(person.getAssignments());
+        }
     }
 
-    public ObservableList<Assignment> emptyAssignmentList() {
-        return assignments.asUnmodifiableObservableList(new ArrayList<>());
+    @Override
+    public ObservableList<Assignment> getAssignmentsList() {
+        return assignments.asUnmodifiableObservableList();
     }
 
     @Override

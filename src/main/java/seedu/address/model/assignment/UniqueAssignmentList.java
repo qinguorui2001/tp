@@ -3,7 +3,6 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -29,17 +28,11 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     private final ObservableList<Assignment> internalList = FXCollections.observableArrayList();
     private final ObservableList<Assignment> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-    /*
-    public ObservableList<Assignment> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
-    }
-    */
+
     /**
      * Returns the assignment list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Assignment> asUnmodifiableObservableList(ArrayList<Assignment> assignments) {
-        internalList.clear();
-        internalList.addAll(assignments);
+    public ObservableList<Assignment> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
@@ -108,6 +101,10 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
                 Status.createCompletedStatus()));
     }
 
+    /**
+     * Replaces the contents of this list with {@code replacement}.
+     * {@code replacement} must not contain duplicate assignments.
+     */
     public void setAssignments(UniqueAssignmentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -124,6 +121,13 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         }
 
         internalList.setAll(assignments);
+    }
+
+    /**
+     * Removes all assignments within the UniqueAssignmentList
+     */
+    public void clearAllAssignments() {
+        internalList.clear();
     }
 
     @Override

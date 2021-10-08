@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -39,7 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        assignmentsList = new FilteredList<>(this.addressBook.emptyAssignmentList());
+        assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
     }
 
     public ModelManager() {
@@ -93,6 +92,8 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    //=========== Person ================================================================================
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -102,6 +103,9 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        if (addressBook.isActivePerson(target)) {
+            updateFilteredAssignmentList(target);
+        }
     }
 
     @Override
@@ -117,26 +121,29 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-    //=========== Person ================================================================================
+    //=========== Assignment ================================================================================
 
     @Override
-    public boolean hasAssignment(Name name, Assignment toAdd) {
-        return addressBook.hasAssignment(name, toAdd);
+    public boolean hasAssignment(Person person, Assignment toAdd) {
+        return addressBook.hasAssignment(person, toAdd);
     }
 
     @Override
-    public void addAssignment(Name name, Assignment toAdd) {
-        addressBook.addAssignment(name, toAdd);
+    public void addAssignment(Person person, Assignment toAdd) {
+        addressBook.addAssignment(person, toAdd);
+        updateFilteredAssignmentList(person);
     }
 
     @Override
-    public void deleteAssignment(Name name, Assignment toDelete) {
-        addressBook.removeAssignment(name, toDelete);
+    public void deleteAssignment(Person person, Assignment toDelete) {
+        addressBook.removeAssignment(person, toDelete);
+        updateFilteredAssignmentList(person);
     }
 
     @Override
-    public void markAssignment(Name name, Assignment toMark) {
-        addressBook.markAssignment(name, toMark);
+    public void markAssignment(Person person, Assignment toMark) {
+        addressBook.markAssignment(person, toMark);
+        updateFilteredAssignmentList(person);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -177,27 +184,25 @@ public class ModelManager implements Model {
 
     //=========== Filtered Assignment List Accessors =============================================================
 
-    /*  @Override
-    public ObservableList<Assignment> getFilteredAssignmentList(Index index) {
-        //TODO: check validity of Index
-        requireNonNull(index);
-        return this.addressBook.getAssignmentList(index);
-    }
-    */
-    @Override
-    public List<Assignment> getFilteredAssignmentList(Name name) {
-        requireNonNull(name);
-        return this.addressBook.getAssignmentList(name);
-    }
-
+    /**
+     * Returns an unmodifiable view of the list of {@code Assignment} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
     @Override
     public ObservableList<Assignment> getFilteredAssignmentList() {
         return assignmentsList;
     }
 
     @Override
+    public List<Assignment> getFilteredAssignmentList(Person person) {
+        requireNonNull(person);
+        return this.addressBook.getPersonAssignmentList(person);
+    }
+
+    @Override
     public void updateFilteredAssignmentList(Person person) {
-        ObservableList<Assignment> personAssignments = this.addressBook.getAssignmentList(person);
-        this.assignmentsList = new FilteredList<>(personAssignments);
+        this.addressBook.changeActivePerson(person);
+        this.addressBook.updateAssignmentList(person);
+        this.assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
     }
 }
