@@ -35,7 +35,7 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the assignment list";
 
-    private final Assignment assignmentToAdd;
+    private final Assignment toAdd;
     private final Name name;
 
     /**
@@ -43,7 +43,7 @@ public class AddAssignmentCommand extends Command {
      */
     public AddAssignmentCommand(Name name, Assignment assignment) {
         requireNonNull(assignment);
-        assignmentToAdd = assignment;
+        toAdd = assignment;
         this.name = name;
     }
 
@@ -63,19 +63,19 @@ public class AddAssignmentCommand extends Command {
         }
 
         Person selectedPerson = filteredPersonList.get(0);
-        if (model.hasAssignment(selectedPerson, assignmentToAdd)) {
+        if (model.hasAssignment(selectedPerson, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
-        model.addAssignment(selectedPerson, assignmentToAdd);
+        model.addAssignment(selectedPerson, toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, assignmentToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddAssignmentCommand // instanceof handles nulls
-                && assignmentToAdd.equals(((AddAssignmentCommand) other).assignmentToAdd));
+                && toAdd.equals(((AddAssignmentCommand) other).toAdd));
     }
 }
