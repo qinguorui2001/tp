@@ -145,7 +145,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Person with {@code name} must exist in the person list.
      */
     public ObservableList<Assignment> getPersonAssignmentList(Name name) {
-        return persons.assignmentsOfPersonWithSameName(name).asUnmodifiableObservableList();
+        return persons.getPersonAssignmentList(name).asUnmodifiableObservableList();
     }
 
     //// util methods

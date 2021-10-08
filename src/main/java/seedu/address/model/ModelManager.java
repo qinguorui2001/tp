@@ -189,7 +189,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Assignment> getPersonAssignmentList(Name name) {
+    public List<Assignment> getFilteredAssignmentList(Name name) {
         requireNonNull(name);
         return this.addressBook.getPersonAssignmentList(name);
     }
