@@ -27,11 +27,12 @@ class ShowAssignmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    void execute_validIndexAssignmentList_Success() {
+    void execute_validIndexAssignmentListSuccess() {
         Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ShowAssignmentCommand showAssignmentCommand = new ShowAssignmentCommand(INDEX_FIRST_PERSON);
 
-        String expectedMessage = String.format(ShowAssignmentCommand.MESSAGE_SHOW_ASSIGNMENT_SUCCESS, personToShow.getName());
+        String expectedMessage =
+                String.format(ShowAssignmentCommand.MESSAGE_SHOW_ASSIGNMENT_SUCCESS, personToShow.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateFilteredAssignmentList(personToShow);
