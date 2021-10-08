@@ -8,6 +8,7 @@ import seedu.address.model.person.Name;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
@@ -22,7 +23,7 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
     public MarkAssignmentCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INDEX);
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
@@ -30,7 +31,7 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
                         MarkAssignmentCommand.MESSAGE_USAGE));
             }
 
-            Index index = ParserUtil.parseIndex(args);
+            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             return new MarkAssignmentCommand(name, index);
         } catch (ParseException pe) {

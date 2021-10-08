@@ -21,7 +21,7 @@ public class Assignment {
         requireAllNonNull(description, dueDate, status);
         this.description = description;
         this.dueDate = dueDate;
-        this.status = Status.createPendingStatus();
+        this.status = status;
     }
 
     public Description getDescription() {

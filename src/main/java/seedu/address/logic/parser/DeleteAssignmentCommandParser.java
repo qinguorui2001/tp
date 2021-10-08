@@ -22,7 +22,7 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
     public DeleteAssignmentCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INDEX);
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {
@@ -30,7 +30,7 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
                         DeleteAssignmentCommand.MESSAGE_USAGE));
             }
 
-            Index index = ParserUtil.parseIndex(args);
+            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             return new DeleteAssignmentCommand(name, index);
         } catch (ParseException pe) {
