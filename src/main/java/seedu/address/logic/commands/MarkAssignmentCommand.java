@@ -61,7 +61,7 @@ public class MarkAssignmentCommand extends Command {
 
         Person selectedPerson = filteredPersonList.get(0);
         List<Assignment> lastShownList = model.getFilteredAssignmentList(selectedPerson);
-        if (lastShownList.size() == 0) {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
