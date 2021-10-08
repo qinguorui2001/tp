@@ -81,7 +81,7 @@ public class AssignmentTest {
         assertFalse(ASSIGNMENT_CS1231S_TUTORIAL.equals(editedCs1231sTutorial));
 
         // different status, change from pending to completed -> returns false
-         editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL).withCompletedStatus().build();
+        editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL).withCompletedStatus().build();
         assertFalse(ASSIGNMENT_CS1231S_TUTORIAL.equals(editedCs1231sTutorial));
         // different status, change from completed to late -> returns false
         Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB).withLateStatus().build();
