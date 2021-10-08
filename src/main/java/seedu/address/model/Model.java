@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -85,8 +84,8 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered assignment list displayed in Ui. */
     ObservableList<Assignment> getFilteredAssignmentList();
 
-    /** Returns an unmodifiable view of the filtered assignment list of a Person with the matching name. */
-    List<Assignment> getFilteredAssignmentList(Name name);
+    /** Returns an unmodifiable view of the filtered assignment list of the Person */
+    List<Assignment> getFilteredAssignmentList(Person person);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -94,13 +93,13 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    boolean hasAssignment(Name name, Assignment toAdd);
+    boolean hasAssignment(Person person, Assignment toAdd);
 
-    void addAssignment(Name name, Assignment toAdd);
+    void addAssignment(Person person, Assignment toAdd);
 
-    void deleteAssignment(Name name, Assignment toDelete);
+    void deleteAssignment(Person person, Assignment toDelete);
 
-    void markAssignment(Name name, Assignment toMark);
+    void markAssignment(Person person, Assignment toMark);
 
     void updateFilteredAssignmentList(Person person);
 }
