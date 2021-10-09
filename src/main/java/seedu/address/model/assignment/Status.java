@@ -3,6 +3,7 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 
 public class Status {
+    public static final String MESSAGE_CONSTRAINTS = "Status of assignment should be clearly defined!";
     public final String value;
 
     enum StatusType {
@@ -15,7 +16,7 @@ public class Status {
     private Status(StatusType value) {
         requireNonNull(value);
 
-        this.value = value.toString().toLowerCase();
+        this.value = value.toString();
     }
 
     public static Status createCompletedStatus() {
@@ -28,6 +29,33 @@ public class Status {
 
     public static Status createLateStatus() {
         return new Status(StatusType.LATE);
+    }
+
+    /**
+     * Creates a status based on the status string in the Json file
+     *
+     * @param value the status string in the Json file
+     * @return the corresponding Status
+     */
+    public static Status createStatus(String value) {
+        StatusType currentStatus = StatusType.PENDING;
+        for (StatusType status: StatusType.values()) {
+            if (value.equals(status.toString())) {
+                currentStatus = status;
+            }
+        }
+        return new Status(currentStatus);
+    }
+    /**
+     * Returns true if a given string is a valid Status.
+     */
+    public static boolean isValidStatus(String test) {
+        for (StatusType status: StatusType.values()) {
+            if (test.equals(status.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
