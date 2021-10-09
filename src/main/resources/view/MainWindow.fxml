@@ -54,9 +54,9 @@
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
-                           <StackPane fx:id="personListHeaderContainer" prefHeight="100.0">
+                           <StackPane fx:id="personListHeaderContainer" prefHeight="100.0" styleClass="header-stack-pane">
                               <children>
-                                 <Label fx:id="personListHeaderText" text="My SoC Contacts" />
+                                 <Label fx:id="personListHeaderText" text="My SoC Contacts" styleClass="header-text-labels" />
                               </children>
                            </StackPane>
                       <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
@@ -65,9 +65,9 @@
                             <padding>
                                 <Insets bottom="10" left="10" right="10" top="10" />
                             </padding>
-                           <StackPane fx:id="assignmentListHeaderContainer" prefHeight="100.0">
+                           <StackPane fx:id="assignmentListHeaderContainer" prefHeight="100.0" styleClass="header-stack-pane">
                               <children>
-                                 <Label fx:id="assignmentListHeaderText" text="Assignments" />
+                                 <Label fx:id="assignmentListHeaderText" text="Assignments" styleClass="header-text-labels" />
                               </children>
                            </StackPane>
                               <StackPane fx:id="assignmentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
