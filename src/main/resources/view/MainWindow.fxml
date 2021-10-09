@@ -54,7 +54,7 @@
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
-                           <StackPane fx:id="personListHeaderContainer" prefHeight="100.0" styleClass="header-stack-pane">
+                           <StackPane fx:id="personListHeaderContainer" prefHeight="80.0" styleClass="header-stack-pane">
                               <children>
                                  <Label fx:id="personListHeaderText" text="My SoC Contacts" styleClass="header-text-labels" />
                               </children>
@@ -65,7 +65,7 @@
                             <padding>
                                 <Insets bottom="10" left="10" right="10" top="10" />
                             </padding>
-                           <StackPane fx:id="assignmentListHeaderContainer" prefHeight="100.0" styleClass="header-stack-pane">
+                           <StackPane fx:id="assignmentListHeaderContainer" prefHeight="80.0" styleClass="header-stack-pane">
                               <children>
                                  <Label fx:id="assignmentListHeaderText" text="Assignments" styleClass="header-text-labels" />
                               </children>
