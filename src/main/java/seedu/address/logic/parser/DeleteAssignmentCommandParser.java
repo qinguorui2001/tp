@@ -21,10 +21,10 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
      */
     public DeleteAssignmentCommand parse(String args) throws ParseException {
         String indexString = args.replaceAll("[^0-9]", "");
-        args = args.replaceAll("[0-9]", "");
+        String argsWithoutIndex = args.replaceAll("[0-9]", "");
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME);
+                    ArgumentTokenizer.tokenize(argsWithoutIndex, PREFIX_NAME);
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                     || !argMultimap.getPreamble().isEmpty()) {

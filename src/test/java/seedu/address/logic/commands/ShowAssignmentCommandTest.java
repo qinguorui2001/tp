@@ -27,7 +27,7 @@ class ShowAssignmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    void execute_validIndexAssignmentListSuccess() {
+    void execute_validIndexPersonListSuccess() {
         Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ShowAssignmentCommand showAssignmentCommand = new ShowAssignmentCommand(INDEX_FIRST_PERSON);
 
@@ -41,7 +41,7 @@ class ShowAssignmentCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexAssignmentList_throwsCommandException() {
+    public void execute_invalidIndexPersonList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         ShowAssignmentCommand showAssignmentCommand = new ShowAssignmentCommand(outOfBoundIndex);
 

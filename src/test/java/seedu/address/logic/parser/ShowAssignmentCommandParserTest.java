@@ -14,7 +14,7 @@ public class ShowAssignmentCommandParserTest {
     private ShowAssignmentCommandParser parser = new ShowAssignmentCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsShowAssignmentCommand() {
         assertParseSuccess(parser, "1", new ShowAssignmentCommand(INDEX_FIRST_PERSON));
     }
 
