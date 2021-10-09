@@ -182,8 +182,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
-
-
+    
     @Override
     public void updateAssignmentList(Person person) {
         if (activePerson == null) {
