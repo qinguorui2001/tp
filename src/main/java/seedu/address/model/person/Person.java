@@ -2,10 +2,7 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.model.assignment.*;
 import seedu.address.model.tag.Tag;
@@ -25,6 +22,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
     private final UniqueAssignmentList assignments;
 
+
     /**
      * Every field must be present and not null.
      */
@@ -35,6 +33,21 @@ public class Person {
         this.module = module;
         this.tags.addAll(tags);
         assignments = new UniqueAssignmentList();
+    }
+
+    /**
+     * Constructor for creating a person with assignments
+     */
+    public Person(Name name, Email email, Module module, List<Assignment> assignmentList, Set<Tag> tags) {
+        requireAllNonNull(name, email, module, tags);
+        this.name = name;
+        this.email = email;
+        this.module = module;
+        this.tags.addAll(tags);
+        assignments = new UniqueAssignmentList();
+        for (Assignment assignment:assignmentList) {
+            assignments.add(assignment);
+        }
     }
 
     public Name getName() {
@@ -93,10 +106,10 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return otherPerson.getAssignments().equals(getAssignments())
-                && otherPerson.getName().equals(getName())
+        return otherPerson.getName().equals(getName())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getModule().equals(getModule())
+                && otherPerson.getAssignments().equals(getAssignments())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -114,6 +127,12 @@ public class Person {
                 .append(getEmail())
                 .append("; Module: ")
                 .append(getModule());
+
+        UniqueAssignmentList assignments = getAssignments();
+        if (!assignments.isEmpty()) {
+            builder.append("; Assignments: ");
+            assignments.asUnmodifiableObservableList().forEach(builder::append);
+        }
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

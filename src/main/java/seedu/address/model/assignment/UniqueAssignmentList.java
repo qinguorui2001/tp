@@ -160,4 +160,18 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         }
         return true;
     }
+
+    /**
+     * Returns true if {@code internalList} has no assignments
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
+    /**
+     *
+     */
+    public Assignment get(int index) {
+        return asUnmodifiableObservableList().get(index);
+    }
 }

@@ -22,28 +22,43 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withModule("CS2103T").withEmail("alice@example.com")
+            .withEmail("alice@example.com")
+            .withModule("CS2103T")
             .withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withModule("CS1101S")
             .withEmail("johnd@example.com")
+            .withModule("CS1101S")
+            .withAssignmentList(new String[] {"Assignment 2", "15 Oct 2021, 01:00 PM", "PENDING"})
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withEmail("heinz@example.com").withModule("IS2101").build();
+            .withEmail("heinz@example.com")
+            .withModule("IS2101")
+            .withAssignmentList(new String[] {"iP", "17 Sep 2021, 11:59 PM", "COMPLETED"}).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withEmail("cornelia@example.com").withModule("CM1102").withTags("friends").build();
+            .withEmail("cornelia@example.com")
+            .withModule("CM1102")
+            .withAssignmentList(new String[] {"Homework 1", "13 Sep 2021, 11:59 PM", "LATE"})
+            .withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withEmail("werner@example.com").withModule("GER1000").build();
+            .withEmail("werner@example.com")
+            .withModule("GER1000")
+            .withAssignmentList(new String[] {"Tutorial 2", "16 Sep 2021, 11:59 PM", "COMPLETED"}).build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withEmail("lydia@example.com").withModule("GET1031").build();
+            .withEmail("lydia@example.com")
+            .withModule("GET1031")
+            .withAssignmentList(new String[] {"Assignment 1", "10 Sep 2021, 11:59 PM", "COMPLETED"}).build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withEmail("anna@example.com").withModule("MA1101R").build();
+            .withEmail("anna@example.com")
+            .withModule("MA1101R")
+            .withAssignmentList(new String[] {"Lab 1", "20 Sep 2021, 11:59 PM", "COMPLETED"}).build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
-            .withEmail("stefan@example.com").withModule("CP2106").build();
+            .withEmail("stefan@example.com").withModule("CP2106")
+            .withAssignmentList(new String[] {"Lab 1", "20 Sep 2021, 11:59 PM", "COMPLETED"}).build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
-            .withEmail("hans@example.com").withModule("EG2201A").build();
+            .withEmail("hans@example.com").withModule("EG2201A")
+            .withAssignmentList(new String[] {"iP", "17 Sep 2021, 11:59 PM", "COMPLETED"}).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
