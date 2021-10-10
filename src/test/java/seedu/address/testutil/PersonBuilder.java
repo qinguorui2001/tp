@@ -6,10 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.assignment.Assignment;
-<<<<<<< HEAD
-import seedu.address.model.assignment.UniqueAssignmentList;
-=======
->>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -29,11 +25,7 @@ public class PersonBuilder {
     private Name name;
     private Email email;
     private Module module;
-<<<<<<< HEAD
-    private UniqueAssignmentList assignments;
-=======
     private List<Assignment> assignmentList;
->>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
     private Set<Tag> tags;
 
     /**
@@ -43,11 +35,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
         module = new Module(DEFAULT_MODULE);
-<<<<<<< HEAD
-        assignments = new UniqueAssignmentList();
-=======
         assignmentList = new ArrayList<>();
->>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
         tags = new HashSet<>();
     }
 
@@ -58,11 +46,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         email = personToCopy.getEmail();
         module = personToCopy.getModule();
-<<<<<<< HEAD
-        assignments = personToCopy.getAssignments();
-=======
         assignmentList = personToCopy.getAssignments().asUnmodifiableObservableList();
->>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -91,14 +75,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code UniqueAssignmentList} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withAssignment(Assignment assignment) {
-        this.assignments.add(assignment);
-        return this;
-    }
-
-    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
@@ -116,13 +92,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-<<<<<<< HEAD
-        Person person = new Person(name, email, module, tags);
-        person.getAssignments().setAssignments(assignments);
-        return person;
-=======
         return new Person(name, email, module, assignmentList, tags);
->>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
     }
 
 }

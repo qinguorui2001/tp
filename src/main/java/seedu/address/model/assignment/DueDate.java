@@ -12,6 +12,7 @@ import java.time.format.DateTimeParseException;
 
 public class DueDate {
 
+    public static final String MESSAGE_CONSTRAINTS = "Due dates should be in a format d/M/yyyy,HHmm";
     public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
     public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
     public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm";

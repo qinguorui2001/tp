@@ -161,7 +161,7 @@ public class DeleteAssignmentCommandTest {
         assertCommandSuccess(deleteAssignmentCommand, model, expectedMessage, expectedModel);
     }
 */
-    @Test
+  /*  @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showAssignmentAtIndex(model,
                 model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), INDEX_FIRST_ASSIGNMENT);
@@ -175,7 +175,7 @@ public class DeleteAssignmentCommandTest {
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
-
+*/
     @Test
     public void equals() {
         DeleteAssignmentCommand deleteFirstCommand =
