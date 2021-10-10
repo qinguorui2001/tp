@@ -31,6 +31,7 @@ public class Assignment {
         this.description = new Description(strings[0]);
         this.dueDate = DueDate.createDueDate(strings[1]);
         this.status = Status.createStatus(strings[2]);
+
     }
 
     public Description getDescription() {

@@ -24,6 +24,10 @@ import seedu.address.testutil.TypicalAssignments;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_DESCRIPTION_AMY = "assignment1";
+    public static final String VALID_DESCRIPTION_BOB = "assignment2";
+    public static final String VALID_DUEDATE_AMY = "11/11/2021,1844";
+    public static final String VALID_DUEDATE_BOB = "11/12/2021,1400";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -33,6 +37,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    /*
+    public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_NAME_AMY;
+    public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_NAME_BOB;
+    public static final String DUEDATE_DESC_AMY = " " + PREFIX_DUEDATE + VALID_NAME_AMY;
+    public static final String DUEDATE_DESC_BOB = " " + PREFIX_DUEDATE + VALID_NAME_BOB;
+    */
     public static final String VALID_DESCRIPTION_CS1231S_TUTORIAL = "CS1231S Tutorial 10";
     public static final String VALID_DESCRIPTION_CS2106_PROJECT = "CS2106 Final Network Project";
     public static final String VALID_DESCRIPTION_CS3230_LAB = "CS3230 Lab Week 4";
@@ -50,16 +60,10 @@ public class CommandTestUtil {
     public static final String MODULE_DESC_BOB = " " + PREFIX_MODULE + VALID_MODULE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
-    public static final String DESCRIPTION_DESC_CS1231S_TUTORIAL =
-            " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CS1231S_TUTORIAL;
-    public static final String DESCRIPTION_DESC_CS2106_PROJECT =
-            " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CS2106_PROJECT;
-    public static final String DATE_DESC_CS1231S_TUTORIAL = " " + PREFIX_DUEDATE + VALID_DATE_CS1231S_TUTORIAL;
-    public static final String DATE_DESC_CS2106_PROJECT = " " + PREFIX_DUEDATE + VALID_DESCRIPTION_CS2106_PROJECT;
 
     public static final String INVALID_DESCRIPTION_DESC =
             " " + PREFIX_DESCRIPTION + "assignment&"; // '&' not allowed in assignment names
-    public static final String INVALID_DATE_DESC =
+    public static final String INVALID_DUEDATE_DESC =
             " " + PREFIX_DUEDATE + "1/1/2021 1450"; // ' ' not allowed in due date
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
