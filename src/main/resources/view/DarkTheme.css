@@ -142,6 +142,19 @@
      -fx-border-top-width: 1px;
 }
 
+.header-stack-pane {
+     -fx-background-color: derive(#1d1d1d, 20%);
+     -fx-border-color: derive(#eeeeee, 10%);
+}
+
+.header-text-labels {
+     -fx-font-size: 28pt;
+     -fx-font-family: "Open Sans Light";
+     -fx-text-fill: derive(#12d6e8, 20%);
+     -fx-alignment: center-left;
+     -fx-opacity: 1;
+}
+
 .status-bar {
     -fx-background-color: derive(#1d1d1d, 30%);
 }
