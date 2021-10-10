@@ -24,6 +24,16 @@ public class Assignment {
         this.status = status;
     }
 
+    /**
+     * Constructor used for loading assignments
+     */
+    public Assignment(String[] strings) {
+        this.description = new Description(strings[0]);
+        this.dueDate = DueDate.createDueDate(strings[1]);
+        this.status = Status.createStatus(strings[2]);
+
+    }
+
     public Description getDescription() {
         return description;
     }

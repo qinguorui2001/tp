@@ -3,10 +3,12 @@
     "name": "Alice Pauline",
     "email": "alice@example.com",
     "module": "CS1101S",
+    "assignments" : [ "Assignment 1|15 Sep 2021, 01:00 PM|COMPLETED" ],
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "email": "pauline@example.com",
+    "assignments" : [ "Assignment 1|15 Sep 2021, 01:00 PM|COMPLETED" ],
     "module": "CS1231S"
   } ]
 }
