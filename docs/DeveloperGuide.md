@@ -467,7 +467,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **t-**: Symbol for an assignment list related command
+* **a-**: Symbol for an assignment list related command
 * **p-**: Symbol for a person related command
 * **e/**: Symbol for a requirement to state email address
 * **m/**: Symbol for a requirement to state the module
