@@ -150,7 +150,7 @@
 .header-text-labels {
      -fx-font-size: 28pt;
      -fx-font-family: "Open Sans Light";
-     -fx-text-fill: derive(#12D6E8, 20%);
+     -fx-text-fill: derive(#12d6e8, 20%);
      -fx-alignment: center-left;
      -fx-opacity: 1;
 }
