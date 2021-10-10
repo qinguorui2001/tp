@@ -162,10 +162,14 @@ public class DeleteAssignmentCommandTest {
     }
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
    /* @Test
 =======
     @Test
 >>>>>>> parent of 79a7c637 (update parser test)
+=======
+   /* @Test
+>>>>>>> 6c76cd13607d7199ab271ab58276400eed2514b1
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showAssignmentAtIndex(model,
                 model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), INDEX_FIRST_ASSIGNMENT);
@@ -179,7 +183,11 @@ public class DeleteAssignmentCommandTest {
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
+<<<<<<< HEAD
 
+=======
+*/
+>>>>>>> 6c76cd13607d7199ab271ab58276400eed2514b1
     @Test
     public void equals() {
         DeleteAssignmentCommand deleteFirstCommand =
