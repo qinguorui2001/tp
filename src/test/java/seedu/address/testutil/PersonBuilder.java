@@ -7,7 +7,10 @@ import java.util.Set;
 
 import seedu.address.model.assignment.Assignment;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import seedu.address.model.assignment.UniqueAssignmentList;
+=======
+>>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
 =======
 >>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
 import seedu.address.model.person.Module;
@@ -30,7 +33,11 @@ public class PersonBuilder {
     private Email email;
     private Module module;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private UniqueAssignmentList assignments;
+=======
+    private List<Assignment> assignmentList;
+>>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
 =======
     private List<Assignment> assignmentList;
 >>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
@@ -44,7 +51,11 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         module = new Module(DEFAULT_MODULE);
 <<<<<<< HEAD
+<<<<<<< HEAD
         assignments = new UniqueAssignmentList();
+=======
+        assignmentList = new ArrayList<>();
+>>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
 =======
         assignmentList = new ArrayList<>();
 >>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
@@ -59,7 +70,11 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         module = personToCopy.getModule();
 <<<<<<< HEAD
+<<<<<<< HEAD
         assignments = personToCopy.getAssignments();
+=======
+        assignmentList = personToCopy.getAssignments().asUnmodifiableObservableList();
+>>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
 =======
         assignmentList = personToCopy.getAssignments().asUnmodifiableObservableList();
 >>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
@@ -117,9 +132,13 @@ public class PersonBuilder {
 
     public Person build() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Person person = new Person(name, email, module, tags);
         person.getAssignments().setAssignments(assignments);
         return person;
+=======
+        return new Person(name, email, module, assignmentList, tags);
+>>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
 =======
         return new Person(name, email, module, assignmentList, tags);
 >>>>>>> 46408507be602f4239f60cb9bd17e3b9a16dff12
