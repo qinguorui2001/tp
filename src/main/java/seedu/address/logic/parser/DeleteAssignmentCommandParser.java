@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteAssignmentCommand;
@@ -20,9 +20,11 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteAssignmentCommand parse(String args) throws ParseException {
+        String indexString = args.replaceAll("[^0-9]", "");
+        String argsWithoutIndex = args.replaceAll("[0-9]", "");
         try {
             ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_INDEX);
+                    ArgumentTokenizer.tokenize(argsWithoutIndex, PREFIX_NAME);
 
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_INDEX)
                     || !argMultimap.getPreamble().isEmpty()) {
@@ -30,7 +32,7 @@ public class DeleteAssignmentCommandParser implements Parser<DeleteAssignmentCom
                         DeleteAssignmentCommand.MESSAGE_USAGE));
             }
 
-            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+            Index index = ParserUtil.parseIndex(indexString);
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
             return new DeleteAssignmentCommand(name, index);
         } catch (ParseException pe) {

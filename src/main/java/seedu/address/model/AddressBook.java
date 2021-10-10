@@ -184,7 +184,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-
     @Override
     public void updateAssignmentList(Person person) {
         if (activePerson == null) {

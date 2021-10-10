@@ -82,7 +82,10 @@ Adds a person to the contact list.
 Format: `p-add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0)<br><br>
+A person's module must follow XX[X]1111[X], where X is any letter,
+1 is any number and values in square brackets are optional, and it
+should not be blank.
 </div>
 
 Examples:
@@ -108,14 +111,21 @@ Format: `p-find n/NAME_KEYWORD... m/MODULE_KEYWORD...`
 * The search is case-insensitive.<br> e.g `cs1101s` will match `CS1101S`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Can search by category.<br> e.g. `n/NAME, m/MODULE`
-* Partial words will be matched e.g. `Ha` will match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Partial names will be matched <br> e.g. `n/Hans` will match `Hans Bo`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). <br>
+  e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* We can search for multiple people at once, separated by a whitespace. <br> 
+  e.g. `n/Bernice James` will return `Bernice`, `James`
+* We can search for multiple module at once, separated by a whitespace. <br>
+  e.g. `m/CS1101S CS2103T` will return people who take either / or both modules.
+* Combining categories during search will return everyone matching either names OR module. <br>
+  e.g. `n/James m/MA1521` will return `James`, `Bernice` (assuming Bernice takes MA1521).
 
 Examples:
 * `p-find n/John` returns `john` and `John Doe`
 * `p-find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `p-find n/bernice james m/ma1521 cs2103t` returns `bernice`, `james`, `christie`, `michael`, assuming christie and michael takes either module listed.
 
 ### Deleting a person : `p-delete`
 

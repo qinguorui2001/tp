@@ -7,10 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 class DueDateTest {
-    @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DueDate(null));
-    }
 
     @Test
     public void constructor_invalidDueDate_throwsIllegalArgumentException() {
@@ -31,16 +27,16 @@ class DueDateTest {
         assertFalse(DueDate.isValidDate("99/99/2021")); // invalid day and month
 
         // valid DueDate
-        assertTrue(DueDate.isValidDate("11/11/2021")); // double digit for day and month
+        assertTrue(DueDate.isValidDate("11/11/2021")); // double-digit for day and month
         assertTrue(DueDate.isValidDate("1/1/2021")); // single digit for day and month
-        assertTrue(DueDate.isValidDate("1/11/2021")); // single digit for day and double digit for month
-        assertTrue(DueDate.isValidDate("11/1/2021")); // double digit for day and double digit for month
+        assertTrue(DueDate.isValidDate("1/11/2021")); // single digit for day and double-digit for month
+        assertTrue(DueDate.isValidDate("11/1/2021")); // double-digit for day and double-digit for month
         assertTrue(DueDate.isValidDate("31/12/9999")); // maximum values for day, month and year
         assertTrue(DueDate.isValidDate("01/02/2021")); // day and month with prefix 0
         assertTrue(DueDate.isValidDate("01/1/2021")); // day with prefix 0 with single digit month
         assertTrue(DueDate.isValidDate("1/01/2021")); // month with prefix 0 with single digit day
-        assertTrue(DueDate.isValidDate("11/01/2021")); // month with prefix 0 with double digit day
-        assertTrue(DueDate.isValidDate("01/11/2021")); // day with prefix 0 with double digit month
+        assertTrue(DueDate.isValidDate("11/01/2021")); // month with prefix 0 with double-digit day
+        assertTrue(DueDate.isValidDate("01/11/2021")); // day with prefix 0 with double-digit month
     }
 
     @Test
@@ -61,6 +57,7 @@ class DueDateTest {
         assertTrue(DueDate.isValidTime("0059")); // minimum hour and maximum minutes
         assertTrue(DueDate.isValidTime("2300")); // maximum hour and minimum minutes
     }
+
 
     @Test
     public void isValidDueDate() {
@@ -83,4 +80,5 @@ class DueDateTest {
         assertTrue(DueDate.isValidDueDate("11/1/2021,1541")); // single digit for month
         assertTrue(DueDate.isValidDueDate("1/11/2021,1400")); // single digit for day
     }
+
 }

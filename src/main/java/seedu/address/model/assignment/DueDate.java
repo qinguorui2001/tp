@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 
 public class DueDate {
@@ -14,6 +15,8 @@ public class DueDate {
     public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
     public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
     public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm";
+    public static final String OUTPUT_CONSTRAINTS = "Due dates saved should be in a format dd MMM yyyy, hh:mm a";
+
     public static final String DATE_VALIDATION_REGEX =
             "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}$";
     public static final String TIME_VALIDATION_REGEX = "^(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
@@ -57,7 +60,18 @@ public class DueDate {
     public DueDate(String date) {
         this(date, LATEST_TIME_IN_DAY);
     }
-
+    /**
+     * Constructs a {@code DueDate}.
+     *
+     * @param dateTime Date and time of dueDate
+     */
+    public DueDate(LocalDateTime dateTime) {
+        requireNonNull(dateTime);
+        this.dateTime = dateTime;
+        this.date = dateTime.toLocalDate();
+        this.time = dateTime.toLocalTime();
+        this.value = this.dateTime.format(OUTPUT_FORMAT);
+    }
     /**
      * Returns true if a given string is a valid date.
      */
@@ -73,7 +87,32 @@ public class DueDate {
     }
 
     /**
-     * Returns true if the date and time is valid.
+     * Returns true if a given string is a valid DueDate output.
+     */
+    public static boolean isValidDueDateOutput(String test) {
+        try {
+            OUTPUT_FORMAT.parse(test);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Creates a due date based on the format in the Json file
+     *
+     * @param dueDate dueDate in the Json file
+     * @return the corresponding dueDate
+     */
+    public static DueDate createDueDate(String dueDate) {
+        requireNonNull(dueDate);
+        checkArgument(isValidDueDateOutput(dueDate), OUTPUT_CONSTRAINTS);
+        LocalDateTime dateTime = LocalDateTime.parse(dueDate, OUTPUT_FORMAT);
+        return new DueDate(dateTime);
+    }
+
+    /**
+     * * Returns true if the date and time is valid.
      */
     public static boolean isValidDateAndTime(String date) {
         return date.matches(DATE_AND_TIME_VALIDATION_REGEX);
@@ -85,6 +124,7 @@ public class DueDate {
     public static boolean isValidDueDate(String date) {
         return isValidDate(date) || isValidDateAndTime(date);
     }
+
 
     @Override
     public String toString() {

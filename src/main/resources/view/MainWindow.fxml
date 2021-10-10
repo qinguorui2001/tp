@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -53,12 +54,22 @@
                       <padding>
                         <Insets bottom="10" left="10" right="10" top="10" />
                       </padding>
+                           <StackPane fx:id="personListHeaderContainer" prefHeight="80.0" styleClass="header-stack-pane">
+                              <children>
+                                 <Label fx:id="personListHeaderText" text="My SoC Contacts" styleClass="header-text-labels" />
+                              </children>
+                           </StackPane>
                       <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                     </VBox>
                         <VBox fx:id="assignmentList" minWidth="770.0" prefHeight="150.0" prefWidth="216.0" styleClass="pane-with-border">
                             <padding>
                                 <Insets bottom="10" left="10" right="10" top="10" />
                             </padding>
+                           <StackPane fx:id="assignmentListHeaderContainer" prefHeight="80.0" styleClass="header-stack-pane">
+                              <children>
+                                 <Label fx:id="assignmentListHeaderText" text="Assignments" styleClass="header-text-labels" />
+                              </children>
+                           </StackPane>
                               <StackPane fx:id="assignmentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                         </VBox>
                      </children>
