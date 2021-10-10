@@ -13,9 +13,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.TypicalAssignments;
 
 /**
  * Contains helper methods for testing commands.
@@ -143,4 +145,15 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the person's assignment at the given {@code targetIndex}
+     * in the {@code model}'s address book.
+     */
+    public static void showAssignmentAtIndex(Model model, Person person, Index targetIndex) {
+        Assignment assignment = TypicalAssignments.getTypicalAssignments().get(targetIndex.getZeroBased());
+        person.getAssignments().add(assignment);
+        model.updateFilteredAssignmentList(person);
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAssignmentList().size());
+        assertEquals(1, model.getFilteredAssignmentList().size());
+    }
 }

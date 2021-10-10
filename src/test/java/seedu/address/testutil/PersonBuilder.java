@@ -3,6 +3,8 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -22,6 +24,7 @@ public class PersonBuilder {
     private Name name;
     private Email email;
     private Module module;
+    private UniqueAssignmentList assignments;
     private Set<Tag> tags;
 
     /**
@@ -31,6 +34,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         email = new Email(DEFAULT_EMAIL);
         module = new Module(DEFAULT_MODULE);
+        assignments = new UniqueAssignmentList();
         tags = new HashSet<>();
     }
 
@@ -41,6 +45,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         email = personToCopy.getEmail();
         module = personToCopy.getModule();
+        assignments = personToCopy.getAssignments();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -69,6 +74,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code UniqueAssignmentList} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withAssignment(Assignment assignment) {
+        this.assignments.add(assignment);
+        return this;
+    }
+
+    /**
      * Sets the {@code Email} of the {@code Person} that we are building.
      */
     public PersonBuilder withEmail(String email) {
@@ -77,7 +90,9 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, email, module, tags);
+        Person person = new Person(name, email, module, tags);
+        person.getAssignments().setAssignments(assignments);
+        return person;
     }
 
 }

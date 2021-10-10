@@ -55,11 +55,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the person's assignment list with {@code assignments}.
+     * {@code assignments} must not contain duplicate assignments.
      */
-    public void setAssignments(Person person, List<Assignment> assignments) {
-        person.getAssignments().setAssignments(assignments);
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments.setAssignments(assignments);
     }
 
     /**
@@ -69,6 +69,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        //activePerson = newData.getPersonList().get(0);
     }
 
     //// person-level operations
