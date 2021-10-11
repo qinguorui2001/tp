@@ -161,8 +161,7 @@ public class DeleteAssignmentCommandTest {
         assertCommandSuccess(deleteAssignmentCommand, model, expectedMessage, expectedModel);
     }
 */
-<<<<<<< HEAD
-<<<<<<< HEAD
+
    /* @Test
 =======
     @Test
@@ -187,7 +186,7 @@ public class DeleteAssignmentCommandTest {
 
 =======
 */
->>>>>>> 6c76cd13607d7199ab271ab58276400eed2514b1
+
     @Test
     public void equals() {
         DeleteAssignmentCommand deleteFirstCommand =
