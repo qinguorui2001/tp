@@ -13,7 +13,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalAssignments;
+import seedu.address.testutil.TypicalIndexes;
 
 class AddAssignmentCommandIntegrationTest {
     private Model model;
@@ -40,10 +40,11 @@ class AddAssignmentCommandIntegrationTest {
 
     @Test
     public void execute_duplicateAssignment_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        personInList.getAssignments().setAssignments(TypicalAssignments.getTypicalAssignments());
+        Person personInList = model.getAddressBook().getPersonList()
+                .get(TypicalIndexes.INDEX_THIRD_PERSON.getZeroBased());
         model.updateFilteredAssignmentList(personInList);
-        Assignment assignmentInList = model.getAddressBook().getAssignmentsList().get(0);
+        Assignment assignmentInList = model.getAddressBook().getAssignmentsList()
+                .get(TypicalIndexes.INDEX_FIRST_ASSIGNMENT.getZeroBased());
         assertCommandFailure(new AddAssignmentCommand(personInList.getName(), assignmentInList),
                 model, AddAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT);
     }
