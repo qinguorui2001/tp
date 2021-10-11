@@ -27,16 +27,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 
 public class AddAssignmentCommandTest {
+
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new AddAssignmentCommand(null, new AssignmentBuilder().build()));
+        assertThrows(NullPointerException.class, () -> new AddAssignmentCommand(null,
+                new AssignmentBuilder().build()));
     }
 
     @Test
     public void constructor_nullAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-                () -> new AddAssignmentCommand(new PersonBuilder().build().getName(), null));
+        assertThrows(NullPointerException.class, () -> new AddAssignmentCommand(new PersonBuilder().build().getName(),
+                null));
     }
 
     @Test
@@ -214,7 +215,7 @@ public class AddAssignmentCommandTest {
             requireNonNull(assignment);
             this.assignment = assignment;
             this.person = person;
-           addAssignment(this.person, this.assignment);
+            addAssignment(this.person, this.assignment);
         }
 
         @Override

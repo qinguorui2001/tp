@@ -87,7 +87,7 @@ public class DeleteAssignmentCommandTest {
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);*/
     }
-/*
+    /*
     @Test
     public void equals() {
         DeletePersonCommand deleteFirstCommand = new DeletePersonCommand(INDEX_FIRST_PERSON);
@@ -113,7 +113,7 @@ public class DeleteAssignmentCommandTest {
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-   /* private void showNoPerson(Model model) {
+    /* private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
 
         assertTrue(model.getFilteredPersonList().isEmpty());
@@ -149,7 +149,8 @@ public class DeleteAssignmentCommandTest {
         DeleteAssignmentCommand deleteAssignmentCommand =
                 new DeleteAssignmentCommand(new PersonBuilder().build().getName(), INDEX_FIRST_ASSIGNMENT);
 
-        String expectedMessage = String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete);
+        String expectedMessage = String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
+         assignmentToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteAssignment(new PersonBuilder().build(), assignmentToDelete);
@@ -157,15 +158,10 @@ public class DeleteAssignmentCommandTest {
 
         assertCommandSuccess(deleteAssignmentCommand, model, expectedMessage, expectedModel);
     }
-*/
+    */
 
-   /* @Test
-=======
-    @Test
->>>>>>> parent of 79a7c637 (update parser test)
-=======
-   /* @Test
->>>>>>> 6c76cd13607d7199ab271ab58276400eed2514b1
+
+    /* @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
         showAssignmentAtIndex(model,
                 model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), INDEX_FIRST_ASSIGNMENT);
@@ -179,10 +175,8 @@ public class DeleteAssignmentCommandTest {
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
-<<<<<<< HEAD
 
-=======
-*/
+    */
 
     @Test
     public void equals() {

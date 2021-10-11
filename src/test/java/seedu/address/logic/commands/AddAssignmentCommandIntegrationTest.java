@@ -26,15 +26,15 @@ class AddAssignmentCommandIntegrationTest {
     @Test
     public void execute_newPersonAssignment_success() {
         Assignment validAssignment = new AssignmentBuilder().build();
-        Person validPerson_for_expectedModel = new PersonBuilder().build();
-        Person validPerson_for_model = new PersonBuilder().build();
+        Person validPersonForExpectedModel = new PersonBuilder().build();
+        Person validPersonForModel = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson_for_expectedModel);
-        expectedModel.addAssignment(validPerson_for_expectedModel, validAssignment);
-        model.addPerson(validPerson_for_model);
+        expectedModel.addPerson(validPersonForExpectedModel);
+        expectedModel.addAssignment(validPersonForExpectedModel, validAssignment);
+        model.addPerson(validPersonForModel);
 
-        assertCommandSuccess(new AddAssignmentCommand(validPerson_for_model.getName(), validAssignment), model,
+        assertCommandSuccess(new AddAssignmentCommand(validPersonForModel.getName(), validAssignment), model,
                 String.format(AddAssignmentCommand.MESSAGE_SUCCESS, validAssignment), expectedModel);
     }
 

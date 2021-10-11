@@ -196,7 +196,7 @@ public class ModelManager implements Model {
     @Override
     public List<Assignment> getFilteredAssignmentList(Person person) {
         requireNonNull(person);
-        return  this.addressBook.getPersonAssignmentList(person);
+        return this.addressBook.getPersonAssignmentList(person);
     }
 
     @Override

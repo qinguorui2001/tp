@@ -45,8 +45,8 @@ public class AddAssignmentCommandParserTest {
                 expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB +
-                        VALID_DESCRIPTION_CS1231S_TUTORIAL + VALID_DATE_TIME_CS1231S_TUTORIAL,
+        assertParseFailure(parser,
+                VALID_NAME_BOB + VALID_DESCRIPTION_CS1231S_TUTORIAL + VALID_DATE_TIME_CS1231S_TUTORIAL,
                 expectedMessage);
     }
 
