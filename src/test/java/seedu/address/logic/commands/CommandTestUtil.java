@@ -17,6 +17,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+
 /**
  * Contains helper methods for testing commands.
  */
@@ -28,6 +29,7 @@ public class CommandTestUtil {
     public static final String VALID_DUEDATE_BOB = "11/12/2021,1400";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_CARL = "Carl Kurz";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_MODULE_AMY = "CS2103T";
@@ -50,12 +52,18 @@ public class CommandTestUtil {
     public static final String VALID_TIME_CS1231S_TUTORIAL = "1800";
     public static final String VALID_TIME_CS2106_PROJECT = "0001";
     public static final String VALID_TIME_CS3230_LAB = "0800";
+    public static final String VALID_DATE_TIME_CS1231S_TUTORIAL =
+            VALID_DATE_CS1231S_TUTORIAL + "," + VALID_TIME_CS1231S_TUTORIAL;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String NAME_DESC_CARL = " " + PREFIX_NAME + VALID_NAME_CARL;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String MODULE_DESC_AMY = " " + PREFIX_MODULE + VALID_MODULE_AMY;
     public static final String MODULE_DESC_BOB = " " + PREFIX_MODULE + VALID_MODULE_BOB;
+    public static final String ASSIGNMENT_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CS1231S_TUTORIAL;
+    public static final String DATE_DESC_BOB =
+            " " + PREFIX_DUEDATE + VALID_DATE_TIME_CS1231S_TUTORIAL;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -68,9 +76,10 @@ public class CommandTestUtil {
     public static final String INVALID_MODULE_DESC = " " + PREFIX_MODULE; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    public static final String INVALID_DESCRIPTION_CS1231S_TUTORIAL = "CS1231S @ Tutorial 10";
+    public static final String INVALID_CS1231S_TUTORIAL_DESCRIPTION =
+            " " + PREFIX_DESCRIPTION + "CS1231S @ Tutorial 10";
     public static final String INVALID_DESCRIPTION_CS3230_LAB = "CS3230: Lab Week 4";
-    public static final String INVALID_DATE_WRONG_MONTH = "11/13/2021";
+    public static final String INVALID_DATE_DESCRIPTION = " " + PREFIX_DUEDATE + "11/13/2021";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -143,4 +152,15 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the person's assignment at the given {@code targetIndex}
+     * in the {@code model}'s address book.
+     */
+    public static void showAssignmentAtIndex(Model model, Person person, Index targetIndex) {
+        //Assignment assignment = TypicalAssignments.getTypicalAssignments().get(targetIndex.getZeroBased());
+        // person.getAssignments().add(assignment);
+        model.updateFilteredAssignmentList(person);
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAssignmentList().size());
+        assertEquals(1, model.getFilteredAssignmentList().size());
+    }
 }
