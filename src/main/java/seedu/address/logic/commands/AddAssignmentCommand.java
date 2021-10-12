@@ -43,6 +43,7 @@ public class AddAssignmentCommand extends Command {
      */
     public AddAssignmentCommand(Name name, Assignment assignment) {
         requireNonNull(assignment);
+        requireNonNull(name);
         toAdd = assignment;
         this.name = name;
     }
