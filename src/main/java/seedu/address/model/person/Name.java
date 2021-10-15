@@ -45,7 +45,7 @@ public class Name {
         String[] arrOfName = fullName.split(" ");
         StringBuilder capitaliseFullName = new StringBuilder();
         for (String name : arrOfName) {
-            String capitalise = name.substring(0,1).toUpperCase() + name.substring(1).toLowerCase();
+            String capitalise = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
             capitaliseFullName.append(capitalise + " ");
         }
         return capitaliseFullName.toString().trim();
