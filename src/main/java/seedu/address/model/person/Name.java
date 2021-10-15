@@ -28,7 +28,7 @@ public class Name {
     public Name(String name) {
         requireNonNull(name);
         checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
-        fullName = name;
+        fullName = captialiseName(name);
     }
 
     /**
@@ -56,4 +56,13 @@ public class Name {
         return fullName.hashCode();
     }
 
+    public static String captialiseName(String fullName) {
+        String[] arrOfName = fullName.split(" ");
+        StringBuilder capitaliseFullName = new StringBuilder();
+        for (String name : arrOfName) {
+            String capitalise = name.substring(0,1).toUpperCase() + name.substring(1);
+            capitaliseFullName.append(capitalise + " ");
+        }
+        return  capitaliseFullName.toString();
+    }
 }
