@@ -7,7 +7,15 @@ public class Status implements Comparable<Status>{
     public final String value;
 
     enum StatusType {
-        COMPLETED, LATE, PENDING
+        COMPLETED(2),
+        LATE(0),
+        PENDING(1);
+
+        private final int weight;
+
+        StatusType(int weight) {
+            this.weight = weight;
+        }
     }
 
     /**
@@ -58,6 +66,10 @@ public class Status implements Comparable<Status>{
         return false;
     }
 
+    public String getValue() {
+        return this.value;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -79,7 +91,17 @@ public class Status implements Comparable<Status>{
     }
 
     @Override
-    public int compareTo(Status status){
-        return 0;
+    public int compareTo(Status comparingStatus) {
+        int thisStatusWeight = 0;
+        int comparingStatusWeight = 0;
+        for (StatusType status: StatusType.values()) {
+            if (this.value.equals(status.toString())) {
+                thisStatusWeight = status.weight;
+            }
+            if (comparingStatus.getValue().equals(status.toString())) {
+                comparingStatusWeight = status.weight;
+            }
+        }
+        return thisStatusWeight - comparingStatusWeight;
     }
 }
