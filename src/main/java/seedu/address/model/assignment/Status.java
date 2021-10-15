@@ -2,7 +2,7 @@ package seedu.address.model.assignment;
 
 import static java.util.Objects.requireNonNull;
 
-public class Status {
+public class Status implements Comparable<Status>{
     public static final String MESSAGE_CONSTRAINTS = "Status of assignment should be clearly defined!";
     public final String value;
 
@@ -76,5 +76,10 @@ public class Status {
     @Override
     public String toString() {
         return '[' + value.toUpperCase() + ']';
+    }
+
+    @Override
+    public int compareTo(Status status){
+        return 0;
     }
 }

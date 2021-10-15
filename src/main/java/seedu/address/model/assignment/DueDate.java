@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Locale;
 
 
-public class DueDate {
+public class DueDate implements Comparable<DueDate>{
 
     public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
     public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
@@ -143,5 +143,10 @@ public class DueDate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(DueDate d){
+        return this.dateTime.compareTo(d.dateTime);
     }
 }
