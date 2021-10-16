@@ -19,17 +19,18 @@ public class MarkAssignmentCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Person personToShow = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
     @Test
     void execute_validIndexAssignmentListSuccess() {
         MarkAssignmentCommand markAssignmentCommand =
                 new MarkAssignmentCommand(personToShow.getName(), INDEX_FIRST_ASSIGNMENT);
 
-        String expectedMessage =
-                String.format(MarkAssignmentCommand.MESSAGE_MARK_ASSIGNMENT_SUCCESS, personToShow.getName());
-
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredAssignmentList(personToShow);
 
+        expectedModel.markAssignment(personToShow, personToShow.getAssignments().get(0));
+        String expectedMessage =
+                String.format(MarkAssignmentCommand.MESSAGE_MARK_ASSIGNMENT_SUCCESS,
+                        personToShow.getAssignments().get(0));
         assertCommandSuccess(markAssignmentCommand, model, expectedMessage, expectedModel);
     }
 

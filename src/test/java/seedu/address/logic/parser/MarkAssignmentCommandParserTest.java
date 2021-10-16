@@ -21,7 +21,7 @@ public class MarkAssignmentCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsMarkCommand() {
-        assertParseSuccess(parser,  " n/" + personInList.getName() + "1",
+        assertParseSuccess(parser, " n/" + personInList.getName() + "1",
                 new MarkAssignmentCommand(personInList.getName(), INDEX_FIRST_ASSIGNMENT));
     }
 
