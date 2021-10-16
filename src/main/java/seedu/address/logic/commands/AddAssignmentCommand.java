@@ -22,17 +22,18 @@ public class AddAssignmentCommand extends Command {
 
     public static final String COMMAND_WORD = "a-add";
 
-    public static final String FRIENDLY_COMMAND_SYNTAX = "Here are some friendly command syntax for Prefix Due Date:\n" +
-            "today - sets due date to tonight 2359\n" +
-            "tmr - sets due date to tomorrow\n" +
-            "week - sets due date to a week (7 days) from now\n" +
-            "mon - sets due date to the coming monday\n" +
-            "tue - sets due date to the coming tuesday\n" +
-            "wed - sets due date to the coming wednesday\n" +
-            "thu - sets due date to the coming thursday\n" +
-            "fri - sets due date to the coming friday\n" +
-            "sat - sets due date to the coming saturday\n" +
-            "sun - sets due date to the coming sunday\n";
+    public static final String FRIENDLY_COMMAND_SYNTAX =
+            "Here are some friendly command syntax for Prefix Due Date:\n"
+                    + "today - sets due date to tonight 2359\n"
+                    + "tmr - sets due date to tomorrow\n"
+                    + "week - sets due date to a week (7 days) from now\n"
+                    + "mon - sets due date to the coming monday\n"
+                    + "tue - sets due date to the coming tuesday\n"
+                    + "wed - sets due date to the coming wednesday\n"
+                    + "thu - sets due date to the coming thursday\n"
+                    + "fri - sets due date to the coming friday\n"
+                    + "sat - sets due date to the coming saturday\n"
+                    + "sun - sets due date to the coming sunday\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an assignment to the person's assignment list. "
             + "Parameters: "
@@ -42,8 +43,8 @@ public class AddAssignmentCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_DESCRIPTION + "assignment2 "
-            + PREFIX_DUEDATE + "11/11/2021 \n\n" +
-            FRIENDLY_COMMAND_SYNTAX;
+            + PREFIX_DUEDATE + "11/11/2021 \n\n"
+            + FRIENDLY_COMMAND_SYNTAX;
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the assignment list";

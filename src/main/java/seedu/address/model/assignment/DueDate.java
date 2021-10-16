@@ -69,6 +69,13 @@ public class DueDate {
         this(date, LATEST_TIME_IN_DAY);
     }
 
+    /**
+     * Constructs a {@code DueDate}
+     *
+     * @param friendlyDate friendly command format of date
+     * @param code code value assigned to denote friendly command
+     * @throws ParseException erroneous is given, exception is thrown
+     */
     public DueDate(String friendlyDate, int code) throws ParseException {
         if (code == 1) {
             this.date = friendlyToDate(friendlyDate);
@@ -106,6 +113,12 @@ public class DueDate {
         return test.matches(TIME_VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if the given string is one of the valid friendly date commands.
+     *
+     * @param date user input for a date.
+     * @return true if the given string is a valid friendly date command.
+     */
     public static boolean isValidFriendlyDate(String date) {
         for (String s : FRIENDLY_COMMANDS) {
             if (s.equals(date)) {
@@ -174,6 +187,12 @@ public class DueDate {
         return temp;
     }
 
+    /**
+     * Converts a friendly date into a LocalDate object.
+     *
+     * @param friendlyDate user given friendly date.
+     * @return user given friendly date in LocalDate format.
+     */
     public static LocalDate friendlyToDate(String friendlyDate) {
         LocalDate currentDate = LocalDate.now();
         switch (friendlyDate) {
@@ -201,10 +220,11 @@ public class DueDate {
         case "tmr":
             currentDate = currentDate.plusDays(1);
             break;
-        case "today":
-            break;
         case "week":
             currentDate = currentDate.plusDays(7);
+            break;
+        default:
+            // If flow enters here, user has entered "today"
             break;
         }
         return currentDate;
