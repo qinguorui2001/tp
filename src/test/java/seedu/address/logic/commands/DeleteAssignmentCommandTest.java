@@ -1,44 +1,80 @@
 package seedu.address.logic.commands;
 
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.testutil.PersonBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 public class DeleteAssignmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
+    private Person clonePerson(Person person) {
+        return new PersonBuilder(person).build();
+    }
+
+    private Model setUpModel(Model inputModel, Person selectedPerson ,Person clonedPerson) {
+        inputModel.setPerson(selectedPerson, clonedPerson);
+        inputModel.setPerson(selectedPerson, clonedPerson);
+        return inputModel;
+    }
+
+    private Model setUpActualModel(Person selectedPerson ,Person clonedPerson) {
+        return setUpModel(model, selectedPerson, clonedPerson);
+    }
+
+    private Model setUpExpectedModel(Person selectedPerson ,Person clonedPerson) {
+        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        return setUpModel(expectedModel, selectedPerson, clonedPerson);
+    }
+
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        /*Person personInList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Assignment assignmentToDelete_expected =
-                TypicalAssignments.getTypicalAssignments().get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        /* The selectedPerson is cloned to avoid race conditions happening with JsonSerializableAddressBookTest
+           and is cloned for both actual and expected models because a change in expectedModel will affect the actual
+           model*/
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_SIXTH_PERSON.getZeroBased());
+        Person clonedActualPerson = clonePerson(selectedPerson);
+        Person clonedExpectedPerson = clonePerson(selectedPerson);
 
-        expectedModel.addAssignment(personInList, assignmentToDelete_expected);
-        expectedModel.deleteAssignment(personInList, assignmentToDelete_expected);
+        Assignment assignmentToDelete_expected = selectedPerson.getAssignments()
+                .asUnmodifiableObservableList().get(INDEX_SECOND_ASSIGNMENT.getZeroBased());
 
-        personInList.getAssignments().setAssignments(TypicalAssignments.getTypicalAssignments());
-        model.updateFilteredAssignmentList(personInList);
-        Assignment assignmentToDelete_model =
-                model.getFilteredAssignmentList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
+        Model actualModel = setUpActualModel(selectedPerson, clonedActualPerson);
+        Model expectedModel = setUpExpectedModel(selectedPerson, clonedExpectedPerson);
+        expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete_expected);
+
         DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(personInList.getName(), INDEX_FIRST_ASSIGNMENT);
+                new DeleteAssignmentCommand(clonedActualPerson.getName(), INDEX_SECOND_ASSIGNMENT);
 
-        String expectedMessage =
-                String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete_model);
+        String expectedMessage = String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
+                assignmentToDelete_expected);
 
-        assertCommandSuccess(deleteAssignmentCommand, model, expectedMessage, expectedModel);*/
+        assertCommandSuccess(deleteAssignmentCommand, actualModel, expectedMessage, expectedModel);
     }
 
     @Test
@@ -51,132 +87,53 @@ public class DeleteAssignmentCommandTest {
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        /*showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Person personInList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        Assignment assignmentToDelete = model.getFilteredAssignmentList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
-        expectedModel.addAssignment(personInList, assignmentToDelete);
-        expectedModel.deleteAssignment(personInList, assignmentToDelete);
-        showNoAssignment(expectedModel, personInList);
-        showAssignmentAtIndex(model,
-                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), INDEX_FIRST_ASSIGNMENT);
+    public void execute_validIndexFilteredPersonList_success() {
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_SIXTH_PERSON.getZeroBased());
+        Person clonedActualPerson = clonePerson(selectedPerson);
+        Person clonedExpectedPerson = clonePerson(selectedPerson);
 
+        Model expectedModel = setUpExpectedModel(selectedPerson, clonedExpectedPerson);
+        Model actualModel = setUpActualModel(selectedPerson, clonedActualPerson);
+
+        Assignment assignmentToDelete = selectedPerson.getAssignments()
+                .asUnmodifiableObservableList().get(INDEX_SECOND_ASSIGNMENT.getZeroBased());
+
+        expectedModel.updateFilteredPersonList(person -> person.isSameName(clonedExpectedPerson.getName()));
+        actualModel.updateFilteredPersonList(person -> person.isSameName(selectedPerson.getName()));
+        expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
         DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(personInList.getName(), INDEX_FIRST_ASSIGNMENT);
+                new DeleteAssignmentCommand(clonedActualPerson.getName(), INDEX_SECOND_ASSIGNMENT);
 
         String expectedMessage =
                 String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete);
 
-        assertCommandSuccess(deleteAssignmentCommand, model, expectedMessage, expectedModel);*/
+        assertCommandSuccess(deleteAssignmentCommand, actualModel, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        /*showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        Person personInList = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        showAssignmentAtIndex(model, personInList, INDEX_FIRST_ASSIGNMENT);
+    public void execute_invalidIndexFilteredPersonList_throwsCommandException() {
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_SIXTH_PERSON.getZeroBased());
+        Person filteredPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
-        Index outOfBoundIndex = INDEX_SECOND_ASSIGNMENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getAssignmentsList().size());
-
+        // ensures that outOfBoundIndex is still in bounds of address book's person list
+        assertTrue(INDEX_SIXTH_PERSON.getZeroBased() < model.getAddressBook().getPersonList().size());
+        model.updateFilteredPersonList(person -> person.isSameName(filteredPerson.getName()));
         DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(personInList.getName(), outOfBoundIndex);
-
-        assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);*/
-    }
-    /*
-    @Test
-    public void equals() {
-        DeletePersonCommand deleteFirstCommand = new DeletePersonCommand(INDEX_FIRST_PERSON);
-        DeletePersonCommand deleteSecondCommand = new DeletePersonCommand(INDEX_SECOND_PERSON);
-
-        // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
-
-        // same values -> returns true
-        DeletePersonCommand deleteFirstCommandCopy = new DeletePersonCommand(INDEX_FIRST_PERSON);
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    /* private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
-    }private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(INDEX_FIRST_PERSON);
-
-        String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
-
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-
-        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAssignmentList().size() + 1);
-        DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(new PersonBuilder().build().getName(), outOfBoundIndex);
+                new DeleteAssignmentCommand(filteredPerson.getName(), INDEX_FIRST_ASSIGNMENT);
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_validIndexFilteredList_success() {
-        showAssignmentAtIndex(model, INDEX_FIRST_ASSIGNMENT);
-
-        Assignment assignmentToDelete = model.getFilteredAssignmentList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
-        DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(new PersonBuilder().build().getName(), INDEX_FIRST_ASSIGNMENT);
-
-        String expectedMessage = String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
-         assignmentToDelete);
-
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deleteAssignment(new PersonBuilder().build(), assignmentToDelete);
-        showNoAssignment(expectedModel);
-
-        assertCommandSuccess(deleteAssignmentCommand, model, expectedMessage, expectedModel);
-    }
-    */
-
-
-    /* @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showAssignmentAtIndex(model,
-                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), INDEX_FIRST_ASSIGNMENT);
-
-        Index outOfBoundIndex = INDEX_SECOND_ASSIGNMENT;
-        // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getAssignmentsList().size());
+    public void execute_invalidPerson_throwsCommandException() {
+        Person personNotInList = HOON;
 
         DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(new PersonBuilder().build().getName(), outOfBoundIndex);
+                new DeleteAssignmentCommand(personNotInList.getName(), INDEX_FIRST_ASSIGNMENT);
 
-        assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
+        assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
     }
-
-    */
 
     @Test
     public void equals() {
@@ -199,15 +156,7 @@ public class DeleteAssignmentCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different deleted assignment -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoAssignment(Model model, Person person) {
-        model.updateFilteredAssignmentList(person);
-        assertTrue(model.getFilteredAssignmentList().isEmpty());
     }
 }
