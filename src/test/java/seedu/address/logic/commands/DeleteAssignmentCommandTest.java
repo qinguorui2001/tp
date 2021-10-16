@@ -2,19 +2,13 @@ package seedu.address.logic.commands;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.UniqueAssignmentList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.testutil.PersonBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,11 +19,6 @@ import static seedu.address.testutil.TypicalIndexes.*;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-
 public class DeleteAssignmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -37,17 +26,17 @@ public class DeleteAssignmentCommandTest {
         return new PersonBuilder(person).build();
     }
 
-    private Model setUpModel(Model inputModel, Person selectedPerson ,Person clonedPerson) {
+    private Model setUpModel(Model inputModel, Person selectedPerson, Person clonedPerson) {
         inputModel.setPerson(selectedPerson, clonedPerson);
         inputModel.setPerson(selectedPerson, clonedPerson);
         return inputModel;
     }
 
-    private Model setUpActualModel(Person selectedPerson ,Person clonedPerson) {
+    private Model setUpActualModel(Person selectedPerson, Person clonedPerson) {
         return setUpModel(model, selectedPerson, clonedPerson);
     }
 
-    private Model setUpExpectedModel(Person selectedPerson ,Person clonedPerson) {
+    private Model setUpExpectedModel(Person selectedPerson, Person clonedPerson) {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         return setUpModel(expectedModel, selectedPerson, clonedPerson);
     }
@@ -61,18 +50,18 @@ public class DeleteAssignmentCommandTest {
         Person clonedActualPerson = clonePerson(selectedPerson);
         Person clonedExpectedPerson = clonePerson(selectedPerson);
 
-        Assignment assignmentToDelete_expected = selectedPerson.getAssignments()
+        Assignment assignmentToDelete = selectedPerson.getAssignments()
                 .asUnmodifiableObservableList().get(INDEX_SECOND_ASSIGNMENT.getZeroBased());
 
         Model actualModel = setUpActualModel(selectedPerson, clonedActualPerson);
         Model expectedModel = setUpExpectedModel(selectedPerson, clonedExpectedPerson);
-        expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete_expected);
+        expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
         DeleteAssignmentCommand deleteAssignmentCommand =
                 new DeleteAssignmentCommand(clonedActualPerson.getName(), INDEX_SECOND_ASSIGNMENT);
 
         String expectedMessage = String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
-                assignmentToDelete_expected);
+                assignmentToDelete);
 
         assertCommandSuccess(deleteAssignmentCommand, actualModel, expectedMessage, expectedModel);
     }
