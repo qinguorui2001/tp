@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -16,9 +17,14 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
 public class MarkAssignmentCommandTest {
+    private Model model;
+    private Person personToShow;
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Person personToShow = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        personToShow = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+    }
 
     @Test
     void execute_validIndexAssignmentListSuccess() {
