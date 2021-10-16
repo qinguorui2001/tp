@@ -1,14 +1,19 @@
 package seedu.address.model.assignment;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Locale;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 public class DueDate {
@@ -25,6 +30,7 @@ public class DueDate {
               "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}(,)"
                       + "(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
     public static final String LATEST_TIME_IN_DAY = "2359";
+    public static final ArrayList<String> FRIENDLY_COMMANDS = initArrayList();
 
     protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
     protected static final DateTimeFormatter PARSE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
@@ -62,6 +68,18 @@ public class DueDate {
     public DueDate(String date) {
         this(date, LATEST_TIME_IN_DAY);
     }
+
+    public DueDate(String friendlyDate, int code) throws ParseException {
+        if (code == 1) {
+            this.date = friendlyToDate(friendlyDate);
+            this.time = LocalTime.parse(LATEST_TIME_IN_DAY, PARSE_TIME_FORMAT);
+            this.dateTime = LocalDateTime.of(this.date, this.time);
+            this.value = this.dateTime.format(OUTPUT_FORMAT);
+        } else {
+            throw new ParseException(DueDate.MESSAGE_CONSTRAINTS_DUE_DATE);
+        }
+    }
+
     /**
      * Constructs a {@code DueDate}.
      *
@@ -86,6 +104,15 @@ public class DueDate {
      */
     public static boolean isValidTime(String test) {
         return test.matches(TIME_VALIDATION_REGEX);
+    }
+
+    public static boolean isValidFriendlyDate(String date) {
+        for (String s : FRIENDLY_COMMANDS) {
+            if (s.equals(date)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -124,7 +151,63 @@ public class DueDate {
      * Returns true if date is valid due date form.
      */
     public static boolean isValidDueDate(String date) {
-        return isValidDate(date) || isValidDateAndTime(date);
+        return isValidDate(date) || isValidDateAndTime(date) || isValidFriendlyDate(date);
+    }
+
+    /**
+     * Instantiates the global arraylist with the friendly commands.
+     *
+     * @return an arraylist of String containing the friendly commands.
+     */
+    public static ArrayList<String> initArrayList() {
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add("mon");
+        temp.add("tue");
+        temp.add("wed");
+        temp.add("thu");
+        temp.add("fri");
+        temp.add("sat");
+        temp.add("sun");
+        temp.add("tmr");
+        temp.add("today");
+        temp.add("week");
+        return temp;
+    }
+
+    public static LocalDate friendlyToDate(String friendlyDate) {
+        LocalDate currentDate = LocalDate.now();
+        switch (friendlyDate) {
+        case "mon":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+            break;
+        case "tue":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
+            break;
+        case "wed":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
+            break;
+        case "thu":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
+            break;
+        case "fri":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+            break;
+        case "sat":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+            break;
+        case "sun":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+            break;
+        case "tmr":
+            currentDate = currentDate.plusDays(1);
+            break;
+        case "today":
+            break;
+        case "week":
+            currentDate = currentDate.plusDays(7);
+            break;
+        }
+        return currentDate;
     }
 
 

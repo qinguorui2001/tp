@@ -23,6 +23,8 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
+    public static final int FRIENDLY_CODE = 1;
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -94,7 +96,11 @@ public class ParserUtil {
         if (!DueDate.isValidDueDate(trimmedDueDate)) {
             throw new ParseException(DueDate.MESSAGE_CONSTRAINTS_DUE_DATE);
         } else if (!dueDate.contains(splitString)) {
-            return new DueDate(trimmedDueDate);
+            if (DueDate.isValidFriendlyDate(trimmedDueDate)) {
+                return new DueDate(trimmedDueDate, FRIENDLY_CODE);
+            } else {
+                return new DueDate(trimmedDueDate);
+            }
         } else {
             String[] dateAndTime = trimmedDueDate.split(splitString);
             String date = dateAndTime[0];
