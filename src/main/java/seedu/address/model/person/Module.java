@@ -1,5 +1,7 @@
 package seedu.address.model.person;
 
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -19,7 +21,7 @@ public class Module {
      * if the module code matches a 2/3 letter - 4 number - optional one letter pattern.
      *
      */
-    public static final String VALIDATION_REGEX = "([a-zA-Z]{2,3})([0-9]{4})([a-zA-Z])?";
+    public static final String VALIDATION_REGEX = "([A-Z]{2,3})([0-9]{4})([A-Z])?";
 
     public final String moduleCode;
 
@@ -30,6 +32,7 @@ public class Module {
      */
     public Module(String module) {
         requireNonNull(module);
+        module = module.toUpperCase(Locale.ROOT);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
         moduleCode = module;
     }
