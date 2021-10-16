@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -49,5 +51,7 @@ public class NameTest {
         assertEquals(Name.capitalise("aLEX"), "Alex");
         assertEquals(Name.capitalise("aLeX"), "Alex");
         assertEquals(Name.capitalise("AlEx"), "Alex");
+        assertEquals(Name.capitalise("Alex  "), "Alex");
+        assertEquals(Name.capitalise("CLIffOrd KAlEB toh jiNg zHe"), "Clifford Kaleb Toh Jing Zhe");
     }
 }
