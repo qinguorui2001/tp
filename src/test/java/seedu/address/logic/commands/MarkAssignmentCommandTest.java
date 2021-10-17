@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.clonePerson;
+import static seedu.address.logic.commands.CommandTestUtil.setUpActualModel;
+import static seedu.address.logic.commands.CommandTestUtil.setUpExpectedModel;
 import static seedu.address.testutil.TypicalIndexes.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -14,6 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
 public class MarkAssignmentCommandTest {
@@ -28,16 +32,25 @@ public class MarkAssignmentCommandTest {
 
     @Test
     void execute_validIndexAssignmentListSuccess() {
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person clonedActualPerson = clonePerson(selectedPerson);
+        Person clonedExpectedPerson = clonePerson(selectedPerson);
+
+        Assignment assignmentToMark = selectedPerson.getAssignments()
+                .asUnmodifiableObservableList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
+
+        Model actualModel = setUpActualModel(model, selectedPerson, clonedActualPerson);
+        Model expectedModel = setUpExpectedModel(selectedPerson, clonedExpectedPerson);
+
+        expectedModel.markAssignment(clonedExpectedPerson, assignmentToMark);
+
         MarkAssignmentCommand markAssignmentCommand =
-                new MarkAssignmentCommand(personToShow.getName(), INDEX_FIRST_ASSIGNMENT);
+                new MarkAssignmentCommand(clonedActualPerson.getName(), INDEX_FIRST_ASSIGNMENT);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
-        expectedModel.markAssignment(personToShow, personToShow.getAssignments().get(0));
         String expectedMessage =
                 String.format(MarkAssignmentCommand.MESSAGE_MARK_ASSIGNMENT_SUCCESS,
-                        personToShow.getAssignments().get(0));
-        assertCommandSuccess(markAssignmentCommand, model, expectedMessage, expectedModel);
+                        assignmentToMark);
+        assertCommandSuccess(markAssignmentCommand, actualModel, expectedMessage, expectedModel);
     }
 
     @Test
