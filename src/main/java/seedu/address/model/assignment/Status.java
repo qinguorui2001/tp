@@ -2,7 +2,7 @@ package seedu.address.model.assignment;
 
 import static java.util.Objects.requireNonNull;
 
-public class Status implements Comparable<Status>{
+public class Status implements Comparable<Status> {
     public static final String MESSAGE_CONSTRAINTS = "Status of assignment should be clearly defined!";
     public final String value;
 

@@ -8,7 +8,7 @@ import java.util.Objects;
  * Represents an Assignment in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Assignment implements Comparable<Assignment>{
+public class Assignment implements Comparable<Assignment> {
 
     private final Description description;
     private final DueDate dueDate;
