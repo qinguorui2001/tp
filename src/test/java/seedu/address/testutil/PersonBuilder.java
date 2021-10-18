@@ -49,8 +49,8 @@ public class PersonBuilder {
         tags = new HashSet<>(personToCopy.getTags());
 
         assignmentList = new ArrayList<>();
-        for (Assignment assignments: personToCopy.getAssignments()) {
-            assignmentList.add(assignments);
+        for (Assignment assignment: personToCopy.getAssignments()) {
+            assignmentList.add(assignment);
         }
     }
 

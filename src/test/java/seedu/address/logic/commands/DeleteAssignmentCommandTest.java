@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.clonePerson;
 import static seedu.address.testutil.TypicalIndexes.*;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -22,12 +23,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 public class DeleteAssignmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-    private Person clonePerson(Person person) {
-        return new PersonBuilder(person).build();
-    }
-
     private Model setUpModel(Model inputModel, Person selectedPerson, Person clonedPerson) {
-        inputModel.setPerson(selectedPerson, clonedPerson);
         inputModel.setPerson(selectedPerson, clonedPerson);
         return inputModel;
     }

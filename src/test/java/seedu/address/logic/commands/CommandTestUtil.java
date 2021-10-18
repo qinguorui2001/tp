@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 
 /**
@@ -162,5 +163,9 @@ public class CommandTestUtil {
         model.updateFilteredAssignmentList(person);
         assertTrue(targetIndex.getZeroBased() < model.getFilteredAssignmentList().size());
         assertEquals(1, model.getFilteredAssignmentList().size());
+    }
+
+    public static Person clonePerson(Person person) {
+        return new PersonBuilder(person).build();
     }
 }
