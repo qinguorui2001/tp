@@ -28,12 +28,14 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com")
             .withModule("CS1101S")
-            .withAssignmentList(new String[] {"Assignment 2", "15 Oct 2021, 01:00 PM", "PENDING"})
+            .withAssignmentList(new String[] {"Assignment 2", "15 Oct 2021, 01:00 PM", "PENDING"},
+                    new String[] {"Homework 1", "13 Sep 2021, 11:59 PM", "LATE"})
             .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withEmail("heinz@example.com")
             .withModule("IS2101")
-            .withAssignmentList(new String[] {"iP", "17 Sep 2021, 11:59 PM", "COMPLETED"}).build();
+            .withAssignmentList(new String[] {"iP", "17 Sep 2021, 11:59 PM", "COMPLETED"},
+                    new String[] {"Assignment 2", "15 Oct 2021, 01:00 PM", "PENDING"}).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
             .withEmail("cornelia@example.com")
             .withModule("CM1102")
