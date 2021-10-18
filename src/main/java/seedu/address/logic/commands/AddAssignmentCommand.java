@@ -23,7 +23,7 @@ public class AddAssignmentCommand extends Command {
     public static final String COMMAND_WORD = "a-add";
 
     public static final String FRIENDLY_COMMAND_SYNTAX =
-            "Here are some friendly command syntax for Prefix Due Date:\n"
+            "Here are some friendly command syntax for to replace d/M/yyyy:\n"
                     + "today - sets due date to tonight 2359\n"
                     + "tmr - sets due date to tomorrow\n"
                     + "week - sets due date to a week (7 days) from now\n"

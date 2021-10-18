@@ -1,6 +1,8 @@
 package seedu.address.model.assignment;
 
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.MainApp;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddAssignmentCommand;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -11,6 +13,7 @@ import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -20,7 +23,8 @@ public class DueDate {
 
     public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
     public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
-    public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm";
+    public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm\n"
+            + AddAssignmentCommand.FRIENDLY_COMMAND_SYNTAX;
     public static final String OUTPUT_CONSTRAINTS = "Due dates saved should be in a format dd MMM yyyy, hh:mm a";
 
     public static final String DATE_VALIDATION_REGEX =
@@ -43,6 +47,8 @@ public class DueDate {
     private final LocalDateTime dateTime;
     private final LocalTime time;
 
+    private static final Logger logger = LogsCenter.getLogger(DueDate.class);
+
     /**
      * Constructs a {@code DueDate}.
      *
@@ -53,8 +59,13 @@ public class DueDate {
         requireNonNull(date);
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS_TIME);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
-        this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
+        logger.info("Date: " + date + "\nTime: " + time);
+        if (isValidFriendlyDate(date)) {
+            this.date = friendlyToDate(date);
+        } else {
+            checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
+            this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
+        }
         this.time = LocalTime.parse(time, PARSE_TIME_FORMAT);
         this.dateTime = LocalDateTime.of(this.date, this.time);
         this.value = this.dateTime.format(OUTPUT_FORMAT);
@@ -66,25 +77,15 @@ public class DueDate {
      * @param date Date of due date.
      */
     public DueDate(String date) {
-        this(date, LATEST_TIME_IN_DAY);
-    }
-
-    /**
-     * Constructs a {@code DueDate}
-     *
-     * @param friendlyDate friendly command format of date
-     * @param code code value assigned to denote friendly command
-     * @throws ParseException erroneous is given, exception is thrown
-     */
-    public DueDate(String friendlyDate, int code) throws ParseException {
-        if (code == 1) {
-            this.date = friendlyToDate(friendlyDate);
-            this.time = LocalTime.parse(LATEST_TIME_IN_DAY, PARSE_TIME_FORMAT);
-            this.dateTime = LocalDateTime.of(this.date, this.time);
-            this.value = this.dateTime.format(OUTPUT_FORMAT);
+        if (isValidFriendlyDate(date)) {
+            this.date = friendlyToDate(date);
         } else {
-            throw new ParseException(DueDate.MESSAGE_CONSTRAINTS_DUE_DATE);
+            checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
+            this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
         }
+        this.time = LocalTime.parse(LATEST_TIME_IN_DAY, PARSE_TIME_FORMAT);
+        this.dateTime = LocalDateTime.of(this.date, this.time);
+        this.value = this.dateTime.format(OUTPUT_FORMAT);
     }
 
     /**
@@ -129,6 +130,17 @@ public class DueDate {
     }
 
     /**
+     * Returns true if a given string contains a valid Friendly Date and time.
+     *
+     * @param date user input friendly date and time
+     * @return true if matches regex
+     */
+    public static boolean isValidFriendlyDateAndTime(String date) {
+        String[] splitDate = date.split(",");
+        return isValidFriendlyDate(splitDate[0]) && splitDate[1].matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
      * Returns true if a given string is a valid DueDate output.
      */
     public static boolean isValidDueDateOutput(String test) {
@@ -164,7 +176,8 @@ public class DueDate {
      * Returns true if date is valid due date form.
      */
     public static boolean isValidDueDate(String date) {
-        return isValidDate(date) || isValidDateAndTime(date) || isValidFriendlyDate(date);
+        return isValidDate(date) || isValidDateAndTime(date) || isValidFriendlyDate(date)
+                || isValidFriendlyDateAndTime(date);
     }
 
     /**
@@ -220,11 +233,10 @@ public class DueDate {
         case "tmr":
             currentDate = currentDate.plusDays(1);
             break;
+        case "today":
+            break;
         case "week":
             currentDate = currentDate.plusDays(7);
-            break;
-        default:
-            // If flow enters here, user has entered "today"
             break;
         }
         return currentDate;
