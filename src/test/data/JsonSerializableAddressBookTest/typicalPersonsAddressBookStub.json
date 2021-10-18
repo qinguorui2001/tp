@@ -34,7 +34,7 @@
     "name" : "Fiona Kunz",
     "email" : "lydia@example.com",
     "module": "GET1031",
-    "assignments" : [ "Assignment 1|10 Sep 2021, 11:59 PM|COMPLETED", "Assignment 2|11 Sep 2021, 11:58 PM|COMPLETED", "Lab 3|12 Nov 2021, 06:00 PM|PENDING" ],
+    "assignments" : [ "Assignment 1|10 Sep 2021, 11:59 PM|COMPLETED" ],
     "tagged" : [ ]
   }, {
     "name" : "George Best",
