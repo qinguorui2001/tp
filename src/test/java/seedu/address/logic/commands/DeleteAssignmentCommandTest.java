@@ -16,26 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.clonePerson;
+import static seedu.address.logic.commands.CommandTestUtil.replacePersonWithClone;
+import static seedu.address.logic.commands.CommandTestUtil.setUpNewModelWithClonedPerson;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.*;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class DeleteAssignmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
-    private Model setUpModel(Model inputModel, Person selectedPerson, Person clonedPerson) {
-        inputModel.setPerson(selectedPerson, clonedPerson);
-        return inputModel;
-    }
-
-    private Model setUpActualModel(Person selectedPerson, Person clonedPerson) {
-        return setUpModel(model, selectedPerson, clonedPerson);
-    }
-
-    private Model setUpExpectedModel(Person selectedPerson, Person clonedPerson) {
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        return setUpModel(expectedModel, selectedPerson, clonedPerson);
-    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -49,8 +38,8 @@ public class DeleteAssignmentCommandTest {
         Assignment assignmentToDelete = selectedPerson.getAssignments()
                 .asUnmodifiableObservableList().get(INDEX_SECOND_ASSIGNMENT.getZeroBased());
 
-        Model actualModel = setUpActualModel(selectedPerson, clonedActualPerson);
-        Model expectedModel = setUpExpectedModel(selectedPerson, clonedExpectedPerson);
+        Model actualModel = replacePersonWithClone(model, selectedPerson, clonedActualPerson);
+        Model expectedModel = setUpNewModelWithClonedPerson(selectedPerson, clonedExpectedPerson);
         expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
         DeleteAssignmentCommand deleteAssignmentCommand =
@@ -66,7 +55,8 @@ public class DeleteAssignmentCommandTest {
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAssignmentList().size() + 1);
         DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(model.getFilteredPersonList().get(0).getName(), outOfBoundIndex);
+                new DeleteAssignmentCommand(model.getFilteredPersonList()
+                        .get(INDEX_FIRST_PERSON.getZeroBased()).getName(), outOfBoundIndex);
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
@@ -77,14 +67,14 @@ public class DeleteAssignmentCommandTest {
         Person clonedActualPerson = clonePerson(selectedPerson);
         Person clonedExpectedPerson = clonePerson(selectedPerson);
 
-        Model expectedModel = setUpExpectedModel(selectedPerson, clonedExpectedPerson);
-        Model actualModel = setUpActualModel(selectedPerson, clonedActualPerson);
+        Model expectedModel = setUpNewModelWithClonedPerson(selectedPerson, clonedExpectedPerson);
+        Model actualModel = replacePersonWithClone(model, selectedPerson, clonedActualPerson);
 
         Assignment assignmentToDelete = selectedPerson.getAssignments()
                 .asUnmodifiableObservableList().get(INDEX_SECOND_ASSIGNMENT.getZeroBased());
 
-        expectedModel.updateFilteredPersonList(person -> person.isSameName(clonedExpectedPerson.getName()));
-        actualModel.updateFilteredPersonList(person -> person.isSameName(selectedPerson.getName()));
+        showPersonAtIndex(actualModel, INDEX_SIXTH_PERSON);
+        showPersonAtIndex(expectedModel, INDEX_SIXTH_PERSON);
         expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
         DeleteAssignmentCommand deleteAssignmentCommand =
@@ -98,14 +88,14 @@ public class DeleteAssignmentCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredPersonList_throwsCommandException() {
-        Person selectedPerson = model.getFilteredPersonList().get(INDEX_SIXTH_PERSON.getZeroBased());
-        Person filteredPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
+        Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book's person list
-        assertTrue(INDEX_SIXTH_PERSON.getZeroBased() < model.getAddressBook().getPersonList().size());
-        model.updateFilteredPersonList(person -> person.isSameName(filteredPerson.getName()));
-        DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(filteredPerson.getName(), INDEX_FIRST_ASSIGNMENT);
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+
+        DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(
+                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName(), outOfBoundIndex);
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
