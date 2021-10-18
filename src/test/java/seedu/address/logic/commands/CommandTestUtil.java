@@ -23,49 +23,68 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_DESCRIPTION_AMY = "assignment1";
-    public static final String VALID_DESCRIPTION_BOB = "assignment2";
-    public static final String VALID_DUEDATE_AMY = "11/11/2021,1844";
-    public static final String VALID_DUEDATE_BOB = "11/12/2021,1400";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_NAME_CARL = "Carl Kurz";
+
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_MODULE_AMY = "CS2103T";
-    public static final String VALID_MODULE_BOB = "CS2101";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_EMAIL_CARL = "carl@example.com";
 
-    /*
-    public static final String DESCRIPTION_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_NAME_AMY;
-    public static final String DESCRIPTION_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_NAME_BOB;
-    public static final String DUEDATE_DESC_AMY = " " + PREFIX_DUEDATE + VALID_NAME_AMY;
-    public static final String DUEDATE_DESC_BOB = " " + PREFIX_DUEDATE + VALID_NAME_BOB;
-    */
-    public static final String VALID_DESCRIPTION_CS1231S_TUTORIAL = "CS1231S Tutorial 10";
+    public static final String VALID_MODULE_AMY = "CS2106";
+    public static final String VALID_MODULE_BOB = "CS1231";
+    public static final String VALID_MODULE_CARL = "CS3230";
+
+    public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_TAG_HUSBAND = "husband";
+    public static final String VALID_TAG_CLASSMATE = "classmate";
+
     public static final String VALID_DESCRIPTION_CS2106_PROJECT = "CS2106 Final Network Project";
+    public static final String VALID_DESCRIPTION_CS1231S_TUTORIAL = "CS1231S Tutorial 10";
     public static final String VALID_DESCRIPTION_CS3230_LAB = "CS3230 Lab Week 4";
-    public static final String VALID_DATE_CS1231S_TUTORIAL = "01/02/2021";
+
     public static final String VALID_DATE_CS2106_PROJECT = "1/1/2020";
+    public static final String VALID_DATE_CS1231S_TUTORIAL = "01/02/2021";
     public static final String VALID_DATE_CS3230_LAB = "11/01/2021";
-    public static final String VALID_TIME_CS1231S_TUTORIAL = "1800";
+
     public static final String VALID_TIME_CS2106_PROJECT = "0001";
+    public static final String VALID_TIME_CS1231S_TUTORIAL = "1800";
     public static final String VALID_TIME_CS3230_LAB = "0800";
+
+    public static final String VALID_DATE_TIME_CS2106_PROJECT =
+            VALID_DATE_CS2106_PROJECT + "," + VALID_TIME_CS2106_PROJECT;
     public static final String VALID_DATE_TIME_CS1231S_TUTORIAL =
             VALID_DATE_CS1231S_TUTORIAL + "," + VALID_TIME_CS1231S_TUTORIAL;
+    public static final String VALID_DATE_TIME_CS3230_LAB =
+            VALID_DATE_CS3230_LAB + "," + VALID_TIME_CS3230_LAB;
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String NAME_DESC_CARL = " " + PREFIX_NAME + VALID_NAME_CARL;
+
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String EMAIL_DESC_CARL = " " + PREFIX_EMAIL + VALID_EMAIL_CARL;
+
     public static final String MODULE_DESC_AMY = " " + PREFIX_MODULE + VALID_MODULE_AMY;
     public static final String MODULE_DESC_BOB = " " + PREFIX_MODULE + VALID_MODULE_BOB;
+    public static final String MODULE_DESC_CARL = " " + PREFIX_MODULE + VALID_MODULE_CARL;
+
+    public static final String ASSIGNMENT_DESC_AMY = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CS2106_PROJECT;
     public static final String ASSIGNMENT_DESC_BOB = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CS1231S_TUTORIAL;
+    public static final String ASSIGNMENT_DESC_CARL = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_CS3230_LAB;
+
+    public static final String DATE_DESC_AMY =
+            " " + PREFIX_DUEDATE + VALID_DATE_TIME_CS2106_PROJECT;
     public static final String DATE_DESC_BOB =
             " " + PREFIX_DUEDATE + VALID_DATE_TIME_CS1231S_TUTORIAL;
+    public static final String DATE_DESC_CARL =
+            " " + PREFIX_DUEDATE + VALID_DATE_TIME_CS3230_LAB;
+
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TAG_DESC_CLASSMATE = " " + PREFIX_TAG + VALID_TAG_CLASSMATE;
+
 
     public static final String INVALID_DESCRIPTION_DESC =
             " " + PREFIX_DESCRIPTION + "assignment&"; // '&' not allowed in assignment names
@@ -86,6 +105,7 @@ public class CommandTestUtil {
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditPersonCommand.EditPersonDescriptor DESC_CARL;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -94,6 +114,9 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withEmail(VALID_EMAIL_BOB).withModule(VALID_MODULE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_CARL = new EditPersonDescriptorBuilder().withName(VALID_NAME_CARL)
+                .withEmail(VALID_EMAIL_CARL).withModule(VALID_MODULE_CARL)
+                .withTags(VALID_TAG_CLASSMATE).build();
     }
 
     /**

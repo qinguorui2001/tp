@@ -14,7 +14,7 @@ Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ta^2.jar` from [here](https://github.com/Droffilc13/ip/releases/tag/A-Release).
+1. Download the latest `ta2.jar` from [here](https://github.com/Droffilc13/ip/releases/tag/A-Release).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your TA<sup>2</sup>.
 
@@ -151,6 +151,16 @@ Examples:
 * `a-add n/John Doe d/Lab1 by/ 21/8/2021`
 * `a-add n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
 
+### Adding an assignment to all persons in the specified module: "giveall"
+
+Adds an assignment with deadline to all persons in the specified module 
+
+Format: `giveall m/MODULE d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
+
+Examples:
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300`
+* `giveall m/CS2103T d/iP by/ 02/09/2021,2359`
+
 ### Deleting an assignment with deadline : `a-delete`
 
 Deletes the specified assignment with deadline from a person in the contact list.
@@ -173,7 +183,7 @@ Format: `a-done n/NAME INDEX`
 Examples:
 * `a-done n/John Doe 4` marks the 4th assignment in John Doe’s assignment list as done.
 
-### Showing person’s assignment list: `a-show`
+### Showing a person’s assignment list: `a-show`
 
 Shows the assignment list of the specified person in a separate assignment list window.
 
@@ -202,10 +212,10 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 
 ### Editing the data file
 
-TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta^2.json`. Advanced users are welcome to update data directly by editing that data file.
+TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TA<sup>2<> will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
