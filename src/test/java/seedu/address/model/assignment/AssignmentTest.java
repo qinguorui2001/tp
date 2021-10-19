@@ -2,7 +2,11 @@ package seedu.address.model.assignment;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS1231S_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS3230_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS1231S_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1101S_MISSION;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1231S_TUTORIAL;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS2106_PROJECT;

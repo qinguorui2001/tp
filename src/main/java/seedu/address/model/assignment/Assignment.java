@@ -98,11 +98,11 @@ public class Assignment implements Comparable<Assignment> {
 
     @Override
     public int compareTo(Assignment a) {
-        int statuscompare = this.getStatus().compareTo(a.getStatus());
-        int duedatecompare = this.getDueDate().compareTo(a.getDueDate());
-        return (statuscompare == 0)
-                ? duedatecompare
-                : statuscompare;
+        int statusCompare = this.getStatus().compareTo(a.getStatus());
+        int dueDateCompare = this.getDueDate().compareTo(a.getDueDate());
+        return (statusCompare == 0)
+                ? dueDateCompare
+                : statusCompare;
     }
 }
 

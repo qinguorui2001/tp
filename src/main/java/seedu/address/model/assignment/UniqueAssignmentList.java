@@ -177,7 +177,8 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     }
 
     /**
-     * Sorts the assignment list by date and status
+     * Sorts the assignment list by status.
+     * Assignments with the same status are then sorted by date
      */
     public void sort() {
         Comparator<Assignment> byStatusAndDate = (Assignment a1, Assignment a2) -> a1.compareTo(a2);

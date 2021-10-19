@@ -46,10 +46,14 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_CS1231S_TUTORIAL = "CS1231S Tutorial 10";
     public static final String VALID_DESCRIPTION_CS2106_PROJECT = "CS2106 Final Network Project";
     public static final String VALID_DESCRIPTION_CS3230_LAB = "CS3230 Lab Week 4";
+    public static final String VALID_DATE_CS1101S_MISSION = "30/09/2021";
     public static final String VALID_DATE_CS1231S_TUTORIAL = "01/02/2021";
+    public static final String VALID_DATE_CS2103_QUIZ = "30/11/2022";
     public static final String VALID_DATE_CS2106_PROJECT = "1/1/2020";
     public static final String VALID_DATE_CS3230_LAB = "11/01/2021";
     public static final String VALID_TIME_CS1231S_TUTORIAL = "1800";
+    public static final String VALID_TIME_CS1101S_MISSION = "1800";
+    public static final String VALID_TIME_CS2100_TUTORIAL = "2200";
     public static final String VALID_TIME_CS2106_PROJECT = "0001";
     public static final String VALID_TIME_CS3230_LAB = "0800";
     public static final String VALID_DATE_TIME_CS1231S_TUTORIAL =
