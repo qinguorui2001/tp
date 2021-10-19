@@ -2,12 +2,20 @@ package seedu.address.model.assignment;
 
 import static java.util.Objects.requireNonNull;
 
-public class Status {
+public class Status implements Comparable<Status> {
     public static final String MESSAGE_CONSTRAINTS = "Status of assignment should be clearly defined!";
     public final String value;
 
     enum StatusType {
-        COMPLETED, LATE, PENDING
+        COMPLETED(2),
+        LATE(0),
+        PENDING(1);
+
+        private final int weight;
+
+        StatusType(int weight) {
+            this.weight = weight;
+        }
     }
 
     /**
@@ -58,6 +66,10 @@ public class Status {
         return false;
     }
 
+    public String getValue() {
+        return this.value;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -76,5 +88,20 @@ public class Status {
     @Override
     public String toString() {
         return '[' + value.toUpperCase() + ']';
+    }
+
+    @Override
+    public int compareTo(Status comparingStatus) {
+        int thisStatusWeight = 0;
+        int comparingStatusWeight = 0;
+        for (StatusType status: StatusType.values()) {
+            if (this.value.equals(status.toString())) {
+                thisStatusWeight = status.weight;
+            }
+            if (comparingStatus.getValue().equals(status.toString())) {
+                comparingStatusWeight = status.weight;
+            }
+        }
+        return thisStatusWeight - comparingStatusWeight;
     }
 }
