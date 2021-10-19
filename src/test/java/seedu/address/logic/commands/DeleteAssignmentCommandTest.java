@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.clonePerson;
-import static seedu.address.logic.commands.CommandTestUtil.replacePersonWithClone;
+import static seedu.address.logic.commands.CommandTestUtil.clonePersonInModel;
 import static seedu.address.logic.commands.CommandTestUtil.setUpNewModelWithClonedPerson;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.*;
@@ -24,7 +24,7 @@ import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class DeleteAssignmentCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model    model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -38,7 +38,7 @@ public class DeleteAssignmentCommandTest {
         Assignment assignmentToDelete = selectedPerson.getAssignments()
                 .asUnmodifiableObservableList().get(INDEX_SECOND_ASSIGNMENT.getZeroBased());
 
-        Model actualModel = replacePersonWithClone(model, selectedPerson, clonedActualPerson);
+        Model actualModel = clonePersonInModel(model, selectedPerson, clonedActualPerson);
         Model expectedModel = setUpNewModelWithClonedPerson(selectedPerson, clonedExpectedPerson);
         expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
@@ -68,7 +68,7 @@ public class DeleteAssignmentCommandTest {
         Person clonedExpectedPerson = clonePerson(selectedPerson);
 
         Model expectedModel = setUpNewModelWithClonedPerson(selectedPerson, clonedExpectedPerson);
-        Model actualModel = replacePersonWithClone(model, selectedPerson, clonedActualPerson);
+        Model actualModel = clonePersonInModel(model, selectedPerson, clonedActualPerson);
 
         Assignment assignmentToDelete = selectedPerson.getAssignments()
                 .asUnmodifiableObservableList().get(INDEX_SECOND_ASSIGNMENT.getZeroBased());

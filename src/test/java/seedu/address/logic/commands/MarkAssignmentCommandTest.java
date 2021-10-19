@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.clonePerson;
-import static seedu.address.logic.commands.CommandTestUtil.replacePersonWithClone;
+import static seedu.address.logic.commands.CommandTestUtil.clonePersonInModel;
 import static seedu.address.logic.commands.CommandTestUtil.setUpNewModelWithClonedPerson;
 import static seedu.address.testutil.TypicalIndexes.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -39,7 +39,7 @@ public class MarkAssignmentCommandTest {
         Assignment assignmentToMark = selectedPerson.getAssignments()
                 .asUnmodifiableObservableList().get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
 
-        Model actualModel = replacePersonWithClone(model, selectedPerson, clonedActualPerson);
+        Model actualModel = clonePersonInModel(model, selectedPerson, clonedActualPerson);
         Model expectedModel = setUpNewModelWithClonedPerson(selectedPerson, clonedExpectedPerson);
 
         expectedModel.markAssignment(clonedExpectedPerson, assignmentToMark);

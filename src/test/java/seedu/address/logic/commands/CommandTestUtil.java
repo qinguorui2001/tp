@@ -185,7 +185,7 @@ public class CommandTestUtil {
      * @param clonedPerson the clone of the person that will replace the original person
      * @return the Model with the selected person replaced by a clone
      */
-    public static Model replacePersonWithClone(Model inputModel, Person selectedPerson, Person clonedPerson) {
+    public static Model clonePersonInModel(Model inputModel, Person selectedPerson, Person clonedPerson) {
         inputModel.setPerson(selectedPerson, clonedPerson);
         return inputModel;
     }
@@ -198,6 +198,6 @@ public class CommandTestUtil {
      */
     public static Model setUpNewModelWithClonedPerson(Person selectedPerson, Person clonedPerson) {
         Model freshModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        return replacePersonWithClone(freshModel, selectedPerson, clonedPerson);
+        return clonePersonInModel(freshModel, selectedPerson, clonedPerson);
     }
 }
