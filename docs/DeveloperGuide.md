@@ -154,6 +154,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Show assignment list feature
+
+#### Implementation
+
+The show assignment mechanism is facilitated by `AddressBook`, where the specified person's assignment list is stored internally under `assignments` This `assignments` is retrieved or updated by the following methods:
+* `AddressBook#getAssignmentList()`
+* `AddressBook#updateAssignmentList(Person person)`  —  where `person` is the specified person.
+
+These methods are exposed in the `Model` interface as `Model#getFilteredAssignmentList()` and `Model#updateFilteredAssignmentList(Person person)` respectively.
+
+Given below is an example usage scenario and how the show assignment mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `assignments` will be initialized with an empty list.
+
+Step 2. The user inputs `a-show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateFilterdAssignmentList(person)`, whereby `person` varaible is the 2nd person n the address book.
+This causes the `assignments` in `AddressBook` to be replaced with the 2nd person's assignment list.
+
+Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getFilteredAssignmentList()` to input into the assignment panel of the `Ui`
+This results in the assignment list panel to display the assignments of the person.
+
+Step 4. The user decides to modify the assignment list of the person by using either `a-add`, `a-done` or `a-delete` command. This will result in the assignment list in the person to be modified.
+The command will the call `Model#updateFilteredAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
+Step 3 is repeated to show the recent updated assignment list.
+
+####Design considerations:
+The assignment list of the specified person is stored in `AddressBook` rather than `ModelManger`
+As `AddressBook` is the domain where the data is placed at after retrieving from the storage. 
+Whereas `ModelManager`contains what data to be displayed.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
