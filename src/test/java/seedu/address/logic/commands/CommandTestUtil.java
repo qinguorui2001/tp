@@ -168,18 +168,36 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredAssignmentList().size());
     }
 
-    public static Model setUpActualModel(Model inputModel, Person selectedPerson, Person clonedPerson) {
-        inputModel.setPerson(selectedPerson, clonedPerson);
-        return inputModel;
-    }
-
+    /**
+     * Instantiates another person object with the same fields.
+     * @param person the Person object
+     * @return another instance of the same Person object
+     */
     public static Person clonePerson(Person person) {
         return new PersonBuilder(person).build();
     }
 
-    public static Model setUpExpectedModel(Person selectedPerson, Person clonedPerson) {
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        return setUpActualModel(expectedModel, selectedPerson, clonedPerson);
+    /**
+     * Replaces the person object within the current model with a clone of that person.
+     *
+     * @param inputModel the given model
+     * @param selectedPerson the person to be replaced
+     * @param clonedPerson the clone of the person that will replace the original person
+     * @return the Model with the selected person replaced by a clone
+     */
+    public static Model clonePersonInModel(Model inputModel, Person selectedPerson, Person clonedPerson) {
+        inputModel.setPerson(selectedPerson, clonedPerson);
+        return inputModel;
     }
 
+    /**
+     * Creates a new Model with the selected person replaced with a clone.
+     * @param selectedPerson the person to be replaced
+     * @param clonedPerson the clone of the person that will replace the original person
+     * @return a new Model with the selected person replaced by a clone
+     */
+    public static Model setUpNewModelWithClonedPerson(Person selectedPerson, Person clonedPerson) {
+        Model freshModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        return clonePersonInModel(freshModel, selectedPerson, clonedPerson);
+    }
 }
