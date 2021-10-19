@@ -62,20 +62,20 @@ class UniqueAssignmentListTest {
 
     @Test
     public void setAssignment_nullTargetAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-            () -> uniqueAssignmentList.setAssignment(null, ASSIGNMENT_CS1101S_MISSION));
+        assertThrows(NullPointerException.class, () ->
+                uniqueAssignmentList.setAssignment(null, ASSIGNMENT_CS1101S_MISSION));
     }
 
     @Test
     public void setAssignment_nullEditedAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-            () -> uniqueAssignmentList.setAssignment(ASSIGNMENT_CS1101S_MISSION, null));
+        assertThrows(NullPointerException.class, () ->
+                uniqueAssignmentList.setAssignment(ASSIGNMENT_CS1101S_MISSION, null));
     }
 
     @Test
     public void setAssignment_targetAssignmentNotInList_throwsAssignmentNotFoundException() {
-        assertThrows(AssignmentNotFoundException.class,
-            () -> uniqueAssignmentList.setAssignment(ASSIGNMENT_CS1101S_MISSION, ASSIGNMENT_CS1101S_MISSION));
+        assertThrows(AssignmentNotFoundException.class, () ->
+                uniqueAssignmentList.setAssignment(ASSIGNMENT_CS1101S_MISSION, ASSIGNMENT_CS1101S_MISSION));
     }
 
     @Test
@@ -111,8 +111,8 @@ class UniqueAssignmentListTest {
     public void setAssignment_editedAssignmentHasNonUniqueIdentity_throwsDuplicateAssignmentException() {
         uniqueAssignmentList.add(ASSIGNMENT_CS1101S_MISSION);
         uniqueAssignmentList.add(ASSIGNMENT_CS2103_QUIZ);
-        assertThrows(DuplicateAssignmentException.class,
-            () -> uniqueAssignmentList.setAssignment(ASSIGNMENT_CS1101S_MISSION, ASSIGNMENT_CS2103_QUIZ));
+        assertThrows(DuplicateAssignmentException.class, () ->
+                uniqueAssignmentList.setAssignment(ASSIGNMENT_CS1101S_MISSION, ASSIGNMENT_CS2103_QUIZ));
     }
 
     @Test
@@ -156,8 +156,8 @@ class UniqueAssignmentListTest {
 
     @Test
     public void setAssignments_nullUniqueAssignmentList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class,
-            () -> uniqueAssignmentList.setAssignments((UniqueAssignmentList) null));
+        assertThrows(NullPointerException.class, () ->
+                uniqueAssignmentList.setAssignments((UniqueAssignmentList) null));
     }
 
     @Test
@@ -188,14 +188,14 @@ class UniqueAssignmentListTest {
     public void setAssignments_listWithDuplicateAssignments_throwsDuplicateAssignmentException() {
         List<Assignment> listWithDuplicateAssignments =
                 Arrays.asList(ASSIGNMENT_CS1101S_MISSION, ASSIGNMENT_CS1101S_MISSION);
-        assertThrows(DuplicateAssignmentException.class,
-            () -> uniqueAssignmentList.setAssignments(listWithDuplicateAssignments));
+        assertThrows(DuplicateAssignmentException.class, () ->
+                uniqueAssignmentList.setAssignments(listWithDuplicateAssignments));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class,
-            () -> uniqueAssignmentList.asUnmodifiableObservableList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () ->
+                uniqueAssignmentList.asUnmodifiableObservableList().remove(0));
     }
 
     @Test
