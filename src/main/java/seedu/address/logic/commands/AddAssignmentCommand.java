@@ -20,7 +20,7 @@ import seedu.address.model.person.Person;
  */
 public class AddAssignmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "a-add";
+    public static final String COMMAND_WORD = "give";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an assignment to the person's assignment list. "
             + "Parameters: "

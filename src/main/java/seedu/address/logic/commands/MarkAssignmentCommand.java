@@ -19,7 +19,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
  * Marks an assignment to the person's assignment list.
  */
 public class MarkAssignmentCommand extends Command {
-    public static final String COMMAND_WORD = "a-done";
+    public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the specified person's assignment identified by the "
