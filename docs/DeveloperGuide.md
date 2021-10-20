@@ -251,11 +251,15 @@ displayed list with the module field `CS2100`and add the specified assignment to
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
 module field, it will return an error to the user. 
 
+</div>
+
 The following sequence diagram shows how the removeall command is executed:
 ![GiveallSequenceDiagram](images/GiveAllSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 Step 3. The user executes `a-show 1` to check that the specified assignment has been added for persons in the specified
 module.
@@ -297,11 +301,15 @@ with the module field `CS2100`and remove the specified assignment if the person 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
 module field or there are no persons who have completed the assignment, it will return an error to the user. 
 
+</div>
+
 The following sequence diagram shows how the removeall command is executed:
 ![GiveallSequenceDiagram](images/RemoveAllSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RemoveAssignmentOfAllCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 Step 3. The user executes `a-show 1` to check that the specified assignment has been removed for persons in the specified 
 module who has completed the assignment.
@@ -330,6 +338,66 @@ in **alternative 1**, it may take up much more time.
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Friendlier Command Inputs
+In striving to adopt a more user-centric approach in command recognition, additional commands are
+included on top of the original commands which stuck by a strict and predefined prefix. This offered
+very little flexibility to our users in an event they make a mistake.
+
+Here are the commands that currently support a *friendly* input command:
+1. `a-add`
+
+The `a-add` command has the sole purpose of adding a single assignment to an individual in the list.
+The following table contains the new *friendly* commands that a user may provide, instead of the
+original command inputs.
+
+| Friendly Command                            | Corresponding Command                         |   Example Usages                                                         |                                                
+| ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
+| tmr                                         | sets the date to be tomorrow                  | a-add n/name d/description by/tmr                                        |
+| today                                       | sets the date to be the current date          | a-add n/name d/description by/today                                      |                                                                        |
+| week                                        | sets the date to be a week from now           | a-add n/name d/description by/week                                       |
+| mon                                         | sets the date to be the upcoming monday       | a-add n/name d/description by/mon                                        |
+| tue                                         | sets the date to be the upcoming tuesday      | a-add n/name d/description by/tue                                        |                                                                         |
+| wed                                         | sets the date to be the upcoming wednesday    | a-add n/name d/description by/wed                                        |
+| thu                                         | sets the date to be the upcoming thursday     | a-add n/name d/description by/thu                                        |
+| fri                                         | sets the date to be the upcoming friday       | a-add n/name d/description by/fri                                        | 
+| sat                                         | sets the date to be the upcoming saturday     | a-add n/name d/description by/sat                                        |
+| sun                                         | sets the date to be the upcoming sunday       | a-add n/name d/description by/sun                                        |
+
+When the user enters a *friendly* command, the `AddressBookParser` class will recognize the command
+to be an add assignment command. This triggers the `AddAssignmentParser#parse` method to be called with the
+user input arguments. From there, the `AddAssignmentParser` parses each individual argument
+token and for the *friendly* command, it will be recognized within the `DueDate` class as a date with
+a *friendly* command format. This then calls the Java `TemporalAdjusters` class to return a `LocalDate` instance
+that represents the desired *friendly* command input. From here, the `AddAssignmentCommand` class is then instantiated and
+results actualized by the `Model` component.
+
+The following activity diagram shows the possible paths whilst a user adds an assignment:
+
+![AddAssignmentActivityDiagram](images/AddAssignmentActivityDiagram.png)
+
+
+The following sequence diagram shows the logic sequence of an AddAssignment command execution:
+
+![AddAssignmentSequenceDiagram](images/AddAssignmentSequenceDiagram.png)
+
+
+#### Design considerations:
+**Aspect: Rigidity in allowing users to add assignments correctly yet handle multiple short-form user inputs:**
+
+* **Alternative 1 (current choice):** Allows users to add based on format and some *friendly* commands
+    * Pros: Allows for a safer addition of assignment, ensuring strict adherence to format
+    * Cons: User has to memorize the command usage or get it wrong the first time to view the error message
+
+* **Alternative 2:** Simplify the rigid commands and make all commands user-friendly 
+    * Pros: Users can perform more powerful addition of assignments without having to type too much or following too strict 
+  of a guideline
+    * Cons: Requires the application to recognize a lot of different words, be it short or long form, to allow
+    maximum user-friendliness, which may not be too feasible to achieve
+    
+#### [Proposed] Friendly Commands
+1. `p-find`
+
+#### [COMING SOON!!!]
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -339,6 +407,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
+* 
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
