@@ -46,8 +46,12 @@ public class PersonBuilder {
         name = personToCopy.getName();
         email = personToCopy.getEmail();
         module = personToCopy.getModule();
-        assignmentList = personToCopy.getAssignments().asUnmodifiableObservableList();
         tags = new HashSet<>(personToCopy.getTags());
+
+        assignmentList = new ArrayList<>();
+        for (Assignment assignment: personToCopy.getAssignments()) {
+            assignmentList.add(assignment);
+        }
     }
 
     /**
