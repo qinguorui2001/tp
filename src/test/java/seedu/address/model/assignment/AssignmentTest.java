@@ -24,10 +24,6 @@ import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1231S_TUTOR
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS2106_PROJECT;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS3230_LAB;
 
-import org.junit.jupiter.api.Test;
-
-import seedu.address.testutil.AssignmentBuilder;
-
 public class AssignmentTest {
 
 

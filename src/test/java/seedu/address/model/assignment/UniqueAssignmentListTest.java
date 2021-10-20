@@ -46,7 +46,7 @@ class UniqueAssignmentListTest {
         uniqueAssignmentList.add(ASSIGNMENT_CS1101S_MISSION);
         Assignment editedCS1101SMission = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION).withCompletedStatus()
                 .withDueDate(VALID_DATE_CS2106_PROJECT, VALID_TIME_CS2106_PROJECT).build();
-        assertTrue(uniqueAssignmentList.contains(editedCS1101SMission));
+        assertFalse(uniqueAssignmentList.contains(editedCS1101SMission));
     }
 
     @Test
