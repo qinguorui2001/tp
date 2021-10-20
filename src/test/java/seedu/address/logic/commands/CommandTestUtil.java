@@ -52,19 +52,14 @@ public class CommandTestUtil {
     public static final String VALID_DATE_CS1231S_TUTORIAL = "01/02/2021";
     public static final String VALID_DATE_CS2103_QUIZ = "30/11/2022";
     public static final String VALID_DATE_CS2106_PROJECT = "1/1/2020";
-    public static final String VALID_DATE_CS1231S_TUTORIAL = "01/02/2021";
     public static final String VALID_DATE_CS3230_LAB = "11/01/2021";
     public static final String VALID_FRIENDLY_DATE_CS2100_LAB = "tmr";
     public static final String VALID_FRIENDLY_DATE_GEQ1000_QUIZ = "today";
-    public static final String VALID_DATE_CS1101S_MISSION = "30/09/2021";
-    public static final String VALID_DATE_CS2103_QUIZ = "30/11/2022";
     public static final String VALID_TIME_CS2106_PROJECT = "0001";
     public static final String VALID_TIME_CS1231S_TUTORIAL = "1800";
     public static final String VALID_TIME_CS3230_LAB = "0800";
     public static final String VALID_TIME_CS1101S_MISSION = "1800";
     public static final String VALID_TIME_CS2100_TUTORIAL = "2200";
-    public static final String VALID_TIME_CS2106_PROJECT = "0001";
-    public static final String VALID_TIME_CS3230_LAB = "0800";
     public static final String VALID_TIME_CS2100_LAB = "1300";
     public static final String VALID_TIME_GEQ1000_QUIZ = "2359";
 
