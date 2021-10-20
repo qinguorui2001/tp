@@ -9,6 +9,9 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+* For the detailed documentation of  AddressBook-Level3 project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -153,6 +156,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Assignment Feature
+
+#### Current Implementation
+
+The i
 
 ### \[Proposed\] Undo/redo feature
 
@@ -458,8 +467,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Should be a single user product.
 6. Data should be stored in a human editable text file.
 7. Data cannot be stored in DBMS. 
-8. Size of products should not exceed 100MB.
-9. Size of documents should not exceed 15MB per file.
+8. Size of products should not exceed 100 MB.
+9. Size of documents should not exceed 15 MB per file.
 
 *{More to be added}*
 
