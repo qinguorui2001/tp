@@ -1,20 +1,12 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS2106_PROJECT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2106_PROJECT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS3230_LAB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS2106_PROJECT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.assignment.Assignment;
+
+import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Assignment} objects to be used in tests.
@@ -52,6 +44,17 @@ public class TypicalAssignments {
             .withLateStatus()
             .withDueDate(VALID_DATE_CS2106_PROJECT, VALID_TIME_CS2106_PROJECT)
             .build();
+    public static final Assignment ASSIGNMENT_CS2100_LAB = new AssignmentBuilder()
+            .withDescription(VALID_DESCRIPTION_CS2100_LAB)
+            .withPendingStatus()
+            .withDueDate(VALID_FRIENDLY_DATE_CS2100_LAB, VALID_TIME_CS2100_LAB)
+            .build();
+    public static final Assignment ASSIGNMENT_GEQ1000_QUIZ = new AssignmentBuilder()
+            .withDescription(VALID_DESCRIPTION_GEQ1000_QUIZ)
+            .withPendingStatus()
+            .withDueDate(VALID_FRIENDLY_DATE_GEQ1000_QUIZ, VALID_TIME_GEQ1000_QUIZ)
+            .build();
+
 
     // prevents instantiation
     private TypicalAssignments() {}

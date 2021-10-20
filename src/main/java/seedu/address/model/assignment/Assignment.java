@@ -56,7 +56,8 @@ public class Assignment {
         }
 
         return otherAssignment != null
-                && otherAssignment.getDescription().equals(getDescription());
+                && otherAssignment.getDescription().equals(getDescription())
+                && otherAssignment.getDueDate().equals(getDueDate());
     }
 
     /**

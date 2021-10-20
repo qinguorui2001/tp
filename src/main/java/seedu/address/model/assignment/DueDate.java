@@ -19,8 +19,8 @@ import java.util.logging.Logger;
 
 public class DueDate {
 
-    public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
-    public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
+    public static final String MESSAGE_CONSTRAINTS_TIME = "Due time should be in a format HHmm";
+    public static final String MESSAGE_CONSTRAINTS_DATE = "Due date should be in a format d/M/yyyy";
     public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm\n"
             + AddAssignmentCommand.FRIENDLY_COMMAND_SYNTAX;
     public static final String OUTPUT_CONSTRAINTS = "Due dates saved should be in a format dd MMM yyyy, hh:mm a";
@@ -126,6 +126,7 @@ public class DueDate {
         }
         return false;
     }
+
 
     /**
      * Returns true if a given string contains a valid Friendly Date and time.
