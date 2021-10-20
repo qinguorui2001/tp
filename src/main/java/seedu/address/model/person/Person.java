@@ -63,6 +63,7 @@ public class Person {
     }
 
     public UniqueAssignmentList getAssignments() {
+        assignments.sort();
         return assignments;
     }
 
