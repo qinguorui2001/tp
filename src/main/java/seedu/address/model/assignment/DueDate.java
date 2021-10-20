@@ -1,6 +1,8 @@
 package seedu.address.model.assignment;
 
-import seedu.address.MainApp;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddAssignmentCommand;
 
@@ -14,10 +16,6 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.logging.Logger;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 
 public class DueDate {
 
@@ -41,13 +39,13 @@ public class DueDate {
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a",
             Locale.ENGLISH);
 
+    private static final Logger logger = LogsCenter.getLogger(DueDate.class);
+
     public final String value;
 
     private final LocalDate date;
     private final LocalDateTime dateTime;
     private final LocalTime time;
-
-    private static final Logger logger = LogsCenter.getLogger(DueDate.class);
 
     /**
      * Constructs a {@code DueDate}.
@@ -237,6 +235,8 @@ public class DueDate {
             break;
         case "week":
             currentDate = currentDate.plusDays(7);
+            break;
+        default:
             break;
         }
         return currentDate;
