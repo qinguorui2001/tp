@@ -109,7 +109,7 @@ public class AssignmentTest {
         // different description -> returns false
         Assignment editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL)
                 .withDescription(VALID_DESCRIPTION_CS3230_LAB).build();
-        assertFalse(ASSIGNMENT_CS1231S_TUTORIAL.equals(editedCs1231sTutorial));
+        assertNotEquals(ASSIGNMENT_CS1231S_TUTORIAL, editedCs1231sTutorial);
 
         // different status, change from pending to late -> returns false
         editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL).withLateStatus().build();
