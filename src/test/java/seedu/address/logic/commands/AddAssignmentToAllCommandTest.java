@@ -317,5 +317,10 @@ public class AddAssignmentToAllCommandTest {
                 assignments2.add(assignment);
             }
         }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
+        }
     }
 }
