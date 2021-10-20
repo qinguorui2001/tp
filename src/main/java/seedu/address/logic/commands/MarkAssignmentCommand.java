@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -39,7 +38,6 @@ public class MarkAssignmentCommand extends Command {
     private final Index targetIndex;
     private final Name name;
     private ReadOnlyAddressBook addressBook;
-    private ObservableList<Assignment> assignmentFilteredList;
 
     /**
      * Creates an MarkAssignmentCommand to mark the specified {@code Assignment}
@@ -64,7 +62,6 @@ public class MarkAssignmentCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
         }
         addressBook = new AddressBook(model.getAddressBook());
-        assignmentFilteredList = model.getFilteredAssignmentListCopy();
 
         Person selectedPerson = filteredPersonList.get(0);
         List<Assignment> lastShownList = model.getFilteredAssignmentList(selectedPerson);

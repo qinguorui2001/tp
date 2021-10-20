@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
-import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -193,26 +192,6 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void setObservableAssignmentList(ObservableList<Assignment> assignmentsList) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setObservablePersonList(ObservableList<Person> filteredPersonList) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonListCopy() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Assignment> getFilteredAssignmentListCopy() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Assignment> getFilteredAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -238,6 +217,11 @@ public class AddPersonCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
     }
 

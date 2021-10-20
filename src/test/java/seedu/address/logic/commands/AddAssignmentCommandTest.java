@@ -209,26 +209,6 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public void setObservableAssignmentList(ObservableList<Assignment> assignmentsList) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setObservablePersonList(ObservableList<Person> filteredPersonList) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Person> getFilteredPersonListCopy() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Assignment> getFilteredAssignmentListCopy() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Assignment> getFilteredAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -264,6 +244,11 @@ public class AddAssignmentCommandTest {
             UniquePersonList persons = new UniquePersonList();
             persons.add(person);
             return new FilteredList<>(persons.asUnmodifiableObservableList());
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
 
         @Override

@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,7 +28,6 @@ public class DeletePersonCommand extends Command {
 
     private final Index targetIndex;
     private ReadOnlyAddressBook addressBook;
-    private ObservableList<Person> personFilteredList;
 
     public DeletePersonCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -41,7 +38,6 @@ public class DeletePersonCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         addressBook = new AddressBook(model.getAddressBook());
-        personFilteredList = model.getFilteredPersonListCopy();
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }

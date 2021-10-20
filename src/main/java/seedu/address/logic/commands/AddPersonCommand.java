@@ -1,8 +1,5 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -36,7 +33,6 @@ public class AddPersonCommand extends Command {
 
     private final Person toAdd;
     private ReadOnlyAddressBook addressBook;
-    private ObservableList<Person> personFilteredList;
 
     /**
      * Creates an AddPersonCommand to add the specified {@code Person}
@@ -50,7 +46,6 @@ public class AddPersonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         addressBook = new AddressBook(model.getAddressBook());
-        personFilteredList = model.getFilteredPersonListCopy();
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }

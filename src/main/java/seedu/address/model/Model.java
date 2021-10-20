@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -111,14 +110,4 @@ public interface Model {
     void redoAddressBook() throws CommandException;
 
     void updateCommandStack(Command command);
-
-    void setObservableAssignmentList(ObservableList<Assignment> assignmentsList);
-
-    void setObservablePersonList(ObservableList<Person> filteredPersonList);
-
-    ObservableList<Person> getFilteredPersonListCopy();
-
-    ObservableList<Assignment> getFilteredAssignmentListCopy();
-
-    Command retrieveCurrentCommand();
 }

@@ -9,43 +9,45 @@ import seedu.address.logic.commands.exceptions.CommandException;
 public class CommandStack {
     private final Stack<Command> undoStack = new Stack<>();
 
-    private int undoRedoPointer = -1;
+    private int undoPointer = -1;
     private int undoStackSize;
 
     /**
-     * Undo by changing the state of the NoteBook to the previous state.
+     * Undo the command of given model.
      */
     public void undo(Model model) throws CommandException {
-        if (!undoStack.empty() && undoRedoPointer >= 0) {
-            Command command = undoStack.get(undoRedoPointer);
+        if (!undoStack.empty() && undoPointer >= 0) {
+            Command command = undoStack.get(undoPointer);
             command.unExecute(model);
-            undoRedoPointer--;
+            undoPointer--;
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_UNDO);
         }
     }
 
     /**
-     * Updates undo stack on redo command call.
+     * Update undo stack whenever a command is executed(except undo command).
      */
     public void updateUndoStack(Command nextCommand) {
-        deleteElementsAfterPointer(undoRedoPointer);
+        deleteElementsAfterPointer(undoPointer);
         undoStack.push(nextCommand);
-        undoRedoPointer++;
-        undoStackSize = undoRedoPointer + 1;
+        undoPointer++;
+        undoStackSize = undoPointer + 1;
     }
 
-    private void deleteElementsAfterPointer(int undoRedoPointer) {
+    //Solution adapted from
+    //https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java
+    /**
+     * Deletes any commands in undo stack after the current point when a new command is added at that point.
+     * @param undoPointer The current point where undo stack is at.
+     */
+    private void deleteElementsAfterPointer(int undoPointer) {
         if (undoStackSize < 1) {
             return;
         }
 
-        for(int i = undoStackSize - 1; i > undoRedoPointer; i--) {
-             undoStack.remove(i);
+        if (undoStackSize > undoPointer + 1) {
+            undoStack.subList(undoPointer + 1, undoStackSize).clear();
         }
-    }
-
-    public Command retrieveCurrentCommand() {
-        return undoStack.get(undoStackSize - 1);
     }
 }

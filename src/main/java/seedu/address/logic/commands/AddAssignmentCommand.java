@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -58,7 +56,6 @@ public class AddAssignmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         addressBook = new AddressBook(model.getAddressBook());
-        assignmentFilteredList = model.getFilteredAssignmentListCopy();
         // Get Person that match the name
         List<Person> filteredPersonList =
                 model.getFilteredPersonList()

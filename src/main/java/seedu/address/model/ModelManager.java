@@ -4,11 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -43,7 +41,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        assignmentsList =new FilteredList<>(this.addressBook.getAssignmentsList());
+        assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
         this.commandStack = new CommandStack();
     }
 
@@ -164,19 +162,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonListCopy() {
-        return new FilteredList<>(filteredPersons);
-    }
-
-    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public void setObservablePersonList(ObservableList<Person> observablePersonList) {
-        this.addressBook.getPersonList().setAll(observablePersonList);
     }
 
     @Override
@@ -193,6 +181,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
@@ -207,16 +196,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Assignment> getFilteredAssignmentList() {
         return assignmentsList;
-    }
-
-    @Override
-    public ObservableList<Assignment> getFilteredAssignmentListCopy() {
-        return new FilteredList<>(assignmentsList);
-    }
-
-    @Override
-    public void setObservableAssignmentList(ObservableList<Assignment> assignmentsList) {
-        this.assignmentsList = assignmentsList;
     }
 
     @Override
@@ -240,11 +219,6 @@ public class ModelManager implements Model {
     @Override
     public void undoAddressBook() throws CommandException {
         commandStack.undo(this);
-    }
-
-    @Override
-    public Command retrieveCurrentCommand() {
-        return commandStack.retrieveCurrentCommand();
     }
 
     @Override

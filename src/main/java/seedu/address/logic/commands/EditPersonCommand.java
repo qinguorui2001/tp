@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import java.util.*;
 
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -47,7 +45,6 @@ public class EditPersonCommand extends Command {
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
     private ReadOnlyAddressBook addressBook;
-    private ObservableList<Person> personFilteredList;
 
     /**
      * @param index of the person in the filtered person list to edit
@@ -66,7 +63,6 @@ public class EditPersonCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
         addressBook = new AddressBook(model.getAddressBook());
-        personFilteredList = model.getFilteredPersonListCopy();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
