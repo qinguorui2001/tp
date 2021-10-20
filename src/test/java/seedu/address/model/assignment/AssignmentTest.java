@@ -12,6 +12,21 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalAssignments.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS1231S_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS3230_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS1231S_TUTORIAL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1101S_MISSION;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1231S_TUTORIAL;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS2106_PROJECT;
+import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS3230_LAB;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.AssignmentBuilder;
 
 public class AssignmentTest {
 
@@ -141,5 +156,45 @@ public class AssignmentTest {
                 .withDueDate(VALID_DATE_CS3230_LAB, VALID_TIME_CS1231S_TUTORIAL).build();
         assertNotEquals(ASSIGNMENT_CS3230_LAB, editedCs3230Lab);
 
+    }
+
+    @Test
+    void compareTo() {
+        //Assignment with date: 11/01/2021, time: 0800, status: completed
+        Assignment comparingAssignment = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB).build();
+
+        //Same values has equal weight
+        Assignment assignmentCopy = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB).build();
+        assertTrue(comparingAssignment.compareTo(assignmentCopy) == 0);
+
+        //Same time and status with later date(01/02/2021) has more weight-> returns true
+        Assignment laterDateAssignment = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS3230_LAB).build();
+        assertTrue(laterDateAssignment.compareTo(comparingAssignment) > 0);
+
+        //Same date and status with later time(1800) has more weight-> returns true
+        Assignment laterTimeAssignment = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDueDate(VALID_DATE_CS3230_LAB, VALID_TIME_CS1231S_TUTORIAL).build();
+        assertTrue(laterTimeAssignment.compareTo(comparingAssignment) > 0);
+
+        //Same date and time with pending status has less weight-> returns true
+        Assignment pendingStatusAssignment = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withPendingStatus().build();
+        assertTrue(pendingStatusAssignment.compareTo(comparingAssignment) < 0);
+
+        //Same time with later date(01/02/2021) and pending status has less weight-> returns true
+        Assignment laterDateAndPendingAssignment = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS3230_LAB).withPendingStatus().build();
+        assertTrue(laterDateAndPendingAssignment.compareTo(comparingAssignment) < 0);
+
+        //Same date with later time(1800) and pending status has less weight-> returns true
+        Assignment laterTimeAndPendingAssignment = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDueDate(VALID_DATE_CS3230_LAB, VALID_TIME_CS1231S_TUTORIAL).withPendingStatus().build();
+        assertTrue(laterTimeAndPendingAssignment.compareTo(comparingAssignment) < 0);
+
+        //later date(01/02/2021) and time(1800) and pending status has less weight-> returns true
+        Assignment earlierDateTimeAndPendingAssignment = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+                .withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS1231S_TUTORIAL).withPendingStatus().build();
+        assertTrue(earlierDateTimeAndPendingAssignment.compareTo(comparingAssignment) < 0);
     }
 }

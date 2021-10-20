@@ -8,7 +8,7 @@ import java.util.Objects;
  * Represents an Assignment in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Assignment {
+public class Assignment implements Comparable<Assignment> {
 
     private final Description description;
     private final DueDate dueDate;
@@ -95,6 +95,15 @@ public class Assignment {
                 .append("; Status: ")
                 .append(getStatus());
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Assignment a) {
+        int statusCompare = this.getStatus().compareTo(a.getStatus());
+        int dueDateCompare = this.getDueDate().compareTo(a.getDueDate());
+        return (statusCompare == 0)
+                ? dueDateCompare
+                : statusCompare;
     }
 }
 
