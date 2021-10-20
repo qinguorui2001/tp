@@ -200,6 +200,12 @@ Clears all entries from TA<sup>2</sup>.
 
 Format: `clear`
 
+### Undoing the last command : `undo`
+
+Undo the last command entered.
+
+Format: `undo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -240,9 +246,10 @@ Action | Format, Examples
 **p-delete** | `p-delete INDEX`<br> e.g., `p-delete 3`
 **p-edit** | `p-edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`p-edit 2 n/James Lee e/jameslee@example.com`
 **p-find** | `p-find KEYWORD [MORE_KEYWORDS]`<br> e.g., `p-find James Jake`
-**p-list** | `list`
+**p-list** | `p-list`
 **Help** | `help`
 **a-add** | `a-add n/NAME d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `a-add n/John Doe d/Lab1 by/ 21/8/2021`
 **a-delete** | `a-delete n/NAME INDEX` <br> e.g., `a-delete n/Wei Chang 10`
 **a-done** | `a-done n/NAME INDEX` <br> e.g., `a-done n/John Doe 4`
 **a-list** | `a-show INDEX` <br> e.g., `a-show 2`
+**undo** | `undo`
