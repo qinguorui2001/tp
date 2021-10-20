@@ -91,9 +91,9 @@ public class Assignment implements Comparable<Assignment> {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append("; DueDate: ")
+                .append(", DueDate: ")
                 .append(getDueDate())
-                .append("; Status: ")
+                .append(", Status: ")
                 .append(getStatus());
         return builder.toString();
     }
