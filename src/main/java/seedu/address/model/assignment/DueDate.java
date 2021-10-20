@@ -75,15 +75,7 @@ public class DueDate implements Comparable<DueDate> {
      * @param date Date of due date.
      */
     public DueDate(String date) {
-        if (isValidFriendlyDate(date)) {
-            this.date = friendlyToDate(date);
-        } else {
-            checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
-            this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
-        }
-        this.time = LocalTime.parse(LATEST_TIME_IN_DAY, PARSE_TIME_FORMAT);
-        this.dateTime = LocalDateTime.of(this.date, this.time);
-        this.value = this.dateTime.format(OUTPUT_FORMAT);
+        this(date, LATEST_TIME_IN_DAY);
     }
 
     /**
