@@ -1,0 +1,55 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant "r:RemoveAssignmentOfAllCommand" as RemoveAssignmentOfAllCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+
+[-> LogicManager : execute(removeall m/...)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(removeall m/...)
+activate AddressBookParser
+
+create RemoveAssignmentOfAllCommand
+AddressBookParser -> RemoveAssignmentOfAllCommand
+activate RemoveAssignmentOfAllCommand
+
+RemoveAssignmentOfAllCommand --> AddressBookParser
+deactivate RemoveAssignmentOfAllCommand
+
+AddressBookParser --> LogicManager : u
+deactivate AddressBookParser
+
+LogicManager -> RemoveAssignmentOfAllCommand : execute()
+activate RemoveAssignmentOfAllCommand
+
+RemoveAssignmentOfAllCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> RemoveAssignmentOfAllCommand : filteredPersons
+deactivate Model
+
+loop for each person in module who has completed assignment
+    RemoveAssignmentOfAllCommand -> Model : deleteAssignment(person, assignment)
+    activate Model
+
+    Model --> RemoveAssignmentOfAllCommand
+        deactivate Model
+
+end
+RemoveAssignmentOfAllCommand --> LogicManager : result
+deactivate RemoveAssignmentOfAllCommand
+RemoveAssignmentOfAllCommand -[hidden]-> LogicManager : result
+destroy RemoveAssignmentOfAllCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

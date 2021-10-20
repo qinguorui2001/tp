@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* TA<sup>2</sup> is adapted from [AddressBook-Level3 (AB3)](https://github.com/nus-cs2103-AY2122S1/tp)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -52,7 +53,7 @@ The rest of the App consists of four components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `p-delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -234,6 +235,97 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Giveall feature
+The giveall command allows users to add the specified assignment to all persons in the same module which are stored in 
+the model. Persons who already have the specified assignment will not have a duplicated assignment added to them. The 
+command is abstracted as `AddAssignmentToAllCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `AddAssignmentToAllCommand` is executed.
+
+Step 1. The user executes `p-list` command to see the current list of persons.
+
+Step 2. The user executes `giveall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to add assignments to all persons in
+the specified module. When `Command#execute` is called, the `giveall m/...` command will filter out persons in the current 
+displayed list with the module field `CS2100`and add the specified assignment to them if they do not have the assignment.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
+module field, it will return an error to the user. 
+
+The following sequence diagram shows how the removeall command is executed:
+![GiveallSequenceDiagram](images/GiveAllSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+Step 3. The user executes `a-show 1` to check that the specified assignment has been added for persons in the specified
+module.
+
+The following activity diagram summarizes what happens when a user executes the giveall command:
+
+<img src="images/GiveAllActivityDiagram.png" width="250" />
+
+#### Design considerations:
+**Aspect: Adds assignment to persons in current displayed list or to all persons:**
+
+* **Alternative 1:** Adds assignment of persons in current displayed list
+    * Pros: If the displayed list is shorter, the addition of assignments will be faster.
+    * Cons: User has to carry out `p-list` command first if addition of assignments is desired for all persons
+
+* **Alternative 2 (current choice):** Add assignment to all persons in the module
+    * Pros: Allows user to add assignment to all persons even when some persons are not displayed in the list
+    * Cons: Might take longer to execute
+
+* Considering the fact that the giveall command is meant for users to add assignments to all persons in the specified 
+module, **alternative 2** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for 
+persons who already have the assignment.
+**Alternative 1** requires an additional command `p-list` to ensure the displayed list contains all persons, which 
+means it is less convenient for users as they have to do extra work. 
+
+
+### [Proposed] Removeall feature
+The removeall command allows users to remove the specified assignment of all persons in the same module displayed in the GUI.
+It is abstracted as `DeleteAssignmentOfAllCommand` and extends `Command`. When the user inputs the command, 
+`Command#execute` is called and returns a `CommandResult`. 
+
+Given below is an example usage scenario and how the `DeleteAssignmentOfAllCommand` is executed.
+
+Step 1. The user executes `p-list` command to see the current list of persons.
+
+Step 2. The user executes `removeall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to remove all the completed assignments.
+When `Command#execute` is called, the `removeall m/...` command will filter out persons in the current displayed list 
+with the module field `CS2100`and remove the specified assignment if the person has completed the assignment. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
+module field or there are no persons who have completed the assignment, it will return an error to the user. 
+
+The following sequence diagram shows how the removeall command is executed:
+![GiveallSequenceDiagram](images/RemoveAllSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RemoveAssignmentOfAllCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+Step 3. The user executes `a-show 1` to check that the specified assignment has been removed for persons in the specified 
+module who has completed the assignment.
+
+The following activity diagram summarizes what happens when a user executes the giveall command:
+
+<img src="images/RemoveAllActivityDiagram.png" width="250" />
+
+#### Design considerations:
+**Aspect: Deletes assignment of persons in current displayed list or for all persons:**
+
+* **Alternative 1 (current choice):** Deletes assignment of persons in current displayed list
+    * Pros: Allows for a safer delete of assignments
+    * Cons: User has to carry out `p-list` command first if deletion of assignments is desired for all persons
+
+* **Alternative 2:** Deletes assignment of all persons 
+    * Pros: Allows user to delete assignment of all persons without the need of additional commands
+    * Cons: Undesired deletion of assignment of persons not in displayed list may occur
+
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 1** is 
+chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the 
+deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `p-list` command
+in **alternative 1**, it may take up much more time. 
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -279,24 +371,24 @@ information(student submissions etc.) much faster than when using a mouse/GUI dr
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                  | So that I can…​ |                                                
-| -------- | ------------------------------------------ | --------------------------------------------- | ------------------------------------------------------------------------ |
-| `* * *`  | tutor for the first use                    | see all commands available                    | recall commands and use them properly when I forget how to use the app  |
-| `* * *`  | tutor                                      | add a new student or professor                |                                                                           |
-| `* * *`  | tutor                                      | delete a student or professor                 | remove entries that I no longer need                                     |
-| `* * *`  | tutor                                      | find a person by name or module               | locate details of persons without having to go through the entire list |
-| `* * *`  | tutor                                      | assign tasks to students                      |                                                                           |
-| `* * *`  | tutor                                      | delete tasks assigned before                  | remove the outdated assignments for students                             |
-| `* * *`  | tutor                                      | mark students' tasks as done                  | record students' progress more easily                                     |
-| `* * *`  | tutor teaching online                      | access the web links used for teaching        | access information from teaching websites immediately                     |
-| `* * *`  | tutor for several modules                  | organize student data according to module     | manage my tasks of different modules in an organised manner          |
-| `* * *`  | student and tutor                          | organise my tasks in order of deadline        | manage my time better                                                     |
-| `* * *`  | easily frustrated tutor                    | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                   |
-| `* * *`  | tutor with many persons in the contact book| sort persons by name                          | locate a person easily                                                   |
-| `* * *`  | responsible tutor                          | track students' progress on their assignments | identify and reach out to those who need help                             |
-| `* * *`  | tutor                                      | list all students I am teaching               | ensure I added right and correct number of people before                 |
-| `* *`    | busy tutor                                 | list certain people I interacted frequently   | save time searching their name whenever I start app                       | 
-| `*`      | clumsy tutor                               | undo actions                                  | recover information that I accidentally delete                           |
+| Priority | As a …​                                  | I want to …​                               | So that I can…​                                                       |                                                
+| -------- | ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
+| `* * *`  | tutor for the first use                     | see all commands available                    | recall commands and use them properly when I forget how to use the app   |
+| `* * *`  | tutor                                       | add a new student or professor                |                                                                          |
+| `* * *`  | tutor                                       | delete a student or professor                 | remove entries that I no longer need                                     |
+| `* * *`  | tutor                                       | find a person by name or module               | locate details of persons without having to go through the entire list   |
+| `* * *`  | tutor                                       | assign tasks to students                      |                                                                          |
+| `* * *`  | tutor                                       | delete tasks assigned before                  | remove the outdated assignments for students                             |
+| `* * *`  | tutor                                       | mark students' tasks as done                  | record students' progress more easily                                    |
+| `* * *`  | tutor teaching online                       | access the web links used for teaching        | access information from teaching websites immediately                    |
+| `* * *`  | tutor for several modules                   | organize student data according to module     | manage my tasks of different modules in an organised manner              |
+| `* * *`  | student and tutor                           | organise my tasks in order of deadline        | manage my time better                                                    |
+| `* * *`  | easily frustrated tutor                     | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                   |
+| `* * *`  | tutor with many persons in the contact book | sort persons by name                          | locate a person easily                                                   |
+| `* * *`  | responsible tutor                           | track students' progress on their assignments | identify and reach out to those who need help                            |
+| `* * *`  | tutor                                       | list all students I am teaching               | ensure I added right and correct number of people before                 |
+| `* *`    | busy tutor                                  | list certain people I interacted frequently   | save time searching their name whenever I start app                      | 
+| `*`      | clumsy tutor                                | undo actions                                  | recover information that I accidentally delete                           |
 
 *{More to be added}*
 
@@ -476,6 +568,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **TA**: Abbreviation for the tutor
 * **UC**: Abbreviation for the use case
 * **SOC**: Abbreviation for the school of computing
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
@@ -508,15 +601,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `p-list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   1. Test case: `p-delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   1. Test case: `p-delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `p-delete`, `p-delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
