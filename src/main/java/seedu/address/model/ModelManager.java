@@ -4,14 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
@@ -25,6 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private ObservableList<Assignment> assignmentsList;
+    private CommandStack commandStack;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,7 +43,8 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
+        assignmentsList =new FilteredList<>(this.addressBook.getAssignmentsList());
+        this.commandStack = new CommandStack();
     }
 
     public ModelManager() {
@@ -158,9 +164,19 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Person> getFilteredPersonListCopy() {
+        return new FilteredList<>(filteredPersons);
+    }
+
+    @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void setObservablePersonList(ObservableList<Person> observablePersonList) {
+        this.addressBook.getPersonList().setAll(observablePersonList);
     }
 
     @Override
@@ -194,6 +210,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ObservableList<Assignment> getFilteredAssignmentListCopy() {
+        return new FilteredList<>(assignmentsList);
+    }
+
+    @Override
+    public void setObservableAssignmentList(ObservableList<Assignment> assignmentsList) {
+        this.assignmentsList = assignmentsList;
+    }
+
+    @Override
     public List<Assignment> getFilteredAssignmentList(Person person) {
         requireNonNull(person);
         return this.addressBook.getPersonAssignmentList(person);
@@ -204,5 +230,25 @@ public class ModelManager implements Model {
         this.addressBook.changeActivePerson(person);
         this.addressBook.updateAssignmentList(person);
         this.assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
+    }
+
+    @Override
+    public void updateCommandStack(Command command) {
+        commandStack.updateUndoStack(command);
+    }
+
+    @Override
+    public void undoAddressBook() throws CommandException {
+        commandStack.undo(this);
+    }
+
+    @Override
+    public Command retrieveCurrentCommand() {
+        return commandStack.retrieveCurrentCommand();
+    }
+
+    @Override
+    public void redoAddressBook() throws CommandException{
+
     }
 }

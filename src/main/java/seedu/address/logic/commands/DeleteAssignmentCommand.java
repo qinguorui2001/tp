@@ -7,10 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -35,6 +38,8 @@ public class DeleteAssignmentCommand extends Command {
 
     private final Index targetIndex;
     private final Name name;
+    private ReadOnlyAddressBook addressBook;
+    private ObservableList<Assignment> assignmentFilteredList;
 
     /**
      * Creates an DeleteAssignmentCommand to delete the specified {@code Assignment}
@@ -47,7 +52,8 @@ public class DeleteAssignmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        addressBook = new AddressBook(model.getAddressBook());
+        assignmentFilteredList = model.getFilteredAssignmentListCopy();
         // Get Person that match the name
         List<Person> filteredPersonList =
                 model.getFilteredPersonList()
@@ -68,6 +74,11 @@ public class DeleteAssignmentCommand extends Command {
         Assignment assignmentToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteAssignment(selectedPerson, assignmentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete));
+    }
+
+    @Override
+    public void unExecute(Model model) throws CommandException {
+        model.setAddressBook(addressBook);
     }
 
     @Override

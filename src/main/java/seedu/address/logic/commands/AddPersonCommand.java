@@ -1,7 +1,12 @@
 package seedu.address.logic.commands;
 
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 import static java.util.Objects.requireNonNull;
@@ -30,6 +35,8 @@ public class AddPersonCommand extends Command {
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
+    private ReadOnlyAddressBook addressBook;
+    private ObservableList<Person> personFilteredList;
 
     /**
      * Creates an AddPersonCommand to add the specified {@code Person}
@@ -42,13 +49,19 @@ public class AddPersonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        addressBook = new AddressBook(model.getAddressBook());
+        personFilteredList = model.getFilteredPersonListCopy();
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public void unExecute(Model model) throws CommandException {
+        model.setAddressBook(addressBook);
     }
 
     @Override
