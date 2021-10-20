@@ -1,0 +1,19 @@
+@startuml
+start
+:User executes giveall command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([persons in module without
+assignment present])
+    :Get persons in module;
+    :Filter out those
+    without assignment;
+    :Add assignment
+    for filtered persons;
+else ([else])
+    :Show error message;
+endif
+stop
+@enduml
