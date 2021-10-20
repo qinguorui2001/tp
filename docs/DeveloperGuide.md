@@ -251,11 +251,15 @@ displayed list with the module field `CS2100`and add the specified assignment to
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
 module field, it will return an error to the user. 
 
+</div>
+
 The following sequence diagram shows how the removeall command is executed:
 ![GiveallSequenceDiagram](images/GiveAllSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 Step 3. The user executes `a-show 1` to check that the specified assignment has been added for persons in the specified
 module.
@@ -297,11 +301,15 @@ with the module field `CS2100`and remove the specified assignment if the person 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
 module field or there are no persons who have completed the assignment, it will return an error to the user. 
 
+</div>
+
 The following sequence diagram shows how the removeall command is executed:
 ![GiveallSequenceDiagram](images/RemoveAllSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RemoveAssignmentOfAllCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 Step 3. The user executes `a-show 1` to check that the specified assignment has been removed for persons in the specified 
 module who has completed the assignment.
