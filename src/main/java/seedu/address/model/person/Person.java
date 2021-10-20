@@ -92,6 +92,10 @@ public class Person {
         return this.getName().equals(name);
     }
 
+    public boolean hasModule(Module module) {
+        return this.getModule().equals(module);
+    }
+
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
