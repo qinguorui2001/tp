@@ -38,7 +38,7 @@ public class AssignmentTest {
         // same description, all other attributes different -> returns false
         Assignment editedCs1101sAssignment = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
                 .withLateStatus().withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS1231S_TUTORIAL).build();
-        assertFalse(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(editedCs1101sAssignment));
+        assertTrue(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(editedCs1101sAssignment));
 
         // different description, all other attributes same -> returns false
         editedCs1101sAssignment = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
@@ -50,10 +50,10 @@ public class AssignmentTest {
                 .withPendingStatus().build();
         assertTrue(ASSIGNMENT_CS2106_PROJECT.isSameAssignment(editedCs2106Lab));
 
-        // description differs in case, all other attributes same -> returns false
+        // description differs in case, all other attributes same -> returns true
         Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
                 .withDescription(VALID_DESCRIPTION_CS3230_LAB.toLowerCase()).build();
-        assertFalse(ASSIGNMENT_CS3230_LAB.isSameAssignment(editedCs3230Lab));
+        assertTrue(ASSIGNMENT_CS3230_LAB.isSameAssignment(editedCs3230Lab));
 
         // description has trailing spaces, all other attributes same -> returns false
         String nameWithTrailingSpaces = VALID_DESCRIPTION_CS3230_LAB + " ";
