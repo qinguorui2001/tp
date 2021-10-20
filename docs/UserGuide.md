@@ -147,9 +147,28 @@ Adds an assignment with deadline to a person in the contact list.
 
 Format: `a-add n/NAME d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
 
+* The name is case-insensitive.
+e.g. n/alex yeoh will match Alex Yeoh
+  
+
+* Date can be replaced by friendly commands.
+    * `today` - sets due date to tonight.
+    * `tmr` - sets due date to tomorrow.
+    * `week` - sets due date to a week(7 days) from now.
+    * `mon` - sets due date to the coming monday.
+    * `tue` - sets due date to the coming tuesday.
+    * `wed` - sets due date to the coming wednesday.
+    * `thu` - sets due date to the coming thursday.
+    * `fri` - sets due date to the coming friday.
+    * `sat` - sets due date to the coming saturday.
+    * `sun` - sets due date to the coming sunday.
+  
+
 Examples:
 * `a-add n/John Doe d/Lab1 by/ 21/8/2021`
 * `a-add n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
+* `a-add n/Alex Yeoh d/Tutorial3 by/ mon`
+* `a-add n/john smith d/Report1 by/ tue, 1800`
 
 ### Deleting an assignment with deadline : `a-delete`
 
@@ -157,6 +176,8 @@ Deletes the specified assignment with deadline from a person in the contact list
 
 Format: `a-delete n/NAME INDEX`
 
+* The name is case-insensitive.
+  e.g. n/alex yeoh will match Alex Yeoh.
 * Deletes the deadline of person `NAME` at the specified `INDEX`.
 * The index refers to the index number shown in the displayed assignment list.
 * The index must be a positive integer 1, 2, 3, …​
@@ -176,6 +197,10 @@ Examples:
 ### Showing person’s assignment list: `a-show`
 
 Shows the assignment list of the specified person in a separate assignment list window.
+Assignment list will be sorted by status and date.
+* Assignments with `COMPLETED` status will be at the bottom of the list.
+* Assignments with `PENDING` status will be at the top of the list.
+* Assignments with same status will be sorted by due date.
 
 Format: `a-show INDEX`
 
