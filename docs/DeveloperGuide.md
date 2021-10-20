@@ -160,8 +160,32 @@ This section describes some noteworthy details on how certain features are imple
 ### Assignment Feature
 
 #### Current Implementation
+The `Assignment` class encapsulates the current Assignment feature and composes of `Description`, `Status` and `DueDate` class.
 
-The i
+It implements the operation `Assignment#isSameAssignment(Assignment assignment)` to check for duplicate assignments. Currently, assignments are similar if they have the same description and this check is case-insensitive. This is because each student is under one module and having a similarly named assignment within the same module is less likely.
+
+Next, the current available `Status` of `Assignment` are "PENDING" and "COMPLETED". Since the type of `Status` are fixed, the `Status` class contains a `enumeration StatusType` to store the valid values. The use of static methods `Status#createCompletedStatus()` and `Status#createPendingStatus()` initialises the "COMPLETED" and "PENDING" `Status` respectively. Meanwhile, the constructor is set to private to prevent instantiation through inheritance. 
+
+#### Related Implementation: UniqueAssignmentList
+A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. `Assignment` class extends `Comparable` interface for sorting purposes within a `UniqueAssignmentList`. Currently, only `AddressBook` and `Person` has a reference to `UniqueAssignmentList`.
+
+![Assignment class diagram](images/developerguide/implementation/AssignmentClassDiagram.png)
+
+`UniqueAssignmentList#sort()` is a method responsible for sorting the list based on the `Status` and `DueDate` of the `Assignment`. The `UniqueAssignmentList` gives more importance to assignments that are pending than completed, and if both are pending, it will break the tie by choosing the assignment with an earlier due date.
+
+![Sorted Assignments within AddressBook](images/developerguide/implementation/SortedAssignments.png)
+
+#### Design considerations:
+
+**Aspect: How Status can be instantiated:**
+
+* **Alternative 1 (current choice):** Instantiate Status using static methods with enumerations to store the fixed values
+    * Pros: Easy to implement.
+    * Cons: May become harder to update if there are more types of status with different types of behaviour
+
+* **Alternative 2:** Use a factory method to instantiate the different types of status
+    * Pros: Divides cleanly all the different types of status and intended behaviour and make it very easy to add new status with few adjustments by creating another subclass.
+    * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -476,8 +500,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **a-**: Symbol for an assignment list related command
-* **p-**: Symbol for a person related command
 * **e/**: Symbol for a requirement to state email address
 * **m/**: Symbol for a requirement to state the module
 * **n/**: Symbol for a requirement to state a name
