@@ -66,7 +66,7 @@ Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing 
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -149,7 +149,17 @@ Examples:
 * `give n/John Doe d/Lab1 by/ 21/8/2021`
 * `give n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
 
-### Deleting an assignment : `remove`
+### Adding an assignment to all persons in the specified module: `giveall`
+
+Adds an assignment with deadline to all persons in the specified module 
+
+Format: `giveall m/MODULE d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
+
+Examples:
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300`
+* `giveall m/CS2103T d/iP by/ 02/09/2021,2359`
+
+### Deleting an assignment with deadline : `remove`
 
 Removes the specified assignment with deadline from a person in the contact list.
 
@@ -203,7 +213,7 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TA<sup>2<> will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
