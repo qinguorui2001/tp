@@ -151,7 +151,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         Pattern pattern;
         Matcher matcher;
 
-        pattern = Pattern.compile(VALIDATION_REGEX);
+            pattern = Pattern.compile(VALIDATION_REGEX);
         for (String s : modules) {
             matcher = pattern.matcher(s.toUpperCase(Locale.ROOT));
             if (!matcher.find() && !Objects.equals(s, "")) {

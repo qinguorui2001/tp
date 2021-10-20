@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.Locale;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -32,7 +30,6 @@ public class Module {
      */
     public Module(String module) {
         requireNonNull(module);
-        module = module.toUpperCase(Locale.ROOT);
         checkArgument(isValidModule(module), MESSAGE_CONSTRAINTS);
         moduleCode = module;
     }
