@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -24,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private ObservableList<Assignment> assignmentsList;
+    private final ObservableList<Assignment> assignmentsList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -103,6 +104,9 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+
+        /*show an empty assignment list in AddressBook if the person deleted has his/her assignments
+            stored in AddressBook's Assignment List*/
         if (addressBook.isActivePerson(target)) {
             updateFilteredAssignmentList(target);
         }
@@ -203,6 +207,14 @@ public class ModelManager implements Model {
     public void updateFilteredAssignmentList(Person person) {
         this.addressBook.changeActivePerson(person);
         this.addressBook.updateAssignmentList(person);
-        this.assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
+    }
+
+    //=========== Active Person =========================================================================
+    public Person getActivePerson() {
+        return addressBook.getActivePerson();
+    }
+
+    public boolean hasActivePerson() {
+        return addressBook.hasActivePerson();
     }
 }

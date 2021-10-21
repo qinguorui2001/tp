@@ -5,6 +5,7 @@ import seedu.address.logic.commands.MarkAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -20,32 +21,23 @@ public class MarkAssignmentCommandParser implements Parser<MarkAssignmentCommand
      * @throws ParseException if the user input does not conform the expected format
      */
     public MarkAssignmentCommand parse(String args) throws ParseException {
-        String indexString = args.replaceAll("[^0-9]", "");
-        String argsWithoutIndex = args.replaceAll("[0-9]", "");
         try {
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(argsWithoutIndex, PREFIX_NAME);
+            ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
-                    || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        MarkAssignmentCommand.MESSAGE_USAGE));
-            }
+            Index assignmentIndex = ParserUtil.parseIndex(args);
 
-            Index index = ParserUtil.parseIndex(indexString);
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            return new MarkAssignmentCommand(name, index);
+            return new MarkAssignmentCommand(assignmentIndex);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkAssignmentCommand.MESSAGE_USAGE), pe);
         }
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
+//
+//    /**
+//     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+//     * {@code ArgumentMultimap}.
+//     */
+//    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+//        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+//    }
 }

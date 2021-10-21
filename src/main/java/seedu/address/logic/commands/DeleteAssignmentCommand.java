@@ -33,40 +33,34 @@ public class DeleteAssignmentCommand extends Command {
 
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Deleted Assignment: %1$s";
 
-    private final Index targetIndex;
-    private final Name name;
+    private final Index targetAssignmentIndex;
 
     /**
      * Creates an DeleteAssignmentCommand to delete the specified {@code Assignment}
      */
-    public DeleteAssignmentCommand(Name name, Index targetIndex) {
-        this.targetIndex = targetIndex;
-        this.name = name;
+    public DeleteAssignmentCommand(Index targetAssignmentIndex) {
+        this.targetAssignmentIndex = targetAssignmentIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        // Get Person that match the name
-        List<Person> filteredPersonList =
-                model.getFilteredPersonList()
-                        .stream()
-                        .filter(person -> person.isSameName(name))
-                        .collect(Collectors.toList());
-
-        if (filteredPersonList.size() == 0) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        if (!model.hasActivePerson()) {
+            throw new CommandException(Messages.MESSAGE_NO_ASSIGNMENT_LIST_DISPLAYED);
         }
-        Person selectedPerson = filteredPersonList.get(0);
-        List<Assignment> lastShownList = model.getFilteredAssignmentList(selectedPerson);
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        Person personToRemoveAssignment = model.getActivePerson();
+
+        List<Assignment> assignmentList = model.getFilteredAssignmentList();
+
+        if (targetAssignmentIndex.getZeroBased() >= assignmentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
-        Assignment assignmentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteAssignment(selectedPerson, assignmentToDelete);
+        Assignment assignmentToDelete = assignmentList.get(targetAssignmentIndex.getZeroBased());
+        model.deleteAssignment(personToRemoveAssignment, assignmentToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete));
     }
 
@@ -74,6 +68,7 @@ public class DeleteAssignmentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteAssignmentCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteAssignmentCommand) other).targetIndex)); // state check
+                && targetAssignmentIndex.equals(
+                        ((DeleteAssignmentCommand) other).targetAssignmentIndex)); // state check
     }
 }

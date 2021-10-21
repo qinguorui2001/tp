@@ -1,12 +1,13 @@
 package seedu.address.logic.parser;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddAssignmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.assignment.Description;
 import seedu.address.model.assignment.DueDate;
 import seedu.address.model.assignment.Status;
-import seedu.address.model.person.Name;
+
 
 import java.util.stream.Stream;
 
@@ -23,21 +24,28 @@ public class AddAssignmentCommandParser implements Parser<AddAssignmentCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddAssignmentCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_DUEDATE);
+        Index index;
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION, PREFIX_DUEDATE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DUEDATE);
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE),
+                    pe);
+        }
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DUEDATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssignmentCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         DueDate dueDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUEDATE).get());
 
         Assignment assignment = new Assignment(description, dueDate, Status.createPendingStatus());
 
-        return new AddAssignmentCommand(name, assignment);
+        return new AddAssignmentCommand(index, assignment);
     }
 
     /**

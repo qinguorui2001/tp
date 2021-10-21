@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 
@@ -18,7 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     /* The person whose assignment is displayed on the Ui */
-    private Person activePerson;
+    private Optional<Person> activePerson;
     private final UniquePersonList persons;
     private final UniqueAssignmentList assignments;
 
@@ -70,7 +71,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setAssignments(newData.getAssignmentsList());
-        activePerson = null;
+        activePerson = Optional.empty();
     }
 
     //// person-level operations
@@ -159,11 +160,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param person
      */
     public void changeActivePerson(Person person) {
-        if (!hasPerson(person)) {
-            this.activePerson = null;
-        } else {
-            this.activePerson = person;
-        }
+        requireNonNull(person);
+        this.activePerson = Optional.of(person).filter(targetPerson -> hasPerson(targetPerson));
     }
 
     /**
@@ -172,7 +170,28 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return true if the person is the current activePerson
      */
     public boolean isActivePerson(Person person) {
-        return person.equals(activePerson);
+        requireNonNull(person);
+        return activePerson.map(activePerson -> activePerson.equals(person)).orElse(false);
+    }
+
+    /**
+     * Checks if there is a person whose assignment is stored in AddressBook's assignments.
+     * @return true if there is an active person.
+     */
+    public boolean hasActivePerson() {
+        return activePerson.isPresent();
+    }
+
+    /**
+     * Returns the current person whose assignment is stored in AddressBook's assignments. Assumes
+     * that the caller of this method has checked that there is an active person.
+     *
+     * @return the current active person
+     */
+    public Person getActivePerson() {
+        assert(activePerson.isPresent());
+
+        return activePerson.get();
     }
 
     @Override
@@ -187,9 +206,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public void updateAssignmentList(Person person) {
-        if (activePerson == null) {
-            this.assignments.clearAllAssignments();
-        } else {
+        this.assignments.clearAllAssignments();
+
+        if (activePerson.isPresent()) {
             this.assignments.setAssignments(person.getAssignments());
         }
     }
