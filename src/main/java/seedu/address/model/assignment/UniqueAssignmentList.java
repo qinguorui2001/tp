@@ -3,6 +3,7 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -173,5 +174,14 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
      */
     public Assignment get(int index) {
         return asUnmodifiableObservableList().get(index);
+    }
+
+    /**
+     * Sorts the assignment list by status.
+     * Assignments with the same status are then sorted by date
+     */
+    public void sort() {
+        Comparator<Assignment> byStatusAndDate = Comparator.naturalOrder();
+        this.internalList.sort(byStatusAndDate);
     }
 }

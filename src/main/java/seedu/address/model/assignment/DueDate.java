@@ -3,19 +3,26 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddAssignmentCommand;
+
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Logger;
 
+public class DueDate implements Comparable<DueDate> {
 
-public class DueDate {
-
-    public static final String MESSAGE_CONSTRAINTS_TIME = "Due date should be in a format d/M/yyyy";
-    public static final String MESSAGE_CONSTRAINTS_DATE = "Due time should be in a format HHmm";
-    public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm";
+    public static final String MESSAGE_CONSTRAINTS_TIME = "Due time should be in a format HHmm";
+    public static final String MESSAGE_CONSTRAINTS_DATE = "Due date should be in a format d/M/yyyy";
+    public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm\n"
+            + AddAssignmentCommand.FRIENDLY_COMMAND_SYNTAX;
     public static final String OUTPUT_CONSTRAINTS = "Due dates saved should be in a format dd MMM yyyy, hh:mm a";
 
     public static final String DATE_VALIDATION_REGEX =
@@ -25,11 +32,14 @@ public class DueDate {
               "^([1-9]|[0-2][0-9]|(3)[0-1])(/)([1-9]|((0)[0-9])|((1)[0-2]))(/)\\d{4}(,)"
                       + "(00|[0,1][0-9]|2[0-3])([0-5][0-9])$";
     public static final String LATEST_TIME_IN_DAY = "2359";
+    public static final ArrayList<String> FRIENDLY_COMMANDS = initArrayList();
 
     protected static final DateTimeFormatter PARSE_DATE_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy");
     protected static final DateTimeFormatter PARSE_TIME_FORMAT = DateTimeFormatter.ofPattern("HHmm");
     protected static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a",
             Locale.ENGLISH);
+
+    private static final Logger logger = LogsCenter.getLogger(DueDate.class);
 
     public final String value;
 
@@ -47,8 +57,13 @@ public class DueDate {
         requireNonNull(date);
         requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_CONSTRAINTS_TIME);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
-        this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
+        logger.info("Date: " + date + "\nTime: " + time);
+        if (isValidFriendlyDate(date)) {
+            this.date = friendlyToDate(date);
+        } else {
+            checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS_DATE);
+            this.date = LocalDate.parse(date, PARSE_DATE_FORMAT);
+        }
         this.time = LocalTime.parse(time, PARSE_TIME_FORMAT);
         this.dateTime = LocalDateTime.of(this.date, this.time);
         this.value = this.dateTime.format(OUTPUT_FORMAT);
@@ -62,6 +77,7 @@ public class DueDate {
     public DueDate(String date) {
         this(date, LATEST_TIME_IN_DAY);
     }
+
     /**
      * Constructs a {@code DueDate}.
      *
@@ -86,6 +102,33 @@ public class DueDate {
      */
     public static boolean isValidTime(String test) {
         return test.matches(TIME_VALIDATION_REGEX);
+    }
+
+    /**
+     * Checks if the given string is one of the valid friendly date commands.
+     *
+     * @param date user input for a date.
+     * @return true if the given string is a valid friendly date command.
+     */
+    public static boolean isValidFriendlyDate(String date) {
+        for (String s : FRIENDLY_COMMANDS) {
+            if (s.equals(date)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Returns true if a given string contains a valid Friendly Date and time.
+     *
+     * @param date user input friendly date and time
+     * @return true if matches regex
+     */
+    public static boolean isValidFriendlyDateAndTime(String date) {
+        String[] splitDate = date.split(",");
+        return isValidFriendlyDate(splitDate[0]) && splitDate[1].matches(TIME_VALIDATION_REGEX);
     }
 
     /**
@@ -124,7 +167,72 @@ public class DueDate {
      * Returns true if date is valid due date form.
      */
     public static boolean isValidDueDate(String date) {
-        return isValidDate(date) || isValidDateAndTime(date);
+        return isValidDate(date) || isValidDateAndTime(date) || isValidFriendlyDate(date)
+                || isValidFriendlyDateAndTime(date);
+    }
+
+    /**
+     * Instantiates the global arraylist with the friendly commands.
+     *
+     * @return an arraylist of String containing the friendly commands.
+     */
+    public static ArrayList<String> initArrayList() {
+        ArrayList<String> temp = new ArrayList<>();
+        temp.add("mon");
+        temp.add("tue");
+        temp.add("wed");
+        temp.add("thu");
+        temp.add("fri");
+        temp.add("sat");
+        temp.add("sun");
+        temp.add("tmr");
+        temp.add("today");
+        temp.add("week");
+        return temp;
+    }
+
+    /**
+     * Converts a friendly date into a LocalDate object.
+     *
+     * @param friendlyDate user given friendly date.
+     * @return user given friendly date in LocalDate format.
+     */
+    public static LocalDate friendlyToDate(String friendlyDate) {
+        LocalDate currentDate = LocalDate.now();
+        switch (friendlyDate) {
+        case "mon":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+            break;
+        case "tue":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.TUESDAY));
+            break;
+        case "wed":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.WEDNESDAY));
+            break;
+        case "thu":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.THURSDAY));
+            break;
+        case "fri":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+            break;
+        case "sat":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
+            break;
+        case "sun":
+            currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.SUNDAY));
+            break;
+        case "tmr":
+            currentDate = currentDate.plusDays(1);
+            break;
+        case "today":
+            break;
+        case "week":
+            currentDate = currentDate.plusDays(7);
+            break;
+        default:
+            break;
+        }
+        return currentDate;
     }
 
 
@@ -143,5 +251,10 @@ public class DueDate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(DueDate d) {
+        return this.dateTime.compareTo(d.dateTime);
     }
 }

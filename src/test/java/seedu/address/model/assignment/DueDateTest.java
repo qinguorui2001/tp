@@ -73,12 +73,52 @@ class DueDateTest {
         assertFalse(DueDate.isValidDueDate("111/188/2021*")); // contains invalid day and month
         assertFalse(DueDate.isValidDueDate("11/11/2021 1444")); // no comma but space between time and date
         assertFalse(DueDate.isValidDueDate("11/11/2021,744")); // invalid format for time
+        assertFalse(DueDate.isValidDueDate("11/11/2023, 744")); // spacing after comma
 
         // valid dueDate
         assertTrue(DueDate.isValidDueDate("11/11/2021")); // date only
         assertTrue(DueDate.isValidDueDate("02/02/2011,1650")); // prefix 0 for day and month
         assertTrue(DueDate.isValidDueDate("11/1/2021,1541")); // single digit for month
         assertTrue(DueDate.isValidDueDate("1/11/2021,1400")); // single digit for day
+    }
+
+    @Test
+    public void isValidFriendlyDate() {
+        // Valid friendly dates
+        assertTrue(DueDate.isValidFriendlyDate("mon"));
+        assertTrue(DueDate.isValidFriendlyDate("tue"));
+        assertTrue(DueDate.isValidFriendlyDate("wed"));
+        assertTrue(DueDate.isValidFriendlyDate("thu"));
+        assertTrue(DueDate.isValidFriendlyDate("fri"));
+        assertTrue(DueDate.isValidFriendlyDate("sat"));
+        assertTrue(DueDate.isValidFriendlyDate("sun"));
+        assertTrue(DueDate.isValidFriendlyDate("tmr"));
+        assertTrue(DueDate.isValidFriendlyDate("today"));
+        assertTrue(DueDate.isValidFriendlyDate("week"));
+
+        // Invalid friendly dates
+        assertFalse(DueDate.isValidFriendlyDate("not a date"));
+        assertFalse(DueDate.isValidFriendlyDate("123"));
+        assertFalse(DueDate.isValidFriendlyDate(""));
+        assertFalse(DueDate.isValidFriendlyDate(null));
+    }
+
+    @Test
+    public void isValidFriendlyDateAndTime() {
+
+        // valid friendly date and time
+        assertTrue(DueDate.isValidFriendlyDateAndTime("tmr,2359")); // tmr and maximum time
+        assertTrue(DueDate.isValidFriendlyDateAndTime("week,1200")); // week and middle time
+        assertTrue(DueDate.isValidFriendlyDateAndTime("mon,0700")); // mon and morning
+        assertTrue(DueDate.isValidFriendlyDateAndTime("fri,2234")); // fri and night
+        assertTrue(DueDate.isValidFriendlyDateAndTime("today,0000")); // today and minimum time
+
+        // invalid friendly date and time
+        assertFalse(DueDate.isValidFriendlyDateAndTime("tmr, 2359")); // space after comma
+        assertFalse(DueDate.isValidFriendlyDateAndTime("tomorrow,2359")); // invalid friendly format
+        assertFalse(DueDate.isValidFriendlyDateAndTime("02/02/2021,1000")); // valid date but invalid friendly date
+        assertFalse(DueDate.isValidFriendlyDateAndTime(",1000")); // missing friendly command
+
     }
 
 }

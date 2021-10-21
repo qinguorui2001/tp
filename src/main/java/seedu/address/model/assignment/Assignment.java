@@ -2,13 +2,14 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Locale;
 import java.util.Objects;
 
 /**
  * Represents an Assignment in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Assignment {
+public class Assignment implements Comparable<Assignment> {
 
     private final Description description;
     private final DueDate dueDate;
@@ -56,7 +57,8 @@ public class Assignment {
         }
 
         return otherAssignment != null
-                && otherAssignment.getDescription().equals(getDescription());
+                && otherAssignment.getDescription().toString().toLowerCase(Locale.ROOT)
+                .equals(getDescription().toString().toLowerCase(Locale.ROOT));
     }
 
     /**
@@ -89,11 +91,20 @@ public class Assignment {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append("; DueDate: ")
+                .append(", DueDate: ")
                 .append(getDueDate())
-                .append("; Status: ")
+                .append(", Status: ")
                 .append(getStatus());
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Assignment a) {
+        int statusCompare = this.getStatus().compareTo(a.getStatus());
+        int dueDateCompare = this.getDueDate().compareTo(a.getDueDate());
+        return (statusCompare == 0)
+                ? dueDateCompare
+                : statusCompare;
     }
 }
 

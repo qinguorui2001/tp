@@ -63,6 +63,7 @@ public class Person {
     }
 
     public UniqueAssignmentList getAssignments() {
+        assignments.sort();
         return assignments;
     }
 
@@ -89,6 +90,10 @@ public class Person {
 
     public boolean isSameName(Name name) {
         return this.getName().equals(name);
+    }
+
+    public boolean hasModule(Module module) {
+        return this.getModule().equals(module);
     }
 
     /**

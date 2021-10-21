@@ -12,12 +12,13 @@ import static seedu.address.logic.parser.CliSyntax.*;
  */
 public class AddPersonCommand extends Command {
 
-    public static final String COMMAND_WORD = "p-add";
+    public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_MODULE + "MODULE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "

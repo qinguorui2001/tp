@@ -5,6 +5,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -152,7 +153,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
         pattern = Pattern.compile(VALIDATION_REGEX);
         for (String s : modules) {
-            matcher = pattern.matcher(s);
+            matcher = pattern.matcher(s.toUpperCase(Locale.ROOT));
             if (!matcher.find() && !Objects.equals(s, "")) {
                 throw new ParseException(MESSAGE_CONSTRAINTS);
             }
