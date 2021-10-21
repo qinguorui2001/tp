@@ -14,23 +14,23 @@ Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `ta2.jar` from [here](https://github.com/Droffilc13/ip/releases/tag/A-Release).
+1. Download the latest `ta^2.jar` from [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/releases/tag/v1.3.trial).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your TA<sup>2</sup>.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/userguide/ta^2_ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`p-list`** : Lists all contacts.
+   * **`list`** : Lists all contacts.
 
-   * **`p-add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` to the TA<sup>2</sup>.
+   * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` to the TA<sup>2</sup>.
 
-   * **`p-delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`p-clear`** : Deletes all contacts.
+   * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
 
@@ -44,42 +44,40 @@ Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing 
 
 **:information_source: Notes about the command format:**<br>
 
-* `a-` specifies an assignment list related command, whereas `-p` specifies a person related command.
-
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `p-add n/NAME`, `NAME` is a parameter which can be used as `p-add n/John Doe`.
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friends` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friends`, `t/Leader t/friends` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+  e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `p-list`, `exit` and `p-clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
 
-### Adding a person: `p-add`
+### Adding a person: `add`
 
 Adds a person to the contact list.
 
-Format: `p-add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
+Format: `add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)<br><br>
@@ -89,24 +87,24 @@ should not be blank.
 </div>
 
 Examples:
-* `p-add n/John Doe e/e1234567@u.nus.edu m/CS2100, CS1101S`
-* `p-add n/Betsy Crowe e/e0234567@u.nus.edu m/CS2103T`
+* `add n/John Doe e/e1234567@u.nus.edu m/CS2100, CS1101S`
+* `add n/Betsy Crowe e/e0234567@u.nus.edu m/CS2103T`
 
-### Listing all persons : `p-list`
+### Listing all persons : `list`
 
 Shows a list of all persons in the contact list.
 
-Format: `p-list`
+Format: `list`
 
-### Editing a person : `p-edit`
+### Editing a person : `edit`
 
 ####Implementing [coming soon]
 
-### Locating persons by name: `p-find`
+### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `p-find n/NAME_KEYWORD... m/MODULE_KEYWORD...`
+Format: `find n/NAME_KEYWORD... m/MODULE_KEYWORD...`
 
 * The search is case-insensitive.<br> e.g `cs1101s` will match `CS1101S`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -122,36 +120,36 @@ Format: `p-find n/NAME_KEYWORD... m/MODULE_KEYWORD...`
   e.g. `n/James m/MA1521` will return `James`, `Bernice` (assuming Bernice takes MA1521).
 
 Examples:
-* `p-find n/John` returns `john` and `John Doe`
-* `p-find n/alex david` returns `Alex Yeoh`, `David Li`<br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `p-find n/bernice james m/ma1521 cs2103t` returns `bernice`, `james`, `christie`, `michael`, assuming christie and michael takes either module listed.
+* `find n/bernice james m/ma1521 cs2103t` returns `bernice`, `james`, `christie`, `michael`, assuming christie and michael takes either module listed.
 
-### Deleting a person : `p-delete`
+### Deleting a person : `delete`
 
 Deletes the specified person from the contact list.
 
-Format: `p-delete INDEX`
+Format: `delete INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `p-list` followed by `p-delete 2` deletes the 2nd person in the contact list.
-* `p-find n/Betsy` followed by `p-delete 1` deletes the 1st person in the results of the `p-find` command.
+* `list` followed by `delete 2` deletes the 2nd person in the contact list.
+* `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding an assignment with deadline: `a-add`
+### Adding an assignment : `give`
 
-Adds an assignment with deadline to a person in the contact list.
+Gives an assignment with deadline to a person in the contact list.
 
-Format: `a-add n/NAME d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
+Format: `give n/NAME d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
 
 Examples:
-* `a-add n/John Doe d/Lab1 by/ 21/8/2021`
-* `a-add n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
+* `give n/John Doe d/Lab1 by/ 21/8/2021`
+* `give n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
 
-### Adding an assignment to all persons in the specified module: "giveall"
+### Adding an assignment to all persons in the specified module: `giveall`
 
 Adds an assignment with deadline to all persons in the specified module 
 
@@ -161,38 +159,38 @@ Examples:
 * `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300`
 * `giveall m/CS2103T d/iP by/ 02/09/2021,2359`
 
-### Deleting an assignment with deadline : `a-delete`
+### Deleting an assignment with deadline : `remove`
 
-Deletes the specified assignment with deadline from a person in the contact list.
+Removes the specified assignment with deadline from a person in the contact list.
 
-Format: `a-delete n/NAME INDEX`
+Format: `remove n/NAME INDEX`
 
-* Deletes the deadline of person `NAME` at the specified `INDEX`.
+* Removes the specified assignment of person `NAME` at the specified `INDEX`.
 * The index refers to the index number shown in the displayed assignment list.
 * The index must be a positive integer 1, 2, 3, …​
 
 Examples:
-* `a-delete n/Wei Chang 10` deletes the 10th assignment in Wei Chang’s assignment list.
+* `remove n/Wei Chang 10` deletes the 10th assignment in Wei Chang’s assignment list.
 
-### Marking an assignment with deadline as done: `a-done`
+### Marking an assignment with deadline as done: `done`
 
 Marks a specified assignment's deadline of a person as done.
 
-Format: `a-done n/NAME INDEX`
+Format: `done n/NAME INDEX`
 
 Examples:
-* `a-done n/John Doe 4` marks the 4th assignment in John Doe’s assignment list as done.
+* `done n/John Doe 4` marks the 4th assignment in John Doe’s assignment list as done.
 
-### Showing a person’s assignment list: `a-show`
+### Showing person’s assignment list: `show`
 
 Shows the assignment list of the specified person in a separate assignment list window.
 
-Format: `a-show INDEX`
+Format: `show INDEX`
 
 Examples:
-* `a-show 2` renders the 2nd person’s assignment list on the right side of the app.
+* `show 2` renders the 2nd person’s assignment list on the right side of the app.
 * The index refers to the index shown in the displayed person list.
-  ![result for 'show assignment list'](images/showAssignmentListResult.png)
+  ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -212,7 +210,7 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 
 ### Editing the data file
 
-TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
+TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
@@ -235,14 +233,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**p-add** | `p-add n/NAME e/EMAIL m/MODULES [t/TAG]…​` <br> e.g., `add n/James Ho m/CS2100 e/jamesho@example.com t/friend t/colleague`
-**Clear** | `clear`
-**p-delete** | `p-delete INDEX`<br> e.g., `p-delete 3`
-**p-edit** | `p-edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`p-edit 2 n/James Lee e/jameslee@example.com`
-**p-find** | `p-find KEYWORD [MORE_KEYWORDS]`<br> e.g., `p-find James Jake`
-**p-list** | `list`
-**Help** | `help`
-**a-add** | `a-add n/NAME d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `a-add n/John Doe d/Lab1 by/ 21/8/2021`
-**a-delete** | `a-delete n/NAME INDEX` <br> e.g., `a-delete n/Wei Chang 10`
-**a-done** | `a-done n/NAME INDEX` <br> e.g., `a-done n/John Doe 4`
-**a-list** | `a-show INDEX` <br> e.g., `a-show 2`
+**add** | `add n/NAME e/EMAIL m/MODULES [t/TAG]…​` <br> e.g., `add n/James Ho m/CS2100 e/jamesho@example.com t/friend t/colleague`
+**clear** | `clear`
+**delete** | `delete INDEX`<br> e.g., `delete 3`
+**edit** | `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**list** | `list`
+**help** | `help`
+**give** | `give n/NAME d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give n/John Doe d/Lab1 by/ 21/8/2021`
+**remove** | `remove n/NAME INDEX` <br> e.g., `remove n/Wei Chang 10`
+**done** | `done n/NAME INDEX` <br> e.g., `done n/John Doe 4`
+**show** | `show INDEX` <br> e.g., `show 2`

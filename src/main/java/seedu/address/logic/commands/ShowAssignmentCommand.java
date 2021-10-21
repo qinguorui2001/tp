@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class ShowAssignmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "a-show";
+    public static final String COMMAND_WORD = "show";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows the assignments assigned to the person identified by the "
