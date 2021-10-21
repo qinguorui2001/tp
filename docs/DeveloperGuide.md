@@ -165,7 +165,7 @@ The `Assignment` class encapsulates the current Assignment feature and composes 
 
 It implements the operation `Assignment#isSameAssignment(Assignment assignment)` to check for duplicate assignments. Currently, assignments are similar if they have the same description and this check is case-insensitive. This is because each student is under one module and having a similarly named assignment within the same module is less likely.
 
-Next, the current available `Status` of `Assignment` are "PENDING" and "COMPLETED". Since the type of `Status` are fixed, the `Status` class contains a `enumeration StatusType` to store the valid values. The use of static methods `Status#createCompletedStatus()` and `Status#createPendingStatus()` initialises the "COMPLETED" and "PENDING" `Status` respectively. Meanwhile, the constructor is set to private to prevent instantiation through inheritance. 
+Next, the current available `Status` of `Assignment` are `PENDING` and `COMPLETED`. Since the type of `Status` are fixed, the `Status` class contains an `enumeration StatusType` to store the valid values. The use of static methods `Status#createCompletedStatus()` and `Status#createPendingStatus()` initialises the `COMPLETED Status` and `PENDING Status` respectively. Meanwhile, the constructor, `Status(StatusType value)`, is set to private to prevent instantiation through inheritance. 
 
 #### Related Implementation: UniqueAssignmentList
 A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. `Assignment` class extends `Comparable` interface for sorting purposes within a `UniqueAssignmentList`. Currently, only `AddressBook` and `Person` has a reference to `UniqueAssignmentList`.
