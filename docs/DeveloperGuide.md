@@ -170,7 +170,7 @@ Step 1. The user launches the application for the first time. The `assignments` 
 
 ![AssignmentsState0](images/AssignmentsState0.png)
 
-Step 2. The user inputs `a-show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateFilterdAssignmentList(person)`, whereby `person` varaible is the 2nd person n the address book.
+Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateFilterdAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
 This causes the `assignments` in `AddressBook` to be replaced with the 2nd person's assignment list.
 
 ![AssignmentsState1](images/AssignmentsState1.png)
@@ -182,7 +182,7 @@ This results in the assignment list panel to display the assignments of the pers
 ![AssignmentsState2](images/AssignmentsState2.png)
 
 
-Step 4. The user decides to modify the assignment list of the person by using either `a-add`, `a-done` or `a-delete` command. This will result in the assignment list in the person to be modified.
+Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
 The command will the call `Model#updateFilteredAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
 
 ![AssignmentsState3](images/AssignmentsState3.png)
@@ -193,10 +193,9 @@ Step 5. Step 3 is repeated to show the recent updated assignment list.
 ![AssignmentsState4](images/AssignmentsState4.png)
 
 
-####Design considerations:
+#### Design considerations:
 The assignment list of the specified person is stored in `AddressBook` rather than `ModelManger`
-As `AddressBook` is the domain where the data is placed at after retrieving from the storage. 
-Whereas `ModelManager`contains what data to be displayed.
+
 
 
 ### \[Proposed\] Undo/redo feature

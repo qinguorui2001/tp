@@ -167,8 +167,8 @@ e.g. n/alex yeoh will match Alex Yeoh
 Examples:
 * `a-add n/John Doe d/Lab1 by/ 21/8/2021`
 * `a-add n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
-* `a-add n/Alex Yeoh d/Tutorial3 by/ mon`
-* `a-add n/john smith d/Report1 by/ tue, 1800`
+* `give n/Alex Yeoh d/Tutorial3 by/ mon`
+* `give n/john smith d/Report1 by/ tue, 1800`
 
 ### Deleting an assignment with deadline : `a-delete`
 
