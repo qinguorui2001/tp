@@ -282,7 +282,7 @@ The following activity diagram summarizes what happens when a user executes the 
   assignments, which means it is less convenient for users as they have to do extra work.
 
 
-### [Proposed] a-delete feature
+### a-delete feature
 The a-delete command allows users to remove the specified assignment of a particular person in model.
 It is abstracted as `DeleteAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
@@ -291,11 +291,10 @@ Given below is an example usage scenario and how the `DeleteAssignmentCommand` i
 
 Step 1. The user executes `p-list` command to see the current list of persons.
 
-Step 2. The user executes `a-delete n/Xiao m/CS2100 d/Assignment 2 by/ 03/10/2021` command to remove the completed assignment
-of a person. When `Command#execute` is called, the `a-delete n/...` command will filter out persons in the storage list
-with the module field `CS2100`and remove the specified assignment if the person exists and has that assignment in assignment list.
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
-module field or there are no persons who have this assignment, it will return an error to the user. 
+Step 2. The user executes `a-delete n/Xiao 1` command to remove the first assignment of a person. When `Command#execute`
+is called, the `a-delete n/...` command will filter out persons in the storage list with the name field `Xiao`and remove 
+the specified assignment if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source:
+**Note:** If there are no persons with the specified module field or there are no persons who have this assignment, it will return an error to the user. 
 
 The following sequence diagram shows how the a-delete command is executed:
 ![a-deleteSequenceDiagram](images/a-deleteSequenceDiagram.png)
@@ -308,7 +307,7 @@ module with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the a-delete command:
 
-<img src="images/RemoveAllActivityDiagram.png" width="250" />
+<img src="images/a-deleteActivityDiagram.png" width="250" />
 
 #### Design considerations:
 **Aspect: Deletes assignment of a person in current displayed list or for any person in storage:**
@@ -327,6 +326,50 @@ The following activity diagram summarizes what happens when a user executes the 
   deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `p-list` command
   in **alternative 1**, it may take up much more time.
 
+### a-done feature
+The a-done command allows users to mark the specified assignment of a particular person in model.
+It is abstracted as `MarkAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `MarkAssignmentCommand` is executed.
+
+Step 1. The user executes `p-list` command to see the current list of persons.
+
+Step 2. The user executes `a-done n/Xiao 1` command to mark the first assignment of a `Xiao` as done. When `Command#execute` is called,
+the `a-done n/...` command will filter out persons in the storage list with the name field `Xiao`and mark the specified assignment
+if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source: 
+**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user. 
+
+The following sequence diagram shows how the a-done command is executed:
+![a-doneSequenceDiagram](images/a-doneSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAssignmentCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+Step 3. The user executes `a-show 1` to check that the specified assignment has been marked for person with specified
+name with that assignment.
+
+The following activity diagram summarizes what happens when a user executes the a-done command:
+
+<img src="images/a-doneActivityDiagram.png" width="250" />
+
+#### Design considerations:
+**Aspect: Marks assignment of a person in current displayed list as done or for any person in storage model:**
+
+* **Alternative 1:** (current choice) Marks assignment of a person in current displayed list
+    * Pros: Allows for a safer mark of assignments
+    * Cons: User has to carry out `p-list` command first if required person is not in the current displayed list
+
+* **Alternative 2:** Marks assignment of any person with that name and assignment
+    * Pros: Allows user to mark assignment of a person without the need of additional commands
+    * Cons: User may not be certain about which person's assignment to mark if several of them has completed assignment
+      and likely to remember the wrong person name if the current person displayed list is not shown
+
+* Considering the fact that TA<sup>2</sup> is designed to be user-friendly in managing student submissions,**alternative 1** is
+  chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
+  marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `p-list` command
+  in **alternative 1**, it may take up much more time.
+* 
   _{Explain here how the data archiving feature will be implemented}_
 
 
