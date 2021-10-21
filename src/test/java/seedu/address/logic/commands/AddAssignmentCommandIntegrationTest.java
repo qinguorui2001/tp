@@ -2,18 +2,23 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.clonePerson;
+import static seedu.address.logic.commands.CommandTestUtil.clonePersonInModel;
+import static seedu.address.logic.commands.CommandTestUtil.setUpNewModelWithClonedPerson;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.AssignmentBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TypicalIndexes;
 
 class AddAssignmentCommandIntegrationTest {
     private Model model;
@@ -26,26 +31,26 @@ class AddAssignmentCommandIntegrationTest {
     @Test
     public void execute_newPersonAssignment_success() {
         Assignment validAssignment = new AssignmentBuilder().build();
-        Person validPersonForExpectedModel = new PersonBuilder().build();
-        Person validPersonForModel = new PersonBuilder().build();
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person clonedPersonForExpectedModel = clonePerson(selectedPerson);
+        Person clonedPersonForActualModel = clonePerson(selectedPerson);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPersonForExpectedModel);
-        expectedModel.addAssignment(validPersonForExpectedModel, validAssignment);
-        model.addPerson(validPersonForModel);
+        Model expectedModel = setUpNewModelWithClonedPerson(selectedPerson, clonedPersonForExpectedModel);
+        expectedModel.addAssignment(clonedPersonForExpectedModel, validAssignment);
+        Model actualModel = clonePersonInModel(model, selectedPerson, clonedPersonForActualModel);
 
-        assertCommandSuccess(new AddAssignmentCommand(validPersonForModel.getName(), validAssignment), model,
+        assertCommandSuccess(new AddAssignmentCommand(INDEX_FIRST_PERSON, validAssignment), actualModel,
                 String.format(AddAssignmentCommand.MESSAGE_SUCCESS, validAssignment), expectedModel);
     }
 
     @Test
     public void execute_duplicateAssignment_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList()
-                .get(TypicalIndexes.INDEX_THIRD_PERSON.getZeroBased());
+                .get(INDEX_THIRD_PERSON.getZeroBased());
         model.updateFilteredAssignmentList(personInList);
         Assignment assignmentInList = model.getAddressBook().getAssignmentsList()
-                .get(TypicalIndexes.INDEX_FIRST_ASSIGNMENT.getZeroBased());
-        assertCommandFailure(new AddAssignmentCommand(personInList.getName(), assignmentInList),
+                .get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
+        assertCommandFailure(new AddAssignmentCommand(INDEX_THIRD_PERSON, assignmentInList),
                 model, AddAssignmentCommand.MESSAGE_DUPLICATE_ASSIGNMENT);
     }
 }

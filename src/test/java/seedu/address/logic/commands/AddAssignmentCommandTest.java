@@ -25,6 +25,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 public class AddAssignmentCommandTest {
 
@@ -36,7 +37,7 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void constructor_nullAssignment_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddAssignmentCommand(new PersonBuilder().build().getName(),
+        assertThrows(NullPointerException.class, () -> new AddAssignmentCommand(INDEX_FIRST_PERSON,
                 null));
     }
 
@@ -44,10 +45,9 @@ public class AddAssignmentCommandTest {
     public void execute_assignmentAcceptedByModel_addSuccessful() throws Exception {
         AddAssignmentCommandTest.ModelStubAcceptingAssignmentAdded modelStub =
                 new AddAssignmentCommandTest.ModelStubAcceptingAssignmentAdded();
-        Person validPerson = new PersonBuilder().build();
         Assignment validAssignment = new AssignmentBuilder().build();
         CommandResult commandResult =
-                new AddAssignmentCommand(validPerson.getName(), validAssignment).execute(modelStub);
+                new AddAssignmentCommand(INDEX_FIRST_PERSON, validAssignment).execute(modelStub);
 
         assertEquals(String.format(AddAssignmentCommand.MESSAGE_SUCCESS, validAssignment),
                 commandResult.getFeedbackToUser());
@@ -59,7 +59,7 @@ public class AddAssignmentCommandTest {
         Person validPerson = new PersonBuilder().build();
         Assignment validAssignment = new AssignmentBuilder().build();
 
-        AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(validPerson.getName(), validAssignment);
+        AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(INDEX_FIRST_PERSON, validAssignment);
         AddAssignmentCommandTest.ModelStub modelStub =
                 new AddAssignmentCommandTest.ModelStubWithAssignment(validPerson, validAssignment);
 
@@ -69,19 +69,17 @@ public class AddAssignmentCommandTest {
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-
         Assignment cs2100 = new AssignmentBuilder().withDescription("CS2100").build();
         Assignment cs2103 = new AssignmentBuilder().withDescription("CS2103").build();
 
-        AddAssignmentCommand addCs2100Command = new AddAssignmentCommand(alice.getName(), cs2100);
-        AddAssignmentCommand addCs2103Command = new AddAssignmentCommand(alice.getName(), cs2103);
+        AddAssignmentCommand addCs2100Command = new AddAssignmentCommand(INDEX_FIRST_PERSON, cs2100);
+        AddAssignmentCommand addCs2103Command = new AddAssignmentCommand(INDEX_FIRST_PERSON, cs2103);
 
         // same object -> returns true
         assertTrue(addCs2100Command.equals(addCs2100Command));
 
         // same values -> returns true
-        AddAssignmentCommand addCs2100CommandCopy = new AddAssignmentCommand(alice.getName(), cs2100);
+        AddAssignmentCommand addCs2100CommandCopy = new AddAssignmentCommand(INDEX_FIRST_PERSON, cs2100);
         assertTrue(addCs2100Command.equals(addCs2100CommandCopy));
 
         // different types -> returns false
@@ -167,6 +165,16 @@ public class AddAssignmentCommandTest {
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasActivePerson() {
+            throw new AssertionError("This method should not be called.");
+        } // change here
+
+        @Override
+        public Person getActivePerson() {
+            throw new AssertionError("This method should not be called.");
+        } //change here
 
         @Override
         public boolean hasAssignment(Person person, Assignment toAdd) {

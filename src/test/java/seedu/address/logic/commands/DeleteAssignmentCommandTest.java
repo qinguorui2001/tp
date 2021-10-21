@@ -9,7 +9,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,7 +19,6 @@ import static seedu.address.logic.commands.CommandTestUtil.clonePersonInModel;
 import static seedu.address.logic.commands.CommandTestUtil.setUpNewModelWithClonedPerson;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.*;
-import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 public class DeleteAssignmentCommandTest {
@@ -42,8 +40,9 @@ public class DeleteAssignmentCommandTest {
         Model expectedModel = setUpNewModelWithClonedPerson(selectedPerson, clonedExpectedPerson);
         expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
+        actualModel.updateFilteredAssignmentList(clonedActualPerson);
         DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(clonedActualPerson.getName(), INDEX_SECOND_ASSIGNMENT);
+                new DeleteAssignmentCommand(INDEX_SECOND_ASSIGNMENT);
 
         String expectedMessage = String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS,
                 assignmentToDelete);
@@ -53,11 +52,11 @@ public class DeleteAssignmentCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        model.updateFilteredAssignmentList(person);
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAssignmentList().size() + 1);
-        DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(model.getFilteredPersonList()
-                        .get(INDEX_FIRST_PERSON.getZeroBased()).getName(), outOfBoundIndex);
+
+        DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
@@ -78,8 +77,8 @@ public class DeleteAssignmentCommandTest {
         showPersonAtIndex(expectedModel, INDEX_SIXTH_PERSON);
         expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
-        DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(clonedActualPerson.getName(), INDEX_SECOND_ASSIGNMENT);
+        actualModel.updateFilteredAssignmentList(clonedActualPerson);
+        DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(INDEX_SECOND_ASSIGNMENT);
 
         String expectedMessage =
                 String.format(DeleteAssignmentCommand.MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete);
@@ -89,41 +88,38 @@ public class DeleteAssignmentCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredPersonList_throwsCommandException() {
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book's person list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(
-                model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()).getName(), outOfBoundIndex);
+        model.updateFilteredAssignmentList(person);
+        DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_invalidPerson_throwsCommandException() {
-        Person personNotInList = HOON;
-
-        DeleteAssignmentCommand deleteAssignmentCommand =
-                new DeleteAssignmentCommand(personNotInList.getName(), INDEX_FIRST_ASSIGNMENT);
-
-        assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+    public void execute_noAssignmentListDisplayed_throwsCommandException() {
+        DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
+        assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_NO_ASSIGNMENT_LIST_DISPLAYED);
     }
 
     @Test
     public void equals() {
         DeleteAssignmentCommand deleteFirstCommand =
-                new DeleteAssignmentCommand(new PersonBuilder().build().getName(), INDEX_FIRST_ASSIGNMENT);
+                new DeleteAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
         DeleteAssignmentCommand deleteSecondCommand =
-                new DeleteAssignmentCommand(new PersonBuilder().build().getName(), INDEX_SECOND_ASSIGNMENT);
+                new DeleteAssignmentCommand(INDEX_SECOND_ASSIGNMENT);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
         DeleteAssignmentCommand deleteFirstCommandCopy =
-                new DeleteAssignmentCommand(new PersonBuilder().build().getName(), INDEX_FIRST_ASSIGNMENT);
+                new DeleteAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
