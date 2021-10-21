@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
+
+* TA<sup>2</sup> is adapted from [AddressBook-Level3 (AB3)](https://github.com/nus-cs2103-AY2122S1/tp)
 * For the detailed documentation of  AddressBook-Level3 project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -267,10 +268,169 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Giveall feature
+The giveall command allows users to add the specified assignment to all persons in the same module which are stored in 
+the model. Persons who already have the specified assignment will not have a duplicated assignment added to them. The 
+command is abstracted as `AddAssignmentToAllCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `AddAssignmentToAllCommand` is executed.
+
+Step 1. The user executes `list` command to see the current list of persons.
+
+Step 2. The user executes `giveall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to add assignments to all persons in
+the specified module. When `Command#execute` is called, the `giveall m/...` command will filter out persons in the current 
+displayed list with the module field `CS2100`and add the specified assignment to them if they do not have the assignment.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
+module field, it will return an error to the user. 
+
+</div>
+
+The following sequence diagram shows how the removeall command is executed:
+![GiveallSequenceDiagram](images/GiveAllSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Step 3. The user executes `show 1` to check that the specified assignment has been added for persons in the specified
+module.
+
+The following activity diagram summarizes what happens when a user executes the giveall command:
+
+<img src="images/GiveAllActivityDiagram.png" width="250" />
+
+#### Design considerations:
+**Aspect: Adds assignment to persons in current displayed list or to all persons:**
+
+* **Alternative 1:** Adds assignment of persons in current displayed list
+    * Pros: If the displayed list is shorter, the addition of assignments will be faster.
+    * Cons: User has to carry out `list` command first if addition of assignments is desired for all persons
+
+* **Alternative 2 (current choice):** Add assignment to all persons in the module
+    * Pros: Allows user to add assignment to all persons even when some persons are not displayed in the list
+    * Cons: Might take longer to execute
+
+* Considering the fact that the giveall command is meant for users to add assignments to all persons in the specified 
+module, **alternative 2** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for 
+persons who already have the assignment.
+**Alternative 1** requires an additional command `list` to ensure the displayed list contains all persons, which 
+means it is less convenient for users as they have to do extra work. 
+
+
+### [Proposed] Removeall feature
+The removeall command allows users to remove the specified assignment of all persons in the same module displayed in the GUI.
+It is abstracted as `DeleteAssignmentOfAllCommand` and extends `Command`. When the user inputs the command, 
+`Command#execute` is called and returns a `CommandResult`. 
+
+Given below is an example usage scenario and how the `DeleteAssignmentOfAllCommand` is executed.
+
+Step 1. The user executes `list` command to see the current list of persons.
+
+Step 2. The user executes `removeall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to remove all the completed assignments.
+When `Command#execute` is called, the `removeall m/...` command will filter out persons in the current displayed list 
+with the module field `CS2100`and remove the specified assignment if the person has completed the assignment. 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
+module field or there are no persons who have completed the assignment, it will return an error to the user. 
+
+</div>
+
+The following sequence diagram shows how the removeall command is executed:
+![GiveallSequenceDiagram](images/RemoveAllSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RemoveAssignmentOfAllCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Step 3. The user executes `show 1` to check that the specified assignment has been removed for persons in the specified 
+module who has completed the assignment.
+
+The following activity diagram summarizes what happens when a user executes the giveall command:
+
+<img src="images/RemoveAllActivityDiagram.png" width="250" />
+
+#### Design considerations:
+**Aspect: Deletes assignment of persons in current displayed list or for all persons:**
+
+* **Alternative 1 (current choice):** Deletes assignment of persons in current displayed list
+    * Pros: Allows for a safer delete of assignments
+    * Cons: User has to carry out `list` command first if deletion of assignments is desired for all persons
+
+* **Alternative 2:** Deletes assignment of all persons 
+    * Pros: Allows user to delete assignment of all persons without the need of additional commands
+    * Cons: Undesired deletion of assignment of persons not in displayed list may occur
+
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 1** is 
+chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the 
+deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
+in **alternative 1**, it may take up much more time. 
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Friendlier Command Inputs
+In striving to adopt a more user-centric approach in command recognition, additional commands are
+included on top of the original commands which stuck by a strict and predefined prefix. This offered
+very little flexibility to our users in an event they make a mistake.
+
+Here are the commands that currently support a *friendly* input command:
+1. `give`
+
+The `give` command has the sole purpose of adding a single assignment to an individual in the list.
+The following table contains the new *friendly* commands that a user may provide, instead of the
+original command inputs.
+
+| Friendly Command                            | Corresponding Command                         |   Example Usages                                                         |                                                
+| ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
+| tmr                                         | sets the date to be tomorrow                  | give n/name d/description by/tmr                                        |
+| today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |                                                                        |
+| week                                        | sets the date to be a week from now           | give n/name d/description by/week                                       |
+| mon                                         | sets the date to be the upcoming monday       | give n/name d/description by/mon                                        |
+| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |                                                                         |
+| wed                                         | sets the date to be the upcoming wednesday    | give n/name d/description by/wed                                        |
+| thu                                         | sets the date to be the upcoming thursday     | give n/name d/description by/thu                                        |
+| fri                                         | sets the date to be the upcoming friday       | give n/name d/description by/fri                                        | 
+| sat                                         | sets the date to be the upcoming saturday     | give n/name d/description by/sat                                        |
+| sun                                         | sets the date to be the upcoming sunday       | give n/name d/description by/sun                                        |
+
+When the user enters a *friendly* command, the `AddressBookParser` class will recognize the command
+to be an add assignment command. This triggers the `AddAssignmentParser#parse` method to be called with the
+user input arguments. From there, the `AddAssignmentParser` parses each individual argument
+token and for the *friendly* command, it will be recognized within the `DueDate` class as a date with
+a *friendly* command format. This then calls the Java `TemporalAdjusters` class to return a `LocalDate` instance
+that represents the desired *friendly* command input. From here, the `AddAssignmentCommand` class is then instantiated and
+results actualized by the `Model` component.
+
+The following activity diagram shows the possible paths whilst a user adds an assignment:
+
+![AddAssignmentActivityDiagram](images/AddAssignmentActivityDiagram.png)
+
+
+The following sequence diagram shows the logic sequence of an AddAssignment command execution:
+
+![AddAssignmentSequenceDiagram](images/AddAssignmentSequenceDiagram.png)
+
+
+#### Design considerations:
+**Aspect: Rigidity in allowing users to add assignments correctly yet handle multiple short-form user inputs:**
+
+* **Alternative 1 (current choice):** Allows users to add based on format and some *friendly* commands
+    * Pros: Allows for a safer addition of assignment, ensuring strict adherence to format
+    * Cons: User has to memorize the command usage or get it wrong the first time to view the error message
+
+* **Alternative 2:** Simplify the rigid commands and make all commands user-friendly 
+    * Pros: Users can perform more powerful addition of assignments without having to type too much or following too strict 
+  of a guideline
+    * Cons: Requires the application to recognize a lot of different words, be it short or long form, to allow
+    maximum user-friendliness, which may not be too feasible to achieve
+    
+#### [Proposed] Friendly Commands
+1. `find`
+
+#### [COMING SOON!!!]
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -280,6 +440,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
+* 
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -312,24 +473,24 @@ information(student submissions etc.) much faster than when using a mouse/GUI dr
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                  | So that I can…​ |                                                
-| -------- | ------------------------------------------ | --------------------------------------------- | ------------------------------------------------------------------------ |
-| `* * *`  | tutor for the first use                    | see all commands available                    | recall commands and use them properly when I forget how to use the app  |
-| `* * *`  | tutor                                      | add a new student or professor                |                                                                           |
-| `* * *`  | tutor                                      | delete a student or professor                 | remove entries that I no longer need                                     |
-| `* * *`  | tutor                                      | find a person by name or module               | locate details of persons without having to go through the entire list |
-| `* * *`  | tutor                                      | assign tasks to students                      |                                                                           |
-| `* * *`  | tutor                                      | delete tasks assigned before                  | remove the outdated assignments for students                             |
-| `* * *`  | tutor                                      | mark students' tasks as done                  | record students' progress more easily                                     |
-| `* * *`  | tutor teaching online                      | access the web links used for teaching        | access information from teaching websites immediately                     |
-| `* * *`  | tutor for several modules                  | organize student data according to module     | manage my tasks of different modules in an organised manner          |
-| `* * *`  | student and tutor                          | organise my tasks in order of deadline        | manage my time better                                                     |
-| `* * *`  | easily frustrated tutor                    | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                   |
-| `* * *`  | tutor with many persons in the contact book| sort persons by name                          | locate a person easily                                                   |
-| `* * *`  | responsible tutor                          | track students' progress on their assignments | identify and reach out to those who need help                             |
-| `* * *`  | tutor                                      | list all students I am teaching               | ensure I added right and correct number of people before                 |
-| `* *`    | busy tutor                                 | list certain people I interacted frequently   | save time searching their name whenever I start app                       | 
-| `*`      | clumsy tutor                               | undo actions                                  | recover information that I accidentally delete                           |
+| Priority | As a …​                                  | I want to …​                               | So that I can…​                                                       |                                                
+| -------- | ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
+| `* * *`  | tutor for the first use                     | see all commands available                    | recall commands and use them properly when I forget how to use the app   |
+| `* * *`  | tutor                                       | add a new student or professor                |                                                                          |
+| `* * *`  | tutor                                       | delete a student or professor                 | remove entries that I no longer need                                     |
+| `* * *`  | tutor                                       | find a person by name or module               | locate details of persons without having to go through the entire list   |
+| `* * *`  | tutor                                       | assign tasks to students                      |                                                                          |
+| `* * *`  | tutor                                       | delete tasks assigned before                  | remove the outdated assignments for students                             |
+| `* * *`  | tutor                                       | mark students' tasks as done                  | record students' progress more easily                                    |
+| `* * *`  | tutor teaching online                       | access the web links used for teaching        | access information from teaching websites immediately                    |
+| `* * *`  | tutor for several modules                   | organize student data according to module     | manage my tasks of different modules in an organised manner              |
+| `* * *`  | student and tutor                           | organise my tasks in order of deadline        | manage my time better                                                    |
+| `* * *`  | easily frustrated tutor                     | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                   |
+| `* * *`  | tutor with many persons in the contact book | sort persons by name                          | locate a person easily                                                   |
+| `* * *`  | responsible tutor                           | track students' progress on their assignments | identify and reach out to those who need help                            |
+| `* * *`  | tutor                                       | list all students I am teaching               | ensure I added right and correct number of people before                 |
+| `* *`    | busy tutor                                  | list certain people I interacted frequently   | save time searching their name whenever I start app                      | 
+| `*`      | clumsy tutor                                | undo actions                                  | recover information that I accidentally delete                           |
 
 *{More to be added}*
 
@@ -507,6 +668,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **TA**: Abbreviation for the tutor
 * **UC**: Abbreviation for the use case
 * **SOC**: Abbreviation for the school of computing
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**

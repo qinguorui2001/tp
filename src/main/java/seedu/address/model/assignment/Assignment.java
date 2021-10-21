@@ -2,6 +2,7 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -56,7 +57,8 @@ public class Assignment implements Comparable<Assignment> {
         }
 
         return otherAssignment != null
-                && otherAssignment.getDescription().equals(getDescription());
+                && otherAssignment.getDescription().toString().toLowerCase(Locale.ROOT)
+                .equals(getDescription().toString().toLowerCase(Locale.ROOT));
     }
 
     /**
