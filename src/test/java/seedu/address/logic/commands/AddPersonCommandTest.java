@@ -153,26 +153,41 @@ public class AddPersonCommandTest {
 
         @Override
         public boolean hasAssignment(Person person, Assignment toAdd) {
-            return false;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addAssignment(Person person, Assignment toAdd) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void deleteAssignment(Person person, Assignment toDelete) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void markAssignment(Person person, Assignment toMark) {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredAssignmentList(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAddressBook() throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateCommandStack(Command command) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -202,6 +217,11 @@ public class AddPersonCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return this.person.isSamePerson(person);
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
     }
 
