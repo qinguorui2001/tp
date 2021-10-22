@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 
-Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app for managing School of Computing contacts and assignments, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps.
+Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app designed for teaching assistants/tutors/professors of 
+from School of Computing to help manage student contacts and keep track of students' assignment submissions. Ta<sup>2</sup> is  
+optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -80,10 +83,10 @@ Adds a person to the contact list.
 Format: `add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)<br><br>
-A person's module must follow XX[X]1111[X], where X is any letter,
-1 is any number and values in square brackets are optional, and it
-should not be blank.
+
+* A person can have any number of tags (including 0).<br><br>
+* A person's module **must follow XX[X]1111[X], where X is any letter,
+1 is any number and values in square brackets are optional.
 </div>
 
 Examples:
@@ -100,29 +103,29 @@ Format: `list`
 
 ####Implementing [coming soon]
 
-### Locating persons by name: `find`
+### Locating persons by name or module: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose names or modules contain any of the given keywords.
 
 Format: `find n/NAME_KEYWORD... m/MODULE_KEYWORD...`
 
-* The search is case-insensitive.<br> e.g `cs1101s` will match `CS1101S`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Can search by category.<br> e.g. `n/NAME, m/MODULE`
-* Partial names will be matched <br> e.g. `n/Hans` will match `Hans Bo`
+* The search is case-insensitive.<br> e.g `cs1101s` will match `CS1101S`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Can search by category.<br> e.g. `n/NAME, m/MODULE`.
+* Partial names will be matched. <br> e.g. `n/Hans` will match `Hans Bo`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search). <br>
-  e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * We can search for multiple people at once, separated by a whitespace. <br> 
-  e.g. `n/Bernice James` will return `Bernice`, `James`
-* We can search for multiple module at once, separated by a whitespace. <br>
+  e.g. `n/Bernice James` will return `Bernice`, `James`.
+* We can search for multiple modules at once, separated by a whitespace. <br>
   e.g. `m/CS1101S CS2103T` will return people who take either / or both modules.
-* Combining categories during search will return everyone matching either names OR module. <br>
+* Combining categories during search will return people who take at least one of the modules. <br>
   e.g. `n/James m/MA1521` will return `James`, `Bernice` (assuming Bernice takes MA1521).
 
 Examples:
-* `find n/John` returns `john` and `John Doe`
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`.
+* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>.
+  ![result for 'find alex david'](images/Userguide/findAlexDavidResult.png)
 * `find n/bernice james m/ma1521 cs2103t` returns `bernice`, `james`, `christie`, `michael`, assuming christie and michael takes either module listed.
 
 ### Deleting a person : `delete`
@@ -139,26 +142,24 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contact list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Adding an assignment : `give`
+### Adding assignments : `give` `giveall`
+
+#### Adding an assignment : `give`
 
 Gives an assignment with deadline to a person in the contact list.
 
 Format: `give n/NAME d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
 
-Examples:
-* `give n/John Doe d/Lab1 by/ 21/8/2021`
-* `give n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
+#### Adding an assignment with specified module: `giveall`
 
-### Adding an assignment to all persons in the specified module: `giveall`
-
-Adds an assignment with deadline to all persons in the specified module 
+Adds an assignment with deadline to all persons in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
 
 * The name is case-insensitive.
-e.g. n/alex yeoh will match Alex Yeoh
-  
 
+    e.g. n/alex yeoh will match Alex Yeoh.
+  
 * Date can be replaced by friendly commands.
     * `today` - sets due date to tonight.
     * `tmr` - sets due date to tomorrow.
@@ -173,8 +174,8 @@ e.g. n/alex yeoh will match Alex Yeoh
   
 
 Examples:
-* `a-add n/John Doe d/Lab1 by/ 21/8/2021`
-* `a-add n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
+* `give n/John Doe d/Lab1 by/ 21/8/2021`
+* `give n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
 * `give n/Alex Yeoh d/Tutorial3 by/ mon`
 * `give n/john smith d/Report1 by/ tue, 1800`
 * `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300`
@@ -187,23 +188,26 @@ Removes the specified assignment with deadline from a person in the contact list
 Format: `remove n/NAME INDEX`
 
 * The name is case-insensitive.
+  
   e.g. n/alex yeoh will match Alex Yeoh.
 * Deletes the deadline of person `NAME` at the specified `INDEX`.
 * Removes the specified assignment of person `NAME` at the specified `INDEX`.
 * The index refers to the index number shown in the displayed assignment list.
-* The index must be a positive integer 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 * `remove n/Wei Chang 10` deletes the 10th assignment in Wei Chang’s assignment list.
 
-### Marking an assignment with deadline as done: `done`
+### Marking an assignment : `done`
 
-Marks a specified assignment's deadline of a person as done.
+Marks a specified assignment's deadline of a person as completed.
+* Assignments with uncompleted/pending status will have an orange tag.
+* Assignments with completed status will have a green tag.
 
 Format: `done n/NAME INDEX`
 
 Examples:
-* `done n/John Doe 4` marks the 4th assignment in John Doe’s assignment list as done.
+* `done n/John Doe 4` marks the 4th assignment in John Doe’s assignment list as completed.
 
 ### Showing person’s assignment list: `show`
 
@@ -216,7 +220,7 @@ Assignment list will be sorted by status and date.
 Format: `show INDEX`
 
 Examples:
-* `show 2` renders the 2nd person’s assignment list on the right side of the app.
+* `show 1` renders the first person’s assignment list on the right side of the app.
 * The index refers to the index shown in the displayed person list.
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
@@ -275,6 +279,7 @@ Action | Format, Examples
 **list** | `list`
 **help** | `help`
 **give** | `give n/NAME d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give n/John Doe d/Lab1 by/ 21/8/2021`
+**giveall** | `giveall m/module d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give m/CS2100 d/Lab1 by/ 21/8/2021`
 **remove** | `remove n/NAME INDEX` <br> e.g., `remove n/Wei Chang 10`
 **done** | `done n/NAME INDEX` <br> e.g., `done n/John Doe 4`
 **show** | `show INDEX` <br> e.g., `show 2`
