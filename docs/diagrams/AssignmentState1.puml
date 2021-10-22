@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+
+title After command "show 2"
+
+object 2ndPersonList
+
+map AddressBook {
+ assignments *---> 2ndPersonList
+}
+
+
+
+@enduml

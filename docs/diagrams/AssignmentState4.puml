@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+
+title Final State
+
+object modified2ndPersonList
+
+map AddressBook {
+ assignments *---> modified2ndPersonList
+}
+
+map Ui {
+ assignmentPanel *---> AddressBook
+}
+
+@enduml

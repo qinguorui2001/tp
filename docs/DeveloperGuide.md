@@ -158,6 +158,49 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Show assignment list feature
+
+#### Implementation
+
+The show assignment mechanism is facilitated by `AddressBook`, where the specified person's assignment list is stored internally under `assignments` This `assignments` is retrieved or updated by the following methods:
+* `AddressBook#getAssignmentList()`
+* `AddressBook#updateAssignmentList(Person person)`  —  where `person` is the specified person.
+
+These methods are exposed in the `Model` interface as `Model#getFilteredAssignmentList()` and `Model#updateFilteredAssignmentList(Person person)` respectively.
+
+Given below is an example usage scenario and how the show assignment mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `assignments` will be initialized with an empty list.
+
+![AssignmentState0](images/AssignmentState0.png)
+
+Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateFilterdAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
+This causes the `assignments` in `AddressBook` to be replaced with the 2nd person's assignment list.
+
+![AssignmentState1](images/AssignmentState1.png)
+
+
+Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getFilteredAssignmentList()` to input into the assignment panel of the `Ui`
+This results in the assignment list panel to display the assignments of the person.
+
+![AssignmentState2](images/AssignmentState2.png)
+
+
+Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
+The command will the call `Model#updateFilteredAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
+
+![AssignmentState3](images/AssignmentState3.png)
+
+
+Step 5. Step 3 is repeated to show the recent updated assignment list.
+
+![AssignmentState4](images/AssignmentState4.png)
+
+
+#### Design considerations:
+The assignment list of the specified person is stored in `AddressBook` rather than `ModelManger`
+
+
 ### Assignment Feature
 
 #### Current Implementation
@@ -187,6 +230,7 @@ A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. 
 * **Alternative 2:** Use a factory method to instantiate the different types of status
     * Pros: Divides cleanly all the different types of status and intended behaviour and make it very easy to add new status with few adjustments by creating another subclass.
     * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
+
 
 ### \[Proposed\] Undo/redo feature
 
