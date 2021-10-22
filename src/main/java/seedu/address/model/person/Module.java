@@ -19,7 +19,7 @@ public class Module {
      * if the module code matches a 2/3 letter - 4 number - optional one letter pattern.
      *
      */
-    public static final String VALIDATION_REGEX = "([a-zA-Z]{2,3})([0-9]{4})([a-zA-Z])?";
+    public static final String VALIDATION_REGEX = "([A-Z]{2,3})([0-9]{4})([A-Z])?";
 
     public final String moduleCode;
 

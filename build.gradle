@@ -70,7 +70,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'ta^2.jar'
 }
 
 defaultTasks 'clean', 'test'
