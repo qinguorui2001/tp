@@ -109,5 +109,9 @@ public interface Model {
 
     void redoAddressBook() throws CommandException;
 
-    void updateCommandStack(Command command);
+    void commitAddressBook(ReadOnlyAddressBook addressBook);
+
+    VersionedAddressBook getCopyOfVersionedAddressBook();
+
+    void setVersionedAddressBook(VersionedAddressBook versionedAddressBook);
 }

@@ -11,6 +11,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_NAME = "The person name does not exist";
     public static final String MESSAGE_INVALID_UNDO = "Nothing can be undone";
+    public static final String MESSAGE_INVALID_REDO = "Nothing can be redone";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_MODULE = "The module does not exist!";
 

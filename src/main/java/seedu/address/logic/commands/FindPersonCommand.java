@@ -24,7 +24,6 @@ public class FindPersonCommand extends Command {
             + "Example: " + COMMAND_WORD + " n/alice bob charlie m/CS1101S";
 
     private final NameContainsKeywordsPredicate predicate;
-    private ReadOnlyAddressBook addressBook;
 
     public FindPersonCommand(NameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
@@ -33,15 +32,9 @@ public class FindPersonCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        addressBook = new AddressBook(model.getAddressBook());
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-    }
-
-    @Override
-    public void unExecute(Model model) throws CommandException {
-        model.setAddressBook(addressBook);
     }
 
     @Override

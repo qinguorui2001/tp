@@ -47,7 +47,7 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
 
         if (!(command instanceof UndoCommand)) {
-            model.updateCommandStack(command);
+            model.commitAddressBook(model.getCopyOfVersionedAddressBook());
         }
 
         commandResult = command.execute(model);

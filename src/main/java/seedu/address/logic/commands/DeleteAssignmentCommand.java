@@ -37,7 +37,6 @@ public class DeleteAssignmentCommand extends Command {
 
     private final Index targetIndex;
     private final Name name;
-    private ReadOnlyAddressBook addressBook;
 
     /**
      * Creates an DeleteAssignmentCommand to delete the specified {@code Assignment}
@@ -50,7 +49,6 @@ public class DeleteAssignmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        addressBook = new AddressBook(model.getAddressBook());
         // Get Person that match the name
         List<Person> filteredPersonList =
                 model.getFilteredPersonList()
@@ -71,11 +69,6 @@ public class DeleteAssignmentCommand extends Command {
         Assignment assignmentToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteAssignment(selectedPerson, assignmentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete));
-    }
-
-    @Override
-    public void unExecute(Model model) throws CommandException {
-        model.setAddressBook(addressBook);
     }
 
     @Override

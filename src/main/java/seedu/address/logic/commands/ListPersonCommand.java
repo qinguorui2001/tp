@@ -17,18 +17,10 @@ public class ListPersonCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
-    private ReadOnlyAddressBook addressBook;
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        addressBook = new AddressBook(model.getAddressBook());
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
-    }
-
-    @Override
-    public void unExecute(Model model) throws CommandException {
-        model.setAddressBook(addressBook);
     }
 }

@@ -17,10 +17,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.*;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -187,7 +184,17 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void updateCommandStack(Command command) {
+        public void commitAddressBook(ReadOnlyAddressBook addressBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public VersionedAddressBook getCopyOfVersionedAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setVersionedAddressBook(VersionedAddressBook versionedAddressBook) {
             throw new AssertionError("This method should not be called.");
         }
 

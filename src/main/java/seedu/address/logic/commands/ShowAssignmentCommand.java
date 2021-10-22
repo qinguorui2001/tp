@@ -28,7 +28,6 @@ public class ShowAssignmentCommand extends Command {
     public static final String MESSAGE_SHOW_ASSIGNMENT_SUCCESS = "Showing assignments assigned to the person: %1$s";
 
     private final Index targetIndex;
-    private ReadOnlyAddressBook addressBook;
 
     public ShowAssignmentCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -37,7 +36,6 @@ public class ShowAssignmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        addressBook = new AddressBook(model.getAddressBook());
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -47,11 +45,6 @@ public class ShowAssignmentCommand extends Command {
         Person personToShow = lastShownList.get(targetIndex.getZeroBased());
         model.updateFilteredAssignmentList(personToShow);
         return new CommandResult(String.format(MESSAGE_SHOW_ASSIGNMENT_SUCCESS, personToShow.getName()));
-    }
-
-    @Override
-    public void unExecute(Model model) throws CommandException {
-        model.setAddressBook(addressBook);
     }
 
     @Override
