@@ -8,7 +8,6 @@ public class Status implements Comparable<Status> {
 
     enum StatusType {
         COMPLETED(2),
-        LATE(0),
         PENDING(1);
 
         private final int weight;
@@ -33,10 +32,6 @@ public class Status implements Comparable<Status> {
 
     public static Status createPendingStatus() {
         return new Status(StatusType.PENDING);
-    }
-
-    public static Status createLateStatus() {
-        return new Status(StatusType.LATE);
     }
 
     /**
