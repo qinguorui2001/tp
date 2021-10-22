@@ -28,8 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final ObservableList<Assignment> assignmentsList;
     private CommandStack commandStack;
-
-
+    
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
