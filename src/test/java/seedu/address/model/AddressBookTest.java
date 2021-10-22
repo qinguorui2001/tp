@@ -115,6 +115,26 @@ public class AddressBookTest {
             return assignments;
         }
 
+        @Override
+        public ObservableList<Assignment> copyOfAssignmentList() {
+            return this.assignments;
+        }
+
+        @Override
+        public ObservableList<Person> copyOfPersonList() {
+            return this.persons;
+        }
+
+        @Override
+        public Person copyOfActivePerson() {
+            return null;
+        }
+
+        @Override
+        public AddressBook copyOfAddressBook() {
+            return new AddressBook(this);
+        }
+
     }
 
 }

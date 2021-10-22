@@ -104,5 +104,9 @@ public class Assignment implements Comparable<Assignment> {
                 ? dueDateCompare
                 : statusCompare;
     }
+
+    public Assignment copyOfAssignment() {
+        return new Assignment(description, dueDate, status);
+    }
 }
 

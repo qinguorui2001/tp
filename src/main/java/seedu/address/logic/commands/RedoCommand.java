@@ -6,7 +6,7 @@ import seedu.address.model.Model;
 
 import static java.util.Objects.requireNonNull;
 
-public class RedoCommand extends Command{
+public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redo the previous command.\n"

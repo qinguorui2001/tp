@@ -214,22 +214,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void undoAddressBook() throws CommandException{
+    public void undoAddressBook() throws CommandException {
         versionedAddressBook.undo();
     }
 
     @Override
-    public void redoAddressBook() throws CommandException{
+    public void redoAddressBook() throws CommandException {
         versionedAddressBook.redo();
     }
 
     @Override
-    public VersionedAddressBook getCopyOfVersionedAddressBook() {
+    public VersionedAddressBook getVersionedAddressBook() {
         return new VersionedAddressBook(getAddressBook());
-    }
-
-    @Override
-    public void setVersionedAddressBook(VersionedAddressBook versionedAddressBook) {
-        //this.versionedAddressBook = versionedAddressBook;
     }
 }

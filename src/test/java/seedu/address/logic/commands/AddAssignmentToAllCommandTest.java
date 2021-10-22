@@ -221,12 +221,7 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
-        public VersionedAddressBook getCopyOfVersionedAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setVersionedAddressBook(VersionedAddressBook versionedAddressBook) {
+        public VersionedAddressBook getVersionedAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 

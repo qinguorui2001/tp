@@ -15,13 +15,17 @@ public class VersionedAddressBook extends AddressBook {
     private int currentStatePointer = 0;
     private int size = 1;
 
+    /**
+     * Returns the versioned address book instance.
+     * @param readOnlyAddressBook The address book
+     */
     public VersionedAddressBook(ReadOnlyAddressBook readOnlyAddressBook) {
         super(readOnlyAddressBook);
-        addressBookStateList.push(readOnlyAddressBook);
+        addressBookStateList.push(readOnlyAddressBook.copyOfAddressBook());
     }
 
     /**
-     * Undo the command.
+     * Undoes the command.
      */
     public void undo() throws CommandException {
         if (!addressBookStateList.empty() && currentStatePointer >= 1) {
@@ -35,7 +39,7 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     /**
-     * Redo the command.
+     * Redoes the command.
      */
     public void redo() throws CommandException {
         if (!addressBookStateList.empty() && currentStatePointer < size - 1) {
@@ -49,11 +53,11 @@ public class VersionedAddressBook extends AddressBook {
     }
 
     /**
-     * Update address book state list whenever a command is executed(except undo command).
+     * Updates address book state list whenever a command is executed(except undo command).
      */
     public void commitAddressBook(ReadOnlyAddressBook readOnlyAddressBook) {
         deleteElementsAfterPointer(currentStatePointer);
-        addressBookStateList.push(readOnlyAddressBook);
+        addressBookStateList.push(readOnlyAddressBook.copyOfAddressBook());
         currentStatePointer++;
         size = currentStatePointer + 1;
     }
@@ -73,11 +77,4 @@ public class VersionedAddressBook extends AddressBook {
             addressBookStateList.subList(undoPointer + 1, size).clear();
         }
     }
-
-    /*@SuppressWarnings("unchecked")
-    public VersionedAddressBook copiedVersionedAddressBook() {
-        /*VersionedAddressBook versionedAddressBook = new VersionedAddressBook();
-        versionedAddressBook.addressBookStateList = (Stack<ReadOnlyAddressBook>)addressBookStateList.clone();
-        return versionedAddressBook;
-    }*/
 }

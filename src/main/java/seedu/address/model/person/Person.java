@@ -46,7 +46,7 @@ public class Person {
         this.tags.addAll(tags);
         assignments = new UniqueAssignmentList();
         for (Assignment assignment:assignmentList) {
-            assignments.add(assignment);
+            assignments.add(assignment.copyOfAssignment());
         }
     }
 
@@ -145,5 +145,16 @@ public class Person {
             tags.forEach(builder::append);
         }
         return builder.toString();
+    }
+
+    /**
+     * Returns the copy of person.
+     * @return The copy of person.
+     */
+    public Person copyOfPerson() {
+        Person personCopy = new Person(name, email, module,
+                this.assignments.copyOfUniqueAssignmentList().asUnmodifiableObservableList(), tags);
+
+        return personCopy;
     }
 }
