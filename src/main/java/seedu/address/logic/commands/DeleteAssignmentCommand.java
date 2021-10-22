@@ -8,7 +8,9 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
@@ -31,6 +33,8 @@ public class DeleteAssignmentCommand extends Command {
     public static final String MESSAGE_DELETE_ASSIGNMENT_SUCCESS = "Deleted Assignment: %1$s";
 
     private final Index targetAssignmentIndex;
+    private ReadOnlyAddressBook addressBook;
+
 
     /**
      * Creates an DeleteAssignmentCommand to delete the specified {@code Assignment}
@@ -42,6 +46,8 @@ public class DeleteAssignmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        addressBook = new AddressBook(model.getAddressBook());
 
         if (!model.hasActivePerson()) {
             throw new CommandException(Messages.MESSAGE_NO_ASSIGNMENT_LIST_DISPLAYED);
@@ -59,6 +65,11 @@ public class DeleteAssignmentCommand extends Command {
         model.deleteAssignment(personToRemoveAssignment, assignmentToDelete);
 
         return new CommandResult(String.format(MESSAGE_DELETE_ASSIGNMENT_SUCCESS, assignmentToDelete));
+    }
+
+    @Override
+    public void unExecute(Model model) throws CommandException {
+        model.setAddressBook(addressBook);
     }
 
     @Override

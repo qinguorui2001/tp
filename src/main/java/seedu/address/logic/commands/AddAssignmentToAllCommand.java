@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
@@ -35,6 +36,7 @@ public class AddAssignmentToAllCommand extends Command {
 
     private final Assignment toAdd;
     private final Module module;
+    private ReadOnlyAddressBook addressBook;
 
     /**
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
@@ -49,6 +51,7 @@ public class AddAssignmentToAllCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        addressBook = model.getAddressBook();
         // Get Person that match the Module
         List<Person> filteredPersonList =
                 model.getFilteredPersonList()
@@ -67,6 +70,11 @@ public class AddAssignmentToAllCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, module, toAdd));
+    }
+
+    @Override
+    public void unExecute(Model model) throws CommandException {
+        model.setAddressBook(addressBook);
     }
 
     @Override

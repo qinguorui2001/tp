@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
@@ -31,6 +33,7 @@ public class MarkAssignmentCommand extends Command {
     public static final String MESSAGE_MARK_ASSIGNMENT_SUCCESS = "Marked Assignment: %1$s";
 
     private final Index targetAssignmentIndex;
+    private ReadOnlyAddressBook addressBook;
 
     /**
      * Creates an MarkAssignmentCommand to mark the specified {@code Assignment}
@@ -47,6 +50,8 @@ public class MarkAssignmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NO_ASSIGNMENT_LIST_DISPLAYED);
         }
 
+        addressBook = new AddressBook(model.getAddressBook());
+
         Person personToRemoveAssignment = model.getActivePerson();
 
         List<Assignment> assignmentList = model.getFilteredAssignmentList();
@@ -59,6 +64,11 @@ public class MarkAssignmentCommand extends Command {
         model.markAssignment(personToRemoveAssignment, assignmentToMark);
 
         return new CommandResult(String.format(MESSAGE_MARK_ASSIGNMENT_SUCCESS, assignmentToMark));
+    }
+
+    @Override
+    public void unExecute(Model model) throws CommandException {
+        model.setAddressBook(addressBook);
     }
 
     @Override

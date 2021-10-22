@@ -158,6 +158,49 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Show assignment list feature
+
+#### Implementation
+
+The show assignment mechanism is facilitated by `AddressBook`, where the specified person's assignment list is stored internally under `assignments` This `assignments` is retrieved or updated by the following methods:
+* `AddressBook#getAssignmentList()`
+* `AddressBook#updateAssignmentList(Person person)`  —  where `person` is the specified person.
+
+These methods are exposed in the `Model` interface as `Model#getFilteredAssignmentList()` and `Model#updateFilteredAssignmentList(Person person)` respectively.
+
+Given below is an example usage scenario and how the show assignment mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `assignments` will be initialized with an empty list.
+
+![AssignmentState0](images/AssignmentState0.png)
+
+Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateFilterdAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
+This causes the `assignments` in `AddressBook` to be replaced with the 2nd person's assignment list.
+
+![AssignmentState1](images/AssignmentState1.png)
+
+
+Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getFilteredAssignmentList()` to input into the assignment panel of the `Ui`
+This results in the assignment list panel to display the assignments of the person.
+
+![AssignmentState2](images/AssignmentState2.png)
+
+
+Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
+The command will the call `Model#updateFilteredAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
+
+![AssignmentState3](images/AssignmentState3.png)
+
+
+Step 5. Step 3 is repeated to show the recent updated assignment list.
+
+![AssignmentState4](images/AssignmentState4.png)
+
+
+#### Design considerations:
+The assignment list of the specified person is stored in `AddressBook` rather than `ModelManger`
+
+
 ### Assignment Feature
 
 #### Current Implementation
@@ -187,6 +230,7 @@ A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. 
 * **Alternative 2:** Use a factory method to instantiate the different types of status
     * Pros: Divides cleanly all the different types of status and intended behaviour and make it very easy to add new status with few adjustments by creating another subclass.
     * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -368,8 +412,142 @@ deleted assignment by adding the assignment again. Compared to the additional ti
 in **alternative 1**, it may take up much more time. 
 
 ### \[Proposed\] Data archiving
+### a-add feature
+The a-add command allows users to add the specified assignment to a particular person is stored in the model. 
+Person who already has the specified assignment will not have a duplicated assignment added to him. The
+command is abstracted as `AddAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
 
-_{Explain here how the data archiving feature will be implemented}_
+Given below is an example usage scenario and how the `AddAssignmentCommand` is executed.
+
+Step 1. The user executes `p-list` command to see the current list of persons.
+
+Step 2. The user executes `a-add n/Xiao m/CS2103 d/Assignment 1 by/ 03/11/2021` command to add assignment to Xiao in
+the specified module. When `Command#execute` is called, the `a-add n/...` command will filter out persons in the current
+displayed list with the module field `CS2103` and add the specified assignment to him if this person exists, and he does 
+not have the assignment.<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no 
+persons with the specified module field, it will return an error to the user. 
+
+The following sequence diagram shows how the removeall command is executed:
+![a-addSequenceDiagram](images/a-addSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+Step 3. The user executes `a-show 1` to check that the specified assignment has been added for persons in the specified
+module.
+
+The following activity diagram summarizes what happens when a user executes the a-add command:
+
+<img src="images/GiveAllActivityDiagram.png" width="250" />
+
+#### Design considerations:
+**Aspect: Adds an assignment to a person in current displayed list or to any other person in storage:**
+
+* **Alternative 1:** Add an assignment to a person in current displayed list
+    * Pros: If the displayed list is shorter, the addition of assignments will be faster.
+    * Cons: User has to carry out `p-list` command first if addition of assignment is desired for that person
+
+* **Alternative 2 (current choice):** Add an assignment to any person in the storage
+    * Pros: Allows user to add assignment to a particular person even when he is not visible in the list
+    * Cons: Might take longer to execute
+
+* Considering the fact that the a-add command is meant for users to add assignments to any person in model, 
+* **Alternative 2** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for
+  persons who already have the assignment.
+  **Alternative 1** requires an additional command `p-list` to ensure the displayed list contains all persons before adding 
+  assignments, which means it is less convenient for users as they have to do extra work.
+
+
+### a-delete feature
+The a-delete command allows users to remove the specified assignment of a particular person in model.
+It is abstracted as `DeleteAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `DeleteAssignmentCommand` is executed.
+
+Step 1. The user executes `p-list` command to see the current list of persons.
+
+Step 2. The user executes `a-delete n/Xiao 1` command to remove the first assignment of a person. When `Command#execute`
+is called, the `a-delete n/...` command will filter out persons in the storage list with the name field `Xiao`and remove 
+the specified assignment if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source:
+**Note:** If there are no persons with the specified module field or there are no persons who have this assignment, it will return an error to the user. 
+
+The following sequence diagram shows how the a-delete command is executed:
+![a-deleteSequenceDiagram](images/a-deleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAssignmentCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+Step 3. The user executes `a-show 1` to check that the specified assignment has been removed for person in the specified
+module with that assignment.
+
+The following activity diagram summarizes what happens when a user executes the a-delete command:
+
+<img src="images/a-deleteActivityDiagram.png" width="250" />
+
+#### Design considerations:
+**Aspect: Deletes assignment of a person in current displayed list or for any person in storage:**
+
+* **Alternative 1:** (current choice) Deletes assignment of a person in current displayed list
+    * Pros: Allows for a safer delete of assignments
+    * Cons: User has to carry out `p-list` command first if required person is not in the current displayed list
+
+* **Alternative 2:** Deletes assignment of any person with that name and assignment
+    * Pros: Allows user to delete assignment of a person without the need of additional commands
+    * Cons: User may not be certain about which person's assignment to delete if several of them has completed assignment
+    and likely to remember the wrong person name if the current person displayed list is not shown
+
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 1** is
+  chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the
+  deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `p-list` command
+  in **alternative 1**, it may take up much more time.
+
+### a-done feature
+The a-done command allows users to mark the specified assignment of a particular person in model.
+It is abstracted as `MarkAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `MarkAssignmentCommand` is executed.
+
+Step 1. The user executes `p-list` command to see the current list of persons.
+
+Step 2. The user executes `a-done n/Xiao 1` command to mark the first assignment of a `Xiao` as done. When `Command#execute` is called,
+the `a-done n/...` command will filter out persons in the storage list with the name field `Xiao`and mark the specified assignment
+if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source: 
+**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user. 
+
+The following sequence diagram shows how the a-done command is executed:
+![a-doneSequenceDiagram](images/a-doneSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAssignmentCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+Step 3. The user executes `a-show 1` to check that the specified assignment has been marked for person with specified
+name with that assignment.
+
+The following activity diagram summarizes what happens when a user executes the a-done command:
+
+<img src="images/a-doneActivityDiagram.png" width="250" />
+
+#### Design considerations:
+**Aspect: Marks assignment of a person in current displayed list as done or for any person in storage model:**
+
+* **Alternative 1:** (current choice) Marks assignment of a person in current displayed list
+    * Pros: Allows for a safer mark of assignments
+    * Cons: User has to carry out `p-list` command first if required person is not in the current displayed list
+
+* **Alternative 2:** Marks assignment of any person with that name and assignment
+    * Pros: Allows user to mark assignment of a person without the need of additional commands
+    * Cons: User may not be certain about which person's assignment to mark if several of them has completed assignment
+      and likely to remember the wrong person name if the current person displayed list is not shown
+
+* Considering the fact that TA<sup>2</sup> is designed to be user-friendly in managing student submissions,**alternative 1** is
+  chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
+  marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `p-list` command
+  in **alternative 1**, it may take up much more time.
+* 
+  _{Explain here how the data archiving feature will be implemented}_
 
 ### Friendlier Command Inputs
 In striving to adopt a more user-centric approach in command recognition, additional commands are

@@ -68,9 +68,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
-        setPersons(newData.getPersonList());
         setAssignments(newData.getAssignmentsList());
+        setPersons(newData.getPersonList());
         activePerson = Optional.empty();
     }
 
