@@ -211,14 +211,10 @@ class UniqueAssignmentListTest {
     public void sort_assignmentsWithDifferentStatusOnly_completedAssignmentsAtBottomOfList() {
         Assignment completedCS1101SMission = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
                 .withDescription("completedCS1101SMission").withCompletedStatus().build();
-        Assignment lateCS1101SMission = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
-                .withDescription("lateCS1101SMission").withLateStatus().build();
         uniqueAssignmentList.add(completedCS1101SMission);
-        uniqueAssignmentList.add(lateCS1101SMission);
         uniqueAssignmentList.add(ASSIGNMENT_CS1101S_MISSION);
         uniqueAssignmentList.sort();
         UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
-        expectedUniqueAssignmentList.add(lateCS1101SMission);
         expectedUniqueAssignmentList.add(ASSIGNMENT_CS1101S_MISSION);
         expectedUniqueAssignmentList.add(completedCS1101SMission);
         assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);
@@ -267,15 +263,10 @@ class UniqueAssignmentListTest {
         Assignment earlierDateTimeCompletedCS1101SMission = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
                 .withDescription("earlierDateTimeCompletedCS1101SMission")
                 .withDueDate(VALID_DATE_CS2106_PROJECT, VALID_TIME_CS2106_PROJECT).withCompletedStatus().build();
-        Assignment laterDateTimeLateCS1101SMission = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
-                .withDescription("laterDateTimeLateCS1101SMission")
-                .withDueDate(VALID_DATE_CS1101S_MISSION, VALID_TIME_CS2100_TUTORIAL).withLateStatus().build();
         uniqueAssignmentList.add(ASSIGNMENT_CS1101S_MISSION);
         uniqueAssignmentList.add(earlierDateTimeCompletedCS1101SMission);
-        uniqueAssignmentList.add(laterDateTimeLateCS1101SMission);
         uniqueAssignmentList.sort();
         UniqueAssignmentList expectedUniqueAssignmentList = new UniqueAssignmentList();
-        expectedUniqueAssignmentList.add(laterDateTimeLateCS1101SMission);
         expectedUniqueAssignmentList.add(ASSIGNMENT_CS1101S_MISSION);
         expectedUniqueAssignmentList.add(earlierDateTimeCompletedCS1101SMission);
         assertEquals(expectedUniqueAssignmentList, uniqueAssignmentList);

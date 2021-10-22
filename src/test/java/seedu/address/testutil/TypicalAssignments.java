@@ -54,11 +54,6 @@ public class TypicalAssignments {
             .withCompletedStatus()
             .withDueDate(VALID_DATE_CS3230_LAB, VALID_TIME_CS3230_LAB)
             .build();
-    public static final Assignment ASSIGNMENT_CS2106_PROJECT = new AssignmentBuilder()
-            .withDescription(VALID_DESCRIPTION_CS2106_PROJECT)
-            .withLateStatus()
-            .withDueDate(VALID_DATE_CS2106_PROJECT, VALID_TIME_CS2106_PROJECT)
-            .build();
     public static final Assignment ASSIGNMENT_CS2100_LAB = new AssignmentBuilder()
             .withDescription(VALID_DESCRIPTION_CS2100_LAB)
             .withPendingStatus()
