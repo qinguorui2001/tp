@@ -65,7 +65,6 @@ public class MarkAssignmentCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MarkAssignmentCommand // instanceof handles nulls
-                && targetAssignmentIndex.equals(
-                        ((MarkAssignmentCommand) other).targetAssignmentIndex)); // state check
+                && targetAssignmentIndex.equals(((MarkAssignmentCommand) other).targetAssignmentIndex)); // state check
     }
 }

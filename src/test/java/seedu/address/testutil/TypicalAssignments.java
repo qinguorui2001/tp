@@ -6,14 +6,11 @@ import java.util.List;
 
 import seedu.address.model.assignment.Assignment;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS2106_PROJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2106_PROJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS1231S_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS2106_PROJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIENDLY_DATE_CS2100_LAB;
