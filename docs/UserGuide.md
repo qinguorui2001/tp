@@ -198,6 +198,12 @@ Clears all entries from TA<sup>2</sup>.
 
 Format: `clear`
 
+### Undoing the last command : `undo`
+
+Undo the last command entered.
+
+Format: `undo`
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -244,3 +250,4 @@ Action | Format, Examples
 **remove** | `remove n/NAME INDEX` <br> e.g., `remove n/Wei Chang 10`
 **done** | `done n/NAME INDEX` <br> e.g., `done n/John Doe 4`
 **show** | `show INDEX` <br> e.g., `show 2`
+**undo** | `undo`
