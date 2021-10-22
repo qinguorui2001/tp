@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  * Deletes an assignment to the person's assignment list.
  */
 public class DeleteAssignmentCommand extends Command {
-    public static final String COMMAND_WORD = "a-delete";
+    public static final String COMMAND_WORD = "remove";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified person's assignment identified by the "

@@ -22,7 +22,7 @@ import seedu.address.model.person.Person;
  */
 public class AddAssignmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "a-add";
+    public static final String COMMAND_WORD = "give";
 
     public static final String FRIENDLY_COMMAND_SYNTAX =
             "Here are some friendly command syntax for to replace d/M/yyyy:\n"
