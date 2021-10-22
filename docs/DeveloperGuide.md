@@ -172,29 +172,29 @@ Given below is an example usage scenario and how the show assignment mechanism b
 
 Step 1. The user launches the application for the first time. The `assignments` will be initialized with an empty list.
 
-![AssignmentsState0](images/AssignmentsState0.png)
+![AssignmentState0](images/AssignmentState0.png)
 
 Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateFilterdAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
 This causes the `assignments` in `AddressBook` to be replaced with the 2nd person's assignment list.
 
-![AssignmentsState1](images/AssignmentsState1.png)
+![AssignmentState1](images/AssignmentState1.png)
 
 
 Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getFilteredAssignmentList()` to input into the assignment panel of the `Ui`
 This results in the assignment list panel to display the assignments of the person.
 
-![AssignmentsState2](images/AssignmentsState2.png)
+![AssignmentState2](images/AssignmentState2.png)
 
 
 Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
 The command will the call `Model#updateFilteredAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
 
-![AssignmentsState3](images/AssignmentsState3.png)
+![AssignmentState3](images/AssignmentState3.png)
 
 
 Step 5. Step 3 is repeated to show the recent updated assignment list.
 
-![AssignmentsState4](images/AssignmentsState4.png)
+![AssignmentState4](images/AssignmentState4.png)
 
 
 #### Design considerations:
