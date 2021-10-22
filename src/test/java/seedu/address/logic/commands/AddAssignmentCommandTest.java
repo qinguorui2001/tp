@@ -194,6 +194,21 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public void undoAddressBook() throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateCommandStack(Command command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Assignment> getFilteredAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -229,6 +244,11 @@ public class AddAssignmentCommandTest {
             UniquePersonList persons = new UniquePersonList();
             persons.add(person);
             return new FilteredList<>(persons.asUnmodifiableObservableList());
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return new AddressBook();
         }
 
         @Override

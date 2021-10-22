@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
@@ -25,6 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private ObservableList<Assignment> assignmentsList;
+    private CommandStack commandStack;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +42,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
+        this.commandStack = new CommandStack();
     }
 
     public ModelManager() {
@@ -177,6 +181,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
@@ -204,5 +209,20 @@ public class ModelManager implements Model {
         this.addressBook.changeActivePerson(person);
         this.addressBook.updateAssignmentList(person);
         this.assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
+    }
+
+    @Override
+    public void updateCommandStack(Command command) {
+        commandStack.updateUndoStack(command);
+    }
+
+    @Override
+    public void undoAddressBook() throws CommandException {
+        commandStack.undo(this);
+    }
+
+    @Override
+    public void redoAddressBook() throws CommandException{
+
     }
 }
