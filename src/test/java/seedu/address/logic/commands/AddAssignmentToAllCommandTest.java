@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -12,7 +11,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.Module;
 import seedu.address.testutil.AssignmentBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -72,7 +70,6 @@ public class AddAssignmentToAllCommandTest {
                 commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validAssignment), modelStub.assignments1);
         assertEquals(Arrays.asList(validAssignment), modelStub.assignments2);
-        //assertEquals(Arrays.asList(validAssignment), modelStub.assignmentsAdded);
     }
 
     @Test
@@ -205,12 +202,22 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
+        public void addAllAssignment(List<Person> personList, Assignment toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteAssignment(Person person, Assignment toDelete) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void markAssignment(Person person, Assignment toMark) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void cleanAssignments() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -267,24 +274,22 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
-        public void addAssignment(Person person, Assignment assignment) {
+        public void addAllAssignment(List<Person> personList, Assignment assignment) {
             requireNonNull(assignment);
-            person.getAssignments().add(assignment);
+            personList.get(0).getAssignments().add(assignment);
+            personList.get(1).getAssignments().add(assignment);
             assignmentsAdded.add(assignment);
         }
 
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            UniquePersonList persons = new UniquePersonList();
-            persons.add(person1);
-            persons.add(person2);
-            return new FilteredList<>(persons.asUnmodifiableObservableList());
+        public ReadOnlyAddressBook getAddressBook() {
+            AddressBook addressBook = new AddressBook();
+            addressBook.addPerson(person1);
+            addressBook.addPerson(person2);
+            return addressBook;
         }
+
     }
 
 
@@ -317,26 +322,27 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
-            UniquePersonList persons = new UniquePersonList();
-            persons.add(person1);
-            persons.add(person2);
-            return new FilteredList<>(persons.asUnmodifiableObservableList());
-        }
-
-        @Override
-        public void addAssignment(Person person, Assignment assignment) {
+        public void addAllAssignment(List<Person> personList, Assignment assignment) {
             requireNonNull(assignment);
-            if (person.equals(person1)) {
-                assignments1.add(assignment);
-            } else {
-                assignments2.add(assignment);
+            for (Person person : personList) {
+                if (person.equals(person1)) {
+                    if (!hasAssignment(person1, assignment)) {
+                        assignments1.add(assignment);
+                    }
+                } else {
+                    if (!hasAssignment(person2, assignment)) {
+                        assignments2.add(assignment);
+                    }
+                }
             }
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+            AddressBook addressBook = new AddressBook();
+            addressBook.addPerson(person1);
+            addressBook.addPerson(person2);
+            return addressBook;
         }
     }
 }

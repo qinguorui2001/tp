@@ -8,6 +8,7 @@ import seedu.address.model.assignment.DueDate;
 import seedu.address.model.assignment.Status;
 import seedu.address.model.person.Module;
 
+import java.util.Locale;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -32,7 +33,7 @@ public class AddAssignmentToAllCommandParser implements Parser<AddAssignmentToAl
                     AddAssignmentToAllCommand.MESSAGE_USAGE));
         }
 
-        Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
+        Module module = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get().toUpperCase(Locale.ROOT));
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         DueDate dueDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DUEDATE).get());
 

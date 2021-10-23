@@ -217,6 +217,12 @@ Examples:
 * The index refers to the index shown in the displayed person list.
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
+### Delete completed assignments from all persons: `clean`
+
+Deletes all completed assignments from TA<sup>2</sup>.
+
+Format: `clear`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from TA<sup>2</sup>.
