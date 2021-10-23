@@ -6,9 +6,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -25,16 +23,13 @@ import static seedu.address.model.person.Module.VALIDATION_REGEX;
  */
 public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
-    private static final String PREFIXES = "[nmt]/";
+    // Regex for matching valid prefixes or white spaces
+    private static final String PREFIXES_SPACE = "([nmt]/)|(\\s)";
+
+    // Regex for matching valid prefixes ONLY
+    private static final String VALID_PREFIXES = "[nmt]/";
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
-    // Serves as the constant values for different branches
-    private enum Mode {
-        NAME_MODULE,
-        NAME,
-        MODULE
-    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindPersonCommand
@@ -50,133 +45,83 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
 
-        Pattern prefixesPattern = Pattern.compile(PREFIXES);
-        Matcher prefixesMatcher = prefixesPattern.matcher(trimmedArgs);
+        validPrefixes(trimmedArgs);
+
+        Pattern modulePattern = Pattern.compile(PREFIX_MODULE.getPrefix());
+        Matcher moduleMatcher = modulePattern.matcher(trimmedArgs);
+        ArrayList<String> store;
+
+        if (!moduleMatcher.find()) {
+            logger.info("No module tags");
+            return new FindPersonCommand(new NameContainsKeywordsPredicate(generateKeywords((trimmedArgs))));
+        } else {
+            logger.info("Module tags with validation");
+            store = generateKeywordsWithModuleChecking(trimmedArgs);
+            return new FindPersonCommand(new NameContainsKeywordsPredicate(store));
+        }
+
+    }
+
+    /**
+     * Generates the keywords based on the given user input.
+     *
+     * @param args user input in command line
+     * @return a String array that contains the generated keywords
+     * @throws ParseException if the user input does not match defined command usage
+     */
+    private static ArrayList<String> generateKeywords(String args) {
+
+        String[] split = args.split(PREFIXES_SPACE);
+        ArrayList<String> keywords = new ArrayList<>();
+
+        for (String s : split) {
+            if ( s != null && !s.equals("")) {
+                keywords.add(s);
+            }
+        }
+        logger.info("keywords found: " + keywords);
+        return keywords;
+    }
+
+    /**
+     * Generates the keywords based on the given user input. This method is called with the
+     * guarantee that there is a module prefix included. Module validity checking is
+     * enforced.
+     *
+     * @param args user input in command line
+     * @return a String array that contains the generated keywords
+     * @throws ParseException if the user input does not match defined command usage
+     */
+    private ArrayList<String> generateKeywordsWithModuleChecking(String args) throws ParseException {
+        String[] splitByModule = args.split(PREFIX_MODULE.getPrefix());
+        String moduleHalf = splitByModule[1];
+        performValidation(moduleHalf.split(PREFIXES_SPACE)[0]);
+
+        return generateKeywords(args);
+    }
+
+    private void validPrefixes(String args) throws ParseException {
+        Pattern prefixesPattern = Pattern.compile(VALID_PREFIXES);
+        Matcher prefixesMatcher = prefixesPattern.matcher(args);
         boolean hasPrefixes = prefixesMatcher.find();
 
         if (!hasPrefixes) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
-
-        Pattern modulePattern = Pattern.compile(PREFIX_MODULE.getPrefix());
-        Matcher moduleMatcher = modulePattern.matcher(trimmedArgs);
-
-        if (!moduleMatcher.find()) {
-
-            String[] split = trimmedArgs.split(PREFIXES);
-            ArrayList<String> keywords = new ArrayList<>();
-
-            for (String s : split) {
-                if (!s.equals("")) {
-                    keywords.add(s.trim());
-                }
-            }
-
-            return new FindPersonCommand(new NameContainsKeywordsPredicate(keywords));
-        } else {
-
-            String[] splitByModule = trimmedArgs.split(PREFIX_MODULE.getPrefix());
-            String moduleHalf = splitByModule[1];
-            logger.info("DOESM ODULE: " + Arrays.toString(moduleHalf.split(PREFIXES)));
-
-            return null;
-        }
-
     }
-//    public FindPersonCommand parse(String args) throws ParseException {
-//        String trimmedArgs = args.trim();
-//
-//        if (trimmedArgs.isEmpty()) {
-//            throw new ParseException(
-//                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
-//        }
-//
-//        // Regex depends on user input
-//        String regex;
-//
-//        Pattern namePattern = Pattern.compile(namePrefix.getPrefix());
-//        Pattern modulePattern = Pattern.compile(modulePrefix.getPrefix());
-//        Matcher nameMatcher = namePattern.matcher(trimmedArgs);
-//        Matcher moduleMatcher = modulePattern.matcher(trimmedArgs);
-//        boolean hasName = nameMatcher.find();
-//        boolean hasModule = moduleMatcher.find();
-//
-//        // Represents simply which branch it matches
-//        Mode mode;
-//
-//        if (hasName && hasModule) {
-//            // Branch 0
-//            regex = nameModulePrefix.getPrefix();
-//            mode = Mode.NAME_MODULE;
-//        } else if (hasName) {
-//            // Branch 1
-//            regex = namePrefix + orWhitespace;
-//            mode = Mode.NAME;
-//        } else if (hasModule) {
-//            // Branch 2
-//            regex = modulePrefix + orWhitespace;
-//            mode = Mode.MODULE;
-//        } else {
-//            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
-//        }
-//
-//        String[] nameKeywords = generateKeywords(trimmedArgs, regex, mode);
-//
-//        ArrayList<String> keywords = new ArrayList<>();
-//        for (String str : nameKeywords) {
-//            if (!Objects.equals(str, "")) {
-//                keywords.add(str);
-//            }
-//        }
-//
-//        return new FindPersonCommand(new NameContainsKeywordsPredicate(keywords));
-//    }
 
     /**
-     * Generates the keywords based on the given user input, corresponding regex and
-     * mode which defines what kind of input is further given by the user.
+     * Obtains the module string separated by white spaces and performs module
+     * validity checking on them.
      *
-     * @param input user input in command line
-     * @param regex chosen regex to parse user input
-     * @param mode mode which defines what input the user has given
-     * @return a String array that contains the generated keywords
-     * @throws ParseException if the user input does not match defined command usage
+     * @param args module string separated by white spaces
+     * @throws ParseException input module is invalid
      */
-//    public String[] generateKeywords(String input, String regex, Mode mode) throws ParseException {
-//
-//        String[] tempReturn = input.split(regex);
-//
-//        if (mode.equals(Mode.NAME_MODULE)) {
-//            // Both name and module
-//            // Splits by module prefix
-//            String[] splitByModulePrefix = input.split(modulePrefix.getPrefix());
-//
-//            String[] splitByWhiteSpace;
-//
-//            // Splits modules by whitespace if m/ comes after n/
-//            if (!splitByModulePrefix[0].equals("") && splitByModulePrefix[0].charAt(0) == 'n') {
-//                splitByWhiteSpace = splitByModulePrefix[1].split(whitespace);
-//            } else {
-//                // Throw error and restate command use
-//                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-//                        FindPersonCommand.MESSAGE_USAGE));
-//            }
-//
-//            // Check each module fits the constraints
-//            checkModuleValidity(splitByWhiteSpace);
-//
-//            // Past here, modules are all valid
-//        } else if (mode.equals(Mode.NAME)) {
-//            // Only name
-//            return tempReturn;
-//        } else if (mode.equals(Mode.MODULE)) {
-//            // Only module
-//            checkModuleValidity(tempReturn);
-//        }
-//
-//        return tempReturn;
-//    }
+    private void performValidation(String args) throws ParseException {
+        String[] modules = args.split(" ");
+        checkModuleValidity(modules);
+    }
 
     /**
      * Checks if the provided modules are valid.
@@ -190,6 +135,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         Matcher matcher;
 
         pattern = Pattern.compile(VALIDATION_REGEX);
+
         for (String s : modules) {
             matcher = pattern.matcher(s.toUpperCase(Locale.ROOT));
             if (!matcher.find() && !Objects.equals(s, "")) {

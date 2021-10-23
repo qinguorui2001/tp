@@ -76,6 +76,21 @@ public class Person {
     }
 
     /**
+     * Checks if a person has a tag in their tag set.
+     *
+     * @param key tag name of the tag to find.
+     * @return true if tag name matches any of the tags in the tag set.
+     */
+    public boolean hasTag(String key) {
+        for (Tag tag : tags) {
+            if (tag.equals(new Tag(key))) {
+                return true;
+            };
+        }
+        return false;
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
