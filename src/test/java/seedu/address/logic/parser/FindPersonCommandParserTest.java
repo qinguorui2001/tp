@@ -75,6 +75,7 @@ public class FindPersonCommandParserTest {
         FindPersonCommand expectedFindCommandAllThree =
                 new FindPersonCommand(new NameContainsKeywordsPredicate(List.of("Alice", "MA1521", "lab15")));
         assertParseSuccess(parser, "n/alice m/ma1521 t/LAB15", expectedFindCommandAllThree);
+
     }
 
     @Test
