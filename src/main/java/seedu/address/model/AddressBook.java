@@ -1,9 +1,11 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
@@ -20,6 +22,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /* The person whose assignment is displayed on the Ui */
     private Optional<Person> activePerson = Optional.empty();
+    private Predicate<Person> filteredPersonListPredicate = PREDICATE_SHOW_ALL_PERSONS;
     private final UniquePersonList persons;
     private final UniqueAssignmentList assignments;
 
@@ -72,6 +75,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         setAssignments(newData.copyAssignmentList());
         setPersons(newData.copyPersonList());
         activePerson = newData.copyActivePerson();
+        filteredPersonListPredicate = newData.getFilteredPersonListPredicate();
+    }
+
+    public void setFilteredPersonListPredicate(Predicate<Person> predicate) {
+        this.filteredPersonListPredicate = predicate;
     }
 
     //// person-level operations
@@ -219,6 +227,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public Predicate<Person> getFilteredPersonListPredicate() {
+        return filteredPersonListPredicate;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
@@ -249,4 +262,5 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook copyAddressBook() {
         return new AddressBook(this);
     }
+
 }

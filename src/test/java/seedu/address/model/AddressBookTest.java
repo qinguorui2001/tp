@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -109,6 +110,11 @@ public class AddressBookTest {
 
         @Override
         public void updateAssignmentList(Person person) {
+        }
+
+        @Override
+        public Predicate<Person> getFilteredPersonListPredicate() {
+            return null;
         }
 
         @Override

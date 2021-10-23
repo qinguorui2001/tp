@@ -164,6 +164,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        versionedAddressBook.setFilteredPersonListPredicate(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
@@ -227,11 +228,13 @@ public class ModelManager implements Model {
     @Override
     public void undoAddressBook() throws CommandException {
         versionedAddressBook.undo();
+        updateFilteredPersonList(this.versionedAddressBook.getFilteredPersonListPredicate());
     }
 
     @Override
     public void redoAddressBook() throws CommandException {
         versionedAddressBook.redo();
+        updateFilteredPersonList(this.versionedAddressBook.getFilteredPersonListPredicate());
     }
 
     @Override

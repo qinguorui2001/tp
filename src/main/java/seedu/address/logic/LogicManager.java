@@ -44,13 +44,11 @@ public class LogicManager implements Logic {
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
 
-        if (!(command instanceof UndoCommand
-                || command instanceof ListPersonCommand
-                || command instanceof FindPersonCommand)) {
+        commandResult = command.execute(model);
+
+        if (!(command instanceof UndoCommand || command instanceof RedoCommand)) {
             model.commitAddressBook(model.getVersionedAddressBook());
         }
-
-        commandResult = command.execute(model);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
