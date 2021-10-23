@@ -146,11 +146,27 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the contact list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Showing person’s assignment list: `show`
+
+Shows the assignment list of the specified person in a separate assignment list window.
+Assignment list will be sorted by status and date.
+* Assignments with `COMPLETED` status will be at the bottom of the list.
+* Assignments with `PENDING` status will be at the top of the list.
+* Assignments with same status will be sorted by due date.
+
+Format: `show INDEX`
+
+Examples:
+* `show 1` renders the first person’s assignment list on the right side of the app.
+* The index refers to the index shown in the displayed person list.
+  ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
+
 ### Adding assignments : `give` `giveall`
 
 #### Adding an assignment : `give`
 
 Gives an assignment with deadline to the person specified by the index in the contact list.
+If `time` is not specified, `time` will be set to `11:59 pm` by default.
 
 Format: `INDEX d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
 
@@ -206,20 +222,6 @@ Format: `done INDEX`
 Examples:
 * `done 4` marks the 4th assignment in the displayed assignment list as completed.
 
-### Showing person’s assignment list: `show`
-
-Shows the assignment list of the specified person in a separate assignment list window.
-Assignment list will be sorted by status and date.
-* Assignments with `COMPLETED` status will be at the bottom of the list.
-* Assignments with `PENDING` status will be at the top of the list.
-* Assignments with same status will be sorted by due date.
-
-Format: `show INDEX`
-
-Examples:
-* `show 1` renders the first person’s assignment list on the right side of the app.
-* The index refers to the index shown in the displayed person list.
-  ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
 ### Clearing all entries : `clear`
 
@@ -275,10 +277,11 @@ Action | Format, Examples
 **find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **list** | `list`
 **help** | `help`
+**show** | `show INDEX` <br> e.g., `show 2`
 **give** | `give INDEX d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021`
 **giveall** | `giveall m/module d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give m/CS2100 d/Lab1 by/ 21/8/2021
 **remove** | `remove INDEX` <br> e.g., `remove 10`
 **done** | `done INDEX` <br> e.g., `done 4`
-**show** | `show INDEX` <br> e.g., `show 2`
 **undo** | `undo`
+**exit** | `exit`
 
