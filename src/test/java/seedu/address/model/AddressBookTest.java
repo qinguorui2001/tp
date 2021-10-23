@@ -116,22 +116,22 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Assignment> copyOfAssignmentList() {
+        public ObservableList<Assignment> copyAssignmentList() {
             return this.assignments;
         }
 
         @Override
-        public ObservableList<Person> copyOfPersonList() {
+        public ObservableList<Person> copyPersonList() {
             return this.persons;
         }
 
         @Override
-        public Person copyOfActivePerson() {
+        public Person copyActivePerson() {
             return null;
         }
 
         @Override
-        public AddressBook copyOfAddressBook() {
+        public AddressBook copyAddressBook() {
             return new AddressBook(this);
         }
 

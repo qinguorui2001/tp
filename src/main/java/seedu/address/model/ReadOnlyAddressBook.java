@@ -30,20 +30,20 @@ public interface ReadOnlyAddressBook {
     /**
      * Returns the copy of assignment list.
      */
-    ObservableList<Assignment> copyOfAssignmentList();
+    ObservableList<Assignment> copyAssignmentList();
 
     /**
      * Returns the copy of person list.
      */
-    ObservableList<Person> copyOfPersonList();
+    ObservableList<Person> copyPersonList();
 
     /**
      * Returns the copy of active person.
      */
-    Person copyOfActivePerson();
+    Person copyActivePerson();
 
     /**
      * Returns the copy of address book.
      */
-    AddressBook copyOfAddressBook();
+    AddressBook copyAddressBook();
 }

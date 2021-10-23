@@ -21,35 +21,33 @@ public class VersionedAddressBook extends AddressBook {
      */
     public VersionedAddressBook(ReadOnlyAddressBook readOnlyAddressBook) {
         super(readOnlyAddressBook);
-        addressBookStateList.push(readOnlyAddressBook.copyOfAddressBook());
+        addressBookStateList.push(readOnlyAddressBook.copyAddressBook());
     }
 
     /**
      * Undoes the command.
      */
     public void undo() throws CommandException {
-        if (!addressBookStateList.empty() && currentStatePointer >= 1) {
-            ReadOnlyAddressBook addressBook = addressBookStateList.get(currentStatePointer - 1);
-            logger.info("AddressBook: " + addressBook);
-            resetData(addressBook);
-            currentStatePointer--;
-        } else {
+        if (addressBookStateList.empty() || currentStatePointer < 1) {
             throw new CommandException(Messages.MESSAGE_INVALID_UNDO);
         }
+        ReadOnlyAddressBook addressBook = addressBookStateList.get(currentStatePointer - 1);
+        logger.info("AddressBook: " + addressBook);
+        resetData(addressBook);
+        currentStatePointer--;
     }
 
     /**
      * Redoes the command.
      */
     public void redo() throws CommandException {
-        if (!addressBookStateList.empty() && currentStatePointer < size - 1) {
-            ReadOnlyAddressBook addressBook = addressBookStateList.get(currentStatePointer + 1);
-            logger.info("AddressBook: " + addressBook);
-            resetData(addressBook);
-            currentStatePointer++;
-        } else {
+        if (addressBookStateList.empty() || currentStatePointer >= size - 1) {
             throw new CommandException(Messages.MESSAGE_INVALID_REDO);
         }
+        ReadOnlyAddressBook addressBook = addressBookStateList.get(currentStatePointer + 1);
+        logger.info("AddressBook: " + addressBook);
+        resetData(addressBook);
+        currentStatePointer++;
     }
 
     /**
@@ -57,7 +55,7 @@ public class VersionedAddressBook extends AddressBook {
      */
     public void commitAddressBook(ReadOnlyAddressBook readOnlyAddressBook) {
         deleteElementsAfterPointer(currentStatePointer);
-        addressBookStateList.push(readOnlyAddressBook.copyOfAddressBook());
+        addressBookStateList.push(readOnlyAddressBook.copyAddressBook());
         currentStatePointer++;
         size = currentStatePointer + 1;
     }

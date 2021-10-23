@@ -188,10 +188,10 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
     /**
      * Returns the copy of unique assignment list.
      */
-    public UniqueAssignmentList copyOfUniqueAssignmentList() {
+    public UniqueAssignmentList copyUniqueAssignmentList() {
         UniqueAssignmentList uniqueAssignmentListCopy = new UniqueAssignmentList();
         for (Assignment assignment: this.internalList) {
-            uniqueAssignmentListCopy.add(assignment.copyOfAssignment());
+            uniqueAssignmentListCopy.add(assignment.copyAssignment());
         }
         return uniqueAssignmentListCopy;
     }
