@@ -56,7 +56,7 @@ public class FindPersonCommandParserTest {
         assertParseSuccess(parser, "n/Alice Bob m/CS1101S", expectedFindCommandWithBoth);
 
         // finding both name and valid module with different case sensitivity and white spaces
-        assertParseSuccess(parser, "n/ \t AlICe \n\n\nBOB m/cs1101s",expectedFindCommandWithBoth);
+        assertParseSuccess(parser, "n/ \t AlICe \n\n\nBOB m/cs1101s", expectedFindCommandWithBoth);
 
         // inverted prefixes
         FindPersonCommand expectedFindCommandInverted =

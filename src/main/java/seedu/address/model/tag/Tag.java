@@ -44,8 +44,8 @@ public class Tag {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Tag // instanceof handles nulls
-                && tagName.toUpperCase(Locale.ROOT).equals(
-                ((Tag) other).tagName.toUpperCase(Locale.ROOT))); // state check
+                && tagName.toUpperCase(Locale.ROOT)
+                .equals(((Tag) other).tagName.toUpperCase(Locale.ROOT))); // state check
     }
 
     @Override

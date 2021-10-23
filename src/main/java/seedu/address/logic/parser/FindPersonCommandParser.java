@@ -75,7 +75,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
         ArrayList<String> keywords = new ArrayList<>();
 
         for (String s : split) {
-            if ( s != null && !s.equals("")) {
+            if (s != null && !s.equals("")) {
                 keywords.add(s);
             }
         }

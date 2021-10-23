@@ -85,7 +85,7 @@ public class Person {
         for (Tag tag : tags) {
             if (tag.equals(new Tag(key))) {
                 return true;
-            };
+            }
         }
         return false;
     }

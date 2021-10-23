@@ -1,12 +1,10 @@
 package seedu.address.model.person;
 
-import java.util.Collections;
+import seedu.address.commons.util.StringUtil;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
-
-import seedu.address.commons.util.StringUtil;
-import seedu.address.model.tag.Tag;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -44,6 +42,13 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
                 && listEquals(keywords, ((NameContainsKeywordsPredicate) other).keywords)); // state check
     }
 
+    /**
+     * Checks if two lists are equal (case-insensitive).
+     *
+     * @param a First list
+     * @param b Second list
+     * @return True if both lists are similar
+     */
     public boolean listEquals(List<String> a, List<String> b) {
 
         if (a.size() != b.size()) {
