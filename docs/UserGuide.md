@@ -220,7 +220,7 @@ Marks a specified assignment's deadline of a person as completed.
 Format: `done INDEX`
 
 Examples:
-* `done 4` marks the 4th assignment in the displayed assignment list as completed.
+* `done 3` marks the 3rd assignment in the displayed assignment list as completed.
 
 
 ### Clearing all entries : `clear`
@@ -233,7 +233,7 @@ Format: `clear`
 
 Undo the last command entered.
 
-Format: `undo`
+Format: `undo` 
 
 ### Exiting the program : `exit`
 
