@@ -227,7 +227,7 @@ Examples:
 
 Deletes all completed assignments from TA<sup>2</sup>.
 
-Format: `clear`
+Format: `clean`
 
 ### Clearing all entries : `clear`
 
@@ -286,6 +286,7 @@ Action | Format, Examples
 **show** | `show INDEX` <br> e.g., `show 2`
 **give** | `give INDEX d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021`
 **giveall** | `giveall m/module d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give m/CS2100 d/Lab1 by/ 21/8/2021`
+**clean** | `clean`
 **remove** | `remove INDEX` <br> e.g., `remove 10`
 **done** | `done INDEX` <br> e.g., `done 4`
 **undo** | `undo`

@@ -363,56 +363,53 @@ persons who already have the assignment.
 means it is less convenient for users as they have to do extra work. 
 
 
-### [Proposed] Removeall feature
-The removeall command allows users to remove the specified assignment of all persons in the same module displayed in the GUI.
-It is abstracted as `DeleteAssignmentOfAllCommand` and extends `Command`. When the user inputs the command, 
+### Clean feature
+The clean command allows users to remove the all completed assignment of all persons stored in the model.
+It is abstracted as `CleanAssignmentCommand` and extends `Command`. When the user inputs the command, 
 `Command#execute` is called and returns a `CommandResult`. 
 
-Given below is an example usage scenario and how the `DeleteAssignmentOfAllCommand` is executed.
+Given below is an example usage scenario and how the `CleanAssignmentCommand` is executed.
 
 Step 1. The user executes `list` command to see the current list of persons.
 
-Step 2. The user executes `removeall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to remove all the completed assignments.
-When `Command#execute` is called, the `removeall m/...` command will filter out persons in the current displayed list 
-with the module field `CS2100`and remove the specified assignment if the person has completed the assignment. 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
-module field or there are no persons who have completed the assignment, it will return an error to the user. 
+Step 2. The user executes `clean` command to remove all the completed assignments.
+When `Command#execute` is called, the `clean` command will get the assignment list of all persons in the model and
+remove all assignments with the completed status.
 
-</div>
+The following sequence diagram shows how the clean command is executed:
+![RemoveAllSequenceDiagram](images/CleanSequenceDiagram.png)
 
-The following sequence diagram shows how the removeall command is executed:
-![RemoveAllSequenceDiagram](images/RemoveAllSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RemoveAssignmentOfAllCommand` 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CleanAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-Step 3. The user executes `show 1` to check that the specified assignment has been removed for persons in the specified 
-module who has completed the assignment.
+Step 3. The user executes `show 1` to check that all completed assignments has been removed for the first person.
 
-The following activity diagram summarizes what happens when a user executes the removeall command:
+The following activity diagram summarizes what happens when a user executes the clean command:
 
-<img src="images/RemoveAllActivityDiagram.png" width="250" />
+<img src="images/CleanActivityDiagram.png" width="250" />
 
 #### Design considerations:
-**Aspect: Deletes assignment of persons in current displayed list or for all persons:**
+**Aspect: Deletes completed assignments of person with assignments currently displayed or for all persons:**
 
-* **Alternative 1 (current choice):** Deletes assignment of persons in current displayed list
+* **Alternative 1:** Deletes completed assignments of person with assignments currently displayed
     * Pros: Allows for a safer delete of assignments
-    * Cons: User has to carry out `list` command first if deletion of assignments is desired for all persons
+    * Cons: User has to carry out `show INDEX` command for every person if deletion of assignments is desired for all persons
 
-* **Alternative 2:** Deletes assignment of all persons 
+* **Alternative 2(current choice):** Deletes completed assignment of all persons 
     * Pros: Allows user to delete assignment of all persons without the need of additional commands
     * Cons: Undesired deletion of assignment of persons not in displayed list may occur
 
-* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 1** is 
-chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the 
-deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
-in **alternative 1**, it may take up much more time. 
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 2** is 
+chosen. When the list of persons increase to considerable numbers, deletion of completed assignments will require the user
+to input an additional command for each person. Bearing in mind that users make use of the `clean` command to remove
+completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
+may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command 
+which allows the user to retrieve the desired assignments easily.
 
 ### \[Proposed\] Data archiving
-### give feature
+### Give feature
 The give command allows users to add the specified assignment to a particular person is stored in the model. 
 Person who already has the specified assignment will not have a duplicated assignment added to him. The
 command is abstracted as `AddAssignmentCommand` and extends `Command`. When the user inputs the command,
@@ -459,7 +456,7 @@ The following activity diagram summarizes what happens when a user executes the 
   assignments, which means it is less convenient for users as they have to do extra work.
 
 
-### remove feature
+### Remove feature
 The remove command allows users to remove the specified assignment of a particular person in model.
 It is abstracted as `DeleteAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
@@ -484,7 +481,7 @@ module with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the remove command:
 
-<img src="images/RemoveactivityDiagram.png" width="250" />
+<img src="images/RemoveActivityDiagram.png" width="250" />
 
 #### Design considerations:
 **Aspect: Deletes assignment of a person in current displayed list or for any person in storage:**
@@ -503,7 +500,7 @@ The following activity diagram summarizes what happens when a user executes the 
   deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
 
-### done feature
+### Done feature
 The done command allows users to mark the specified assignment of a particular person in model.
 It is abstracted as `MarkAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
