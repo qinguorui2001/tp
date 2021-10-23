@@ -247,7 +247,7 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 
 ### Editing the data file
 
-TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
@@ -279,7 +279,7 @@ Action | Format, Examples
 **help** | `help`
 **show** | `show INDEX` <br> e.g., `show 2`
 **give** | `give INDEX d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021`
-**giveall** | `giveall m/module d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give m/CS2100 d/Lab1 by/ 21/8/2021
+**giveall** | `giveall m/module d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give m/CS2100 d/Lab1 by/ 21/8/2021`
 **remove** | `remove INDEX` <br> e.g., `remove 10`
 **done** | `done INDEX` <br> e.g., `done 4`
 **undo** | `undo`
