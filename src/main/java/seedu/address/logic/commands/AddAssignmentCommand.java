@@ -8,11 +8,8 @@ import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 
@@ -49,9 +46,8 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the assignment list";
 
     private final Assignment toAdd;
+
     private final Index index;
-    private ReadOnlyAddressBook addressBook;
-    private ObservableList<Assignment> assignmentFilteredList;
 
     /**
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
@@ -73,8 +69,6 @@ public class AddAssignmentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        addressBook = new AddressBook(model.getAddressBook());
-
         Person personToGiveAssignment = lastShownList.get(index.getZeroBased());
 
         if (model.hasAssignment(personToGiveAssignment, toAdd)) {
@@ -84,11 +78,6 @@ public class AddAssignmentCommand extends Command {
         model.addAssignment(personToGiveAssignment, toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-    }
-
-    @Override
-    public void unExecute(Model model) throws CommandException {
-        model.setAddressBook(addressBook);
     }
 
     @Override

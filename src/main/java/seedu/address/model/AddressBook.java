@@ -19,7 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     /* The person whose assignment is displayed on the Ui */
-    private Optional<Person> activePerson;
+    private Optional<Person> activePerson = Optional.empty();
     private final UniquePersonList persons;
     private final UniqueAssignmentList assignments;
 
@@ -68,9 +68,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setAssignments(newData.getAssignmentsList());
-        setPersons(newData.getPersonList());
-        activePerson = Optional.empty();
+
+        setAssignments(newData.copyAssignmentList());
+        setPersons(newData.copyPersonList());
+        activePerson = newData.copyActivePerson();
     }
 
     //// person-level operations
@@ -227,5 +228,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    @Override
+    public ObservableList<Assignment> copyAssignmentList() {
+        return this.assignments.copyUniqueAssignmentList().asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Person> copyPersonList() {
+        return this.persons.copyUniquePersonList().asUnmodifiableObservableList();
+    }
+
+    @Override
+    public Optional<Person> copyActivePerson() {
+        return activePerson.map(person -> person.copyPerson());
+    }
+
+    @Override
+    public AddressBook copyAddressBook() {
+        return new AddressBook(this);
     }
 }

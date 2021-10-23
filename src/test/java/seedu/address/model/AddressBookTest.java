@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -113,6 +114,26 @@ public class AddressBookTest {
         @Override
         public ObservableList<Assignment> getAssignmentsList() {
             return assignments;
+        }
+
+        @Override
+        public ObservableList<Assignment> copyAssignmentList() {
+            return this.assignments;
+        }
+
+        @Override
+        public ObservableList<Person> copyPersonList() {
+            return this.persons;
+        }
+
+        @Override
+        public Optional<Person> copyActivePerson() {
+            return Optional.empty();
+        }
+
+        @Override
+        public AddressBook copyAddressBook() {
+            return new AddressBook(this);
         }
 
     }
