@@ -117,6 +117,68 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+The cumulative list of all commands are:
+1. **AddAssignmentCommand:** 
+<br>Adds assignment to a specific user's assignment list<br>
+
+
+2. **AddAssignmentToAllCommand:**
+<br> Adds assignment to all user's assignment list<br>
+
+
+3. **AddPersonCommand:**
+<br> Adds person to the list<br>
+
+
+4. **ClearCommand:**
+<br> Clears everyone's completed tasks<br>
+
+
+5. **DeleteAssignmentCommand:**
+<br> Deletes a specific assignment from a specific person<br>
+
+
+6. **DeletePersonCommand:**
+<br> Deletes a specific person<br>
+
+
+7. **EditPersonCommand:**
+<br> Edits a specific person <br>
+
+
+8. **ExitCommand:**
+<br> Exits the application <br>
+
+
+9. **FindPersonCommand:**
+<br> Finds people who match the given input <br>
+
+
+10. **HelpCommand:**
+<br> Pulls up the help list <br>
+
+
+11. **ListPersonCommand:**
+<br> Displays the entire list of contacts <br>
+
+
+12. **MarkAssignmentCommand:**
+<br> Marks the specified assignment <br>
+
+
+13. **RedoCommand:**
+<br> Redo the previous command <br>
+
+
+14. **ShowAssignmentCommand:**
+<br> Shows a specific person's list <br>
+
+
+15. **UndoCommand:**
+<br> Undo the previous command <br>
+
+
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
