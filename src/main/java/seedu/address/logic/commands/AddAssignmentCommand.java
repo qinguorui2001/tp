@@ -1,21 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUEDATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -39,12 +34,10 @@ public class AddAssignmentCommand extends Command {
                     + "sun - sets due date to the coming sunday\n";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an assignment to the person's assignment list. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + "Parameters: INDEX (must be a positive integer)  "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DUEDATE + "DUEDATE\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + "assignment2 "
             + PREFIX_DUEDATE + "11/11/2021 \n\n"
             + FRIENDLY_COMMAND_SYNTAX;
@@ -53,47 +46,38 @@ public class AddAssignmentCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT = "This assignment already exists in the assignment list";
 
     private final Assignment toAdd;
-    private final Name name;
-    private ReadOnlyAddressBook addressBook;
-    private ObservableList<Assignment> assignmentFilteredList;
+
+    private final Index index;
+
     /**
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
      */
-    public AddAssignmentCommand(Name name, Assignment assignment) {
+    public AddAssignmentCommand(Index index, Assignment assignment) {
         requireNonNull(assignment);
-        requireNonNull(name);
+        requireNonNull(index);
         toAdd = assignment;
-        this.name = name;
+        this.index = index;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        addressBook = new AddressBook(model.getAddressBook());
-        // Get Person that match the name
-        List<Person> filteredPersonList =
-                model.getFilteredPersonList()
-                        .stream()
-                        .filter(person -> person.isSameName(name))
-                        .collect(Collectors.toList());
 
-        if (filteredPersonList.size() == 0) {
-            throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_NAME);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person selectedPerson = filteredPersonList.get(0);
-        if (model.hasAssignment(selectedPerson, toAdd)) {
+        Person personToGiveAssignment = lastShownList.get(index.getZeroBased());
+
+        if (model.hasAssignment(personToGiveAssignment, toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSIGNMENT);
         }
 
-        model.addAssignment(selectedPerson, toAdd);
+        model.addAssignment(personToGiveAssignment, toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-    }
-
-    @Override
-    public void unExecute(Model model) throws CommandException {
-        model.setAddressBook(addressBook);
     }
 
     @Override

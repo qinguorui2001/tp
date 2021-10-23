@@ -1,3 +1,4 @@
+
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
@@ -10,7 +11,7 @@
     "name" : "Benson Meier",
     "email" : "johnd@example.com",
     "module": "CS1101S",
-    "assignments" : ["Assignment 2|15 Oct 2021, 01:00 PM|PENDING", "Homework 1|13 Sep 2021, 11:59 PM|LATE" ],
+    "assignments" : ["Assignment 2|15 Oct 2021, 01:00 PM|PENDING", "Homework 1|13 Sep 2021, 11:59 PM|COMPLETED" ],
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +23,7 @@
     "name" : "Daniel Meier",
     "email" : "cornelia@example.com",
     "module": "CM1102",
-    "assignments" : [ "Homework 1|13 Sep 2021, 11:59 PM|LATE" ],
+    "assignments" : [ "Homework 1|13 Sep 2021, 11:59 PM|COMPLETED" ],
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",

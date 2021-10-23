@@ -7,7 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.clonePerson;
 import static seedu.address.logic.commands.CommandTestUtil.clonePersonInModel;
 import static seedu.address.logic.commands.CommandTestUtil.setUpNewModelWithClonedPerson;
-import static seedu.address.testutil.TypicalIndexes.*;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ASSIGNMENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ASSIGNMENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SIXTH_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -44,8 +47,9 @@ public class MarkAssignmentCommandTest {
 
         expectedModel.markAssignment(clonedExpectedPerson, assignmentToMark);
 
+        actualModel.updateFilteredAssignmentList(clonedActualPerson);
         MarkAssignmentCommand markAssignmentCommand =
-                new MarkAssignmentCommand(clonedActualPerson.getName(), INDEX_FIRST_ASSIGNMENT);
+                new MarkAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
 
         String expectedMessage =
                 String.format(MarkAssignmentCommand.MESSAGE_MARK_ASSIGNMENT_SUCCESS,
@@ -56,26 +60,30 @@ public class MarkAssignmentCommandTest {
     @Test
     public void execute_invalidIndexAssignmentList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAssignmentList(personToShow).size() + 1);
+
+        model.updateFilteredAssignmentList(personToShow);
         MarkAssignmentCommand markAssignmentCommand =
-                new MarkAssignmentCommand(personToShow.getName(), outOfBoundIndex);
+                new MarkAssignmentCommand(outOfBoundIndex);
 
         assertCommandFailure(markAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        Person personInList = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person personInList = model.getFilteredPersonList().get(INDEX_SIXTH_PERSON.getZeroBased());
+        model.updateFilteredAssignmentList(personInList);
+
         MarkAssignmentCommand markFirstCommand =
-                new MarkAssignmentCommand(personInList.getName(), INDEX_FIRST_ASSIGNMENT);
+                new MarkAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
         MarkAssignmentCommand markSecondCommand =
-                new MarkAssignmentCommand(personInList.getName(), INDEX_SECOND_ASSIGNMENT);
+                new MarkAssignmentCommand(INDEX_SECOND_ASSIGNMENT);
 
         // same object -> returns true
         assertTrue(markFirstCommand.equals(markFirstCommand));
 
         // same values -> returns true
         MarkAssignmentCommand markFirstCommandCopy =
-                new MarkAssignmentCommand(personInList.getName(), INDEX_FIRST_ASSIGNMENT);
+                new MarkAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
         assertTrue(markFirstCommand.equals(markFirstCommandCopy));
 
         // different types -> returns false

@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
@@ -23,11 +22,10 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private ObservableList<Assignment> assignmentsList;
-    private CommandStack commandStack;
+    private final ObservableList<Assignment> assignmentsList;
+    private final VersionedAddressBook versionedAddressBook;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,11 +36,10 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.versionedAddressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
-        this.commandStack = new CommandStack();
+        filteredPersons = new FilteredList<>(this.versionedAddressBook.getPersonList());
+        assignmentsList = new FilteredList<>(this.versionedAddressBook.getAssignmentsList());
     }
 
     public ModelManager() {
@@ -88,12 +85,12 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.versionedAddressBook.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return versionedAddressBook;
     }
 
     //=========== Person ================================================================================
@@ -101,20 +98,23 @@ public class ModelManager implements Model {
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return addressBook.hasPerson(person);
+        return versionedAddressBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
-        if (addressBook.isActivePerson(target)) {
+        versionedAddressBook.removePerson(target);
+
+        /*show an empty assignment list in AddressBook if the person deleted has his/her assignments
+            stored in AddressBook's Assignment List*/
+        if (versionedAddressBook.isActivePerson(target)) {
             updateFilteredAssignmentList(target);
         }
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
+        versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
@@ -122,31 +122,31 @@ public class ModelManager implements Model {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        addressBook.setPerson(target, editedPerson);
+        versionedAddressBook.setPerson(target, editedPerson);
     }
 
     //=========== Assignment ================================================================================
 
     @Override
     public boolean hasAssignment(Person person, Assignment toAdd) {
-        return addressBook.hasAssignment(person, toAdd);
+        return versionedAddressBook.hasAssignment(person, toAdd);
     }
 
     @Override
     public void addAssignment(Person person, Assignment toAdd) {
-        addressBook.addAssignment(person, toAdd);
+        versionedAddressBook.addAssignment(person, toAdd);
         updateFilteredAssignmentList(person);
     }
 
     @Override
     public void deleteAssignment(Person person, Assignment toDelete) {
-        addressBook.removeAssignment(person, toDelete);
+        versionedAddressBook.removeAssignment(person, toDelete);
         updateFilteredAssignmentList(person);
     }
 
     @Override
     public void markAssignment(Person person, Assignment toMark) {
-        addressBook.markAssignment(person, toMark);
+        versionedAddressBook.markAssignment(person, toMark);
         updateFilteredAssignmentList(person);
     }
 
@@ -164,6 +164,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        versionedAddressBook.setFilteredPersonListPredicate(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
@@ -182,7 +183,7 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
 
-        return addressBook.equals(other.addressBook)
+        return versionedAddressBook.equals(other.versionedAddressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
@@ -201,28 +202,43 @@ public class ModelManager implements Model {
     @Override
     public List<Assignment> getFilteredAssignmentList(Person person) {
         requireNonNull(person);
-        return this.addressBook.getPersonAssignmentList(person);
+        return this.versionedAddressBook.getPersonAssignmentList(person);
     }
 
     @Override
     public void updateFilteredAssignmentList(Person person) {
-        this.addressBook.changeActivePerson(person);
-        this.addressBook.updateAssignmentList(person);
-        this.assignmentsList = new FilteredList<>(this.addressBook.getAssignmentsList());
+        this.versionedAddressBook.changeActivePerson(person);
+        this.versionedAddressBook.updateAssignmentList(person);
+    }
+
+    //=========== Active Person =========================================================================
+    public Person getActivePerson() {
+        return versionedAddressBook.getActivePerson();
+    }
+
+    public boolean hasActivePerson() {
+        return versionedAddressBook.hasActivePerson();
     }
 
     @Override
-    public void updateCommandStack(Command command) {
-        commandStack.updateUndoStack(command);
+    public void commitAddressBook(ReadOnlyAddressBook addressBook) {
+        versionedAddressBook.commitAddressBook(addressBook);
     }
 
     @Override
     public void undoAddressBook() throws CommandException {
-        commandStack.undo(this);
+        versionedAddressBook.undo();
+        updateFilteredPersonList(this.versionedAddressBook.getFilteredPersonListPredicate());
     }
 
     @Override
-    public void redoAddressBook() throws CommandException{
+    public void redoAddressBook() throws CommandException {
+        versionedAddressBook.redo();
+        updateFilteredPersonList(this.versionedAddressBook.getFilteredPersonListPredicate());
+    }
 
+    @Override
+    public VersionedAddressBook getVersionedAddressBook() {
+        return new VersionedAddressBook(getAddressBook());
     }
 }

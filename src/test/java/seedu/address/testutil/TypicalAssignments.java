@@ -6,14 +6,11 @@ import java.util.List;
 
 import seedu.address.model.assignment.Assignment;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS2106_PROJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2106_PROJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS1231S_TUTORIAL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS1231S_TUTORIAL;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS2106_PROJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2100_LAB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIENDLY_DATE_CS2100_LAB;
@@ -53,11 +50,6 @@ public class TypicalAssignments {
             .withDescription(VALID_DESCRIPTION_CS3230_LAB)
             .withCompletedStatus()
             .withDueDate(VALID_DATE_CS3230_LAB, VALID_TIME_CS3230_LAB)
-            .build();
-    public static final Assignment ASSIGNMENT_CS2106_PROJECT = new AssignmentBuilder()
-            .withDescription(VALID_DESCRIPTION_CS2106_PROJECT)
-            .withLateStatus()
-            .withDueDate(VALID_DATE_CS2106_PROJECT, VALID_TIME_CS2106_PROJECT)
             .build();
     public static final Assignment ASSIGNMENT_CS2100_LAB = new AssignmentBuilder()
             .withDescription(VALID_DESCRIPTION_CS2100_LAB)

@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
@@ -95,6 +94,10 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    boolean hasActivePerson();
+
+    Person getActivePerson();
+
     boolean hasAssignment(Person person, Assignment toAdd);
 
     void addAssignment(Person person, Assignment toAdd);
@@ -109,5 +112,7 @@ public interface Model {
 
     void redoAddressBook() throws CommandException;
 
-    void updateCommandStack(Command command);
+    void commitAddressBook(ReadOnlyAddressBook addressBook);
+
+    VersionedAddressBook getVersionedAddressBook();
 }

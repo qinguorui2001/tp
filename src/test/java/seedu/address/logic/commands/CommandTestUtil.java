@@ -48,13 +48,16 @@ public class CommandTestUtil {
     public static final String VALID_DESCRIPTION_CS3230_LAB = "CS3230 Lab Week 4";
     public static final String VALID_DESCRIPTION_CS2100_LAB = "CS2100 Lab Week 7";
     public static final String VALID_DESCRIPTION_GEQ1000_QUIZ = "GEQ1000 Economics Quiz";
+
     public static final String VALID_DATE_CS1101S_MISSION = "30/09/2021";
     public static final String VALID_DATE_CS1231S_TUTORIAL = "01/02/2021";
     public static final String VALID_DATE_CS2103_QUIZ = "30/11/2022";
     public static final String VALID_DATE_CS2106_PROJECT = "1/1/2020";
     public static final String VALID_DATE_CS3230_LAB = "11/01/2021";
+
     public static final String VALID_FRIENDLY_DATE_CS2100_LAB = "tmr";
     public static final String VALID_FRIENDLY_DATE_GEQ1000_QUIZ = "today";
+
     public static final String VALID_TIME_CS2106_PROJECT = "0001";
     public static final String VALID_TIME_CS1231S_TUTORIAL = "1800";
     public static final String VALID_TIME_CS3230_LAB = "0800";
@@ -111,6 +114,10 @@ public class CommandTestUtil {
             " " + PREFIX_DESCRIPTION + "CS1231S @ Tutorial 10";
     public static final String INVALID_DESCRIPTION_CS3230_LAB = "CS3230: Lab Week 4";
     public static final String INVALID_DATE_DESCRIPTION = " " + PREFIX_DUEDATE + "11/13/2021";
+
+    public static final String ZERO_INDEX = "0";
+    public static final String NEGATIVE_INDEX = "-1";
+    public static final String POSITIVE_INDEX = "1";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -185,18 +192,6 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show only the person's assignment at the given {@code targetIndex}
-     * in the {@code model}'s address book.
-     */
-    public static void showAssignmentAtIndex(Model model, Person person, Index targetIndex) {
-        //Assignment assignment = TypicalAssignments.getTypicalAssignments().get(targetIndex.getZeroBased());
-        // person.getAssignments().add(assignment);
-        model.updateFilteredAssignmentList(person);
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredAssignmentList().size());
-        assertEquals(1, model.getFilteredAssignmentList().size());
     }
 
     /**

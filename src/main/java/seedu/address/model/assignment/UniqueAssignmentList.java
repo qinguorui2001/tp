@@ -184,4 +184,15 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         Comparator<Assignment> byStatusAndDate = Comparator.naturalOrder();
         this.internalList.sort(byStatusAndDate);
     }
+
+    /**
+     * Returns the copy of unique assignment list.
+     */
+    public UniqueAssignmentList copyUniqueAssignmentList() {
+        UniqueAssignmentList uniqueAssignmentListCopy = new UniqueAssignmentList();
+        for (Assignment assignment: this.internalList) {
+            uniqueAssignmentListCopy.add(assignment.copyAssignment());
+        }
+        return uniqueAssignmentListCopy;
+    }
 }
