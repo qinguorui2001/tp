@@ -110,11 +110,12 @@ public class AddressBookTest {
 
         @Override
         public void updateAssignmentList(Person person) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public Predicate<Person> getFilteredPersonListPredicate() {
-            return null;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
