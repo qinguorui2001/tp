@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app designed for teaching assistants/tutors/professors of 
-from School of Computing to help manage student contacts and keep track of students' assignment submissions. Ta<sup>2</sup> is  
+Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app designed for teaching assistants/tutors/professors 
+from the School of Computing to help manage student contacts and keep track of students' assignment submissions. TA<sup>2</sup> is  
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps.
 
@@ -21,7 +21,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
 1. Copy the file to the folder you want to use as the _home folder_ for your TA<sup>2</sup>.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/userguide/ta^2_ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -29,7 +29,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
    * **`list`** : Lists all contacts.
 
-   * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` to the TA<sup>2</sup>.
+   * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` with his/her relevant information to TA<sup>2</sup>.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
@@ -51,7 +51,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friends` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friends` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friends`, `t/Leader t/friends` etc.
@@ -78,7 +78,7 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the contact list.
+Adds a person to the contact list with the person's relevant information.
 
 Format: `add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 
@@ -87,11 +87,15 @@ Format: `add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 * A person can have any number of tags (including 0).<br><br>
 * A person's module must follow XX[X]1111[X], where X is any letter,
 1 is any number and values in square brackets are optional.
+* Only person's initials and module code will be capitalised on the displayed person list.<br>
+  * e.g. `n/alex yeoh`, `n/DAVID LI` will be converted to `Alex Yeoh` and `David Li` respectively.
+  * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.
 </div>
 
 Examples:
 * `add n/John Doe e/e1234567@u.nus.edu m/CS2100, CS1101S`
 * `add n/Betsy Crowe e/e0234567@u.nus.edu m/CS2103T`
+* `add n/alex yeoh e/1234123@u.nus.edu m/GEQ1000, T17`
 
 ### Listing all persons : `list`
 
@@ -109,9 +113,9 @@ Finds persons whose names or modules contain any of the given keywords.
 
 Format: `find n/NAME_KEYWORD... m/MODULE_KEYWORD...`
 
-* The search is case-insensitive.<br> e.g `cs1101s` will match `CS1101S`.
+* The search is case-insensitive.<br> e.g. `cs1101s` will match `CS1101S`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Can search by category.<br> e.g. `n/NAME, m/MODULE`.
+* Can only search by name and module.<br> e.g. `n/NAME, m/MODULE`.
 * Partial names will be matched. <br> e.g. `n/Hans` will match `Hans Bo`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search). <br>
   e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
@@ -125,8 +129,8 @@ Format: `find n/NAME_KEYWORD... m/MODULE_KEYWORD...`
 Examples:
 * `find n/John` returns `john` and `John Doe`.
 * `find n/alex david` returns `Alex Yeoh`, `David Li`<br>.
-  ![result for 'find alex david'](images/userguide/findAlexDavidResult.png)
-* `find n/bernice james m/ma1521 cs2103t` returns `bernice`, `james`, `christie`, `michael`, assuming christie and michael takes either module listed.
+* `find n/alex david m/cs1231 cs2103t` returns `alex`, `charlotte`, `david`, `james`, assuming charlotte and james takes either module listed.
+  ![result for 'find Example'](images/userguide/findExample.png)
 
 ### Deleting a person : `delete`
 
