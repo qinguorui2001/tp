@@ -9,11 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -54,8 +51,7 @@ public class AddAssignmentCommand extends Command {
 
     private final Assignment toAdd;
     private final Name name;
-    private ReadOnlyAddressBook addressBook;
-    private ObservableList<Assignment> assignmentFilteredList;
+
     /**
      * Creates an AddAssignmentCommand to add the specified {@code Assignment}
      */
@@ -69,7 +65,6 @@ public class AddAssignmentCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        addressBook = new AddressBook(model.getAddressBook());
         // Get Person that match the name
         List<Person> filteredPersonList =
                 model.getFilteredPersonList()
@@ -89,11 +84,6 @@ public class AddAssignmentCommand extends Command {
         model.addAssignment(selectedPerson, toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-    }
-
-    @Override
-    public void unExecute(Model model) throws CommandException {
-        model.setAddressBook(addressBook);
     }
 
     @Override

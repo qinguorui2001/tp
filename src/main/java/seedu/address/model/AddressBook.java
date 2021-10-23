@@ -67,9 +67,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-        setAssignments(newData.getAssignmentsList());
-        setPersons(newData.getPersonList());
-        activePerson = null;
+        setAssignments(newData.copyAssignmentList());
+        setPersons(newData.copyPersonList());
+        activePerson = newData.copyActivePerson();
     }
 
     //// person-level operations
@@ -208,5 +208,28 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    @Override
+    public ObservableList<Assignment> copyAssignmentList() {
+        return this.assignments.copyUniqueAssignmentList().asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Person> copyPersonList() {
+        return this.persons.copyUniquePersonList().asUnmodifiableObservableList();
+    }
+
+    @Override
+    public Person copyActivePerson() {
+        if (activePerson == null) {
+            return null;
+        }
+        return this.activePerson.copyPerson();
+    }
+
+    @Override
+    public AddressBook copyAddressBook() {
+        return new AddressBook(this);
     }
 }

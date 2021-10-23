@@ -133,4 +133,16 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
+
+    /**
+     * Returns the copy of unique person list.
+     * @return The unique person list.
+     */
+    public UniquePersonList copyUniquePersonList() {
+        UniquePersonList uniquePersonListCopy = new UniquePersonList();
+        for (Person person: this.internalList) {
+            uniquePersonListCopy.add(person.copyPerson());
+        }
+        return uniquePersonListCopy;
+    }
 }

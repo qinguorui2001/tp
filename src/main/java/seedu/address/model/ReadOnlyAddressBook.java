@@ -26,4 +26,24 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate assignments.
      */
     ObservableList<Assignment> getAssignmentsList();
+
+    /**
+     * Returns the copy of assignment list.
+     */
+    ObservableList<Assignment> copyAssignmentList();
+
+    /**
+     * Returns the copy of person list.
+     */
+    ObservableList<Person> copyPersonList();
+
+    /**
+     * Returns the copy of active person.
+     */
+    Person copyActivePerson();
+
+    /**
+     * Returns the copy of address book.
+     */
+    AddressBook copyAddressBook();
 }

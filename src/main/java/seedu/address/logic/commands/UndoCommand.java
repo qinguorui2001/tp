@@ -24,9 +24,4 @@ public class UndoCommand extends Command {
         }
     }
 
-    @Override
-    public void unExecute(Model model) throws CommandException {
-        return;
-    }
-
 }
