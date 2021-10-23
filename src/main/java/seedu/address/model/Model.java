@@ -94,6 +94,10 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+    boolean hasActivePerson();
+
+    Person getActivePerson();
+
     boolean hasAssignment(Person person, Assignment toAdd);
 
     void addAssignment(Person person, Assignment toAdd);

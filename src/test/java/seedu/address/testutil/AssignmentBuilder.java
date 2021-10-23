@@ -66,14 +66,6 @@ public class AssignmentBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Status} to late of the {@code Assignment} that we are building.
-     */
-    public AssignmentBuilder withLateStatus() {
-        this.status = Status.createLateStatus();
-        return this;
-    }
-
     public Assignment build() {
         return new Assignment(description, dueDate, status);
     }

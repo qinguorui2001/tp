@@ -1,5 +1,8 @@
 package seedu.address.model;
 
+import java.util.Optional;
+import java.util.function.Predicate;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
@@ -38,12 +41,20 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> copyPersonList();
 
     /**
-     * Returns the copy of active person.
+     * Returns the copy of active person enclosed by an Optional.
      */
-    Person copyActivePerson();
+    Optional<Person> copyActivePerson();
 
     /**
      * Returns the copy of address book.
      */
     AddressBook copyAddressBook();
+
+    /**
+     * Returns the current filter predicate acting on personList in ModelManager.
+     *
+     * @return the Predicate that PersonList is filtered by
+     */
+    Predicate<Person> getFilteredPersonListPredicate();
+
 }

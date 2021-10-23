@@ -143,11 +143,11 @@ Examples:
 
 Gives an assignment with deadline to a person in the contact list.
 
-Format: `give n/NAME d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
+Format: `INDEX d/DESCRIPTION by/ D/M/YYYY,[HHMM]`
 
 Examples:
-* `give n/John Doe d/Lab1 by/ 21/8/2021`
-* `give n/Betsy Crowe d/Assignment2 by/ 22/9/2021,1200`
+* `give 2 d/Lab1 by/ 21/8/2021`
+* `give 3 d/Assignment2 by/ 22/9/2021,1200`
 
 ### Adding an assignment to all persons in the specified module: `giveall`
 
@@ -182,28 +182,25 @@ Examples:
 
 ### Deleting an assignment with deadline : `remove`
 
-Removes the specified assignment with deadline from a person in the contact list.
+Removes the specified assignment from the displayed assignment list.
 
-Format: `remove n/NAME INDEX`
+Format: `remove INDEX`
 
-* The name is case-insensitive.
-  e.g. n/alex yeoh will match Alex Yeoh.
-* Deletes the deadline of person `NAME` at the specified `INDEX`.
-* Removes the specified assignment of person `NAME` at the specified `INDEX`.
+* Removes the assignment of person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed assignment list.
-* The index must be a positive integer 1, 2, 3, …​
+* These indexes must be positive integers 1, 2, 3, …​
 
 Examples:
-* `remove n/Wei Chang 10` deletes the 10th assignment in Wei Chang’s assignment list.
+* `remove 10` deletes the 10th assignment in the assignment list
 
 ### Marking an assignment with deadline as done: `done`
 
 Marks a specified assignment's deadline of a person as done.
 
-Format: `done n/NAME INDEX`
+Format: `done INDEX`
 
 Examples:
-* `done n/John Doe 4` marks the 4th assignment in John Doe’s assignment list as done.
+* `done 4` marks the 4th assignment in the displayed assignment list as completed.
 
 ### Showing person’s assignment list: `show`
 
@@ -274,8 +271,9 @@ Action | Format, Examples
 **find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **list** | `list`
 **help** | `help`
-**give** | `give n/NAME d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give n/John Doe d/Lab1 by/ 21/8/2021`
-**remove** | `remove n/NAME INDEX` <br> e.g., `remove n/Wei Chang 10`
-**done** | `done n/NAME INDEX` <br> e.g., `done n/John Doe 4`
+**give** | `give INDEX d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021`
+**remove** | `remove INDEX` <br> e.g., `remove 10`
+**done** | `done INDEX` <br> e.g., `done 4`
 **show** | `show INDEX` <br> e.g., `show 2`
 **undo** | `undo`
+

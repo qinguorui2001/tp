@@ -149,7 +149,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDate_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String dueDateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         DueDate expectedDueDate = new DueDate(VALID_DATE);
         assertEquals(expectedDueDate, ParserUtil.parseDate(dueDateWithWhitespace));

@@ -21,7 +21,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS1231S_TU
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_CS3230_LAB;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1101S_MISSION;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS1231S_TUTORIAL;
-import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS2106_PROJECT;
 import static seedu.address.testutil.TypicalAssignments.ASSIGNMENT_CS3230_LAB;
 
 public class AssignmentTest {
@@ -37,7 +36,7 @@ public class AssignmentTest {
 
         // same description, all other attributes different -> returns false
         Assignment editedCs1101sAssignment = new AssignmentBuilder(ASSIGNMENT_CS1101S_MISSION)
-                .withLateStatus().withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS1231S_TUTORIAL).build();
+                .withCompletedStatus().withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS1231S_TUTORIAL).build();
         assertTrue(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(editedCs1101sAssignment));
 
         // different description, all other attributes same -> returns false
@@ -46,9 +45,9 @@ public class AssignmentTest {
         assertFalse(ASSIGNMENT_CS1101S_MISSION.isSameAssignment(editedCs1101sAssignment));
 
         // different status, all other attributes same -> return true
-        Assignment editedCs2106Lab = new AssignmentBuilder(ASSIGNMENT_CS2106_PROJECT)
+        Assignment editedCs2106Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
                 .withPendingStatus().build();
-        assertTrue(ASSIGNMENT_CS2106_PROJECT.isSameAssignment(editedCs2106Lab));
+        assertTrue(ASSIGNMENT_CS3230_LAB.isSameAssignment(ASSIGNMENT_CS3230_LAB));
 
         // description differs in case, all other attributes same -> returns true
         Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
@@ -122,23 +121,12 @@ public class AssignmentTest {
                 .withDescription(VALID_DESCRIPTION_CS3230_LAB).build();
         assertNotEquals(ASSIGNMENT_CS1231S_TUTORIAL, editedCs1231sTutorial);
 
-        // different status, change from pending to late -> returns false
-        editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL).withLateStatus().build();
-        assertNotEquals(ASSIGNMENT_CS1231S_TUTORIAL, editedCs1231sTutorial);
-
         // different status, change from pending to completed -> returns false
         editedCs1231sTutorial = new AssignmentBuilder(ASSIGNMENT_CS1231S_TUTORIAL).withCompletedStatus().build();
         assertNotEquals(ASSIGNMENT_CS1231S_TUTORIAL, editedCs1231sTutorial);
-        // different status, change from completed to late -> returns false
-        Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB).withLateStatus().build();
-        assertNotEquals(ASSIGNMENT_CS3230_LAB, editedCs3230Lab);
-
-        // different status, change from late to pending -> returns false
-        Assignment editedCs2106Project = new AssignmentBuilder(ASSIGNMENT_CS2106_PROJECT).withPendingStatus().build();
-        assertNotEquals(ASSIGNMENT_CS2106_PROJECT, editedCs2106Project);
 
         // different due date -> returns false
-        editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
+        Assignment editedCs3230Lab = new AssignmentBuilder(ASSIGNMENT_CS3230_LAB)
                 .withDueDate(VALID_DATE_CS1231S_TUTORIAL, VALID_TIME_CS1231S_TUTORIAL).build();
         assertNotEquals(ASSIGNMENT_CS3230_LAB, editedCs3230Lab);
 

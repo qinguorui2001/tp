@@ -24,7 +24,7 @@ public class ModelManager implements Model {
 
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private ObservableList<Assignment> assignmentsList;
+    private final ObservableList<Assignment> assignmentsList;
     private final VersionedAddressBook versionedAddressBook;
 
     /**
@@ -104,6 +104,9 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
+
+        /*show an empty assignment list in AddressBook if the person deleted has his/her assignments
+            stored in AddressBook's Assignment List*/
         if (versionedAddressBook.isActivePerson(target)) {
             updateFilteredAssignmentList(target);
         }
@@ -161,6 +164,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        versionedAddressBook.setFilteredPersonListPredicate(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
@@ -205,7 +209,15 @@ public class ModelManager implements Model {
     public void updateFilteredAssignmentList(Person person) {
         this.versionedAddressBook.changeActivePerson(person);
         this.versionedAddressBook.updateAssignmentList(person);
-        this.assignmentsList = new FilteredList<>(this.versionedAddressBook.getAssignmentsList());
+    }
+
+    //=========== Active Person =========================================================================
+    public Person getActivePerson() {
+        return versionedAddressBook.getActivePerson();
+    }
+
+    public boolean hasActivePerson() {
+        return versionedAddressBook.hasActivePerson();
     }
 
     @Override
@@ -216,11 +228,13 @@ public class ModelManager implements Model {
     @Override
     public void undoAddressBook() throws CommandException {
         versionedAddressBook.undo();
+        updateFilteredPersonList(this.versionedAddressBook.getFilteredPersonListPredicate());
     }
 
     @Override
     public void redoAddressBook() throws CommandException {
         versionedAddressBook.redo();
+        updateFilteredPersonList(this.versionedAddressBook.getFilteredPersonListPredicate());
     }
 
     @Override

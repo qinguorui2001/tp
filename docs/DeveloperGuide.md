@@ -776,7 +776,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
     Use case resumes at step 1.
 
-**Use case: UC07 - Delete an assignment**
+**Use case: UC07 - Remove an assignment**
 
 **MSS**
 
@@ -799,24 +799,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC08 - Mark an assignment**
+**Use case: UC08 - Mark an assignment as done**
 
 **MSS**
 
-1. User enters the information of assignment tends to be done
-2. TA<sup>2</sup> shows the assignment is done
+1. User requests to list assignments of a person
+2. User requests to mark a specific assignment in the list as done
+3. TA<sup>2</sup> shows the assignment is done
 
    Use case ends
 
 **Extensions**
 
-* 1a. The assignment doesn't exist in the assignment list.
+* 2a. The assignment doesn't exist in the assignment list.
 
   Use case ends.
 
-* 1b. The given index is invalid.
+* 2b. The given index is invalid.
 
-    * 1b1. TA<sup>2</sup> shows an error message.
+    * 2b1. TA<sup>2</sup> shows an error message.
 
       Use case resumes at step 1.
   
@@ -898,4 +899,6 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
+
+

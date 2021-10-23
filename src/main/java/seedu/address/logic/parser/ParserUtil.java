@@ -89,7 +89,7 @@ public class ParserUtil {
      */
     public static DueDate parseDate(String dueDate) throws ParseException {
         requireNonNull(dueDate);
-        String trimmedDueDate = dueDate.trim();
+        String trimmedDueDate = dueDate.trim().replaceAll("\\s+", "");
         String splitString = ",";
         if (!DueDate.isValidDueDate(trimmedDueDate)) {
             throw new ParseException(DueDate.MESSAGE_CONSTRAINTS_DUE_DATE);

@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -108,6 +110,12 @@ public class AddressBookTest {
 
         @Override
         public void updateAssignmentList(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<Person> getFilteredPersonListPredicate() {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -126,8 +134,8 @@ public class AddressBookTest {
         }
 
         @Override
-        public Person copyActivePerson() {
-            return null;
+        public Optional<Person> copyActivePerson() {
+            return Optional.empty();
         }
 
         @Override

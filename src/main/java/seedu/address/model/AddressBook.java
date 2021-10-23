@@ -1,8 +1,11 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
@@ -18,7 +21,8 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     /* The person whose assignment is displayed on the Ui */
-    private Person activePerson;
+    private Optional<Person> activePerson = Optional.empty();
+    private Predicate<Person> filteredPersonListPredicate = PREDICATE_SHOW_ALL_PERSONS;
     private final UniquePersonList persons;
     private final UniqueAssignmentList assignments;
 
@@ -67,9 +71,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
+
         setAssignments(newData.copyAssignmentList());
         setPersons(newData.copyPersonList());
         activePerson = newData.copyActivePerson();
+        filteredPersonListPredicate = newData.getFilteredPersonListPredicate();
+    }
+
+    public void setFilteredPersonListPredicate(Predicate<Person> predicate) {
+        this.filteredPersonListPredicate = predicate;
     }
 
     //// person-level operations
@@ -158,11 +168,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param person
      */
     public void changeActivePerson(Person person) {
-        if (!hasPerson(person)) {
-            this.activePerson = null;
-        } else {
-            this.activePerson = person;
-        }
+        requireNonNull(person);
+        this.activePerson = Optional.of(person).filter(targetPerson -> hasPerson(targetPerson));
     }
 
     /**
@@ -171,7 +178,28 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return true if the person is the current activePerson
      */
     public boolean isActivePerson(Person person) {
-        return person.equals(activePerson);
+        requireNonNull(person);
+        return activePerson.map(activePerson -> activePerson.equals(person)).orElse(false);
+    }
+
+    /**
+     * Checks if there is a person whose assignment is stored in AddressBook's assignments.
+     * @return true if there is an active person.
+     */
+    public boolean hasActivePerson() {
+        return activePerson.isPresent();
+    }
+
+    /**
+     * Returns the current person whose assignment is stored in AddressBook's assignments. Assumes
+     * that the caller of this method has checked that there is an active person.
+     *
+     * @return the current active person
+     */
+    public Person getActivePerson() {
+        assert(activePerson.isPresent());
+
+        return activePerson.get();
     }
 
     @Override
@@ -186,9 +214,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public void updateAssignmentList(Person person) {
-        if (activePerson == null) {
-            this.assignments.clearAllAssignments();
-        } else {
+        this.assignments.clearAllAssignments();
+
+        if (activePerson.isPresent()) {
             this.assignments.setAssignments(person.getAssignments());
         }
     }
@@ -196,6 +224,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Assignment> getAssignmentsList() {
         return assignments.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public Predicate<Person> getFilteredPersonListPredicate() {
+        return filteredPersonListPredicate;
     }
 
     @Override
@@ -221,15 +254,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public Person copyActivePerson() {
-        if (activePerson == null) {
-            return null;
-        }
-        return this.activePerson.copyPerson();
+    public Optional<Person> copyActivePerson() {
+        return activePerson.map(person -> person.copyPerson());
     }
 
     @Override
     public AddressBook copyAddressBook() {
         return new AddressBook(this);
     }
+
 }

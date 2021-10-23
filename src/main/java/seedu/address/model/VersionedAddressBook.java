@@ -1,6 +1,6 @@
 package seedu.address.model;
 
-import java.util.Stack;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -9,8 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 
 public class VersionedAddressBook extends AddressBook {
     private static final Logger logger = LogsCenter.getLogger(VersionedAddressBook.class);
-    private Stack<ReadOnlyAddressBook> addressBookStateList = new Stack<>();
-
+    private ArrayList<ReadOnlyAddressBook> addressBookStateList = new ArrayList<>();
 
     private int currentStatePointer = 0;
     private int size = 1;
@@ -21,33 +20,38 @@ public class VersionedAddressBook extends AddressBook {
      */
     public VersionedAddressBook(ReadOnlyAddressBook readOnlyAddressBook) {
         super(readOnlyAddressBook);
-        addressBookStateList.push(readOnlyAddressBook.copyAddressBook());
+        addressBookStateList.add(currentStatePointer, readOnlyAddressBook.copyAddressBook());
     }
 
     /**
      * Undoes the command.
      */
     public void undo() throws CommandException {
-        if (addressBookStateList.empty() || currentStatePointer < 1) {
+        final boolean isEarliestAddressBook = currentStatePointer < 1;
+
+        if (addressBookStateList.isEmpty() || isEarliestAddressBook) {
             throw new CommandException(Messages.MESSAGE_INVALID_UNDO);
         }
-        ReadOnlyAddressBook addressBook = addressBookStateList.get(currentStatePointer - 1);
+
+        currentStatePointer--;
+        ReadOnlyAddressBook addressBook = addressBookStateList.get(currentStatePointer);
         logger.info("AddressBook: " + addressBook);
         resetData(addressBook);
-        currentStatePointer--;
     }
 
     /**
      * Redoes the command.
      */
     public void redo() throws CommandException {
-        if (addressBookStateList.empty() || currentStatePointer >= size - 1) {
+        final boolean isMostRecentAddressBook = currentStatePointer >= size - 1;
+
+        if (addressBookStateList.isEmpty() || isMostRecentAddressBook) {
             throw new CommandException(Messages.MESSAGE_INVALID_REDO);
         }
-        ReadOnlyAddressBook addressBook = addressBookStateList.get(currentStatePointer + 1);
+        currentStatePointer++;
+        ReadOnlyAddressBook addressBook = addressBookStateList.get(currentStatePointer);
         logger.info("AddressBook: " + addressBook);
         resetData(addressBook);
-        currentStatePointer++;
     }
 
     /**
@@ -55,10 +59,11 @@ public class VersionedAddressBook extends AddressBook {
      */
     public void commitAddressBook(ReadOnlyAddressBook readOnlyAddressBook) {
         deleteElementsAfterPointer(currentStatePointer);
-        addressBookStateList.push(readOnlyAddressBook.copyAddressBook());
         currentStatePointer++;
         size = currentStatePointer + 1;
+        addressBookStateList.add(currentStatePointer, readOnlyAddressBook.copyAddressBook());
     }
+
 
     //Solution adapted from
     //https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java
