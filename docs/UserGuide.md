@@ -197,6 +197,28 @@ Examples:
 * `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300`
 * `giveall m/CS2103T d/iP by/ 02/09/2021,2359`
 
+### Finding people who match with input keywords: `find`
+
+Displays the list of people who match any of the input keywords. The matching is based
+on an ***OR*** basis, where if a person matches at **least one keyword**, that person will
+be considered as matched and thus displayed.
+
+Format: `find n/NAME m/MODULE t/TUTORIAL_NUMBER`
+
+**Note:**
+1. Prefixes are optional, but at least one is required 
+2. Ordering of prefixes are not strict, and allows for multiple keywords
+3. Keywords are **case-insensitive**
+
+Examples:
+* `find n/Bernice`  
+* `find m/CS1101S`
+* `find t/Lab15`
+* `find n/Bernice m/MA1521`
+* `find m/CM1417 t/Group04`
+* `find n/Evian m/CS2103T t/Group10`
+* `find t/E34 n/Brian m/GEQ1000`
+
 ### Deleting an assignment with deadline : `remove`
 
 Removes the specified assignment from the displayed assignment list.
