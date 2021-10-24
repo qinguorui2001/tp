@@ -659,7 +659,7 @@ the *Find Command*:
 
 * **Alternative 1 (current choice):** Allows user to find people based on **OR** criteria
   * Pros: Allows for a more flexible search, making it less error-prone
-  * Cons: Reduce efficiency of searching for specific peopel if large chunks of information
+  * Cons: Reduce efficiency of searching for specific people if large chunks of information
   is returned
 
 * **Alternative 2:** Allow users to find people based on **AND** criteria
