@@ -5,11 +5,12 @@
 # TA<sup>2</sup>
 
 * This is **a project done by Software Engineering (SE) students**.
-* The project simulates an ongoing software project for a desktop application designed to help teaching assistants with organising their
-  own modules as well as keeping track of their students' work.
+* The project simulates an ongoing software project for a desktop application designed to help teaching assistants keep track of their students' submissions.
   * It is **written in OOP fashion**. It provides a **reasonably well-written** code base **bigger** (around 6 KLoC) than what students usually write in beginner-level SE modules, without being overwhelmingly big.
   * It comes with a **reasonable level of user and developer documentation**.
-* It is named `TA^2` as it is designed to be the assistant to teaching assistants.
+* Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop application designed for teaching assistants
+  from the School of Computing to help manage student information and keep track of students' assignment submissions.** 
+* TA<sup>2</sup> is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 * This project is a **part of the se-education.org** initiative.
   
 ## Acknowledgement
