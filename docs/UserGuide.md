@@ -107,31 +107,6 @@ Format: `list`
 
 ####Implementing [coming soon]
 
-### Locating persons by name or module: `find`
-
-Finds persons whose names or modules contain any of the given keywords.
-
-Format: `find n/NAME_KEYWORD... m/MODULE_KEYWORD...`
-
-* The search is case-insensitive.<br> e.g. `cs1101s` will match `CS1101S`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Can only search by name and module.<br> e.g. `n/NAME, m/MODULE`.
-* Partial names will be matched. <br> e.g. `n/Hans` will match `Hans Bo`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search). <br>
-  e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* We can search for multiple people at once, separated by a whitespace. <br> 
-  e.g. `n/Bernice James` will return `Bernice`, `James`.
-* We can search for multiple modules at once, separated by a whitespace. <br>
-  e.g. `m/CS1101S CS2103T` will return people who take either / or both modules.
-* Combining categories during search will return people who take at least one of the modules. <br>
-  e.g. `n/James m/MA1521` will return `James`, `Bernice` (assuming Bernice takes MA1521).
-
-Examples:
-* `find n/John` returns `john` and `John Doe`.
-* `find n/alex david` returns `Alex Yeoh`, `David Li`<br>.
-* `find n/alex david m/cs1231 cs2103t` returns `alex`, `charlotte`, `david`, `james`, assuming charlotte and james takes either module listed.
-  ![result for 'find Example'](images/userguide/findExample.png)
-
 ### Deleting a person : `delete`
 
 Deletes the specified person from the contact list.
@@ -196,6 +171,37 @@ Examples:
 * `give 2 d/Report1 by/ tue, 1800`
 * `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300`
 * `giveall m/CS2103T d/iP by/ 02/09/2021,2359`
+
+### Finding people who match with input keywords: `find`
+
+Displays the list of people who match any of the input keywords. The matching is based
+on an ***OR*** basis, where if a person matches at **least one keyword**, that person will
+be considered as matched and thus displayed.
+
+Format: `find n/NAME m/MODULE t/TUTORIAL_NUMBER`
+
+**Note:**
+1. Prefixes are optional, but at least one is required 
+2. Ordering of prefixes are not strict, and allows for multiple keywords
+3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
+4. Partial names will be matched. <br> e.g. `n/Hans` will match `Hans Bo`.
+5. Persons matching at least one keyword will be returned (i.e. `OR` search). <br>
+   e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+6. We can search for multiple fields, e.g., modules at once, separated by a whitespace. <br>
+   e.g. `m/CS1101S CS2103T` will return people who take either / or both modules.
+
+Examples:
+* `find n/Bernice`  
+* `find m/CS1101S`
+* `find t/Lab15`
+* `find n/Bernice m/MA1521`
+* `find m/CM1417 t/Group04`
+* `find n/Evian m/CS2103T t/Group10`
+* `find t/E34 n/Brian m/GEQ1000`
+* `find n/alex david m/cs1231 cs2103t` returns `alex`, `charlotte`, `david`, `james`, assuming charlotte and james takes either module listed.
+
+
+![result for 'find Example'](images/userguide/findExample.png)
 
 ### Deleting an assignment with deadline : `remove`
 

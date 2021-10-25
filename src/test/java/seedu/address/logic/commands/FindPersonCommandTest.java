@@ -44,11 +44,11 @@ public class FindPersonCommandTest {
         FindPersonCommand findFirstCommandCopy = new FindPersonCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
+        // null -> returns false
+        assertFalse(findFirstCommand == null);
+
         // different types -> returns false
         assertFalse(findFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));

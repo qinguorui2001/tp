@@ -117,6 +117,68 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+The cumulative list of all commands are:
+1. **AddAssignmentCommand:** 
+<br>Adds assignment to a specific user's assignment list<br>
+
+
+2. **AddAssignmentToAllCommand:**
+<br> Adds assignment to all user's assignment list<br>
+
+
+3. **AddPersonCommand:**
+<br> Adds person to the list<br>
+
+
+4. **ClearCommand:**
+<br> Clears everyone's completed tasks<br>
+
+
+5. **DeleteAssignmentCommand:**
+<br> Deletes a specific assignment from a specific person<br>
+
+
+6. **DeletePersonCommand:**
+<br> Deletes a specific person<br>
+
+
+7. **EditPersonCommand:**
+<br> Edits a specific person <br>
+
+
+8. **ExitCommand:**
+<br> Exits the application <br>
+
+
+9. **FindPersonCommand:**
+<br> Finds people who match the given input <br>
+
+
+10. **HelpCommand:**
+<br> Pulls up the help list <br>
+
+
+11. **ListPersonCommand:**
+<br> Displays the entire list of contacts <br>
+
+
+12. **MarkAssignmentCommand:**
+<br> Marks the specified assignment <br>
+
+
+13. **RedoCommand:**
+<br> Redo the previous command <br>
+
+
+14. **ShowAssignmentCommand:**
+<br> Shows a specific person's list <br>
+
+
+15. **UndoCommand:**
+<br> Undo the previous command <br>
+
+
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -549,6 +611,68 @@ The following activity diagram summarizes what happens when a user executes the 
 * 
   _{Explain here how the data archiving feature will be implemented}_
 
+### Find 
+The *find command* allows users to find specific people in their list, based on certain
+matching criteria such as:
+
+1. Name
+2. Module
+3. Tags
+
+The command is represented by the `find` keyword.
+
+This allows users to specify their list and cut down on the amount of information displayed,
+selectively choosing those that the users would only like to see. 
+
+The *Find Command* is a subclass of the *Command* class. Once the user enters the `find`
+keyword, the `LogicManager` class will execute the command and pass the
+input to the `AddressBookParser` class to parse the given input. 
+
+From this class, a specific parser class known as the `FindPersonCommandParser`
+is created and used to parse the input based on the *find* specificity.
+
+Next, the `FindPersonCommandParser` class returns a `FindPersonCommand` or
+an exception, depending on the validity of the command input. The 
+Command#execute is then called, returning a `CommandResult` class.
+
+Given below is a more specific example of the command execution.
+
+1. The user wants to find a specific person based on their name
+2. The user executes `find n/alice`, causing a `FindPersonCommand` to be returned
+3. The Command#execute is called, which causes the list to update and reflect those whose names matches alice
+
+The sequence of this command execution can be visualized using the
+below sequence diagram:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+The following activity diagram summarizes what happens when a user executes
+the *Find Command*:
+
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+#### Design considerations:
+**Aspect: Finding people based on OR criteria or AND criteria**
+
+* **Alternative 1 (current choice):** Allows user to find people based on **OR** criteria
+  * Pros: Allows for a more flexible search, making it less error-prone
+  * Cons: Reduce efficiency of searching for specific people if large chunks of information
+  is returned
+
+* **Alternative 2:** Allow users to find people based on **AND** criteria
+  * Pros: Users can perform more powerful searching to suit their
+  requirements and criteria, thus possibly being more effective and efficient 
+  if the user knows who is in mind
+  * Cons: Less error tolerant as one simple mistake can result in no matches
+  being returned.
+
+#### [Proposed] Find Extension
+1. Allow finding to have both specificity and flexibility
+
+
 ### Friendlier Command Inputs
 In striving to adopt a more user-centric approach in command recognition, additional commands are
 included on top of the original commands which stuck by a strict and predefined prefix. This offered
@@ -591,6 +715,8 @@ The following sequence diagram shows the logic sequence of an AddAssignment comm
 
 ![AddAssignmentSequenceDiagram](images/AddAssignmentSequenceDiagram.png)
 
+div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 #### Design considerations:
 **Aspect: Rigidity in allowing users to add assignments correctly yet handle multiple short-form user inputs:**
