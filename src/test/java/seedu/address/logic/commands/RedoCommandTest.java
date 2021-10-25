@@ -17,7 +17,7 @@ import seedu.address.model.assignment.Assignment;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TypicalAssignments;
 
-public class UndoCommandTest {
+public class RedoCommandTest {
     private Model model;
 
     @BeforeEach
@@ -26,82 +26,90 @@ public class UndoCommandTest {
     }
 
     @Test
-    void execute_validUndoPersonCommandSuccess() throws CommandException {
+    void execute_validRedoPersonCommandSuccess() throws CommandException {
+        UndoCommand undoCommand = new UndoCommand();
         AddPersonCommand addPersonCommand = new AddPersonCommand(new PersonBuilder().build());
         addPersonCommand.execute(model);
 
         model.commitAddressBook(model.getAddressBook());
 
-        UndoCommand undoCommand = new UndoCommand();
-
-        String expectedMessage = UndoCommand.MESSAGE_UNDO_SUCCESS;
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = RedoCommand.MESSAGE_REDO_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.commitAddressBook(model.getAddressBook());
         expectedModel.undoAddressBook();
-
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        expectedModel.redoAddressBook();
+        undoCommand.execute(model);
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    void execute_validUndoAssignmentCommandSuccess() throws CommandException {
+    void execute_validRedoAssignmentCommandSuccess() throws CommandException {
+        UndoCommand undoCommand = new UndoCommand();
         Assignment assignmentToAdd = TypicalAssignments.ASSIGNMENT_CS1101S_MISSION;
 
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(
                 INDEX_FIRST_PERSON, assignmentToAdd);
 
-        model.commitAddressBook(model.getAddressBook());
-
         addAssignmentCommand.execute(model);
 
-        UndoCommand undoCommand = new UndoCommand();
+        model.commitAddressBook(model.getAddressBook());
 
-        String expectedMessage = UndoCommand.MESSAGE_UNDO_SUCCESS;
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = RedoCommand.MESSAGE_REDO_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.commitAddressBook(model.getAddressBook());
         expectedModel.undoAddressBook();
-
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        expectedModel.redoAddressBook();
+        undoCommand.execute(model);
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    void execute_validUndoListPersonCommandSuccess() throws CommandException {
-        model.commitAddressBook(model.getAddressBook());
+    void execute_validRedoListPersonCommandSuccess() throws CommandException {
+        UndoCommand undoCommand = new UndoCommand();
+
         ListPersonCommand listPersonCommand = new ListPersonCommand();
+
+        model.commitAddressBook(model.getAddressBook());
+
         listPersonCommand.execute(model);
 
-        UndoCommand undoCommand = new UndoCommand();
-
-        String expectedMessage = UndoCommand.MESSAGE_UNDO_SUCCESS;
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = RedoCommand.MESSAGE_REDO_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.commitAddressBook(model.getAddressBook());
         expectedModel.undoAddressBook();
-
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        expectedModel.redoAddressBook();
+        undoCommand.execute(model);
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    void execute_validUndoShowAssignmentCommandSuccess() throws CommandException {
+    void execute_validRedoShowAssignmentCommandSuccess() throws CommandException {
+        UndoCommand undoCommand = new UndoCommand();
         model.commitAddressBook(model.getAddressBook());
         ShowAssignmentCommand showAssignmentCommand = new ShowAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
+
         showAssignmentCommand.execute(model);
 
-        UndoCommand undoCommand = new UndoCommand();
-
-        String expectedMessage = UndoCommand.MESSAGE_UNDO_SUCCESS;
+        RedoCommand redoCommand = new RedoCommand();
+        String expectedMessage = RedoCommand.MESSAGE_REDO_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.commitAddressBook(model.getAddressBook());
         expectedModel.undoAddressBook();
-
-        assertCommandSuccess(undoCommand, model, expectedMessage, expectedModel);
+        expectedModel.redoAddressBook();
+        undoCommand.execute(model);
+        assertCommandSuccess(redoCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     void execute_emptyCommandList_throwCommandException() {
-        UndoCommand undoCommand = new UndoCommand();
-        assertCommandFailure(undoCommand, model, Messages.MESSAGE_INVALID_UNDO);
+        RedoCommand redoCommand = new RedoCommand();
+        assertCommandFailure(redoCommand, model, Messages.MESSAGE_INVALID_REDO);
     }
 }
