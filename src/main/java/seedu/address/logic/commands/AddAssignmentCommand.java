@@ -39,7 +39,7 @@ public class AddAssignmentCommand extends Command {
             + PREFIX_DUEDATE + "DUEDATE\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DESCRIPTION + "assignment2 "
-            + PREFIX_DUEDATE + "11/11/2021 \n\n"
+            + PREFIX_DUEDATE + " 11/11/2021 \n\n"
             + FRIENDLY_COMMAND_SYNTAX;
 
     public static final String MESSAGE_SUCCESS = "New assignment added: %1$s";

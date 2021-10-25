@@ -61,6 +61,9 @@ public class Assignment implements Comparable<Assignment> {
                 .equals(getDescription().toString().toLowerCase(Locale.ROOT));
     }
 
+    public boolean isCompleted() {
+        return this.status.equals(Status.createCompletedStatus());
+    }
     /**
      * Returns true if both assignments have the same identity and data fields.
      * This defines a stronger notion of equality between two assignments.

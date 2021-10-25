@@ -229,6 +229,12 @@ Examples:
 * `done 3` marks the 3rd assignment in the displayed assignment list as completed.
 
 
+### Delete completed assignments from all persons: `clean`
+
+Deletes all completed assignments from TA<sup>2</sup>.
+
+Format: `clean`
+
 ### Clearing all entries : `clear`
 
 Clears all entries from TA<sup>2</sup>.
@@ -286,6 +292,7 @@ Action | Format, Examples
 **show** | `show INDEX` <br> e.g., `show 2`
 **give** | `give INDEX d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021`
 **giveall** | `giveall m/module d/DESCRIPTION by/ D/M/YYYY [HHMM]` <br> e.g., `give m/CS2100 d/Lab1 by/ 21/8/2021`
+**clean** | `clean`
 **remove** | `remove INDEX` <br> e.g., `remove 10`
 **done** | `done INDEX` <br> e.g., `done 4`
 **undo** | `undo`

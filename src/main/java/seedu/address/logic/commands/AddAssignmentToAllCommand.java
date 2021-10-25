@@ -14,7 +14,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAY
 import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
- * Adds an assignment to the person's assignment list.
+ * Adds an assignment to all persons' assignment list if under specified module.
  */
 public class AddAssignmentToAllCommand extends Command {
 
@@ -29,7 +29,7 @@ public class AddAssignmentToAllCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE + "CS2100 "
             + PREFIX_DESCRIPTION + "assignment2 "
-            + PREFIX_DUEDATE + "11/11/2021 ";
+            + PREFIX_DUEDATE + " 11/11/2021 ";
 
     public static final String MESSAGE_SUCCESS = "New assignment added to all persons in %1$s: %2$s";
 
@@ -37,7 +37,7 @@ public class AddAssignmentToAllCommand extends Command {
     private final Module module;
 
     /**
-     * Creates an AddAssignmentCommand to add the specified {@code Assignment}
+     * Creates an AddAssignmentToAllCommand to add the specified {@code Assignment}
      */
     public AddAssignmentToAllCommand(Module module, Assignment assignment) {
         requireNonNull(assignment);
@@ -51,7 +51,7 @@ public class AddAssignmentToAllCommand extends Command {
         requireNonNull(model);
         // Get Person that match the Module
         List<Person> filteredPersonList =
-                model.getFilteredPersonList()
+                model.getAddressBook().getPersonList()
                         .stream()
                         .filter(person -> person.hasModule(module))
                         .collect(Collectors.toList());
@@ -60,11 +60,7 @@ public class AddAssignmentToAllCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_MODULE);
         }
 
-        for (Person person: filteredPersonList) {
-            if (!model.hasAssignment(person, toAdd)) {
-                model.addAssignment(person, toAdd);
-            }
-        }
+        model.addAllAssignment(filteredPersonList, toAdd);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, module, toAdd));
     }

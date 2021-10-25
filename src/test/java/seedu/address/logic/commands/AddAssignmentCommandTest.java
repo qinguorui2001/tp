@@ -188,12 +188,22 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public void addAllAssignment(List<Person> personList, Assignment toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteAssignment(Person person, Assignment toDelete) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void markAssignment(Person person, Assignment toMark) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void cleanAssignments() {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -81,6 +81,9 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
+        case CleanAssignmentCommand.COMMAND_WORD:
+            return new CleanAssignmentCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
