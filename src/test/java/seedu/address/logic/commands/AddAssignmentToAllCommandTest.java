@@ -325,14 +325,13 @@ public class AddAssignmentToAllCommandTest {
         public void addAllAssignment(List<Person> personList, Assignment assignment) {
             requireNonNull(assignment);
             for (Person person : personList) {
-                if (person.equals(person1)) {
-                    if (!hasAssignment(person1, assignment)) {
-                        assignments1.add(assignment);
-                    }
-                } else {
-                    if (!hasAssignment(person2, assignment)) {
-                        assignments2.add(assignment);
-                    }
+                boolean person1NoAssignment = person.equals(person1) && !hasAssignment(person1, assignment);
+                boolean person2NoAssignment = person.equals(person2) && !hasAssignment(person2, assignment);
+                if (person1NoAssignment) {
+                    assignments1.add(assignment);
+                }
+                if (person2NoAssignment) {
+                    assignments2.add(assignment);
                 }
             }
         }
