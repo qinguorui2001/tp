@@ -9,11 +9,13 @@ title: Introducing to you: TA<sup>2</sup>
 ![Ui](images/Ui.png)
 
 ##What is TA<sup>2</sup>?
+
 **Teaching Assistant's Assistant(TA<sup>2</sup>) is a desktop productivity application developed for teaching assistants to make their teaching journey smoother.**
 With TA<sup>2</sup>, you can manage student information and keep track of the status of their assignments. Just type in
 the corresponding commands and TA<sup>2</sup> will manage all these for you! No need to do all these manually!
 
 ##How is TA<sup>2</sup> different?
+
 TA<sup>2</sup> is optimised for use via a Command Line Interface(CLI) while still having the benefits of a Graphical User Interface(GUI). 
 This means that if you are able to type fast, TA<sup>2</sup> will be able to manage student submissions much faster than other applications 
 that require you to use your mouse often. TA<sup>2</sup> sorts all the information that you enter behind the scenes and 
@@ -22,11 +24,13 @@ when trying to manage immense amounts of information. No more trying to filter o
 will do it for you. 
 
 ##For Users
+
 * If you are interested in using TA<sup>2</sup>, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start)
   to get your hands on this application.
 * If you are unsure of how to use the application, the [**User Guide**](UserGuide.html) has a detailed walkthrough on its features.
 
 ##For Developers
+
 * If you are interested in developing TA<sup>2</sup>, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 <br/><br/>
