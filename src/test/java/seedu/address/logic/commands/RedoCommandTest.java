@@ -26,7 +26,7 @@ public class RedoCommandTest {
     }
 
     @Test
-    void execute_validRedoPersonCommandSuccess() throws CommandException {
+    void execute_validRedoPersonCommand_redoSuccess() throws CommandException {
         UndoCommand undoCommand = new UndoCommand();
         AddPersonCommand addPersonCommand = new AddPersonCommand(new PersonBuilder().build());
         addPersonCommand.execute(model);
@@ -45,7 +45,7 @@ public class RedoCommandTest {
     }
 
     @Test
-    void execute_validRedoAssignmentCommandSuccess() throws CommandException {
+    void execute_validRedoAssignmentCommand_redoSuccess() throws CommandException {
         UndoCommand undoCommand = new UndoCommand();
         Assignment assignmentToAdd = TypicalAssignments.ASSIGNMENT_CS1101S_MISSION;
 
@@ -68,7 +68,7 @@ public class RedoCommandTest {
     }
 
     @Test
-    void execute_validRedoListPersonCommandSuccess() throws CommandException {
+    void execute_validRedoListPersonCommand_redoSuccess() throws CommandException {
         UndoCommand undoCommand = new UndoCommand();
 
         ListPersonCommand listPersonCommand = new ListPersonCommand();
@@ -89,7 +89,7 @@ public class RedoCommandTest {
     }
 
     @Test
-    void execute_validRedoShowAssignmentCommandSuccess() throws CommandException {
+    void execute_validRedoShowAssignmentCommand_redoSuccess() throws CommandException {
         UndoCommand undoCommand = new UndoCommand();
         model.commitAddressBook(model.getAddressBook());
         ShowAssignmentCommand showAssignmentCommand = new ShowAssignmentCommand(INDEX_FIRST_ASSIGNMENT);

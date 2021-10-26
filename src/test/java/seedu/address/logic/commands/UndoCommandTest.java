@@ -26,7 +26,7 @@ public class UndoCommandTest {
     }
 
     @Test
-    void execute_validUndoPersonCommandSuccess() throws CommandException {
+    void execute_validUndoPersonCommand_undoSuccess() throws CommandException {
         AddPersonCommand addPersonCommand = new AddPersonCommand(new PersonBuilder().build());
         addPersonCommand.execute(model);
 
@@ -44,7 +44,7 @@ public class UndoCommandTest {
     }
 
     @Test
-    void execute_validUndoAssignmentCommandSuccess() throws CommandException {
+    void execute_validUndoAssignmentCommand_undoSuccess() throws CommandException {
         Assignment assignmentToAdd = TypicalAssignments.ASSIGNMENT_CS1101S_MISSION;
 
         AddAssignmentCommand addAssignmentCommand = new AddAssignmentCommand(
@@ -66,7 +66,7 @@ public class UndoCommandTest {
     }
 
     @Test
-    void execute_validUndoListPersonCommandSuccess() throws CommandException {
+    void execute_validUndoListPersonCommand_undoSuccess() throws CommandException {
         model.commitAddressBook(model.getAddressBook());
         ListPersonCommand listPersonCommand = new ListPersonCommand();
         listPersonCommand.execute(model);
@@ -83,7 +83,7 @@ public class UndoCommandTest {
     }
 
     @Test
-    void execute_validUndoShowAssignmentCommandSuccess() throws CommandException {
+    void execute_validUndoShowAssignmentCommand_undoSuccess() throws CommandException {
         model.commitAddressBook(model.getAddressBook());
         ShowAssignmentCommand showAssignmentCommand = new ShowAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
         showAssignmentCommand.execute(model);

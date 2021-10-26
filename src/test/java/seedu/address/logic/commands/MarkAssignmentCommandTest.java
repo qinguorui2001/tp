@@ -34,7 +34,7 @@ public class MarkAssignmentCommandTest {
     }
 
     @Test
-    void execute_validIndexAssignmentListSuccess() {
+    void execute_validIndexAssignmentList_success() {
         Person selectedPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         Person clonedActualPerson = clonePerson(selectedPerson);
         Person clonedExpectedPerson = clonePerson(selectedPerson);

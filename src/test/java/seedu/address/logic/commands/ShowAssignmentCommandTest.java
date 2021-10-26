@@ -27,7 +27,7 @@ class ShowAssignmentCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    void execute_validIndexPersonListSuccess() {
+    void execute_validIndexPersonList_success() {
         Person personToShow = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         ShowAssignmentCommand showAssignmentCommand = new ShowAssignmentCommand(INDEX_FIRST_PERSON);
 
