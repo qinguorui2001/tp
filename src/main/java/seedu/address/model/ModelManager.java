@@ -121,7 +121,6 @@ public class ModelManager implements Model {
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         versionedAddressBook.setPerson(target, editedPerson);
     }
 
@@ -139,6 +138,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addAllAssignment(List<Person> personList, Assignment toAdd) {
+        for (Person person: personList) {
+            if (!hasAssignment(person, toAdd)) {
+                versionedAddressBook.addAssignment(person, toAdd);
+            }
+        }
+        if (hasActivePerson()) {
+            updateFilteredAssignmentList(getActivePerson());
+        }
+    }
+
+    @Override
     public void deleteAssignment(Person person, Assignment toDelete) {
         versionedAddressBook.removeAssignment(person, toDelete);
         updateFilteredAssignmentList(person);
@@ -148,6 +159,14 @@ public class ModelManager implements Model {
     public void markAssignment(Person person, Assignment toMark) {
         versionedAddressBook.markAssignment(person, toMark);
         updateFilteredAssignmentList(person);
+    }
+
+    @Override
+    public void cleanAssignments() {
+        versionedAddressBook.cleanAssignments();
+        if (hasActivePerson()) {
+            updateFilteredAssignmentList(getActivePerson());
+        }
     }
 
     //=========== Filtered Person List Accessors =============================================================

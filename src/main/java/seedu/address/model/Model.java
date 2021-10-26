@@ -102,9 +102,13 @@ public interface Model {
 
     void addAssignment(Person person, Assignment toAdd);
 
+    void addAllAssignment(List<Person> personList, Assignment toAdd);
+
     void deleteAssignment(Person person, Assignment toDelete);
 
     void markAssignment(Person person, Assignment toMark);
+
+    void cleanAssignments();
 
     void updateFilteredAssignmentList(Person person);
 

@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 
@@ -107,7 +108,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
-
         persons.setPerson(target, editedPerson);
     }
 
@@ -151,6 +151,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void markAssignment(Person person, Assignment key) {
         person.getAssignments().done(key);
+    }
+
+    /**
+     * Removes assignments from all persons' assignment list if completed
+     */
+    public void cleanAssignments() {
+        for (Person person : this.getPersonList()) {
+            List<Assignment> completedAssignmentList =
+                    person.getAssignments().asUnmodifiableObservableList()
+                            .stream()
+                            .filter(Assignment::isCompleted)
+                            .collect(Collectors.toList());
+            for (Assignment assignment : completedAssignmentList) {
+                this.removeAssignment(person, assignment);
+            }
+        }
     }
 
     /**
