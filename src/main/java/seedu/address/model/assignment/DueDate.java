@@ -112,7 +112,7 @@ public class DueDate implements Comparable<DueDate> {
      */
     public static boolean isValidFriendlyDate(String date) {
         for (String s : FRIENDLY_COMMANDS) {
-            if (s.equals(date)) {
+            if (s.equals(date.toLowerCase())) {
                 return true;
             }
         }
@@ -199,7 +199,9 @@ public class DueDate implements Comparable<DueDate> {
      */
     public static LocalDate friendlyToDate(String friendlyDate) {
         LocalDate currentDate = LocalDate.now();
-        switch (friendlyDate) {
+        String lowerCaseFriendlyDate = friendlyDate.toLowerCase();
+
+        switch (lowerCaseFriendlyDate) {
         case "mon":
             currentDate = currentDate.with(TemporalAdjusters.next(DayOfWeek.MONDAY));
             break;

@@ -100,7 +100,7 @@ class DueDateTest {
         assertFalse(DueDate.isValidFriendlyDate("not a date"));
         assertFalse(DueDate.isValidFriendlyDate("123"));
         assertFalse(DueDate.isValidFriendlyDate(""));
-        assertFalse(DueDate.isValidFriendlyDate(null));
+        assertThrows(NullPointerException.class, () -> DueDate.isValidFriendlyDate(null));
     }
 
     @Test
