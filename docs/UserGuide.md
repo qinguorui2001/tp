@@ -215,9 +215,9 @@ Examples:
 * `find t/Lab15` returns the students with tutorial `Lab15`.
 * `find n/Bernice m/MA1521` returns the students with name `Bernice` or study module `MA1521`.
 * `find m/CM1417 t/Group04` returns the students with module `CM1417` or in tutorial `Group04`.
-* `find n/Evian m/CS2103T t/Group10` returns the students with name `Evian` or study module`CS2103T` or in tutorial `Group10`.
-* `find t/E34 n/Brian m/GEQ1000` returns the students with name `Brian` or study module`GEQ1000` or in tutorial `E34`.
-* `find n/alex david m/cs1231 cs2103t` returns the students with name `alex david` or whose name contains `david` or `alex`, or students studying module`cs1231` or `cs2103t`.
+* `find n/Evian m/CS2103T t/Group10` returns the students who at least satisfy one of requirements: with name `Evian`, study module`CS2103T` and in tutorial `Group10`.
+* `find t/E34 n/Brian m/GEQ1000` returns the students who at least satisfy one of requirements: with name `Brian`, study module`GEQ1000` and in tutorial `E34`.
+* `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of requirements: with name contains `david` or `alex`, study module`cs1231` or `cs2103t`.
 
 
 ![result for 'find Example'](images/userguide/findExample.png)
