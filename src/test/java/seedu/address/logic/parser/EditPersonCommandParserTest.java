@@ -10,6 +10,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
+import java.util.Locale;
+
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -114,6 +116,12 @@ public class EditPersonCommandParserTest {
 
         // module
         userInput = targetIndex.getOneBased() + MODULE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withModule(VALID_MODULE_AMY).build();
+        expectedCommand = new EditPersonCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // module in lower case
+        userInput = targetIndex.getOneBased() + MODULE_DESC_AMY.toLowerCase(Locale.ROOT);
         descriptor = new EditPersonDescriptorBuilder().withModule(VALID_MODULE_AMY).build();
         expectedCommand = new EditPersonCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
