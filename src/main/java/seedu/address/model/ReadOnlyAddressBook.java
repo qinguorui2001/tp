@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -43,8 +44,12 @@ public interface ReadOnlyAddressBook {
     /**
      * Returns a person, found in persons list, enclosed in an Optional that has a matching name to active person.
      * Otherwise, returns an empty Optional.
+     *
+     * @param persons list of person to select from
+     * @return the person with matching name to active person enclosed in an Optional, or Empty Optional if
+     * there are no active person.
      */
-    Optional<Person> getActivePersonFromPersonList();
+    Optional<Person> getActivePersonFromPersonList(List<Person> persons);
 
     /**
      * Returns the copy of address book.

@@ -76,7 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setAssignments(newData.copyAssignmentList());
         setPersons(newData.copyPersonList());
-        activePerson = getActivePersonFromPersonList();
+        activePerson = newData.getActivePersonFromPersonList(getPersonList());
         filteredPersonListPredicate = newData.getFilteredPersonListPredicate();
     }
 
@@ -273,22 +273,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public Optional<Person> getActivePersonFromPersonList() {
+    public Optional<Person> getActivePersonFromPersonList(List<Person> persons) {
         if (!activePerson.isPresent()) {
             return Optional.empty();
         }
 
-        Iterator<Person> personIterator = persons.iterator();
         Person actualActivePerson = getActivePerson();
-        Optional<Person> newActivePerson = Optional.empty();
-
-        while (personIterator.hasNext()) {
-            Person nextPersonInList = personIterator.next();
-            if (actualActivePerson.isSamePerson(nextPersonInList)) {
-                newActivePerson = Optional.of(nextPersonInList);
-            }
-        }
-        return newActivePerson;
+        return persons.stream().filter(person -> person.isSamePerson(actualActivePerson)).findFirst();
     }
 
     @Override
