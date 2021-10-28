@@ -59,7 +59,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* If a command contains `INDEX`, then `INDEX` only appears once.
+* If a command requires `INDEX` as an input, only one input for `INDEX` is expected.
 
 * If a parameter is expected only once in the command but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
@@ -97,7 +97,7 @@ Format: `add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 Examples:
 * `add n/John Doe m/CS1010 e/e1234567@u.nus.edu`
 * `add n/Betsy Crowe e/e0234567@u.nus.edu m/CS2103T`
-* `add n/alex yeoh e/1234123@u.nus.edu m/GEQ1000, T17`
+* `add n/alex yeoh e/1234123@u.nus.edu m/GEQ1000 t/T17`
 
 ### Listing all students : `list`
 
