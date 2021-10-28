@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -75,7 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setAssignments(newData.copyAssignmentList());
         setPersons(newData.copyPersonList());
-        activePerson = newData.copyActivePerson();
+        activePerson = getActivePersonFromPersonList();
         filteredPersonListPredicate = newData.getFilteredPersonListPredicate();
     }
 
@@ -179,8 +180,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     /**
-     * Changes the person whose assignment list is displayed. Changes {@code activePerson} to null which represents
-     * no assignment list selected if the person indicated does not exist in {@code AddressBook's person list}.
+     * Changes the person whose assignment list is displayed. Changes {@code activePerson} to an empty Optional which
+     * represents no assignment list selected if the person indicated does not exist in
+     * {@code AddressBook's person list}.
+     *
      * @param person
      */
     public void changeActivePerson(Person person) {
@@ -270,8 +273,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public Optional<Person> copyActivePerson() {
-        return activePerson.map(person -> person.copyPerson());
+    public Optional<Person> getActivePersonFromPersonList() {
+        if (!activePerson.isPresent()) {
+            return Optional.empty();
+        }
+
+        Iterator<Person> personIterator = persons.iterator();
+        Person actualActivePerson = getActivePerson();
+        Optional<Person> newActivePerson = Optional.empty();
+
+        while (personIterator.hasNext()) {
+            Person nextPersonInList = personIterator.next();
+            if (actualActivePerson.isSamePerson(nextPersonInList)) {
+                newActivePerson = Optional.of(nextPersonInList);
+            }
+        }
+        return newActivePerson;
     }
 
     @Override

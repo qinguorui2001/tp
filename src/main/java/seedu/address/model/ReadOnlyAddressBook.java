@@ -41,9 +41,10 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> copyPersonList();
 
     /**
-     * Returns the copy of active person enclosed by an Optional.
+     * Returns a person enclosed by an Optional that uses active person and finds a person with the same name
+     * in list of persons. Otherwise, returns an empty Optional.
      */
-    Optional<Person> copyActivePerson();
+    Optional<Person> getActivePersonFromPersonList();
 
     /**
      * Returns the copy of address book.
