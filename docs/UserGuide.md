@@ -31,9 +31,9 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
    * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` with his/her relevant information to TA<sup>2</sup>.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`delete`**`3` : Deletes the 3rd contact shown in the current displayed contact list.
 
-   * **`clear`** : Deletes all completed assignments of students.
+   * **`clear`** : Deletes all contacts.
 
    * **`exit`** : Exits the app.
 
@@ -119,9 +119,9 @@ Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]`
 * **At least one modification** is required for each edit.
 
 Examples:
-* `list` followed by `edit 2 e/e00111@u.nus.edu` replaces the 2nd student's email with `e00111@u.nus.edu` in contact list.
-* `find n/Alex` followed by `edit 1 n/Brob` changes 1st student's name to `Brob` in the results of the `find` command.
-* `find n/Alex` followed by `edit 1 n/Brob n/New m/cs1101 m/cs1231s` changes 1st student's name to `New` and module to `cs1231s` in the results of the `find` command.
+* `edit 2 e/e00111@u.nus.edu` replaces the 2nd student's email with `e00111@u.nus.edu` in contact list.
+* `edit 1 n/Brob` changes 1st student's name to `Brob` in the results of the `find` command.
+* `edit 1 n/Brob n/New m/cs1101 m/cs1231s` changes 1st student's name to `New` and module to `cs1231s` in the results of the `find` command.
 
 ### Deleting a student : `delete`
 
@@ -175,10 +175,10 @@ Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
     * `sun` - sets due date to the coming sunday.
   
 Examples:
-* `give 1 d/Lab1 by/ 21/8/2021` gives the first student in current contact list `Lab1` with deadline 2021, Aug 21.
-* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student in current contact list `Assignment2` with deadline 2021, Sep 22, 1200hrs.
-* `give 1 d/Tutorial3 by/ mon` gives the first student in current contact list `Tutorial3` with deadline next monday 2359hrs.
-* `give 2 d/Report1 by/ tue, 1800` gives the second student in current contact list `Report1` with deadline next tuesday 1800hrs.
+* `give 1 d/Lab1 by/ 21/8/2021` gives the first student in current displayed contact list `Lab1` with deadline 2021, Aug 21.
+* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student in current displayed contact list `Assignment2` with deadline 2021, Sep 22, 1200hrs.
+* `give 1 d/Tutorial3 by/ mon` gives the first student in current displayed contact list `Tutorial3` with deadline next monday 2359hrs.
+* `give 2 d/Report1 by/ tue, 1800` gives the second student in current displayed contact list `Report1` with deadline next tuesday 1800hrs.
 
 #### Adding an assignment with specified module: `giveall`
 
@@ -199,7 +199,7 @@ be considered as matched and thus displayed.
 Format: `find [n/NAME] [m/MODULE] [t/TUTORIAL_NUMBER]...`
 
 **Note:**
-1. At least one optional prefix is required.
+1. At least one prefix is required.
 2. Ordering of prefixes are not strict, and allows for multiple keywords
 3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
 4. Partial names will be matched. <br> e.g. `n/Hans` will match `Hans Bo`.
@@ -228,7 +228,7 @@ Removes the specified assignment from the displayed assignment list.
 
 Format: `remove INDEX`
 
-* Removes the assignment at `INDEX` in current assignment list of a student.
+* Removes the assignment at `INDEX` in current displayed assignment list of a student.
 
 Examples:
 * `remove 10` deletes the 10th assignment in the displayed assignment list
@@ -238,7 +238,7 @@ Examples:
 Marks a specified assignment's deadline of a student as completed.
 * Assignments with uncompleted/pending status will have an orange tag.
 * Assignments with completed status will have a green tag.
-* Only works if current assignment list is non-empty.
+* Only works if current displayed assignment list is non-empty.
 
 Format: `done INDEX`
 
