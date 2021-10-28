@@ -134,7 +134,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public Optional<Person> copyActivePerson() {
+        public Optional<Person> getActivePersonFromPersonList(List<Person> persons) {
             return Optional.empty();
         }
 
