@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddPersonCommand;
@@ -22,6 +23,13 @@ public class PersonUtil {
      */
     public static String getAddCommand(Person person) {
         return AddPersonCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    }
+
+    /**
+     * Returns an add command string for adding the {@code person}.
+     */
+    public static String getAddCommandCapitalized(Person person) {
+        return AddPersonCommand.COMMAND_WORD.toUpperCase(Locale.ROOT) + " " + getPersonDetails(person);
     }
 
     /**
