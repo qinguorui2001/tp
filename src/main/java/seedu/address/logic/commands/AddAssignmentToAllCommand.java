@@ -32,6 +32,7 @@ public class AddAssignmentToAllCommand extends Command {
             + PREFIX_DUEDATE + " 11/11/2021 ";
 
     public static final String MESSAGE_SUCCESS = "New assignment added to all persons in %1$s: %2$s";
+    public static final String MESSAGE_ALL_HAS_ASSIGNMENT = "All persons in %1$s has the specified assignment already!";
 
     private final Assignment toAdd;
     private final Module module;
@@ -58,6 +59,12 @@ public class AddAssignmentToAllCommand extends Command {
 
         if (filteredPersonList.size() == 0) {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_MODULE);
+        }
+
+        filteredPersonList.removeIf(person -> model.hasAssignment(person, toAdd));
+
+        if (filteredPersonList.size() == 0) {
+            throw new CommandException(String.format(MESSAGE_ALL_HAS_ASSIGNMENT, module));
         }
 
         model.addAllAssignment(filteredPersonList, toAdd);
