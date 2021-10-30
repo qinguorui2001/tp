@@ -31,7 +31,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
    * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` with his/her relevant information to TA<sup>2</sup>.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current displayed contact list.
+   * **`delete`**`3` : Deletes the 3rd contact shown in the lt contact list.
 
    * **`clear`** : Deletes all contacts.
 
@@ -69,7 +69,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -99,31 +99,31 @@ Examples:
 * `add n/Betsy Crowe e/e0234567@u.nus.edu m/CS2103T`
 * `add n/alex yeoh e/1234123@u.nus.edu m/GEQ1000 t/T17`
 
-### Listing all students : `list`
+### Listing all students: `list`
 
 Shows a list of all students in the contact list.
 
 Format: `list`
 
-### Editing a student : `edit`
+### Editing a student: `edit`
 
-Modifies any part of student's information.
+Modifies any part of the student's information.
 
 Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]`
 
 :bulb: **Tip:**
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer within the number of students in list** 1, 2, (till the index of last student)​ 
+* The index **must be a positive integer within the number of students in list** 1, 2, (till the index of the last student)​ 
 * You can modify several parts of student information at the same time.
 * If there are two identical prefixes in one edit command, only the last one works. 
 * **At least one modification** is required for each edit.
 
 Examples:
-* `edit 2 e/e00111@u.nus.edu` replaces the 2nd student's email with `e00111@u.nus.edu` in contact list.
+* `edit 2 e/e00111@u.nus.edu` replaces the 2nd student's email with `e00111@u.nus.edu` in the contact list.
 * `edit 1 n/Brob` changes 1st student's name to `Brob` in the results of the `find` command.
 * `edit 1 n/Brob n/New m/cs1101 m/cs1231s` changes 1st student's name to `New` and module to `cs1231s` in the results of the `find` command.
 
-### Deleting a student : `delete`
+### Deleting a student: `delete`
 
 Deletes the specified student from the contact list.
 
@@ -138,31 +138,31 @@ Examples:
 ### Showing student’s assignment list: `show`
 
 Shows the assignment list of the specified student in a separate assignment list window.
-Assignment list will be sorted by status and date.
+The assignment list will be sorted by status and date.
 
 * Assignments with `COMPLETED` status will be at the bottom of the list.
 * Assignments with `PENDING` status will be at the top of the list.
-* Assignments with same status will be sorted by due date.
+* Assignments with the same status will be sorted by due date.
 
 Format: `show INDEX`
 
-* Shows the assignment list of student at the specified `INDEX`.
+* Shows the assignment list of the student at the specified `INDEX`.
 
-Examples:
+Examples:****
 * `show 1` renders the first student’s assignment list on the right side of the app.
 * The index refers to the index shown in the displayed student list.
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
-### Adding assignments : `give` `giveall`
+### Adding assignments: `give` `giveall`
 
-#### Adding an assignment : `give`
+#### Adding an assignment: `give`
 
 Gives an assignment with deadline to the student specified by the index in the contact list.
 If `time` is not specified, `time` will be set to `11:59 pm` by default.
 
 Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
 
-* Date can be replaced by friendly commands.
+* The date can be replaced by friendly commands.
     * `today` - sets due date to tonight.
     * `tmr` - sets due date to tomorrow.
     * `week` - sets due date to a week(7 days) from now.
@@ -175,10 +175,10 @@ Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
     * `sun` - sets due date to the coming sunday.
   
 Examples:
-* `give 1 d/Lab1 by/ 21/8/2021` gives the first student in current displayed contact list `Lab1` with deadline 2021, Aug 21.
-* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student in current displayed contact list `Assignment2` with deadline 2021, Sep 22, 1200hrs.
-* `give 1 d/Tutorial3 by/ mon` gives the first student in current displayed contact list `Tutorial3` with deadline next monday 2359hrs.
-* `give 2 d/Report1 by/ tue, 1800` gives the second student in current displayed contact list `Report1` with deadline next tuesday 1800hrs.
+* `give 1 d/Lab1 by/ 21/8/2021` gives the first student in currently displayed contact list `Lab1` with deadline 2021, Aug 21.
+* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student in currently displayed contact list `Assignment2` with deadline 2021, Sep 22, 1200hrs.
+* `give 1 d/Tutorial3 by/ mon` gives the first student in currently displayed contact list `Tutorial3` with deadline next monday 2359hrs.
+* `give 2 d/Report1 by/ tue, 1800` gives the second student in currently displayed contact list `Report1` with deadline next tuesday 1800hrs.
 
 #### Adding an assignment with specified module: `giveall`
 
@@ -228,7 +228,7 @@ Removes the specified assignment from the displayed assignment list.
 
 Format: `remove INDEX`
 
-* Removes the assignment at `INDEX` in current displayed assignment list of a student.
+* Removes the assignment at `INDEX` in currently displayed assignment list of a student.
 
 Examples:
 * `remove 10` deletes the 10th assignment in the displayed assignment list
@@ -238,7 +238,7 @@ Examples:
 Marks a specified assignment's deadline of a student as completed.
 * Assignments with uncompleted/pending status will have an orange tag.
 * Assignments with completed status will have a green tag.
-* Only works if current displayed assignment list is non-empty.
+* Only works if currently displayed assignment list is non-empty.
 
 Format: `done INDEX`
 
@@ -265,15 +265,15 @@ Undoes the last command entered.
 
 Format: `undo` 
 
-### Redoing the command : `redo`
+### Redoing the command: `redo`
 
-Recovers the effect of last `undo` command.
-* Redo all kinds of command except for `undo` and `redo`.
+Recovers the effect of the last `undo` command.
+* Redo all kinds of commands except for `undo` and `redo`.
 * Once a new command except for `undo` and `redo` is entered, nothing can be redone. 
 
 Format: `redo`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -288,7 +288,7 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
+If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
