@@ -75,7 +75,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setAssignments(newData.copyAssignmentList());
         setPersons(newData.copyPersonList());
-        activePerson = newData.copyActivePerson();
+        activePerson = newData.getActivePersonFromPersonList(getPersonList());
         filteredPersonListPredicate = newData.getFilteredPersonListPredicate();
     }
 
@@ -179,8 +179,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     /**
-     * Changes the person whose assignment list is displayed. Changes {@code activePerson} to null which represents
-     * no assignment list selected if the person indicated does not exist in {@code AddressBook's person list}.
+     * Changes the person whose assignment list is displayed. Changes {@code activePerson} to an empty Optional which
+     * represents no assignment list selected if the person indicated does not exist in
+     * {@code AddressBook's person list}.
+     *
      * @param person
      */
     public void changeActivePerson(Person person) {
@@ -270,8 +272,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public Optional<Person> copyActivePerson() {
-        return activePerson.map(person -> person.copyPerson());
+    public Optional<Person> getActivePersonFromPersonList(List<Person> persons) {
+        if (!activePerson.isPresent()) {
+            return Optional.empty();
+        }
+
+        Person actualActivePerson = getActivePerson();
+        return persons.stream().filter(person -> person.isSamePerson(actualActivePerson)).findFirst();
     }
 
     @Override
