@@ -534,8 +534,11 @@ Step 1. The user executes `list` command to see the current list of persons.
 
 Step 2. The user executes `remove n/Xiao 1` command to remove the first assignment of a person. When `Command#execute`
 is called, the `remove n/...` command will filter out persons in the storage list with the name field `Xiao`and remove 
-the specified assignment if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source:
+the specified assignment if the person exists and has that assignment in assignment list.
+
+<div markdown="span" class="alert alert-info">:information_source:
 **Note:** If there are no persons with the specified module field or there are no persons who have this assignment, it will return an error to the user. 
+</div>
 
 The following sequence diagram shows how the remove command is executed:
 ![RemoveSequenceDiagram](images/RemoveSequenceDiagram.png)
@@ -741,8 +744,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
     
 #### [Proposed] Friendly Commands
 1. `find`
-
-#### [COMING SOON!!!]
 
 --------------------------------------------------------------------------------------------------------------------
 
