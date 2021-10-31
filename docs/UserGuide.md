@@ -109,7 +109,7 @@ Format: `list`
 
 Modifies any part of the student's information.
 
-Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]`
+Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]...`
 
 :bulb: **Tip:**
 * The index refers to the index number shown in the displayed student list.
@@ -135,7 +135,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in the contact list.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### Showing student’s assignment list: `show`
+### Showing a student’s assignment list: `show`
 
 Shows the assignment list of the specified student in a separate assignment list window.
 The assignment list will be sorted by status and date.
@@ -157,7 +157,7 @@ Examples:****
 
 #### Adding an assignment: `give`
 
-Gives an assignment with deadline to the student specified by the index in the contact list.
+Gives an assignment with a deadline to the student specified by the index in the contact list.
 If `time` is not specified, `time` will be set to `11:59 pm` by default.
 
 Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
@@ -175,20 +175,20 @@ Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
     * `sun` - sets due date to the coming sunday.
   
 Examples:
-* `give 1 d/Lab1 by/ 21/8/2021` gives the first student in currently displayed contact list `Lab1` with deadline 2021, Aug 21.
-* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student in currently displayed contact list `Assignment2` with deadline 2021, Sep 22, 1200hrs.
-* `give 1 d/Tutorial3 by/ mon` gives the first student in currently displayed contact list `Tutorial3` with deadline next monday 2359hrs.
-* `give 2 d/Report1 by/ tue, 1800` gives the second student in currently displayed contact list `Report1` with deadline next tuesday 1800hrs.
+* `give 1 d/Lab1 by/ 21/8/2021` gives the first student in currently displayed contact list `Lab1` with a deadline 2021, Aug 21.
+* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student in currently displayed contact list `Assignment2` with a deadline 2021, Sep 22, 1200hrs.
+* `give 1 d/Tutorial3 by/ mon` gives the first student in currently displayed contact list `Tutorial3` with a deadline next monday 2359hrs.
+* `give 2 d/Report1 by/ tue, 1800` gives the second student in currently displayed contact list `Report1` with a deadline next tuesday 1800hrs.
 
 #### Adding an assignment with specified module: `giveall`
 
-Adds an assignment with deadline to all students in the specified module .
+Adds an assignment with a deadline to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
 
 Examples:
-* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 `Assignment 2` with deadline 2021, Oct 15, 1300hrs.
-* `giveall m/CS2103T d/iP by/ 02/09/2021,2359` gives all students of module CS2103T `iP` with deadline 2021, Sep 2, 2359hrs.
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 `Assignment 2` with a deadline 2021, Oct 15, 1300hrs.
+* `giveall m/CS2103T d/iP by/ 02/09/2021,2359` gives all students of module CS2103T `iP` with a deadline 2021, Sep 2, 2359hrs.
 
 ### Finding people who match with input keywords: `find`
 
@@ -196,49 +196,48 @@ Displays the list of people who match any of the input keywords. The matching is
 on an ***OR*** basis, where if a student matches at **least one keyword**, that student will
 be considered as matched and thus displayed.
 
-Format: `find [n/NAME] [m/MODULE] [t/TUTORIAL_NUMBER]...`
+Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 
 **Note:**
 1. At least one prefix is required.
-2. Ordering of prefixes are not strict, and allows for multiple keywords
+2. Ordering of prefixes are not strict and multiple keywords are allowed.
 3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
-4. Partial names will be matched. <br> e.g. `n/Hans` will match `Hans Bo`.
-5. If there are two identical prefixes in the command, only the last one works.
-6. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
+4. Each part of name seperated by space will match the full name. <br> e.g. `n/Hans` will match `Hans Bo`.
+5. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-7. We can search for multiple fields, e.g., modules at once, separated by a whitespace. <br>
-   e.g. `m/CS1101S CS2103T` will return people who take either / or both modules.
+6. We can search for multiple fields, e.g., modules at once, separated by a whitespace. <br>
+   e.g. `m/CS1101S CS2103T` will return people who take either modules.
 
 Examples:
-* `find n/Bernice` returns the students with name `Bernice`. 
+* `find n/Bernice` returns the students with name of `Bernice`. 
 * `find m/CS1101S` returns the students with module `CS1101S`.
 * `find t/Lab15` returns the students with tutorial `Lab15`.
-* `find n/Bernice m/MA1521` returns the students with name `Bernice` or study module `MA1521`.
+* `find n/Bernice m/MA1521` returns the students with name of `Bernice` or study module `MA1521`.
 * `find m/CM1417 t/Group04` returns the students with module `CM1417` or in tutorial `Group04`.
-* `find n/Evian m/CS2103T t/Group10` returns the students who at least satisfy one of requirements: with name `Evian`, study module`CS2103T` and in tutorial `Group10`.
-* `find t/E34 n/Brian m/GEQ1000` returns the students who at least satisfy one of requirements: with name `Brian`, study module`GEQ1000` and in tutorial `E34`.
-* `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of requirements: with name contains `david` or `alex`, study module`cs1231` or `cs2103t`.
+* `find n/Evian m/CS2103T t/Group10` returns the students who at least satisfy one of the requirements: with name of `Evian`, study module`CS2103T` and in tutorial `Group10`.
+* `find t/E34 n/Brian m/GEQ1000` returns the students who at least satisfy one of the requirements: with name of `Brian`, study module`GEQ1000` and in tutorial `E34`.
+* `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of the requirements: `david` or `alex` or both can be part of their names seperated by space, study module`cs1231` or `cs2103t`.
 
 
 ![result for 'find Example'](images/userguide/findExample.png)
 
-### Deleting an assignment with deadline : `remove`
+### Deleting an assignment with a deadline: `remove`
 
 Removes the specified assignment from the displayed assignment list.
 
 Format: `remove INDEX`
 
-* Removes the assignment at `INDEX` in currently displayed assignment list of a student.
+* Removes the assignment at `INDEX` in the currently displayed assignment list of a student.
 
 Examples:
 * `remove 10` deletes the 10th assignment in the displayed assignment list
 
-### Marking an assignment : `done`
+### Marking an assignment: `done`
 
 Marks a specified assignment's deadline of a student as completed.
-* Assignments with uncompleted/pending status will have an orange tag.
+* Assignments with pending status will have an orange tag.
 * Assignments with completed status will have a green tag.
-* Only works if currently displayed assignment list is non-empty.
+* Only works if currently displayed assignment list is not empty.
 
 Format: `done INDEX`
 
@@ -251,17 +250,17 @@ Deletes all completed assignments from TA<sup>2</sup>.
 
 Format: `clean`
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from TA<sup>2</sup>.
 
 Format: `clear`
 
-### Undoing the last command : `undo`
+### Undoing the last command: `undo`
 
 Undoes the last command entered.
-* Undo all kinds of command except for `undo` and `redo`.
-* At the start of program, nothing can be undone.
+* Undo all kinds of commands except for `undo` and `redo`.
+* At the start of the program, nothing can be undone.
 
 Format: `undo` 
 
