@@ -483,15 +483,21 @@ Step 1. The user executes `list` command to see the current list of persons.
 Step 2. The user executes `give n/Xiao m/CS2103 d/Assignment 1 by/ 03/11/2021` command to add assignment to Xiao in
 the specified module. When `Command#execute` is called, the `give n/...` command will filter out persons in the current
 displayed list with the module field `CS2103` and add the specified assignment to him if this person exists, and he does 
-not have the assignment.<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no 
-persons with the specified module field, it will return an error to the user. 
+not have the assignment.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no 
+persons with the specified module field, it will return an error to the user.
+
+</div>
 
 The following sequence diagram shows how the removeall command is executed:
 ![GiveSequenceDiagram](images/GiveSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+   
+</div>
+   
 Step 3. The user executes `show 1` to check that the specified assignment has been added for persons in the specified
 module.
 
@@ -574,9 +580,12 @@ Step 1. The user executes `list` command to see the current list of persons.
 
 Step 2. The user executes `done n/Xiao 1` command to mark the first assignment of a `Xiao` as done. When `Command#execute` is called,
 the `done n/...` command will filter out persons in the storage list with the name field `Xiao`and mark the specified assignment
-if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source: 
-**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user. 
+if the person exists and has that assignment in assignment list.
 
+<div markdown="span" class="alert alert-info">:information_source: 
+**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user. 
+</div>
+   
 The following sequence diagram shows how the done command is executed:
 ![DoneSequenceDiagram](images/DoneSequenceDiagram.png)
 
@@ -687,10 +696,10 @@ original command inputs.
 | Friendly Command                            | Corresponding Command                         |   Example Usages                                                         |                                                
 | ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
 | tmr                                         | sets the date to be tomorrow                  | give n/name d/description by/tmr                                        |
-| today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |                                                                        |
+| today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |                                                                        
 | week                                        | sets the date to be a week from now           | give n/name d/description by/week                                       |
 | mon                                         | sets the date to be the upcoming monday       | give n/name d/description by/mon                                        |
-| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |                                                                         |
+| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |                                                                         
 | wed                                         | sets the date to be the upcoming wednesday    | give n/name d/description by/wed                                        |
 | thu                                         | sets the date to be the upcoming thursday     | give n/name d/description by/thu                                        |
 | fri                                         | sets the date to be the upcoming friday       | give n/name d/description by/fri                                        | 
