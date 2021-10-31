@@ -120,5 +120,4 @@ class DueDateTest {
         assertFalse(DueDate.isValidFriendlyDateAndTime(",1000")); // missing friendly command
 
     }
-
 }
