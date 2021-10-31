@@ -103,6 +103,18 @@ public class Person {
                 && isSameName(otherPerson.getName());
     }
 
+    /**
+     * Returns true if both persons have the same email.
+     *
+     * @param otherPerson Person to compare to.
+     * @return true if same email, false otherwise.
+     */
+    public boolean isMatchingEmail(Person otherPerson) {
+        Email currentEmail = this.getEmail();
+        Email compareToEmail = otherPerson.getEmail();
+        return currentEmail.equals(compareToEmail);
+    }
+
     public boolean isSameName(Name name) {
         return this.getName().equals(name);
     }

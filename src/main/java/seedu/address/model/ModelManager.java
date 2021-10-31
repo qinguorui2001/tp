@@ -102,6 +102,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasExistingEmail(Person person) {
+        requireNonNull(person);
+        return versionedAddressBook.hasEmail(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
 

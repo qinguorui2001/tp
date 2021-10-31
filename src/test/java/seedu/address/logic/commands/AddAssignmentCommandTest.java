@@ -148,6 +148,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public boolean hasExistingEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
