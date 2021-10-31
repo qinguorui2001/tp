@@ -69,6 +69,24 @@ public class MarkAssignmentCommandTest {
     }
 
     @Test
+    public void execute_assignmentAlreadyCompleted_throwsCommandException() throws Exception {
+        Person selectedPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+
+        model.updateFilteredAssignmentList(selectedPerson);
+
+        MarkAssignmentCommand markAssignmentCommandFirstTime =
+                new MarkAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
+
+        markAssignmentCommandFirstTime.execute(model);
+
+        MarkAssignmentCommand markAssignmentCommandSecondTime =
+                new MarkAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
+
+        assertCommandFailure(markAssignmentCommandSecondTime, model,
+                MarkAssignmentCommand.MESSAGE_ASSIGNMENT_ALREADY_COMPLETED);
+    }
+
+    @Test
     public void equals() {
         Person personInList = model.getFilteredPersonList().get(INDEX_SIXTH_PERSON.getZeroBased());
         model.updateFilteredAssignmentList(personInList);
