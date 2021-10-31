@@ -1,3 +1,4 @@
+
 ---
 layout: page
 title: Introducing to you: TA<sup>2</sup>
@@ -10,13 +11,13 @@ title: Introducing to you: TA<sup>2</sup>
 
 ## What is TA<sup>2</sup>?
 
-**Teaching Assistant's Assistant(TA<sup>2</sup>) is a desktop productivity application developed for teaching assistants to make their teaching journey smoother.**
+**Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop productivity application developed for teaching assistants to make their teaching journey smoother.**
 With TA<sup>2</sup>, you can manage student information and keep track of the status of their assignments. Just type in
 the corresponding commands and TA<sup>2</sup> will manage all these for you! No need to do all these manually!
 
 ## How is TA<sup>2</sup> different?
 
-TA<sup>2</sup> is optimised for use via a Command Line Interface(CLI) while still having the benefits of a Graphical User Interface(GUI). 
+TA<sup>2</sup> is optimised for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). 
 This means that if you are able to type fast, TA<sup>2</sup> will be able to manage student submissions much faster than other applications 
 that require you to use your mouse often. TA<sup>2</sup> sorts all the information that you enter behind the scenes and 
 presents it to you in an organised manner when you ask for it. TA<sup>2</sup> eliminates the problem of information overload 

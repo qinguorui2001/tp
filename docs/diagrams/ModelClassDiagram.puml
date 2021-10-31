@@ -33,8 +33,8 @@ Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
 AddressBook .up.--|> ReadOnlyAddressBook
-VersionedAddressBook .left.|> AddressBook
-VersionedAddressBook -left-> "~*" ReadOnlyAddressBook
+VersionedAddressBook -left-|> AddressBook
+VersionedAddressBook -left----> "~*" ReadOnlyAddressBook: manages state >
 
 ModelManager .up.-|> Model
 Model .right.> ReadOnlyUserPrefs
@@ -45,7 +45,7 @@ UserPrefs .up.-|> ReadOnlyUserPrefs
 
 AddressBook *----> "1" UniqueAssignmentList
 AddressBook *---> "1" UniquePersonList
-AddressBook -> "                                                             0..1 active" Person
+AddressBook -> "                                                              active 0..1" Person
 AddressBook -> "1" Person: stores filtered list predicate about >
 
 Person *--> " 1" UniqueAssignmentList
@@ -53,9 +53,9 @@ Person *--> "1" Name
 Person *--> "1 " Email
 Person *--> "*" Tag
 
-UniquePersonList -right-> "~* all" Person
+UniquePersonList -right-> "all~*" Person
 
-UniqueAssignmentList --> "~*" Assignment: contains >
+UniqueAssignmentList ---> "~*" Assignment: contains >
 Assignment *-down-> "1" Description
 Assignment *-down-> "1" Status
 Assignment *-down-> "1" DueDate
@@ -68,7 +68,5 @@ ModelManager ---->"~* filtered" Person
 UserPrefs -[hidden]down-|>Person
 UniquePersonList -[hidden]down-|> UniqueAssignmentList
 UniqueAssignmentList -[hidden]left-|> Name
-
-
-
+AddressBook -[hidden]left-|>ReadOnlyAddressBook
 @enduml
