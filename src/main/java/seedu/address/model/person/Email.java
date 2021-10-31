@@ -62,7 +62,8 @@ public class Email {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Email // instanceof handles nulls
-                && value.toLowerCase(Locale.ROOT).equals(((Email) other).value.toLowerCase(Locale.ROOT))); // state check
+                && value.toLowerCase(Locale.ROOT)
+                .equals(((Email) other).value.toLowerCase(Locale.ROOT))); // state check
     }
 
     @Override

@@ -113,7 +113,7 @@ public class EditPersonCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
 
-        assertCommandSuccess(editPersonCommand, model, expectedMessage,expectedModel);
+        assertCommandSuccess(editPersonCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
