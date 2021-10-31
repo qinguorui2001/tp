@@ -59,7 +59,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and ****assignment man
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* If a command requires `INDEX` as an input, only one input for `INDEX` is expected.
+* If a command requires `INDEX` as an input, only one input for `INDEX` is expected.<br>
 
 * If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
@@ -84,14 +84,18 @@ Adds a student to the contact list with the student's relevant information.
 
 Format: `add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
 
-* A student can have any number of tags (including 0).<br><br>
-* A student's module must follow XX[X]1111[X], where X is any letter,
-1 is any number and values in square brackets are optional.
+**:information_source: Note:**<br>
+
+* A student can have any number of tags (including 0).<br>
+
+* A student's module must follow XX[X]1111[X], where X is any letter, 1 is any number and values in square brackets are optional.<br>
+
 * Only student's initials and module code will be capitalised on the displayed student list.<br>
-  * e.g. `n/alex yeoh`, `n/DAVID LI` will be converted to `Alex Yeoh` and `David Li` respectively.
-  * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.
+  * e.g. `n/alex yeoh`, `n/DAVID LI` will be converted to `Alex Yeoh` and `David Li` respectively.<br>
+  * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.<br>
+
 </div>
 
 Examples:
@@ -111,12 +115,25 @@ Modifies any part of the student's information.
 
 Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]...`
 
-:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer within the number of students in list** 1, 2, (till the index of the last student)​ 
-* You can modify several parts of student information at the same time.
+
+* The index **must be a positive integer within the number of students in list** 1, 2, (till the index of the last student)​
+
 * If there are two identical prefixes in one edit command, only the last one works. 
+
 * **At least one modification** is required for each edit.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+* You can modify several parts of student information at the same time.
+</div>
 
 Examples:
 * `edit 2 e/e00111@u.nus.edu` replaces the 2nd student's email with `e00111@u.nus.edu` in the contact list.
@@ -140,13 +157,21 @@ Examples:
 Shows the assignment list of the specified student in a separate assignment list window.
 The assignment list will be sorted by status and date.
 
-* Assignments with `COMPLETED` status will be at the bottom of the list.
-* Assignments with `PENDING` status will be at the top of the list.
-* Assignments with the same status will be sorted by due date.
-
 Format: `show INDEX`
 
 * Shows the assignment list of the student at the specified `INDEX`.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Assignments with `COMPLETED` status will be at the bottom of the list.<br>
+
+* Assignments with `PENDING` status will be at the top of the list.<br>
+
+* Assignments with the same status will be sorted by due date.<br>
+
+</div>
 
 Examples:****
 * `show 1` renders the first student’s assignment list on the assignment list panel.
@@ -162,6 +187,9 @@ If `time` is not specified, `time` will be set to `11:59 pm` by default.
 
 Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
 
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
 * The date can be replaced by friendly commands.
     * `today` - sets due date to tonight.
     * `tmr` - sets due date to tomorrow.
@@ -173,7 +201,8 @@ Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
     * `fri` - sets due date to the coming friday.
     * `sat` - sets due date to the coming saturday.
     * `sun` - sets due date to the coming sunday.
-  
+</div>
+
 Examples:
 * `give 1 d/Lab1 by/ 21/8/2021` gives the first student displayed in your contact list an assignment of description `Lab1` with a deadline 2021, Aug 21.
 * `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student displayed in your contact list an assignment of description `Assignment2` with a deadline 2021, Sep 22, 1200hrs.
@@ -198,15 +227,29 @@ be considered as matched and thus displayed.
 
 Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 
-**Note:**
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
 1. There should be at least one prefix.
+
 2. Ordering of prefixes are not strict and presence of multiple keywords are acceptable.
+
 3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
+
 4. Each part of name separated by space will match the full name. <br> e.g. `n/Hans` will match `Hans Bo`.
+
 5. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-6. We can search for multiple fields, e.g., modules at once, separated by a whitespace. <br>
+
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+* We can search for multiple fields, e.g., modules at once, separated by a whitespace. 
    e.g. `m/CS1101S CS2103T` will return people who take either modules.
+</div>
 
 Examples:
 * `find n/Bernice` returns the students with name of `Bernice`. 
@@ -235,11 +278,24 @@ Examples:
 ### Marking an assignment: `done`
 
 Marks a specified assignment's deadline of a student as completed.
-* Assignments with pending status will have an orange tag.
-* Assignments with completed status will have a green tag.
-* Only works if currently displayed assignment list is not empty.
 
 Format: `done INDEX`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Assignments with pending status will have an orange tag.
+
+* Assignments with completed status will have a green tag.
+
+* Only works if currently displayed assignment list is not empty.
+
+</div>
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+You can not mark the already completed assignment as done any more.
+</div>
 
 Examples:
 * `done 3` marks the 3rd assignment in the displayed assignment list as completed.
@@ -259,23 +315,23 @@ Format: `clear`
 ### Undoing a command: `undo`
 
 Undoes the last command entered.
-* Undo all kinds of commands except for `undo` and `redo`.
 
-Format: `undo` 
+Format: `undo`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-At the start of the program, you can not undo anything.
+* Undo all kinds of commands except for `undo` and `redo`.
+* At the start of the program, you can not undo anything.
 </div>
 
 ### Redoing a command: `redo`
 
 Recovers the effect of the last `undo` command.
-* Redo all kinds of commands except for `undo` and `redo`.
 
 Format: `redo`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-Once you enter a new command except for `undo` and `redo`, you can not redo anymore. 
+* Redo all kinds of commands except for `undo` and `redo`.
+* Once you enter a new command except for `undo` and `redo`, you can not redo anymore. 
 </div>
 
 ### Exiting the program: `exit`
