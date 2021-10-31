@@ -6,7 +6,7 @@ title: User Guide
 Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app designed for teaching assistants/tutors/professors 
 from the School of Computing to help manage student contacts and keep track of students' assignment submissions. TA<sup>2</sup> is  
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps.
+If you can type fast, TA<sup>2</sup> can get your contact and ****assignment management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -31,7 +31,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
    * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` with his/her relevant information to TA<sup>2</sup>.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the lt contact list.
+   * **`delete`**`3` : Deletes the 3rd contact shown in the currently displayed contact list.
 
    * **`clear`** : Deletes all contacts.
 
@@ -61,7 +61,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
 * If a command requires `INDEX` as an input, only one input for `INDEX` is expected.
 
-* If a parameter is expected only once in the command but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -97,7 +97,7 @@ Format: `add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 Examples:
 * `add n/John Doe m/CS1010 e/e1234567@u.nus.edu`
 * `add n/Betsy Crowe e/e0234567@u.nus.edu m/CS2103T`
-* `add n/alex yeoh e/1234123@u.nus.edu m/GEQ1000 t/T17`
+* `add n/alex yeoh e/e1234123@u.nus.edu m/GEQ1000 t/T17`
 
 ### Listing all students: `list`
 
@@ -149,7 +149,7 @@ Format: `show INDEX`
 * Shows the assignment list of the student at the specified `INDEX`.
 
 Examples:****
-* `show 1` renders the first student’s assignment list on the right side of the app.
+* `show 1` renders the first student’s assignment list on the assignment list panel.
 * The index refers to the index shown in the displayed student list.
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
@@ -175,20 +175,20 @@ Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
     * `sun` - sets due date to the coming sunday.
   
 Examples:
-* `give 1 d/Lab1 by/ 21/8/2021` gives the first student in currently displayed contact list `Lab1` with a deadline 2021, Aug 21.
-* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student in currently displayed contact list `Assignment2` with a deadline 2021, Sep 22, 1200hrs.
-* `give 1 d/Tutorial3 by/ mon` gives the first student in currently displayed contact list `Tutorial3` with a deadline next monday 2359hrs.
-* `give 2 d/Report1 by/ tue, 1800` gives the second student in currently displayed contact list `Report1` with a deadline next tuesday 1800hrs.
+* `give 1 d/Lab1 by/ 21/8/2021` gives the first student displayed in your contact list an assignment of description `Lab1` with a deadline 2021, Aug 21.
+* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student displayed in your contact list an assignment of description `Assignment2` with a deadline 2021, Sep 22, 1200hrs.
+* `give 1 d/Tutorial3 by/ mon` gives the first student displayed in your contact list an assignment of description `Tutorial3` with a deadline next monday 2359hrs.
+* `give 2 d/Report1 by/ tue, 1800` gives the second student in your contact list an assignment of description `Report1` with a deadline next tuesday 1800hrs.
 
-#### Adding an assignment with specified module: `giveall`
+#### Adding an assignment to all students in a module: `giveall`
 
 Adds an assignment with a deadline to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
 
 Examples:
-* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 `Assignment 2` with a deadline 2021, Oct 15, 1300hrs.
-* `giveall m/CS2103T d/iP by/ 02/09/2021,2359` gives all students of module CS2103T `iP` with a deadline 2021, Sep 2, 2359hrs.
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline 2021, Oct 15, 1300hrs.
+* `giveall m/CS2103T d/iP by/ 02/09/2021,2359` gives all students of module CS2103T an assignment of description `iP` with a deadline 2021, Sep 2, 2359hrs.
 
 ### Finding people who match with input keywords: `find`
 
@@ -199,10 +199,10 @@ be considered as matched and thus displayed.
 Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 
 **Note:**
-1. At least one prefix is required.
-2. Ordering of prefixes are not strict and multiple keywords are allowed.
+1. There should be at least one prefix.
+2. Ordering of prefixes are not strict and presence of multiple keywords are acceptable.
 3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
-4. Each part of name seperated by space will match the full name. <br> e.g. `n/Hans` will match `Hans Bo`.
+4. Each part of name separated by space will match the full name. <br> e.g. `n/Hans` will match `Hans Bo`.
 5. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 6. We can search for multiple fields, e.g., modules at once, separated by a whitespace. <br>
@@ -256,21 +256,27 @@ Clears all entries from TA<sup>2</sup>.
 
 Format: `clear`
 
-### Undoing the last command: `undo`
+### Undoing a command: `undo`
 
 Undoes the last command entered.
 * Undo all kinds of commands except for `undo` and `redo`.
-* At the start of the program, nothing can be undone.
 
 Format: `undo` 
 
-### Redoing the command: `redo`
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+At the start of the program, you can not undo anything.
+</div>
+
+### Redoing a command: `redo`
 
 Recovers the effect of the last `undo` command.
 * Redo all kinds of commands except for `undo` and `redo`.
-* Once a new command except for `undo` and `redo` is entered, nothing can be redone. 
 
 Format: `redo`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Once you enter a new command except for `undo` and `redo`, you can not redo anymore. 
+</div>
 
 ### Exiting the program: `exit`
 
