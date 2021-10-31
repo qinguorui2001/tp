@@ -470,7 +470,6 @@ completed assignments that they no longer want to view, **alternative 2** does t
 may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command 
 which allows the user to retrieve the desired assignments easily.
 
-### \[Proposed\] Data archiving
 ### Give feature
 The give command allows users to add the specified assignment to a particular person is stored in the model. 
 Person who already has the specified assignment will not have a duplicated assignment added to him. The
@@ -538,6 +537,8 @@ The following sequence diagram shows how the remove command is executed:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</div>
+  
 Step 3. The user executes `show 1` to check that the specified assignment has been removed for person in the specified
 module with that assignment.
 
@@ -582,6 +583,8 @@ The following sequence diagram shows how the done command is executed:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</div>
+   
 Step 3. The user executes `show 1` to check that the specified assignment has been marked for person with specified
 name with that assignment.
 
@@ -605,8 +608,6 @@ The following activity diagram summarizes what happens when a user executes the 
   chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
   marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
-* 
-  _{Explain here how the data archiving feature will be implemented}_
 
 ### Find 
 The *find command* allows users to find specific people in their list, based on certain
@@ -643,11 +644,12 @@ below sequence diagram:
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
-div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The following activity diagram summarizes what happens when a user executes
-the *Find Command*:
+</div>
+   
+The following activity diagram summarizes what happens when a user executes the *Find Command*:
 
 ![FindActivityDiagram](images/FindActivityDiagram.png)
 
@@ -741,7 +743,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* 
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
