@@ -50,8 +50,8 @@ public class Description {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
-                && description.trim().toLowerCase(Locale.ROOT)
-                .equals(((Description) other).description.trim().toLowerCase(Locale.ROOT))); // state check
+                && description.toLowerCase(Locale.ROOT)
+                .equals(((Description) other).description.toLowerCase(Locale.ROOT))); // state check
     }
 
     @Override
