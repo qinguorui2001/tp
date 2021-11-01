@@ -76,7 +76,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setAssignments(newData.copyAssignmentList());
         setPersons(newData.copyPersonList());
+
         activePerson = newData.getActivePersonFromPersonList(getPersonList());
+
         filteredPersonListPredicate = newData.getFilteredPersonListPredicate();
     }
 

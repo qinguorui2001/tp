@@ -140,6 +140,11 @@ public class CleanAssignmentCommandTest {
         }
 
         @Override
+        public void clearFilteredAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasAssignment(Person person, Assignment toAdd) {
             throw new AssertionError("This method should not be called.");
         }

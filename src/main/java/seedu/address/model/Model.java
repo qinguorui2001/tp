@@ -112,6 +112,8 @@ public interface Model {
 
     void updateFilteredAssignmentList(Person person);
 
+    void clearFilteredAssignmentList();
+
     void undoAddressBook() throws CommandException;
 
     void redoAddressBook() throws CommandException;

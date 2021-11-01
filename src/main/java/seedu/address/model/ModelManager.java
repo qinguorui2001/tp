@@ -183,7 +183,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        versionedAddressBook.clearAssignmentList();
+
         versionedAddressBook.setFilteredPersonListPredicate(predicate);
         filteredPersons.setPredicate(predicate);
     }
@@ -237,6 +237,15 @@ public class ModelManager implements Model {
     public void updateFilteredAssignmentList(Person person) {
         this.versionedAddressBook.changeActivePerson(person);
         this.versionedAddressBook.updateAssignmentList();
+    }
+
+    /**
+     * Clears the assignments from the assignment list in the {@code versionedAddressBook}.
+     *
+     */
+    @Override
+    public void clearFilteredAssignmentList() {
+        this.versionedAddressBook.clearAssignmentList();
     }
 
     //=========== Active Person =========================================================================

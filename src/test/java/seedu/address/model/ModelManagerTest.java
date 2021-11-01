@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -96,7 +95,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void updateFilteredAssignmentList_validPerson_PersonAssignmentListDisplayed() {
+    public void updateFilteredAssignmentList_validPerson_personAssignmentListDisplayed() {
         modelManager.addPerson(ALICE);
         modelManager.updateFilteredAssignmentList(ALICE);
         assertEquals(modelManager.getFilteredAssignmentList(), ALICE.getAssignments().asUnmodifiableObservableList());

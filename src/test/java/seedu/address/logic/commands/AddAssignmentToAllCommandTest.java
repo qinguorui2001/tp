@@ -227,6 +227,11 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
+        public void clearFilteredAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void undoAddressBook() throws CommandException {
             throw new AssertionError("This method should not be called.");
         }

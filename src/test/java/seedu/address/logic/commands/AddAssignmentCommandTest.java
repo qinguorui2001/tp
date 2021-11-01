@@ -168,6 +168,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public void clearFilteredAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasActivePerson() {
             throw new AssertionError("This method should not be called.");
         } // change here
