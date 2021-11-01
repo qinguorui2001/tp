@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -91,6 +93,22 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void updateFilteredAssignmentList_validPerson_PersonAssignmentListDisplayed() {
+        modelManager.addPerson(ALICE);
+        modelManager.updateFilteredAssignmentList(ALICE);
+        assertEquals(modelManager.getFilteredAssignmentList(), ALICE.getAssignments().asUnmodifiableObservableList());
+    }
+
+    @Test
+    public void updateFilteredAssignmentList_invalidPerson_emptyAssignmentListDisplayed() {
+        modelManager.addPerson(ALICE);
+
+        // BOB is not a person in modelManager
+        modelManager.updateFilteredAssignmentList(BOB);
+        assertTrue(modelManager.getFilteredAssignmentList().isEmpty());
     }
 
     @Test

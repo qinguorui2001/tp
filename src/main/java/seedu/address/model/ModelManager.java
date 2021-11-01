@@ -183,6 +183,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        versionedAddressBook.clearAssignmentList();
         versionedAddressBook.setFilteredPersonListPredicate(predicate);
         filteredPersons.setPredicate(predicate);
     }
@@ -224,13 +225,22 @@ public class ModelManager implements Model {
         return this.versionedAddressBook.getPersonAssignmentList(person);
     }
 
+    /**
+     * Switches the active person to the selected person and displays his/her assignment list
+     * if he/she is present within the person list. Updates to no active person and hence no
+     * assignment list displayed if the person specified does not exist in the list of persons
+     * in {@code versionedAddressBook}.
+     *
+     * @param person the person whose assignment list will be displayed
+     */
     @Override
     public void updateFilteredAssignmentList(Person person) {
         this.versionedAddressBook.changeActivePerson(person);
-        this.versionedAddressBook.updateAssignmentList(person);
+        this.versionedAddressBook.updateAssignmentList();
     }
 
     //=========== Active Person =========================================================================
+
     public Person getActivePerson() {
         return versionedAddressBook.getActivePerson();
     }
@@ -238,6 +248,8 @@ public class ModelManager implements Model {
     public boolean hasActivePerson() {
         return versionedAddressBook.hasActivePerson();
     }
+
+    //=========== Versioned Address Book ================================================================
 
     @Override
     public void commitAddressBook(ReadOnlyAddressBook addressBook) {
