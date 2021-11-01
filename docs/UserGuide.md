@@ -123,9 +123,11 @@ Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]...`
 
 * The index **must be a positive integer within the number of students in list** 1, 2, (till the index of the last student)​
 
-* If there are two identical prefixes in one edit command, only the last one works. 
+* If there are two identical prefixes in one edit command, only the last one works. (except for prefix `t/`)
 
 * **At least one modification** is required for each edit.
+
+* There can be no tags for a student, so you can leave `TAG` after prefix `t/` as blank if necessary.
 
 </div>
 
@@ -149,8 +151,8 @@ Format: `delete INDEX`
 * Deletes the student at the specified `INDEX`.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the contact list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd student in the contact list. (if 2nd student exists).
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command. (if the result is not empty)
 
 ### Showing a student’s assignment list: `show`
 
@@ -185,7 +187,7 @@ Examples:
 Gives an assignment with a deadline to the student specified by the index in the contact list.
 If `time` is not specified, `time` will be set to `11:59 pm` by default.
 
-Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
+Format: `give INDEX d/DESCRIPTION by/ d/M/YYYY [,HHmm]`
 
 <div markdown="span" class="alert alert-primary">
 
@@ -213,7 +215,7 @@ Examples:
 
 Adds an assignment with a deadline to all students in the specified module .
 
-Format: `giveall m/MODULE d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
+Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/YYYY [,HHmm]`
 
 Examples:
 * `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline 2021, Oct 15, 1300hrs.
@@ -381,12 +383,12 @@ Action | Format, Examples
 **clear** | `clear`
 **delete** | `delete INDEX`<br> e.g., `delete 3`
 **edit** | `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**find** | `find [n/NAME] [m/MODULE] [t/TAG]...`<br> e.g., `find n/James Jake m/CS2100 t/T13`
 **list** | `list`
 **help** | `help`
 **show** | `show INDEX` <br> e.g., `show 2`
-**give** | `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021`
-**giveall** | `giveall m/module d/DESCRIPTION by/ D/M/YYYY [,HHMM]` <br> e.g., `give m/CS2100 d/Lab1 by/ 21/8/2021`
+**give** | `give INDEX d/DESCRIPTION by/ d/M/YYYY [,HHmm]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021,1600`
+**giveall** | `giveall m/MODULE d/DESCRIPTION by/ d/M/YYYY [,HHmm]` <br> e.g., `giveall m/CS2100 d/Lab1 by/ 21/8/2021`
 **clean** | `clean`
 **remove** | `remove INDEX` <br> e.g., `remove 10`
 **done** | `done INDEX` <br> e.g., `done 4`
