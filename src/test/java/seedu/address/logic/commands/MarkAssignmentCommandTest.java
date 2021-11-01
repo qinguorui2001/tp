@@ -47,7 +47,7 @@ public class MarkAssignmentCommandTest {
 
         expectedModel.markAssignment(clonedExpectedPerson, assignmentToMark);
 
-        actualModel.updateFilteredAssignmentList(clonedActualPerson);
+        actualModel.updateAssignmentList(clonedActualPerson);
         MarkAssignmentCommand markAssignmentCommand =
                 new MarkAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
 
@@ -59,9 +59,9 @@ public class MarkAssignmentCommandTest {
 
     @Test
     public void execute_invalidIndexAssignmentList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAssignmentList(personToShow).size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getPersonAssignmentList(personToShow).size() + 1);
 
-        model.updateFilteredAssignmentList(personToShow);
+        model.updateAssignmentList(personToShow);
         MarkAssignmentCommand markAssignmentCommand =
                 new MarkAssignmentCommand(outOfBoundIndex);
 
@@ -71,7 +71,7 @@ public class MarkAssignmentCommandTest {
     @Test
     public void equals() {
         Person personInList = model.getFilteredPersonList().get(INDEX_SIXTH_PERSON.getZeroBased());
-        model.updateFilteredAssignmentList(personInList);
+        model.updateAssignmentList(personInList);
 
         MarkAssignmentCommand markFirstCommand =
                 new MarkAssignmentCommand(INDEX_FIRST_ASSIGNMENT);

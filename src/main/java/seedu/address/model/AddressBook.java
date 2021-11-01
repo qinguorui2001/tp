@@ -20,9 +20,10 @@ import seedu.address.model.person.UniquePersonList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
+    private static final Optional<Person> ABSENCE_OF_ACTIVE_PERSON = Optional.empty();
 
     /* The person whose assignment is displayed on the Ui */
-    private Optional<Person> activePerson = Optional.empty();
+    private Optional<Person> activePerson = ABSENCE_OF_ACTIVE_PERSON;
     private Predicate<Person> filteredPersonListPredicate = PREDICATE_SHOW_ALL_PERSONS;
     private final UniquePersonList persons;
     private final UniqueAssignmentList assignments;
@@ -75,7 +76,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setAssignments(newData.copyAssignmentList());
         setPersons(newData.copyPersonList());
+
         activePerson = newData.getActivePersonFromPersonList(getPersonList());
+
         filteredPersonListPredicate = newData.getFilteredPersonListPredicate();
     }
 
@@ -181,10 +184,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Retrieve the assignment list of the identified person {@code name} from this {@code AddressBook's person list}.
+     * Retrieves the assignment list of the identified person {@code name} from this {@code AddressBook's person list}.
      */
     public ObservableList<Assignment> getPersonAssignmentList(Person person) {
-        return person.getAssignments().asUnmodifiableObservableList();
+        return person.getAssignmentAsUnmodifiableObservableList();
+    }
+
+    /**
+     * Retrieves the currently stored assignment list stored in AddressBook of the active person.
+     *
+     * @return the current assignment list in AddressBook.
+     */
+    public ObservableList<Assignment> getCurrentAssignmentList() {
+        return assignments.asUnmodifiableObservableList();
     }
 
     //// util methods
@@ -242,12 +254,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public void updateAssignmentList(Person person) {
+    public void updateAssignmentList() {
         this.assignments.clearAllAssignments();
 
         if (activePerson.isPresent()) {
-            this.assignments.setAssignments(person.getAssignments());
+            this.assignments.setAssignments(getActivePerson().getAssignments());
         }
+    }
+
+    @Override
+    public void clearAssignmentList() {
+        this.assignments.clearAllAssignments();
+        activePerson = ABSENCE_OF_ACTIVE_PERSON;
     }
 
     @Override
@@ -283,18 +301,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
+    public AddressBook copyAddressBook() {
+        return new AddressBook(this);
+    }
+
+    @Override
     public Optional<Person> getActivePersonFromPersonList(List<Person> persons) {
         if (!activePerson.isPresent()) {
-            return Optional.empty();
+            return ABSENCE_OF_ACTIVE_PERSON;
         }
 
         Person actualActivePerson = getActivePerson();
         return persons.stream().filter(person -> person.isSamePerson(actualActivePerson)).findFirst();
-    }
-
-    @Override
-    public AddressBook copyAddressBook() {
-        return new AddressBook(this);
     }
 
 }

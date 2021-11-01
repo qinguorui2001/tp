@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.*;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.assignment.*;
 import seedu.address.model.tag.Tag;
 
@@ -65,6 +66,10 @@ public class Person {
     public UniqueAssignmentList getAssignments() {
         assignments.sort();
         return assignments;
+    }
+
+    public ObservableList<Assignment> getAssignmentAsUnmodifiableObservableList() {
+        return getAssignments().asUnmodifiableObservableList();
     }
 
     /**

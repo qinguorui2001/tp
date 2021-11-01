@@ -173,6 +173,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public void clearAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasActivePerson() {
             throw new AssertionError("This method should not be called.");
         } // change here
@@ -213,7 +218,7 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public void updateFilteredAssignmentList(Person person) {
+        public void updateAssignmentList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -238,12 +243,12 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public ObservableList<Assignment> getFilteredAssignmentList() {
+        public ObservableList<Assignment> getAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Assignment> getFilteredAssignmentList(Person person) {
+        public List<Assignment> getPersonAssignmentList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }

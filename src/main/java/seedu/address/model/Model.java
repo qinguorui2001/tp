@@ -90,11 +90,11 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered assignment list displayed in Ui. */
-    ObservableList<Assignment> getFilteredAssignmentList();
+    /** Returns an unmodifiable view of the assignment list displayed in Ui. */
+    ObservableList<Assignment> getAssignmentList();
 
-    /** Returns an unmodifiable view of the filtered assignment list of the Person */
-    List<Assignment> getFilteredAssignmentList(Person person);
+    /** Returns an unmodifiable view of the assignment list of the Person */
+    List<Assignment> getPersonAssignmentList(Person person);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
@@ -118,7 +118,9 @@ public interface Model {
 
     void cleanAssignments();
 
-    void updateFilteredAssignmentList(Person person);
+    void updateAssignmentList(Person person);
+
+    void clearAssignmentList();
 
     void undoAddressBook() throws CommandException;
 
