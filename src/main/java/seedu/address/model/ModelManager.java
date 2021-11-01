@@ -140,7 +140,7 @@ public class ModelManager implements Model {
     @Override
     public void addAllAssignment(List<Person> personList, Assignment toAdd) {
         for (Person person: personList) {
-            assert !hasAssignment(person, toAdd);
+            assert (!hasAssignment(person, toAdd));
             versionedAddressBook.addAssignment(person, toAdd);
         }
         if (hasActivePerson()) {

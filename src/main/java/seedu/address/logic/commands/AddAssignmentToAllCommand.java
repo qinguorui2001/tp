@@ -74,26 +74,42 @@ public class AddAssignmentToAllCommand extends Command {
         List<Person> personListWithoutAssignment = filteredPersonList.get(0);
         List<Person> personListWithAssignment = filteredPersonList.get(1);
 
-        Assignment existingAssignment = toAdd;
-        if (!personListWithAssignment.isEmpty()) {
-            existingAssignment = personListWithAssignment.get(0).getAssignments().getAssignment(toAdd.getDescription());
-            if (!existingAssignment.getDueDate().equals(toAdd.getDueDate())) {
-                throw new CommandException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE,
-                        existingAssignment.getDueDate(), toAdd.getDueDate()));
-            }
-        }
+        Assignment existingAssignment = getExistingAssignment(personListWithAssignment);
 
         if (personListWithoutAssignment.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_ALL_HAS_ASSIGNMENT, module));
         }
 
-        // Create a new assignment with the same description as existing ones
+        // Create a new assignment with the same description as the existing one
         // to prevent inconsistencies in letter cases
         Assignment standardisedAssignment = new Assignment(existingAssignment.getDescription(),
                 toAdd.getDueDate(), toAdd.getStatus());
         model.addAllAssignment(personListWithoutAssignment, standardisedAssignment);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, module, toAdd));
+    }
+
+
+    /**
+     * Checks if there are persons with {@code toAdd} and returns it
+     *
+     * @param personListWithAssignment The list of persons that has the assignment
+     * @return The existing assignment if any persons have the assignment or {@code toAdd}
+     * @throws CommandException Indicates that the due dates of
+     * existing assignment and {@code toAdd} are different
+     */
+    public Assignment getExistingAssignment(List<Person> personListWithAssignment) throws CommandException {
+        if (!personListWithAssignment.isEmpty()) {
+            Assignment existingAssignment = personListWithAssignment.get(0).getAssignments()
+                    .getAssignment(toAdd.getDescription());
+            if (!existingAssignment.isSameDueDate(toAdd)) {
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE,
+                        existingAssignment.getDueDate(), toAdd.getDueDate()));
+            }
+            return existingAssignment;
+        } else {
+            return toAdd;
+        }
     }
 
     @Override
