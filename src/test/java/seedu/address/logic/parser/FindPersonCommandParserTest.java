@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,6 +77,31 @@ public class FindPersonCommandParserTest {
                 new FindPersonCommand(new NameContainsKeywordsPredicate(List.of("Alice", "MA1521", "lab15")));
         assertParseSuccess(parser, "n/alice m/ma1521 t/LAB15", expectedFindCommandAllThree);
 
+    }
+
+    @Test
+    public void parse_emptyArgsTags_success() {
+
+        FindPersonCommand expectedFindCommandNone =
+                new FindPersonCommand(new NameContainsKeywordsPredicate(new ArrayList<>()));
+
+        // finding an empty prefix m/
+        assertParseSuccess(parser, "m/", expectedFindCommandNone);
+
+        // finding an empty prefix n/
+        assertParseSuccess(parser, "n/", expectedFindCommandNone);
+
+        // finding an empty prefix t/
+        assertParseSuccess(parser, "t/", expectedFindCommandNone);
+
+        // finding multiple empty prefixes m/ t/
+        assertParseSuccess(parser, "m/ t/", expectedFindCommandNone);
+
+        // finding multiple empty prefixes m/ n/
+        assertParseSuccess(parser, "m/ n/", expectedFindCommandNone);
+
+        // finding multiple empty prefixes m/ n/ t/
+        assertParseSuccess(parser, "m/ n/ t/", expectedFindCommandNone);
     }
 
     @Test

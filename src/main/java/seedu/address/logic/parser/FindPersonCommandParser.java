@@ -100,7 +100,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
         logger.info("Split args: " + Arrays.toString(splitByModule));
 
-        if (splitByModule.length < 2) {
+        if (splitByModule.length < 2 || allEmptyTags(splitByModule)) {
             return new ArrayList<>();
         }
 
@@ -119,6 +119,33 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
+    }
+
+    /**
+     * Checks if the user inputs all empty tags.
+     *
+     * @param args user input arguments after splitting by m/ tag
+     * @return true if all tags are empty, false otherwise.
+     */
+    private boolean allEmptyTags(String[] args) {
+        String[] checkTags;
+        Pattern prefixesPattern = Pattern.compile(VALID_PREFIXES);
+        Matcher moduleMatcher;
+
+        for (String s : args) {
+            if (!s.equals("")) {
+                checkTags = s.trim().split(" ");
+                logger.info("Examining Tags in Arr: " + Arrays.toString(checkTags));
+                for (String tags : checkTags) {
+                    logger.info("Examining Tags: " + tags);
+                    moduleMatcher = prefixesPattern.matcher(tags);
+                    if (!moduleMatcher.find()) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
