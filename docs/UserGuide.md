@@ -6,7 +6,7 @@ title: User Guide
 Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app designed for teaching assistants/tutors/professors 
 from the School of Computing to help manage student contacts and keep track of students' assignment submissions. TA<sup>2</sup> is  
 optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-If you can type fast, TA<sup>2</sup> can get your contact and ****assignment management tasks done faster than traditional GUI apps.
+If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -173,7 +173,7 @@ Format: `show INDEX`
 
 </div>
 
-Examples:****
+Examples:
 * `show 1` renders the first student’s assignment list on the assignment list panel.
 * The index refers to the index shown in the displayed student list.
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
@@ -237,7 +237,7 @@ Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 
 3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
 
-4. Each part of name separated by space will match the full name. <br> e.g. `n/Hans` will match `Hans Bo`.
+4. Each part of name separated by space will match the full name. <br> e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`.
 
 5. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
@@ -293,7 +293,8 @@ Format: `done INDEX`
 
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: 
+**Caution:**
 You can not mark the already completed assignment as done any more.
 </div>
 
@@ -318,7 +319,8 @@ Undoes the last command entered.
 
 Format: `undo`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: 
+**Caution:**
 * Undo all kinds of commands except for `undo` and `redo`.
 * At the start of the program, you can not undo anything.
 </div>
@@ -329,7 +331,8 @@ Recovers the effect of the last `undo` command.
 
 Format: `redo`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: 
+**Caution:**
 * Redo all kinds of commands except for `undo` and `redo`.
 * Once you enter a new command except for `undo` and `redo`, you can not redo anymore. 
 </div>
@@ -348,7 +351,8 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: 
+**Caution:**
 If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
 
