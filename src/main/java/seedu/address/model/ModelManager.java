@@ -108,7 +108,7 @@ public class ModelManager implements Model {
         /*show an empty assignment list in AddressBook if the person deleted has his/her assignments
             stored in AddressBook's Assignment List*/
         if (versionedAddressBook.isActivePerson(target)) {
-            updateFilteredAssignmentList(target);
+            updateAssignmentList(target);
         }
     }
 
@@ -134,7 +134,7 @@ public class ModelManager implements Model {
     @Override
     public void addAssignment(Person person, Assignment toAdd) {
         versionedAddressBook.addAssignment(person, toAdd);
-        updateFilteredAssignmentList(person);
+        updateAssignmentList(person);
     }
 
     @Override
@@ -145,27 +145,27 @@ public class ModelManager implements Model {
             }
         }
         if (hasActivePerson()) {
-            updateFilteredAssignmentList(getActivePerson());
+            updateAssignmentList(getActivePerson());
         }
     }
 
     @Override
     public void deleteAssignment(Person person, Assignment toDelete) {
         versionedAddressBook.removeAssignment(person, toDelete);
-        updateFilteredAssignmentList(person);
+        updateAssignmentList(person);
     }
 
     @Override
     public void markAssignment(Person person, Assignment toMark) {
         versionedAddressBook.markAssignment(person, toMark);
-        updateFilteredAssignmentList(person);
+        updateAssignmentList(person);
     }
 
     @Override
     public void cleanAssignments() {
         versionedAddressBook.cleanAssignments();
         if (hasActivePerson()) {
-            updateFilteredAssignmentList(getActivePerson());
+            updateAssignmentList(getActivePerson());
         }
     }
 
@@ -215,12 +215,12 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Assignment> getFilteredAssignmentList() {
+    public ObservableList<Assignment> getAssignmentList() {
         return assignmentsList;
     }
 
     @Override
-    public List<Assignment> getFilteredAssignmentList(Person person) {
+    public List<Assignment> getPersonAssignmentList(Person person) {
         requireNonNull(person);
         return this.versionedAddressBook.getPersonAssignmentList(person);
     }
@@ -234,7 +234,7 @@ public class ModelManager implements Model {
      * @param person the person whose assignment list will be displayed
      */
     @Override
-    public void updateFilteredAssignmentList(Person person) {
+    public void updateAssignmentList(Person person) {
         this.versionedAddressBook.changeActivePerson(person);
         this.versionedAddressBook.updateAssignmentList();
     }
@@ -244,7 +244,7 @@ public class ModelManager implements Model {
      *
      */
     @Override
-    public void clearFilteredAssignmentList() {
+    public void clearAssignmentList() {
         this.versionedAddressBook.clearAssignmentList();
     }
 

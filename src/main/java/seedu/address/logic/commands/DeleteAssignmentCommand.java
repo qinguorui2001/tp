@@ -46,7 +46,7 @@ public class DeleteAssignmentCommand extends Command {
 
         Person personToRemoveAssignment = model.getActivePerson();
 
-        List<Assignment> assignmentList = model.getFilteredAssignmentList();
+        List<Assignment> assignmentList = model.getAssignmentList();
 
         if (targetAssignmentIndex.getZeroBased() >= assignmentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);

@@ -97,8 +97,8 @@ public class ModelManagerTest {
     @Test
     public void updateFilteredAssignmentList_validPerson_personAssignmentListDisplayed() {
         modelManager.addPerson(ALICE);
-        modelManager.updateFilteredAssignmentList(ALICE);
-        assertEquals(modelManager.getFilteredAssignmentList(), ALICE.getAssignments().asUnmodifiableObservableList());
+        modelManager.updateAssignmentList(ALICE);
+        assertEquals(modelManager.getAssignmentList(), ALICE.getAssignments().asUnmodifiableObservableList());
     }
 
     @Test
@@ -106,8 +106,8 @@ public class ModelManagerTest {
         modelManager.addPerson(ALICE);
 
         // BOB is not a person in modelManager
-        modelManager.updateFilteredAssignmentList(BOB);
-        assertTrue(modelManager.getFilteredAssignmentList().isEmpty());
+        modelManager.updateAssignmentList(BOB);
+        assertTrue(modelManager.getAssignmentList().isEmpty());
     }
 
     @Test

@@ -176,7 +176,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Retrieves the assignment list of the identified person {@code name} from this {@code AddressBook's person list}.
      */
     public ObservableList<Assignment> getPersonAssignmentList(Person person) {
-        return person.getAssignments().asUnmodifiableObservableList();
+        return person.getAssignmentAsUnmodifiableObservableList();
     }
 
     /**
