@@ -61,6 +61,14 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a person with the same email exists in the address book.
+     *
+     * @param person person to compare to.
+     * @return true if email exists, false otherwise.
+     */
+    boolean hasExistingEmail(Person person);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */

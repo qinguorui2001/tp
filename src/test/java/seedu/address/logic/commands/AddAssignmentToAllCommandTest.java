@@ -162,6 +162,11 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
+        public boolean hasExistingEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasActivePerson() {
             throw new AssertionError("This method should not be called.");
         }
