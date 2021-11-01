@@ -121,13 +121,11 @@ Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]...`
 
 * The index refers to the index number shown in the displayed student list.
 
-* The index **must be a positive integer within the number of students in list** 1, 2, (till the index of the last student)​
+* The index **must be a positive integer within the number of students in list** 1, 2, 3, ...(till the index of the last student)​
 
-* If there are two identical prefixes in one edit command, only the last one works. (except for prefix `t/`)
+* If you have two identical prefixes with the edit command, only the last prefix will be used for the edit. (except for prefix t/)
 
 * **At least one modification** is required for each edit.
-
-* There can be no tags for a student, so you can leave `TAG` after prefix `t/` as blank if necessary.
 
 </div>
 
@@ -135,6 +133,7 @@ Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]...`
 
 :bulb: **Tip:**
 * You can modify several parts of student information at the same time.
+* If you wish to remove the tags for a student, simply type `t/` prefix without any parameters.
 </div>
 
 Examples:
@@ -325,7 +324,7 @@ Format: `undo`
 <div markdown="span" class="alert alert-warning">
 :exclamation:**Caution:**
 
-* Undo all kinds of commands except for `undo` and `redo`.
+* Undo all commands except for `undo` and `redo`.
 * At the start of the program, you can not undo anything.
 </div>
 
@@ -338,7 +337,7 @@ Format: `redo`
 <div markdown="span" class="alert alert-warning">
 :exclamation:**Caution:**
 
-* Redo all kinds of commands except for `undo` and `redo`.
+* Redo all commands except for `undo` and `redo`.
 * Once you enter a new command except for `undo` and `redo`, you can not redo anymore. 
 </div>
 
