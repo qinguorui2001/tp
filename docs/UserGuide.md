@@ -293,8 +293,9 @@ Format: `done INDEX`
 
 </div>
 
-<div markdown="span" class="alert alert-warning">:exclamation: 
-**Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation:**Caution:**
+
 You can not mark the already completed assignment as done any more.
 </div>
 
@@ -319,8 +320,9 @@ Undoes the last command entered.
 
 Format: `undo`
 
-<div markdown="span" class="alert alert-warning">:exclamation: 
-**Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation:**Caution:**
+
 * Undo all kinds of commands except for `undo` and `redo`.
 * At the start of the program, you can not undo anything.
 </div>
@@ -331,8 +333,9 @@ Recovers the effect of the last `undo` command.
 
 Format: `redo`
 
-<div markdown="span" class="alert alert-warning">:exclamation: 
-**Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation:**Caution:**
+
 * Redo all kinds of commands except for `undo` and `redo`.
 * Once you enter a new command except for `undo` and `redo`, you can not redo anymore. 
 </div>
@@ -351,8 +354,9 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: 
-**Caution:**
+<div markdown="span" class="alert alert-warning">
+:exclamation:**Caution:**
+
 If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
 
