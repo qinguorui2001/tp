@@ -956,7 +956,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. Data should be stored in a human editable text file.
 7. Data cannot be stored in DBMS. 
 8. Size of products should not exceed 100 MB.
-9. Size of documents should not exceed 15 MB per file.
 
 *{More to be added}*
 
@@ -986,19 +985,32 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
+   2. Navigate to the folder using your command prompt.
+   3. Launch the jar file using the ```java -jar ta2.jar```. 
+   4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
+<br/><br />
+![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
+2. Saving window preferences
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window. 
 
-1. Saving window preferences
-
-   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+### Adding a person
 
+1. Prerequisites: List all persons using the `list` command. Ensure there is no person named "Stephen Fallon" in the list before proceeding.
+
+2. Test case: `add n/Stephen Fallon m/CS2100 e/E1337123@u.nus.edu t/L21`<br>
+   Expected: First contact is appended to the SoC contact list. Details of the added contact shown in the status message. The image below shows the result of this command on the contact list if you started with the 6 people from the sample data.<br /><br /> ![Manual Testing for Adding Person](images/ManualTestingAddingPerson.PNG) <br /><br />
+
+3. Test case: Repeat `add n/Stephen Fallon m/CS2100 e/E1337123@u.nus.edu t/L21` again <br>
+   Expected: No person is added. Error details shown in the status message because the peron already exists in the list.
+
+4. Other incorrect delete commands to try: `add` <br>
+   Expected: Similar to previous.
+   
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
