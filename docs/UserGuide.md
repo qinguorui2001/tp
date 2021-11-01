@@ -361,10 +361,6 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 * If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
