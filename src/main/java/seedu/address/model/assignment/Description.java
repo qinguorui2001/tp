@@ -3,6 +3,8 @@ package seedu.address.model.assignment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Locale;
+
 /**
  * Represents an Assignment's description in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
@@ -48,7 +50,8 @@ public class Description {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
-                && description.equals(((Description) other).description)); // state check
+                && description.toLowerCase(Locale.ENGLISH)
+                .equals(((Description) other).description.toLowerCase())); // state check
     }
 
     @Override

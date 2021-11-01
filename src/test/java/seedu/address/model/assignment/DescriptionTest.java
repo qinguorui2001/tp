@@ -2,6 +2,8 @@ package seedu.address.model.assignment;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS2100_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS3230_LAB;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -36,5 +38,19 @@ public class DescriptionTest {
         assertTrue(Description.isValidDescription("cs2100 homework")); // alphanumeric characters
         assertTrue(Description.isValidDescription("CS2100 homework")); // with capital letters
         assertTrue(Description.isValidDescription("Finish Cs3230 tutorial and assignment")); // long Descriptions
+    }
+
+    @Test
+    public void equals() {
+        // same description -> true
+        assertTrue(new Description(VALID_DESCRIPTION_CS3230_LAB).equals(new Description(VALID_DESCRIPTION_CS3230_LAB)));
+
+        // different description -> false
+        assertFalse(new Description(VALID_DESCRIPTION_CS3230_LAB)
+                .equals(new Description(VALID_DESCRIPTION_CS2100_LAB)));
+
+        // different case -> true
+        assertTrue(new Description(VALID_DESCRIPTION_CS3230_LAB)
+                .equals(new Description(VALID_DESCRIPTION_CS3230_LAB.toUpperCase())));
     }
 }
