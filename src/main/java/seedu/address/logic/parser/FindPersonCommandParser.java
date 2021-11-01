@@ -7,6 +7,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -40,6 +41,8 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
         String trimmedArgs = args.trim();
 
+        logger.info("Finding: " + trimmedArgs);
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
@@ -55,7 +58,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             logger.info("No module tags");
             return new FindPersonCommand(new NameContainsKeywordsPredicate(generateKeywords((trimmedArgs))));
         } else {
-            logger.info("Module tags with validation");
+            logger.info("Module tags with validation on " + trimmedArgs);
             store = generateKeywordsWithModuleChecking(trimmedArgs);
             return new FindPersonCommand(new NameContainsKeywordsPredicate(store));
         }
@@ -94,6 +97,13 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
      */
     private ArrayList<String> generateKeywordsWithModuleChecking(String args) throws ParseException {
         String[] splitByModule = args.split(PREFIX_MODULE.getPrefix());
+
+        logger.info("Split args: " + Arrays.toString(splitByModule));
+
+        if (splitByModule.length < 2) {
+            return new ArrayList<>();
+        }
+
         String moduleHalf = splitByModule[1];
         performValidation(moduleHalf.split(PREFIXES_SPACE)[0]);
 
