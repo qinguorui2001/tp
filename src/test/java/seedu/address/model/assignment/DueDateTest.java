@@ -44,7 +44,7 @@ class DueDateTest {
         assertTrue(DueDate.isValidDate("1/11/2021")); // single digit for day and double-digit for month
         assertTrue(DueDate.isValidDate("11/1/2021")); // double-digit for day and double-digit for month
         assertTrue(DueDate.isValidDate("31/12/9999")); // maximum values for day, month and year
-        assertTrue(DueDate.isValidDate("01/01/1900")); // minimum values for day, month and year
+        assertTrue(DueDate.isValidDate("01/01/0001")); // minimum values for day, month and year
         assertTrue(DueDate.isValidDate("01/02/2021")); // day and month with prefix 0
         assertTrue(DueDate.isValidDate("01/1/2021")); // day with prefix 0 with single digit month
         assertTrue(DueDate.isValidDate("1/01/2021")); // month with prefix 0 with single digit day
