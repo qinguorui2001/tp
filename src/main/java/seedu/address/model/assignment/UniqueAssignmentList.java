@@ -189,6 +189,27 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         return asUnmodifiableObservableList().get(index);
     }
 
+    public Assignment getAssignment(Description description) {
+        requireNonNull(description);
+        boolean isPresent = false;
+        Assignment assignment = null;
+        for (Assignment currentAssignment : internalList) {
+            if (currentAssignment.getDescription().equals(description)) {
+                isPresent = true;
+                assignment = currentAssignment;
+                break;
+            }
+        }
+
+        if (isPresent) {
+            requireNonNull(assignment);
+            return assignment;
+        } else {
+            throw new AssignmentNotFoundException();
+        }
+
+    }
+
     /**
      * Sorts the assignment list by status.
      * Assignments with the same status are then sorted by date

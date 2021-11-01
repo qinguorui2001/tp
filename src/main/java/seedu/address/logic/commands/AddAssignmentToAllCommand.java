@@ -3,10 +3,14 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
+import seedu.address.model.assignment.DueDate;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
@@ -33,6 +37,10 @@ public class AddAssignmentToAllCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New assignment added to all persons in %1$s: %2$s";
     public static final String MESSAGE_ALL_HAS_ASSIGNMENT = "All persons in %1$s has the specified assignment already!";
+    public static final String MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE =
+            "Please make sure that the deadline is consistent!\n" +
+            "Your deadline input: %1s\n" +
+            "Existing assignment deadline: %2$s";
 
     private final Assignment toAdd;
     private final Module module;
@@ -51,23 +59,38 @@ public class AddAssignmentToAllCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         // Get Person that match the Module
-        List<Person> filteredPersonList =
+        List<Person> personListInModule =
                 model.getAddressBook().getPersonList()
                         .stream()
                         .filter(person -> person.hasModule(module))
                         .collect(Collectors.toList());
 
-        if (filteredPersonList.size() == 0) {
+        if (personListInModule.size() == 0) {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_MODULE);
         }
 
-        filteredPersonList.removeIf(person -> model.hasAssignment(person, toAdd));
+        //Split the persons into those with or without the assignment
+        List<List<Person>> filteredPersonList = new ArrayList<>(personListInModule
+                .stream()
+                .collect(Collectors.partitioningBy(person -> model.hasAssignment(person, toAdd))).values());
 
-        if (filteredPersonList.size() == 0) {
+        List<Person> personListWithoutAssignment = filteredPersonList.get(0);
+        List<Person> personListWithAssignment = filteredPersonList.get(1);
+
+        Assignment existingAssignment = toAdd;
+        if (!personListWithAssignment.isEmpty()) {
+            existingAssignment = personListWithAssignment.get(0).getAssignments().getAssignment(toAdd.getDescription());
+            if (!existingAssignment.getDueDate().equals(toAdd.getDueDate())) {
+               throw new CommandException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE,
+                       existingAssignment.getDueDate(), toAdd.getDueDate()));
+            }
+        }
+
+        if (personListWithoutAssignment.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_ALL_HAS_ASSIGNMENT, module));
         }
 
-        model.addAllAssignment(filteredPersonList, toAdd);
+        model.addAllAssignment(personListWithoutAssignment, existingAssignment);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, module, toAdd));
     }
