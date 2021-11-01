@@ -53,5 +53,6 @@ public class NameTest {
         assertEquals(Name.capitalise("AlEx"), "Alex");
         assertEquals(Name.capitalise("Alex  "), "Alex");
         assertEquals(Name.capitalise("CLIffOrd KAlEB toh jiNg zHe"), "Clifford Kaleb Toh Jing Zhe");
+        assertEquals(Name.capitalise("lim  wei    chang"), "Lim Wei Chang"); //multiple spaces between names
     }
 }

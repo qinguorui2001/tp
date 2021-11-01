@@ -25,10 +25,11 @@ public class DueDate implements Comparable<DueDate> {
             + AddAssignmentCommand.FRIENDLY_COMMAND_SYNTAX;
     public static final String OUTPUT_CONSTRAINTS = "Due dates saved should be in a format dd MMM yyyy, hh:mm a";
 
+    //Solution below adapted from https://stackoverflow.com/questions/4374185/regular-expression-match-to-test-for-a-valid-year
     public static final String FIRST_28_DAYS_REGEX = "((0?[1-9]|1[0-9]|2[0-8])[/](0?[1-9]|1[012]))";
     public static final String MONTHS_WITH_31_DAYS_REGEX = "((29|30|31)[/](0?[13578]|1[02]))";
     public static final String MONTHS_WITH_30_DAYS_REGEX = "((29|30)[/](0?[4,6,9]|11))";
-    public static final String YEAR_REGEX = "[/](19|[2-9][0-9])\\d\\d$";
+    public static final String YEAR_REGEX = "[/]((?!0000)\\d\\d\\d\\d)$";
     public static final String NON_LEAP_YEAR_REGEX = "(^(" + FIRST_28_DAYS_REGEX
             + "|" + MONTHS_WITH_31_DAYS_REGEX
             + "|" + MONTHS_WITH_30_DAYS_REGEX + ")"
