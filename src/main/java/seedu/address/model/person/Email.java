@@ -81,9 +81,9 @@ public class Email {
         String[] emailParts = test.split("@");
         String localPart = emailParts[0];
         String domainPart = emailParts[1];
-        boolean hasLocalPartExceedMaximum = localPart.length() > MAX_LENGTH_OF_LOCAL_PART;
-        boolean hasDomainPartExceedMaximum = domainPart.length() > MAX_LENGTH_OF_DOMAIN_PART;
-        boolean hasEntireEmailExceedMaximum = test.length() > MAX_LENGTH_OF_EMAIL;
-        return !hasEntireEmailExceedMaximum && !hasLocalPartExceedMaximum && !hasDomainPartExceedMaximum;
+        boolean isValidLocalPartLength = localPart.length() <= MAX_LENGTH_OF_LOCAL_PART;
+        boolean isValidDomainPartLength = domainPart.length() <= MAX_LENGTH_OF_DOMAIN_PART;
+        boolean isValidEmailLength = test.length() <= MAX_LENGTH_OF_EMAIL;
+        return isValidEmailLength && isValidLocalPartLength && isValidDomainPartLength;
     }
 }
