@@ -296,7 +296,7 @@ Format: `done INDEX`
 <div markdown="span" class="alert alert-warning">
 :exclamation:**Caution:**
 
-You can not mark the already completed assignment as done any more.
+* You can not mark the already completed assignment as done any more.
 </div>
 
 Examples:
@@ -357,7 +357,7 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 <div markdown="span" class="alert alert-warning">
 :exclamation:**Caution:**
 
-If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
+* If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
