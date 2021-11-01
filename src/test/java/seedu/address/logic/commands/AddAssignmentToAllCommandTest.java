@@ -55,10 +55,13 @@ public class AddAssignmentToAllCommandTest {
 
     @Test
     public void execute_assignmentNotDuplicated_addSuccessful() throws Exception {
-        Person validPerson1 = new PersonBuilder().build();
-        Person validPerson2 = new PersonBuilder().withName("Alice").build();
-        Module validModule = new PersonBuilder().build().getModule();
         Assignment validAssignment = new AssignmentBuilder().build();
+        String[] assignmentDetails = new String[] {validAssignment.getDescription().toString(),
+                validAssignment.getDueDate().toString(),
+                validAssignment.getStatus().value};
+        Person validPerson1 = new PersonBuilder().withAssignmentList(assignmentDetails).build();
+        Person validPerson2 = new PersonBuilder().withName("Alice").withAssignmentList(assignmentDetails).build();
+        Module validModule = new PersonBuilder().build().getModule();
 
         AddAssignmentToAllCommandTest.ModelStubWithAssignment modelStub =
                 new AddAssignmentToAllCommandTest.ModelStubWithAssignment(validPerson1, validPerson2, validAssignment);

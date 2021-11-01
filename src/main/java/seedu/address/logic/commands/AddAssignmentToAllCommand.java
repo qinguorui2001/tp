@@ -3,14 +3,11 @@ package seedu.address.logic.commands;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.assignment.DueDate;
 import seedu.address.model.person.Module;
 import seedu.address.model.person.Person;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.requireNonNull;
@@ -90,7 +87,11 @@ public class AddAssignmentToAllCommand extends Command {
             throw new CommandException(String.format(MESSAGE_ALL_HAS_ASSIGNMENT, module));
         }
 
-        model.addAllAssignment(personListWithoutAssignment, existingAssignment);
+        // Create a new assignment with the same description as existing ones
+        // to prevent inconsistencies in letter cases
+        Assignment standardisedAssignment = new Assignment(existingAssignment.getDescription(),
+                toAdd.getDueDate(), toAdd.getStatus());
+        model.addAllAssignment(personListWithoutAssignment, standardisedAssignment);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, module, toAdd));
     }
