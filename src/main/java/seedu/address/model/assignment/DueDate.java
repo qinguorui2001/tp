@@ -21,11 +21,12 @@ public class DueDate implements Comparable<DueDate> {
 
     public static final String MESSAGE_CONSTRAINTS_TIME = "Due time should be in a format HHmm";
     public static final String MESSAGE_CONSTRAINTS_DATE = "Due date should be in a format d/M/yyyy";
-    public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy,HHmm\n"
+    public static final String MESSAGE_CONSTRAINTS_DUE_DATE = "Due dates should be in a format d/M/yyyy [,HHmm]\n"
             + AddAssignmentCommand.FRIENDLY_COMMAND_SYNTAX;
     public static final String OUTPUT_CONSTRAINTS = "Due dates saved should be in a format dd MMM yyyy, hh:mm a";
 
-    //Solution below adapted from https://stackoverflow.com/questions/4374185/regular-expression-match-to-test-for-a-valid-year
+    //Solution below adapted from
+    // https://stackoverflow.com/questions/4374185/regular-expression-match-to-test-for-a-valid-year
     public static final String FIRST_28_DAYS_REGEX = "((0?[1-9]|1[0-9]|2[0-8])[/](0?[1-9]|1[012]))";
     public static final String MONTHS_WITH_31_DAYS_REGEX = "((29|30|31)[/](0?[13578]|1[02]))";
     public static final String MONTHS_WITH_30_DAYS_REGEX = "((29|30)[/](0?[4,6,9]|11))";
@@ -34,7 +35,8 @@ public class DueDate implements Comparable<DueDate> {
             + "|" + MONTHS_WITH_31_DAYS_REGEX
             + "|" + MONTHS_WITH_30_DAYS_REGEX + ")"
             + YEAR_REGEX + ")";
-    public static final String LEAP_YEAR_REGEX = "(^29[/]0?2[/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)";
+    public static final String LEAP_YEAR_REGEX = "(^29[/]0?2[/](19|[2-9][0-9])"
+            + "(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)";
     public static final String DATE_VALIDATION_REGEX = NON_LEAP_YEAR_REGEX + "|" + LEAP_YEAR_REGEX;
 
 
