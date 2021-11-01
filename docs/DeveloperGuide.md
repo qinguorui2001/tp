@@ -470,7 +470,6 @@ completed assignments that they no longer want to view, **alternative 2** does t
 may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command 
 which allows the user to retrieve the desired assignments easily.
 
-### \[Proposed\] Data archiving
 ### Give feature
 The give command allows users to add the specified assignment to a particular person is stored in the model. 
 Person who already has the specified assignment will not have a duplicated assignment added to him. The
@@ -484,15 +483,21 @@ Step 1. The user executes `list` command to see the current list of persons.
 Step 2. The user executes `give n/Xiao m/CS2103 d/Assignment 1 by/ 03/11/2021` command to add assignment to Xiao in
 the specified module. When `Command#execute` is called, the `give n/...` command will filter out persons in the current
 displayed list with the module field `CS2103` and add the specified assignment to him if this person exists, and he does 
-not have the assignment.<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no 
-persons with the specified module field, it will return an error to the user. 
+not have the assignment.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no 
+persons with the specified module field, it will return an error to the user.
+
+</div>
 
 The following sequence diagram shows how the removeall command is executed:
 ![GiveSequenceDiagram](images/GiveSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+   
+</div>
+   
 Step 3. The user executes `show 1` to check that the specified assignment has been added for persons in the specified
 module.
 
@@ -529,8 +534,11 @@ Step 1. The user executes `list` command to see the current list of persons.
 
 Step 2. The user executes `remove n/Xiao 1` command to remove the first assignment of a person. When `Command#execute`
 is called, the `remove n/...` command will filter out persons in the storage list with the name field `Xiao`and remove 
-the specified assignment if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source:
+the specified assignment if the person exists and has that assignment in assignment list.
+
+<div markdown="span" class="alert alert-info">:information_source:
 **Note:** If there are no persons with the specified module field or there are no persons who have this assignment, it will return an error to the user. 
+</div>
 
 The following sequence diagram shows how the remove command is executed:
 ![RemoveSequenceDiagram](images/RemoveSequenceDiagram.png)
@@ -538,6 +546,8 @@ The following sequence diagram shows how the remove command is executed:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</div>
+  
 Step 3. The user executes `show 1` to check that the specified assignment has been removed for person in the specified
 module with that assignment.
 
@@ -573,15 +583,20 @@ Step 1. The user executes `list` command to see the current list of persons.
 
 Step 2. The user executes `done n/Xiao 1` command to mark the first assignment of a `Xiao` as done. When `Command#execute` is called,
 the `done n/...` command will filter out persons in the storage list with the name field `Xiao`and mark the specified assignment
-if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source: 
-**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user. 
+if the person exists and has that assignment in assignment list.
 
+<div markdown="span" class="alert alert-info">:information_source: 
+**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user. 
+</div>
+   
 The following sequence diagram shows how the done command is executed:
 ![DoneSequenceDiagram](images/DoneSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</div>
+   
 Step 3. The user executes `show 1` to check that the specified assignment has been marked for person with specified
 name with that assignment.
 
@@ -605,8 +620,6 @@ The following activity diagram summarizes what happens when a user executes the 
   chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
   marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
-* 
-  _{Explain here how the data archiving feature will be implemented}_
 
 ### Find 
 The *find command* allows users to find specific people in their list, based on certain
@@ -643,11 +656,12 @@ below sequence diagram:
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
-div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The following activity diagram summarizes what happens when a user executes
-the *Find Command*:
+</div>
+   
+The following activity diagram summarizes what happens when a user executes the *Find Command*:
 
 ![FindActivityDiagram](images/FindActivityDiagram.png)
 
@@ -685,10 +699,10 @@ original command inputs.
 | Friendly Command                            | Corresponding Command                         |   Example Usages                                                         |                                                
 | ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
 | tmr                                         | sets the date to be tomorrow                  | give n/name d/description by/tmr                                        |
-| today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |                                                                        |
+| today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |                                                                        
 | week                                        | sets the date to be a week from now           | give n/name d/description by/week                                       |
 | mon                                         | sets the date to be the upcoming monday       | give n/name d/description by/mon                                        |
-| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |                                                                         |
+| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |                                                                         
 | wed                                         | sets the date to be the upcoming wednesday    | give n/name d/description by/wed                                        |
 | thu                                         | sets the date to be the upcoming thursday     | give n/name d/description by/thu                                        |
 | fri                                         | sets the date to be the upcoming friday       | give n/name d/description by/fri                                        | 
@@ -731,8 +745,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 #### [Proposed] Friendly Commands
 1. `find`
 
-#### [COMING SOON!!!]
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -741,7 +753,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* 
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
