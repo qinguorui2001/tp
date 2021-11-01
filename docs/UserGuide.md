@@ -156,7 +156,7 @@ Examples:
 
 ### Showing a student’s assignment list: `show`
 
-Shows the assignment list of the specified student in a separate assignment list window.
+Shows the assignment list of the specified student in a separate assignment list panel.
 The assignment list will be sorted by status and date.
 
 Format: `show INDEX`
