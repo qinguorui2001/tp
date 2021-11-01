@@ -35,9 +35,9 @@ public class AddAssignmentToAllCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New assignment added to all persons in %1$s: %2$s";
     public static final String MESSAGE_ALL_HAS_ASSIGNMENT = "All persons in %1$s has the specified assignment already!";
     public static final String MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE =
-            "Please make sure that the deadline is consistent!\n" +
-            "Your deadline input: %1s\n" +
-            "Existing assignment deadline: %2$s";
+            "Please make sure that the deadline is consistent!\n"
+            + "Your deadline input: %1s\n"
+            + "Existing assignment deadline: %2$s";
 
     private final Assignment toAdd;
     private final Module module;
@@ -78,8 +78,8 @@ public class AddAssignmentToAllCommand extends Command {
         if (!personListWithAssignment.isEmpty()) {
             existingAssignment = personListWithAssignment.get(0).getAssignments().getAssignment(toAdd.getDescription());
             if (!existingAssignment.getDueDate().equals(toAdd.getDueDate())) {
-               throw new CommandException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE,
-                       existingAssignment.getDueDate(), toAdd.getDueDate()));
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE,
+                        existingAssignment.getDueDate(), toAdd.getDueDate()));
             }
         }
 
