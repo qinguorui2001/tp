@@ -26,6 +26,8 @@ public class MarkAssignmentCommand extends Command {
             + "1";
 
     public static final String MESSAGE_MARK_ASSIGNMENT_SUCCESS = "Marked Assignment: %1$s";
+    public static final String MESSAGE_ASSIGNMENT_ALREADY_COMPLETED =
+            "This assignment is already completed by the student!";
 
     private final Index targetAssignmentIndex;
 
@@ -46,13 +48,18 @@ public class MarkAssignmentCommand extends Command {
 
         Person personToRemoveAssignment = model.getActivePerson();
 
-        List<Assignment> assignmentList = model.getFilteredAssignmentList();
+        List<Assignment> assignmentList = model.getAssignmentList();
 
         if (targetAssignmentIndex.getZeroBased() >= assignmentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
         Assignment assignmentToMark = assignmentList.get(targetAssignmentIndex.getZeroBased());
+
+        if (model.isAssignmentCompleted(assignmentToMark)) {
+            throw new CommandException(MESSAGE_ASSIGNMENT_ALREADY_COMPLETED);
+        }
+
         model.markAssignment(personToRemoveAssignment, assignmentToMark);
 
         return new CommandResult(String.format(MESSAGE_MARK_ASSIGNMENT_SUCCESS, assignmentToMark));

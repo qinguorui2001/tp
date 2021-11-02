@@ -9,6 +9,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.assignment.exceptions.AssignmentAlreadyCompletedException;
 import seedu.address.model.assignment.exceptions.AssignmentNotFoundException;
 import seedu.address.model.assignment.exceptions.DuplicateAssignmentException;
 
@@ -97,6 +98,10 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         requireNonNull(toDone);
         if (!internalList.contains(toDone)) {
             throw new AssignmentNotFoundException();
+        }
+
+        if (toDone.isCompleted()) {
+            throw new AssignmentAlreadyCompletedException();
         }
         setAssignment(toDone, new Assignment(toDone.getDescription(), toDone.getDueDate(),
                 Status.createCompletedStatus()));

@@ -47,7 +47,7 @@ class AddAssignmentCommandIntegrationTest {
     public void execute_duplicateAssignment_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList()
                 .get(INDEX_THIRD_PERSON.getZeroBased());
-        model.updateFilteredAssignmentList(personInList);
+        model.updateAssignmentList(personInList);
         Assignment assignmentInList = model.getAddressBook().getAssignmentsList()
                 .get(INDEX_FIRST_ASSIGNMENT.getZeroBased());
         assertCommandFailure(new AddAssignmentCommand(INDEX_THIRD_PERSON, assignmentInList),
