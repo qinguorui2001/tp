@@ -72,7 +72,7 @@ public class MarkAssignmentCommandTest {
     public void execute_assignmentAlreadyCompleted_throwsCommandException() throws Exception {
         Person selectedPerson = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
 
-        model.updateFilteredAssignmentList(selectedPerson);
+        model.updateAssignmentList(selectedPerson);
 
         MarkAssignmentCommand markAssignmentCommandFirstTime =
                 new MarkAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
