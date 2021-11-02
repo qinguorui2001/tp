@@ -216,9 +216,20 @@ Adds an assignment with a deadline to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/YYYY [,HHmm]`
 
+**Note:**
+1. It is possible to add an assignment using `giveall` even if some students have the assignment already. Students who have the 
+assignment will not receive a duplicate assignment.
+2. When using `giveall` in the situation stated in point 1, the specified assignment in the input needs to have the same 
+due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure 
+consistency of the due dates of the same assignment.
+
 Examples:
+
 * `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline 2021, Oct 15, 1300hrs.
 * `giveall m/CS2103T d/iP by/ 02/09/2021,2359` gives all students of module CS2103T an assignment of description `iP` with a deadline 2021, Sep 2, 2359hrs.
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` is an invalid input if some students of module CS2100 has the assignment 
+of description `Assignment 2` with a deadline 2021, Oct 15, 2359hrs.
+
 
 ### Finding people who match with input keywords: `find`
 

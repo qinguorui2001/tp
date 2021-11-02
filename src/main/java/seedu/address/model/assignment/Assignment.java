@@ -59,6 +59,10 @@ public class Assignment implements Comparable<Assignment> {
                 && otherAssignment.getDescription().equals(getDescription());
     }
 
+    public boolean isSameDueDate(Assignment otherAssignment) {
+        return getDueDate().equals(otherAssignment.getDueDate());
+    }
+
     public boolean isCompleted() {
         return this.status.equals(Status.createCompletedStatus());
     }
