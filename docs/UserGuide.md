@@ -31,7 +31,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
    * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu` : Adds a contact named `John Doe` with his/her relevant information to TA<sup>2</sup>.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current displayed contact list.
+   * **`delete`**`3` : Deletes the 3rd contact shown in the currently displayed contact list.
 
    * **`clear`** : Deletes all contacts.
 
@@ -59,9 +59,9 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* If a command requires `INDEX` as an input, only one input for `INDEX` is expected.
+* If a command requires `INDEX` as an input, only one input for `INDEX` is expected.<br>
 
-* If a parameter is expected only once in the command but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -69,7 +69,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -84,46 +84,64 @@ Adds a student to the contact list with the student's relevant information.
 
 Format: `add n/NAME e/EMAIL m/MODULES [t/TAG]…​`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
 
-* A student can have any number of tags (including 0).<br><br>
-* A student's module must follow XX[X]1111[X], where X is any letter,
-1 is any number and values in square brackets are optional.
+**:information_source: Note:**<br>
+
+* A student can have any number of tags (including 0).<br>
+
+* A student's module must follow XX[X]1111[X], where X is any letter, 1 is any number and values in square brackets are optional.<br>
+
 * Only student's initials and module code will be capitalised on the displayed student list.<br>
-  * e.g. `n/alex yeoh`, `n/DAVID LI` will be converted to `Alex Yeoh` and `David Li` respectively.
-  * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.
+  * e.g. `n/alex yeoh`, `n/DAVID LI` will be converted to `Alex Yeoh` and `David Li` respectively.<br>
+  * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.<br>
+
 </div>
 
 Examples:
 * `add n/John Doe m/CS1010 e/e1234567@u.nus.edu`
 * `add n/Betsy Crowe e/e0234567@u.nus.edu m/CS2103T`
-* `add n/alex yeoh e/1234123@u.nus.edu m/GEQ1000 t/T17`
+* `add n/alex yeoh e/e1234123@u.nus.edu m/GEQ1000 t/T17`
 
-### Listing all students : `list`
+### Listing all students: `list`
 
 Shows a list of all students in the contact list.
 
 Format: `list`
 
-### Editing a student : `edit`
+### Editing a student: `edit`
 
-Modifies any part of student's information.
+Modifies any part of the student's information.
 
-Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]`
+Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]...`
 
-:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer within the number of students in list** 1, 2, (till the index of last student)​ 
-* You can modify several parts of student information at the same time.
-* If there are two identical prefixes in one edit command, only the last one works. 
+
+* The index **must be a positive integer within the number of students in list** 1, 2, 3, ...(till the index of the last student)​
+
+* If you have two identical prefixes with the edit command, only the last prefix will be used for the edit. (except for prefix t/)
+
 * **At least one modification** is required for each edit.
 
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+* You can modify several parts of student information at the same time.
+* If you wish to remove the tags for a student, simply type `t/` prefix without any parameters.
+</div>
+
 Examples:
-* `edit 2 e/e00111@u.nus.edu` replaces the 2nd student's email with `e00111@u.nus.edu` in contact list.
+* `edit 2 e/e00111@u.nus.edu` replaces the 2nd student's email with `e00111@u.nus.edu` in the contact list.
 * `edit 1 n/Brob` changes 1st student's name to `Brob` in the results of the `find` command.
 * `edit 1 n/Brob n/New m/cs1101 m/cs1231s` changes 1st student's name to `New` and module to `cs1231s` in the results of the `find` command.
 
-### Deleting a student : `delete`
+### Deleting a student: `delete`
 
 Deletes the specified student from the contact list.
 
@@ -132,37 +150,48 @@ Format: `delete INDEX`
 * Deletes the student at the specified `INDEX`.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd student in the contact list.
-* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd student in the contact list. (if 2nd student exists).
+* `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command. (if the result is not empty)
 
-### Showing student’s assignment list: `show`
+### Showing a student’s assignment list: `show`
 
-Shows the assignment list of the specified student in a separate assignment list window.
-Assignment list will be sorted by status and date.
-
-* Assignments with `COMPLETED` status will be at the bottom of the list.
-* Assignments with `PENDING` status will be at the top of the list.
-* Assignments with same status will be sorted by due date.
+Shows the assignment list of the specified student in a separate assignment list panel.
+The assignment list will be sorted by status and date.
 
 Format: `show INDEX`
 
-* Shows the assignment list of student at the specified `INDEX`.
+* Shows the assignment list of the student at the specified `INDEX`.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Assignments with `COMPLETED` status will be at the bottom of the list.<br>
+
+* Assignments with `PENDING` status will be at the top of the list.<br>
+
+* Assignments with the same status will be sorted by due date.<br>
+
+</div>
 
 Examples:
-* `show 1` renders the first student’s assignment list on the right side of the app.
+* `show 1` renders the first student’s assignment list on the assignment list panel.
 * The index refers to the index shown in the displayed student list.
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
-### Adding assignments : `give` `giveall`
+### Adding assignments: `give` `giveall`
 
-#### Adding an assignment : `give`
+#### Adding an assignment: `give`
 
-Gives an assignment with deadline to the student specified by the index in the contact list.
+Gives an assignment with a deadline to the student specified by the index in the contact list.
 If `time` is not specified, `time` will be set to `11:59 pm` by default.
 
-Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
+Format: `give INDEX d/DESCRIPTION by/ d/M/YYYY [,HHmm]`
 
-* Date can be replaced by friendly commands.
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+* The date can be replaced by friendly commands.
     * `today` - sets due date to tonight.
     * `tmr` - sets due date to tomorrow.
     * `week` - sets due date to a week(7 days) from now.
@@ -173,18 +202,19 @@ Format: `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
     * `fri` - sets due date to the coming friday.
     * `sat` - sets due date to the coming saturday.
     * `sun` - sets due date to the coming sunday.
-  
+</div>
+
 Examples:
-* `give 1 d/Lab1 by/ 21/8/2021` gives the first student in current displayed contact list `Lab1` with deadline 2021, Aug 21.
-* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student in current displayed contact list `Assignment2` with deadline 2021, Sep 22, 1200hrs.
-* `give 1 d/Tutorial3 by/ mon` gives the first student in current displayed contact list `Tutorial3` with deadline next monday 2359hrs.
-* `give 2 d/Report1 by/ tue, 1800` gives the second student in current displayed contact list `Report1` with deadline next tuesday 1800hrs.
+* `give 1 d/Lab1 by/ 21/8/2021` gives the first student displayed in your contact list an assignment of description `Lab1` with a deadline 2021, Aug 21.
+* `give 2 d/Assignment2 by/ 22/9/2021,1200` gives the second student displayed in your contact list an assignment of description `Assignment2` with a deadline 2021, Sep 22, 1200hrs.
+* `give 1 d/Tutorial3 by/ mon` gives the first student displayed in your contact list an assignment of description `Tutorial3` with a deadline next monday 2359hrs.
+* `give 2 d/Report1 by/ tue, 1800` gives the second student in your contact list an assignment of description `Report1` with a deadline next tuesday 1800hrs.
 
-#### Adding an assignment with specified module: `giveall`
+#### Adding an assignment to all students in a module: `giveall`
 
-Adds an assignment with deadline to all students in the specified module .
+Adds an assignment with a deadline to all students in the specified module .
 
-Format: `giveall m/MODULE d/DESCRIPTION by/ D/M/YYYY [,HHMM]`
+Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/YYYY [,HHmm]`
 
 **Note:**
 1. It is possible to add an assignment using `giveall` even if some students have the assignment already. Students who have the 
@@ -194,10 +224,12 @@ due date as the existing assignment. **The command will not be valid if the due 
 Point 3 of the examples section illustrates this.
 
 Examples:
-* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 `Assignment 2` with deadline 2021, Oct 15, 1300hrs.
-* `giveall m/CS2103T d/iP by/ 02/09/2021,2359` gives all students of module CS2103T `iP` with deadline 2021, Sep 2, 2359hrs.
-* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` is an invalid input if some students in `CS2100` has the assignment
-`Assignment 2` with deadline `11:59 pm`.
+
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline 2021, Oct 15, 1300hrs.
+* `giveall m/CS2103T d/iP by/ 02/09/2021,2359` gives all students of module CS2103T an assignment of description `iP` with a deadline 2021, Sep 2, 2359hrs.
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` is an invalid input if some students of module CS2100 has the assignment 
+of description `Assignment 2` with a deadline 2021, Oct 15, 2359hrs.
+
 
 ### Finding people who match with input keywords: `find`
 
@@ -205,51 +237,73 @@ Displays the list of people who match any of the input keywords. The matching is
 on an ***OR*** basis, where if a student matches at **least one keyword**, that student will
 be considered as matched and thus displayed.
 
-Format: `find [n/NAME] [m/MODULE] [t/TUTORIAL_NUMBER]...`
+Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 
-**Note:**
-1. At least one prefix is required.
-2. Ordering of prefixes are not strict, and allows for multiple keywords
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+1. There should be at least one prefix.
+
+2. Ordering of prefixes are not strict and presence of multiple keywords are acceptable.
+
 3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
-4. Partial names will be matched. <br> e.g. `n/Hans` will match `Hans Bo`.
-5. If there are two identical prefixes in the command, only the last one works.
-6. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
+
+4. Each part of name separated by space will match the full name. <br> e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`.
+
+5. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-7. We can search for multiple fields, e.g., modules at once, separated by a whitespace. <br>
-   e.g. `m/CS1101S CS2103T` will return people who take either / or both modules.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**
+* We can search for multiple fields, e.g., modules at once, separated by a whitespace. 
+   e.g. `m/CS1101S CS2103T` will return people who take either modules.
+</div>
 
 Examples:
-* `find n/Bernice` returns the students with name `Bernice`. 
+* `find n/Bernice` returns the students with name of `Bernice`. 
 * `find m/CS1101S` returns the students with module `CS1101S`.
-* `find t/Lab15` returns the students with tutorial `Lab15`.
-* `find n/Bernice m/MA1521` returns the students with name `Bernice` or study module `MA1521`.
-* `find m/CM1417 t/Group04` returns the students with module `CM1417` or in tutorial `Group04`.
-* `find n/Evian m/CS2103T t/Group10` returns the students who at least satisfy one of requirements: with name `Evian`, study module`CS2103T` and in tutorial `Group10`.
-* `find t/E34 n/Brian m/GEQ1000` returns the students who at least satisfy one of requirements: with name `Brian`, study module`GEQ1000` and in tutorial `E34`.
-* `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of requirements: with name contains `david` or `alex`, study module`cs1231` or `cs2103t`.
+* `find t/Lab15` returns the students with the tag `Lab15`.
+* `find n/Bernice m/MA1521` returns the students with name of `Bernice` or study module `MA1521`.
+* `find m/CM1417 t/Group04` returns the students with module `CM1417` or with the tag `Group04`.
+* `find n/Evian m/CS2103T t/Group10` returns the students who at least satisfy one of the requirements: with name of `Evian`, study module`CS2103T` or with the tag `Group10`.
+* `find t/E34 n/Brian m/GEQ1000` returns the students who at least satisfy one of the requirements: with name of `Brian`, study module`GEQ1000` or with the tag `E34`.
+* `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of the requirements: containing `david` or `alex` as seperated parts of their names, study module`cs1231` or `cs2103t`.
 
 
 ![result for 'find Example'](images/userguide/findExample.png)
 
-### Deleting an assignment with deadline : `remove`
+### Deleting an assignment with a deadline: `remove`
 
 Removes the specified assignment from the displayed assignment list.
 
 Format: `remove INDEX`
 
-* Removes the assignment at `INDEX` in current displayed assignment list of a student.
+* Removes the assignment at `INDEX` in the currently displayed assignment list of a student.
 
 Examples:
 * `remove 10` deletes the 10th assignment in the displayed assignment list
 
-### Marking an assignment : `done`
+### Marking an assignment: `done`
 
 Marks a specified assignment's deadline of a student as completed.
-* Assignments with uncompleted/pending status will have an orange tag.
-* Assignments with completed status will have a green tag.
-* Only works if current displayed assignment list is non-empty.
 
 Format: `done INDEX`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Assignments with pending status will have an orange tag.
+
+* Assignments with completed status will have a green tag.
+
+* Remember to display the student's assignment list using [show](#showing-a-students-assignment-list-show) before using the done command!
+
+</div>
 
 Examples:
 * `done 3` marks the 3rd assignment in the displayed assignment list as completed.
@@ -260,29 +314,39 @@ Deletes all completed assignments from TA<sup>2</sup>.
 
 Format: `clean`
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from TA<sup>2</sup>.
 
 Format: `clear`
 
-### Undoing the last command : `undo`
+### Undoing a command: `undo`
 
 Undoes the last command entered.
-* Undo all kinds of command except for `undo` and `redo`.
-* At the start of program, nothing can be undone.
 
-Format: `undo` 
+Format: `undo`
 
-### Redoing the command : `redo`
+<div markdown="span" class="alert alert-warning">
+:exclamation:**Caution:**
 
-Recovers the effect of last `undo` command.
-* Redo all kinds of command except for `undo` and `redo`.
-* Once a new command except for `undo` and `redo` is entered, nothing can be redone. 
+* Undo all commands except for `undo` and `redo`.
+* At the start of the program, you can not undo anything.
+</div>
+
+### Redoing a command: `redo`
+
+Recovers the effect of the last `undo` command.
 
 Format: `redo`
 
-### Exiting the program : `exit`
+<div markdown="span" class="alert alert-warning">
+:exclamation:**Caution:**
+
+* Redo all commands except for `undo` and `redo`.
+* Once you enter a new command except for `undo` and `redo`, you can not redo anymore. 
+</div>
+
+### Exiting the program: `exit`
 
 Exits the program.
 
@@ -296,13 +360,11 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
-</div>
+<div markdown="span" class="alert alert-warning">
+:exclamation:**Caution:**
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
+* If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
+</div> 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -321,12 +383,12 @@ Action | Format, Examples
 **clear** | `clear`
 **delete** | `delete INDEX`<br> e.g., `delete 3`
 **edit** | `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**find** | `find [n/NAME] [m/MODULE] [t/TAG]...`<br> e.g., `find n/James Jake m/CS2100 t/T13`
 **list** | `list`
 **help** | `help`
 **show** | `show INDEX` <br> e.g., `show 2`
-**give** | `give INDEX d/DESCRIPTION by/ D/M/YYYY [,HHMM]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021`
-**giveall** | `giveall m/module d/DESCRIPTION by/ D/M/YYYY [,HHMM]` <br> e.g., `give m/CS2100 d/Lab1 by/ 21/8/2021`
+**give** | `give INDEX d/DESCRIPTION by/ d/M/YYYY [,HHmm]` <br> e.g., `give 1 d/Lab1 by/ 21/8/2021,1600`
+**giveall** | `giveall m/MODULE d/DESCRIPTION by/ d/M/YYYY [,HHmm]` <br> e.g., `giveall m/CS2100 d/Lab1 by/ 21/8/2021`
 **clean** | `clean`
 **remove** | `remove INDEX` <br> e.g., `remove 10`
 **done** | `done INDEX` <br> e.g., `done 4`
