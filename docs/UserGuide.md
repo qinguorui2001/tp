@@ -255,12 +255,12 @@ Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 Examples:
 * `find n/Bernice` returns the students with name of `Bernice`. 
 * `find m/CS1101S` returns the students with module `CS1101S`.
-* `find t/Lab15` returns the students with tutorial `Lab15`.
+* `find t/Lab15` returns the students with the tag `Lab15`.
 * `find n/Bernice m/MA1521` returns the students with name of `Bernice` or study module `MA1521`.
-* `find m/CM1417 t/Group04` returns the students with module `CM1417` or in tutorial `Group04`.
-* `find n/Evian m/CS2103T t/Group10` returns the students who at least satisfy one of the requirements: with name of `Evian`, study module`CS2103T` and in tutorial `Group10`.
-* `find t/E34 n/Brian m/GEQ1000` returns the students who at least satisfy one of the requirements: with name of `Brian`, study module`GEQ1000` and in tutorial `E34`.
-* `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of the requirements: `david` or `alex` or both can be part of their names seperated by space, study module`cs1231` or `cs2103t`.
+* `find m/CM1417 t/Group04` returns the students with module `CM1417` or with the tag `Group04`.
+* `find n/Evian m/CS2103T t/Group10` returns the students who at least satisfy one of the requirements: with name of `Evian`, study module`CS2103T` or with the tag `Group10`.
+* `find t/E34 n/Brian m/GEQ1000` returns the students who at least satisfy one of the requirements: with name of `Brian`, study module`GEQ1000` or with the tag `E34`.
+* `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of the requirements: containing `david` or `alex` as seperated parts of their names, study module`cs1231` or `cs2103t`.
 
 
 ![result for 'find Example'](images/userguide/findExample.png)
@@ -290,14 +290,8 @@ Format: `done INDEX`
 
 * Assignments with completed status will have a green tag.
 
-* Only works if currently displayed assignment list is not empty.
+* Remember to display the student's assignment list using [show](#showing-a-students-assignment-list-show) before using the done command!
 
-</div>
-
-<div markdown="span" class="alert alert-warning">
-:exclamation:**Caution:**
-
-* You can not mark the already completed assignment as done any more.
 </div>
 
 Examples:
