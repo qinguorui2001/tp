@@ -8,7 +8,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Module;
@@ -247,17 +246,12 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
-        public void commitAddressBook(ReadOnlyAddressBook addressBook) {
+        public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean isAssignmentCompleted(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public VersionedAddressBook getVersionedAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
