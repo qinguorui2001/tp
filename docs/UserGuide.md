@@ -220,8 +220,8 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/YYYY [,HHmm]`
 1. It is possible to add an assignment using `giveall` even if some students have the assignment already. Students who have the 
 assignment will not receive a duplicate assignment.
 2. When using `giveall` in the situation stated in point 1, the specified assignment in the input needs to have the same 
-due date as the existing assignment. **The command will not be valid if the due date is different.** 
-Point 3 of the examples section illustrates this.
+due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure 
+consistency of the due dates of the same assignment.
 
 Examples:
 

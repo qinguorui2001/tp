@@ -74,7 +74,7 @@ public class AddAssignmentToAllCommand extends Command {
         List<Person> personListWithoutAssignment = filteredPersonList.get(0);
         List<Person> personListWithAssignment = filteredPersonList.get(1);
 
-        Assignment existingAssignment = getExistingAssignment(personListWithAssignment);
+        Assignment existingAssignment = getAssignmentIfExists(personListWithAssignment);
 
         if (personListWithoutAssignment.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_ALL_HAS_ASSIGNMENT, module));
@@ -98,7 +98,7 @@ public class AddAssignmentToAllCommand extends Command {
      * @throws CommandException Indicates that the due dates of
      * existing assignment and {@code toAdd} are different
      */
-    public Assignment getExistingAssignment(List<Person> personListWithAssignment) throws CommandException {
+    public Assignment getAssignmentIfExists(List<Person> personListWithAssignment) throws CommandException {
         if (!personListWithAssignment.isEmpty()) {
             Assignment existingAssignment = personListWithAssignment.get(0).getAssignments()
                     .getAssignment(toAdd.getDescription());
