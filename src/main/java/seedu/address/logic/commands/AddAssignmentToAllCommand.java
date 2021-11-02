@@ -86,7 +86,7 @@ public class AddAssignmentToAllCommand extends Command {
                 toAdd.getDueDate(), toAdd.getStatus());
         model.addAllAssignment(personListWithoutAssignment, standardisedAssignment);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, module, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, module, standardisedAssignment));
     }
 
 
