@@ -51,7 +51,7 @@ You can refer to the changes in this [diff](https://github.com/se-edu/addressboo
 
 Run `Main#main` and try out your new `RemarkCommand`. If everything went well, you should see something like this:
 
-![Output displayed](../images/add-remark/RemarkHello.png)
+![Output displayed](../images/add-remark/RemarkHello.PNG)
 
 ## Change `RemarkCommand` to throw an exception
 
