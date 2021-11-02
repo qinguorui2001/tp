@@ -40,7 +40,7 @@ public class DeleteAssignmentCommandTest {
         Model expectedModel = setUpNewModelWithClonedPerson(selectedPerson, clonedExpectedPerson);
         expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
-        actualModel.updateFilteredAssignmentList(clonedActualPerson);
+        actualModel.updateAssignmentList(clonedActualPerson);
         DeleteAssignmentCommand deleteAssignmentCommand =
                 new DeleteAssignmentCommand(INDEX_SECOND_ASSIGNMENT);
 
@@ -53,8 +53,8 @@ public class DeleteAssignmentCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        model.updateFilteredAssignmentList(person);
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAssignmentList().size() + 1);
+        model.updateAssignmentList(person);
+        Index outOfBoundIndex = Index.fromOneBased(model.getAssignmentList().size() + 1);
 
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(outOfBoundIndex);
 
@@ -77,7 +77,7 @@ public class DeleteAssignmentCommandTest {
         showPersonAtIndex(expectedModel, INDEX_SIXTH_PERSON);
         expectedModel.deleteAssignment(clonedExpectedPerson, assignmentToDelete);
 
-        actualModel.updateFilteredAssignmentList(clonedActualPerson);
+        actualModel.updateAssignmentList(clonedActualPerson);
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(INDEX_SECOND_ASSIGNMENT);
 
         String expectedMessage =
@@ -95,7 +95,7 @@ public class DeleteAssignmentCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book's person list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        model.updateFilteredAssignmentList(person);
+        model.updateAssignmentList(person);
         DeleteAssignmentCommand deleteAssignmentCommand = new DeleteAssignmentCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteAssignmentCommand, model, Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);

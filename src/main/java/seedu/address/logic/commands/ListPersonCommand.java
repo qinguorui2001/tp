@@ -18,6 +18,7 @@ public class ListPersonCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.clearAssignmentList();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

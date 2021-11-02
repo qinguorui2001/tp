@@ -1,7 +1,8 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
@@ -102,5 +103,13 @@ public class EmailTest {
                 + "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz" // 78 characters
                 + "abcdefghijklmnopq.com" //21 characters
         )); // valid email length of 320 characters
+    }
+
+    @Test
+    public void isSameEmail() {
+        // Case sensitivity does not matter
+        Email firstEmail = new Email("alice@gmail.com");
+        Email secondEmail = new Email("AlIcE@gmail.com");
+        assertEquals(firstEmail, secondEmail);
     }
 }

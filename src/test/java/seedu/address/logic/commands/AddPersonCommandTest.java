@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -19,14 +19,18 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddPersonCommandTest {
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullPerson_throwsNullPointerException() {
@@ -41,7 +45,7 @@ public class AddPersonCommandTest {
         CommandResult commandResult = new AddPersonCommand(validPerson).execute(modelStub);
 
         assertEquals(String.format(AddPersonCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(List.of(validPerson), modelStub.personsAdded);
     }
 
     @Test
@@ -52,6 +56,34 @@ public class AddPersonCommandTest {
 
         assertThrows(CommandException.class,
                 AddPersonCommand.MESSAGE_DUPLICATE_PERSON, () -> addPersonCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_duplicateEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder()
+                .withName("Bernice")
+                .withEmail("alice@example.com")
+                .build();
+
+        AddPersonCommand addPersonCommand = new AddPersonCommand(validPerson);
+
+        // Model contains someone with the email alice@example.com
+        assertThrows(CommandException.class,
+                AddPersonCommand.MESSAGE_DUPLICATE_EMAIL, () -> addPersonCommand.execute(model));
+    }
+
+    @Test
+    public void execute_duplicateDifferentCaseEmail_throwsCommandException() {
+        Person validPerson = new PersonBuilder()
+                .withName("Bernice")
+                .withEmail("ALiCe@example.com")
+                .build();
+
+        AddPersonCommand addPersonCommand = new AddPersonCommand(validPerson);
+
+        // Model contains someone with the email alice@example.com
+        assertThrows(CommandException.class,
+                AddPersonCommand.MESSAGE_DUPLICATE_EMAIL, () -> addPersonCommand.execute(model));
     }
 
     @Test
@@ -133,6 +165,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public boolean hasExistingEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasActivePerson() {
             throw new AssertionError("This method should not be called.");
         }
@@ -193,7 +230,12 @@ public class AddPersonCommandTest {
         }
 
         @Override
-        public void updateFilteredAssignmentList(Person person) {
+        public void updateAssignmentList(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -213,17 +255,22 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public boolean isAssignmentCompleted(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public VersionedAddressBook getVersionedAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Assignment> getFilteredAssignmentList() {
+        public ObservableList<Assignment> getAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Assignment> getFilteredAssignmentList(Person person) {
+        public List<Assignment> getPersonAssignmentList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -261,6 +308,16 @@ public class AddPersonCommandTest {
         public boolean hasPerson(Person person) {
             requireNonNull(person);
             return personsAdded.stream().anyMatch(person::isSamePerson);
+        }
+
+        @Override
+        public boolean hasExistingEmail(Person person) {
+            requireNonNull(person);
+            return personsAdded.stream().anyMatch(n -> checkEmailPredicate(n, person));
+        }
+
+        private boolean checkEmailPredicate(Person person, Person toCheck) {
+            return person.getEmail().equals(toCheck.getEmail());
         }
 
         @Override
