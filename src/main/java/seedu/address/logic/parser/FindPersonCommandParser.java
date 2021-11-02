@@ -140,11 +140,13 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
                     logger.info("Examining Tags: " + tags);
                     moduleMatcher = prefixesPattern.matcher(tags);
                     if (!moduleMatcher.find()) {
+                        logger.info("All tags are NOT empty");
                         return false;
                     }
                 }
             }
         }
+        logger.info("All tags are empty");
         return true;
     }
 
@@ -168,12 +170,15 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
      */
     private void checkModuleValidity(String[] modules) throws ParseException {
 
+        logger.info("Checking module validity");
+
         Pattern pattern;
         Matcher matcher;
 
         pattern = Pattern.compile(VALIDATION_REGEX);
 
         for (String s : modules) {
+            logger.info("Validating " + s);
             matcher = pattern.matcher(s.toUpperCase(Locale.ROOT));
             if (!matcher.find() && !Objects.equals(s, "")) {
                 throw new ParseException(MESSAGE_CONSTRAINTS);
