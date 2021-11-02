@@ -127,5 +127,17 @@ public class FindPersonCommandParserTest {
         // random prefixes
         assertParseFailure(parser, "a/assignment",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
+
+        // invalid module input
+        assertParseFailure(parser, "m/CsSsSSsssSSsssSsSSSSS1000",
+                MESSAGE_CONSTRAINTS);
+
+        // invalid module input
+        assertParseFailure(parser, "m/GER1000000000000000000000000000",
+                MESSAGE_CONSTRAINTS);
+
+        // invalid module input with multiple valid tags
+        assertParseFailure(parser, "n/Alice t/Lab10 m/GEQqQQ100000EEE",
+                MESSAGE_CONSTRAINTS);
     }
 }
