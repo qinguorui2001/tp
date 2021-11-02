@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_WITH_LIMIT;
 
 /**
  * Marks an assignment to the person's assignment list.
@@ -20,8 +21,7 @@ public class MarkAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the specified person's assignment identified by the "
             + "index number used in the displayed assignment list.\n"
-            + "Parameters: "
-            + "INDEX (must be a positive integer)\n"
+            + "Parameters: " + MESSAGE_INVALID_INDEX_WITH_LIMIT + "\n"
             + "Example: " + COMMAND_WORD + " "
             + "1";
 
