@@ -1002,7 +1002,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisites: List all persons using the [`list`] command. Ensure there is no person named "Stephen Fallon" in the list before proceeding. 
     1. Test case: `add n/Stephen Fallon m/CS2100 e/E1337123@u.nus.edu t/L21`<br>
-   Expected: "Stephen Fallon" contact information is appended to your SoC contact list. Details of the added contact shown in the status message. The image below shows the result of this command on the contact list if you started with the 6 people from the sample data.<br /><br /> ![Manual Testing for Adding Person](images/ManualTestingAddingPerson.PNG) <br /><br />
+   Expected: Appends added contact to your SoC contact list. Details of the added contact shown in the status message. The image below shows the result of this command on the contact list if you started with the 6 people from the sample data.<br /><br /> ![Manual Testing for Adding Person](images/ManualTestingAddingPerson.PNG) <br /><br />
    
     2. Test case: Repeat `add n/Stephen Fallon m/CS2100 e/E1337123@u.nus.edu t/L21` again <br>
    Expected: No person is added. Error details shown in the status message because the peron already exists in the list.<br/><br />
@@ -1010,9 +1010,9 @@ testers are expected to do more *exploratory* testing.
 2. Prerequisites: Ensure there is at least two person in your contact list. Display a subset of persons using [`find n/Stephen Fallon`] assuming Stephen Fallon is one of the persons in the contact list. Feel free to use the `find` command for any other persons in your contact list instead. Check that there is no one named "Hawking Stephen" in your contact list.
 
    1. Test case: `add n/Hawking Stephen m/CS2100 e/E1337144@u.nus.edu t/L30`<br>
-     Expected: "Hawking Stephen" contact information is appended to your SoC contact list. Details of the added contact shown in the status message. The SoC contacts list will display **all** your contacts with "Hawking Stephen" appended to your contact list. <br/><br/>
+     Expected: "Hawking Stephen" contact information is appended to your SoC contacts list. Details of the added contact shown in the status message. The SoC contacts list will display **all** your contacts with "Hawking Stephen" appended to your contacts list. <br/><br/>
    
-3. Prerequisites: Ensure that no person in your contact list has the name "Steve Jobs".
+3. Prerequisites: Ensure that no person in your contacts list has the name "Steve Jobs".
    1. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
    Expected: No person is added. Error details shown in the status message due to invalid command format.
    
@@ -1022,29 +1022,39 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message because index has to be a positive integer.
 
+   4. Test case: `delete`<br>
+      Expected: No person is deleted. Error details shown in the status message because the index is missing.
+   5. Test case: `delete x` (where x is larger than the list size) <br>
+      Expected: No person is deleted. Error details shown in the status message because the index is invalid.
+   
+2. Deleting a person while some persons are being shown
+  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-      Expected: Similar to previous.
+      Expected: Error details shown in the status message since the index has to be a positive
 
-2. _{ more test cases …​ }_
+4. _{ more test cases …​ }_
 
 ### Viewing Help
 1. Test Case: `help`
    Expected: Pops up a help window as shown in the image below. <br/><br/>
 ![Help window](images/ManualTestingViewingHelp.PNG)<br/><br/>
-2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to TA<sup>2</sup> [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html).
+2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of TA<sup>2</sup>.
 
 ### Exiting the Program
 1. Test Case: `exit` <br/>
 Expected: The TA<sup>2</sup> window will close promptly.
 
 ### Listing all Persons
-1. Test Case:
+1. Prerequisites: Have multiple persons in contacts list. Restart the application. The contacts list will display *all* persons.
+   1. Test Case: `list`
+   2. First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
 ### Saving data
 
