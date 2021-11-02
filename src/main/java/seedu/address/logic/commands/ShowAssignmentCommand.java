@@ -41,7 +41,7 @@ public class ShowAssignmentCommand extends Command {
         }
 
         Person personToShow = lastShownList.get(targetIndex.getZeroBased());
-        model.updateFilteredAssignmentList(personToShow);
+        model.updateAssignmentList(personToShow);
         return new CommandResult(String.format(MESSAGE_SHOW_ASSIGNMENT_SUCCESS, personToShow.getName()));
     }
 

@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.*;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.assignment.*;
 import seedu.address.model.tag.Tag;
 
@@ -67,6 +68,10 @@ public class Person {
         return assignments;
     }
 
+    public ObservableList<Assignment> getAssignmentAsUnmodifiableObservableList() {
+        return getAssignments().asUnmodifiableObservableList();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -101,6 +106,18 @@ public class Person {
 
         return otherPerson != null
                 && isSameName(otherPerson.getName());
+    }
+
+    /**
+     * Returns true if both persons have the same email.
+     *
+     * @param otherPerson Person to compare to.
+     * @return true if same email, false otherwise.
+     */
+    public boolean isMatchingEmail(Person otherPerson) {
+        Email currentEmail = this.getEmail();
+        Email compareToEmail = otherPerson.getEmail();
+        return currentEmail.equals(compareToEmail);
     }
 
     public boolean isSameName(Name name) {

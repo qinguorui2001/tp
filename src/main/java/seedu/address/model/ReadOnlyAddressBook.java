@@ -21,9 +21,14 @@ public interface ReadOnlyAddressBook {
 
 
     /**
-     * Updates the assignment list in AddressBook.
+     * Updates the assignment list in AddressBook to the active person's assignments.
      */
-    void updateAssignmentList(Person person);
+    void updateAssignmentList();
+
+    /**
+     * Empties all assignments from the assignment list panel.
+     */
+    void clearAssignmentList();
 
     /**
      * Returns an unmodifiable view of the assignment list.

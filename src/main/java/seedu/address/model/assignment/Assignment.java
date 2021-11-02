@@ -112,6 +112,11 @@ public class Assignment implements Comparable<Assignment> {
                 : statusCompare;
     }
 
+    /**
+     * Creates another copy of this assignment object
+     *
+     * @return a separate object of the current assignment object
+     */
     public Assignment copyAssignment() {
         return new Assignment(description, dueDate, status);
     }

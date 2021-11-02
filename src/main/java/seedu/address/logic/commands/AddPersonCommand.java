@@ -23,11 +23,13 @@ public class AddPersonCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_MODULE + "CS2100 "
+            + PREFIX_TAG + "Lab04";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_EMAIL =
+            "This email already exists in the address book under another person";
 
     private final Person toAdd;
 
@@ -44,6 +46,8 @@ public class AddPersonCommand extends Command {
         requireNonNull(model);
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        } else if (model.hasExistingEmail(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_EMAIL);
         }
 
         model.addPerson(toAdd);

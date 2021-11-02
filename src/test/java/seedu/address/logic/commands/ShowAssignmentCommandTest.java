@@ -35,7 +35,7 @@ class ShowAssignmentCommandTest {
                 String.format(ShowAssignmentCommand.MESSAGE_SHOW_ASSIGNMENT_SUCCESS, personToShow.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.updateFilteredAssignmentList(personToShow);
+        expectedModel.updateAssignmentList(personToShow);
 
         assertCommandSuccess(showAssignmentCommand, model, expectedMessage, expectedModel);
     }

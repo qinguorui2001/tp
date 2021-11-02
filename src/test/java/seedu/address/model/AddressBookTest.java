@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -21,7 +22,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.assignment.Assignment;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -45,6 +45,21 @@ public class AddressBookTest {
         AddressBook newData = getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
+    }
+
+    @Test
+    public void updateAssignmentList_withValidActivePerson_displaysAssignmentList() {
+        addressBook.addPerson(FIONA);
+        addressBook.changeActivePerson(FIONA);
+        addressBook.updateAssignmentList();
+        assertEquals(addressBook.getCurrentAssignmentList(), FIONA.getAssignments().asUnmodifiableObservableList());
+    }
+
+    @Test
+    public void updateAssignmentList_noActivePerson_displaysEmptyAssignmentList() {
+        AddressBook startingAddressBook = new AddressBook();
+        addressBook.updateAssignmentList();
+        assertTrue(addressBook.getCurrentAssignmentList().isEmpty());
     }
 
     @Test
@@ -82,15 +97,7 @@ public class AddressBookTest {
         assertTrue(addressBook.hasPerson(editedAlice));
     }
 
-    @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
-    }
 
-    // TODO:
-    public ObservableList<Assignment> getPersonAssignmentList(Name name) {
-        throw new AssertionError("This method does not have test cases for now");
-    }
 
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
@@ -109,7 +116,12 @@ public class AddressBookTest {
         }
 
         @Override
-        public void updateAssignmentList(Person person) {
+        public void updateAssignmentList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
