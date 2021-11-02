@@ -146,9 +146,8 @@ public class ModelManager implements Model {
     @Override
     public void addAllAssignment(List<Person> personList, Assignment toAdd) {
         for (Person person: personList) {
-            if (!hasAssignment(person, toAdd)) {
-                versionedAddressBook.addAssignment(person, toAdd);
-            }
+            assert (!hasAssignment(person, toAdd));
+            versionedAddressBook.addAssignment(person, toAdd);
         }
         if (hasActivePerson()) {
             updateAssignmentList(getActivePerson());
@@ -272,8 +271,8 @@ public class ModelManager implements Model {
     //=========== Versioned Address Book ================================================================
 
     @Override
-    public void commitAddressBook(ReadOnlyAddressBook addressBook) {
-        versionedAddressBook.commitAddressBook(addressBook);
+    public void commitAddressBook() {
+        versionedAddressBook.commitAddressBook();
     }
 
     @Override
@@ -286,10 +285,5 @@ public class ModelManager implements Model {
     public void redoAddressBook() throws CommandException {
         versionedAddressBook.redo();
         updateFilteredPersonList(this.versionedAddressBook.getFilteredPersonListPredicate());
-    }
-
-    @Override
-    public VersionedAddressBook getVersionedAddressBook() {
-        return new VersionedAddressBook(getAddressBook());
     }
 }

@@ -330,6 +330,13 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 * If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
 </div>
 
+**Note:**
+1. It is possible to add an assignment using `giveall` even if some students have the assignment already. Students who have the 
+assignment will not receive a duplicate assignment.
+2. When using `giveall` in the situation stated in point 1, the specified assignment in the input needs to have the same 
+due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure 
+consistency of the due dates of the same assignment.
+
 Examples:
 
 * `give 1 d/Lab 1 by/21/8/2021` gives the first student displayed in your contact list an assignment of description `Lab1` with a deadline `21 Aug 2021, 11:59pm`.
@@ -369,6 +376,8 @@ Examples:
 
 * `giveall m/CS2103T d/iP by/ 02/09/2021` gives all students of module CS2103T an assignment of description `iP` with a deadline `2 Sep 2021, 11:59pm`.
 
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` is an invalid input if some students of module CS2100 has the assignment
+  of description `Assignment 2` with a deadline `15 Oct 2021, 01:00pm`.
 Possible Usage:
 
 *  You can use `giveall` instead of `give` when there is a module assignment, whereby all students under the module is required to submit. 

@@ -31,13 +31,13 @@ public class RedoCommandTest {
         AddPersonCommand addPersonCommand = new AddPersonCommand(new PersonBuilder().build());
         addPersonCommand.execute(model);
 
-        model.commitAddressBook(model.getAddressBook());
+        model.commitAddressBook();
 
         RedoCommand redoCommand = new RedoCommand();
         String expectedMessage = RedoCommand.MESSAGE_REDO_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.commitAddressBook(model.getAddressBook());
+        expectedModel.commitAddressBook();
         expectedModel.undoAddressBook();
         expectedModel.redoAddressBook();
         undoCommand.execute(model);
@@ -54,13 +54,13 @@ public class RedoCommandTest {
 
         addAssignmentCommand.execute(model);
 
-        model.commitAddressBook(model.getAddressBook());
+        model.commitAddressBook();
 
         RedoCommand redoCommand = new RedoCommand();
         String expectedMessage = RedoCommand.MESSAGE_REDO_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.commitAddressBook(model.getAddressBook());
+        expectedModel.commitAddressBook();
         expectedModel.undoAddressBook();
         expectedModel.redoAddressBook();
         undoCommand.execute(model);
@@ -73,7 +73,7 @@ public class RedoCommandTest {
 
         ListPersonCommand listPersonCommand = new ListPersonCommand();
 
-        model.commitAddressBook(model.getAddressBook());
+        model.commitAddressBook();
 
         listPersonCommand.execute(model);
 
@@ -81,7 +81,7 @@ public class RedoCommandTest {
         String expectedMessage = RedoCommand.MESSAGE_REDO_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.commitAddressBook(model.getAddressBook());
+        expectedModel.commitAddressBook();
         expectedModel.undoAddressBook();
         expectedModel.redoAddressBook();
         undoCommand.execute(model);
@@ -91,7 +91,7 @@ public class RedoCommandTest {
     @Test
     void execute_validRedoShowAssignmentCommand_redoSuccess() throws CommandException {
         UndoCommand undoCommand = new UndoCommand();
-        model.commitAddressBook(model.getAddressBook());
+        model.commitAddressBook();
         ShowAssignmentCommand showAssignmentCommand = new ShowAssignmentCommand(INDEX_FIRST_ASSIGNMENT);
 
         showAssignmentCommand.execute(model);
@@ -100,7 +100,7 @@ public class RedoCommandTest {
         String expectedMessage = RedoCommand.MESSAGE_REDO_SUCCESS;
 
         ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.commitAddressBook(model.getAddressBook());
+        expectedModel.commitAddressBook();
         expectedModel.undoAddressBook();
         expectedModel.redoAddressBook();
         undoCommand.execute(model);

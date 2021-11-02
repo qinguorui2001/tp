@@ -8,7 +8,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Module;
@@ -55,10 +54,13 @@ public class AddAssignmentToAllCommandTest {
 
     @Test
     public void execute_assignmentNotDuplicated_addSuccessful() throws Exception {
-        Person validPerson1 = new PersonBuilder().build();
-        Person validPerson2 = new PersonBuilder().withName("Alice").build();
-        Module validModule = new PersonBuilder().build().getModule();
         Assignment validAssignment = new AssignmentBuilder().build();
+        String[] assignmentDetails = new String[] {validAssignment.getDescription().toString(),
+                validAssignment.getDueDate().toString(),
+                validAssignment.getStatus().value};
+        Person validPerson1 = new PersonBuilder().withAssignmentList(assignmentDetails).build();
+        Person validPerson2 = new PersonBuilder().withName("Alice").withAssignmentList(assignmentDetails).build();
+        Module validModule = new PersonBuilder().build().getModule();
 
         AddAssignmentToAllCommandTest.ModelStubWithAssignment modelStub =
                 new AddAssignmentToAllCommandTest.ModelStubWithAssignment(validPerson1, validPerson2, validAssignment);
@@ -247,17 +249,12 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
-        public void commitAddressBook(ReadOnlyAddressBook addressBook) {
+        public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean isAssignmentCompleted(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public VersionedAddressBook getVersionedAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 

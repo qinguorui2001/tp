@@ -59,7 +59,8 @@ public class ParserUtil {
      */
     public static Description parseDescription(String description) throws ParseException {
         requireNonNull(description);
-        String trimmedDescription = description.trim();
+        // Solution below adapted from https://stackoverflow.com/questions/2932392
+        String trimmedDescription = description.replaceAll("^ +| +$|( )+", "$1");
         if (!Description.isValidDescription(trimmedDescription)) {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
