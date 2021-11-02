@@ -238,6 +238,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public boolean isAssignmentCompleted(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public VersionedAddressBook getVersionedAddressBook() {
             throw new AssertionError("This method should not be called.");
         }

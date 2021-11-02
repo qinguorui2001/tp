@@ -127,6 +127,7 @@ public interface Model {
     void redoAddressBook() throws CommandException;
 
     void commitAddressBook(ReadOnlyAddressBook addressBook);
+    boolean isAssignmentCompleted(Assignment assignment);
 
     VersionedAddressBook getVersionedAddressBook();
 }

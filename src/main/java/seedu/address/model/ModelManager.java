@@ -175,6 +175,11 @@ public class ModelManager implements Model {
         }
     }
 
+    @Override
+    public boolean isAssignmentCompleted(Assignment assignment) {
+        return versionedAddressBook.isAssignmentCompleted(assignment);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

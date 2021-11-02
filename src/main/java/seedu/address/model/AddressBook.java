@@ -168,6 +168,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns whether assignment completed or not.
+     * {@code assignment} must exist in the person assignment list.
+     */
+    public boolean isAssignmentCompleted(Assignment assignment) {
+        return assignment.isCompleted();
+    }
+
+    /**
      * Removes assignments from all persons' assignment list if completed
      */
     public void cleanAssignments() {
