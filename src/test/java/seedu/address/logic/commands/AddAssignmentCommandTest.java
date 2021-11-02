@@ -233,17 +233,12 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public void commitAddressBook(ReadOnlyAddressBook addressBook) {
+        public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean isAssignmentCompleted(Assignment assignment) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public VersionedAddressBook getVersionedAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
