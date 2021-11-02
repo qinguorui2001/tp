@@ -23,8 +23,20 @@ class DueDateTest {
         assertFalse(DueDate.isValidDate("")); // empty string
         assertFalse(DueDate.isValidDate(" ")); // spaces only
         assertFalse(DueDate.isValidDate("32/12/2021")); // invalid day
+        assertFalse(DueDate.isValidDate("00/12/2021")); // invalid day
+        assertFalse(DueDate.isValidDate("-1/12/2021")); // invalid day
         assertFalse(DueDate.isValidDate("12/13/2021")); // invalid month
-        assertFalse(DueDate.isValidDate("99/99/2021")); // invalid day and month
+        assertFalse(DueDate.isValidDate("12/-1/2021")); // invalid month
+        assertFalse(DueDate.isValidDate("12/00/2021")); // invalid month
+        assertFalse(DueDate.isValidDate("12/10/0000")); // invalid year
+        assertFalse(DueDate.isValidDate("12/10/-0001")); // invalid year
+        assertFalse(DueDate.isValidDate("12/10/10000")); // invalid year
+        assertFalse(DueDate.isValidDate("29/02/2021")); // invalid day for non-leap year
+        assertFalse(DueDate.isValidDate("31/02/2021")); // invalid day for non-leap year
+        assertFalse(DueDate.isValidDate("31/04/2021")); // invalid day for april
+        assertFalse(DueDate.isValidDate("31/06/2021")); // invalid day for june
+        assertFalse(DueDate.isValidDate("31/09/2021")); // invalid day for september
+        assertFalse(DueDate.isValidDate("31/11/2021")); // invalid day for november
 
         // valid DueDate
         assertTrue(DueDate.isValidDate("11/11/2021")); // double-digit for day and month
@@ -32,11 +44,14 @@ class DueDateTest {
         assertTrue(DueDate.isValidDate("1/11/2021")); // single digit for day and double-digit for month
         assertTrue(DueDate.isValidDate("11/1/2021")); // double-digit for day and double-digit for month
         assertTrue(DueDate.isValidDate("31/12/9999")); // maximum values for day, month and year
+        assertTrue(DueDate.isValidDate("01/01/0001")); // minimum values for day, month and year
         assertTrue(DueDate.isValidDate("01/02/2021")); // day and month with prefix 0
         assertTrue(DueDate.isValidDate("01/1/2021")); // day with prefix 0 with single digit month
         assertTrue(DueDate.isValidDate("1/01/2021")); // month with prefix 0 with single digit day
         assertTrue(DueDate.isValidDate("11/01/2021")); // month with prefix 0 with double-digit day
         assertTrue(DueDate.isValidDate("01/11/2021")); // day with prefix 0 with double-digit month
+        assertTrue(DueDate.isValidDate("29/02/2024")); // leap year
+        assertTrue(DueDate.isValidDate("29/2/2060")); // leap year
     }
 
     @Test
@@ -120,5 +135,4 @@ class DueDateTest {
         assertFalse(DueDate.isValidFriendlyDateAndTime(",1000")); // missing friendly command
 
     }
-
 }
