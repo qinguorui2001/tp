@@ -18,6 +18,7 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 
 ## Table of Contents
 
+1. TOC
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
