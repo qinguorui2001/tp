@@ -1034,12 +1034,16 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is deleted. Error details shown in the status message because the index is invalid.
    
 2. Deleting a person while some persons are being shown
-  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
    
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Error details shown in the status message since the index has to be a positive
-
-4. _{ more test cases …​ }_
+   
+### Clearing all entries
+1. Prerequisites: Have multiple persons in your list.
+   1. Type `show 1` to display the first person's assignment list.
+   2. Test Case: `clear`<br/>
+Expected: All contacts will be deleted from the list. Assignment list panel will be cleared as well.
 
 ### Viewing Help
 1. Test Case: `help`
@@ -1053,8 +1057,8 @@ Expected: The TA<sup>2</sup> window will close promptly.
 
 ### Listing all Persons
 1. Prerequisites: Have multiple persons in contacts list. Restart the application. The contacts list will display *all* persons.
-   1. Test Case: `list`
-   2. First contact is deleted from the list. Details of the deleted contact shown in the status message.
+   1. Test Case: `list` <br/>
+   Expected: 
 
 ### Saving data
 
