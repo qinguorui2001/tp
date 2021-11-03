@@ -1016,7 +1016,87 @@ testers are expected to do more *exploratory* testing.
 3. Deleting a person without specifying person's index parameter.
    1. Other incorrect delete commands to try: `delete` <br>
       Expected: Error details shown in the status message since the command format is invalid.
+
+### Finding a person
+
+1. Finding a person while all people are being shown <br>
+
+   1. Prerequisites: List all persons using the `list` command. Multiple people in the list with at least one person 
+   named **Alice**, one person taking the module **CS2103T** and one person having the tag **Lab15**. <br>
+
+   2. Test case: `find n/Alice`<br>
+      Expected: Finds all people with the name ***Alice***. <br> Even if ***Alice*** is a first name or last name, the 
+   person will be found and their name and details are shown.
+
+   3. Test case: `find m/CS2103T`<br>
+      Expected: Finds all people taking the module ***CS2103T***. People found will have their names and details displayed. <br>
+
+   4. Test case: `find t/Lab15`
+      Expected: Finds all people with the tag ***Lab15***. People found will have their names and details displayed. <br>
+
+   5. Test case: `find n/Alice m/CS2103T` <br>
+      Expected: Finds all people with the name ***Alice*** or module ***CS2103T***. People found will have their names 
+   and details displayed. <br><br>
+
+2. Finding a person while only _**some people**_ OR _**none**_ are being shown
+
+   1. Prerequisites: Empty the display list by calling `find n/`. This returns an empty list as 0 people will be found. 
+   Ensure multiple people in the original list with at least one person named **Alice**, one person taking the module 
+   **CS2103T** and one person having the tag **Lab15**. <br>
    
+   2. Test case: `find t/Lab15`
+      Expected: Finds all people with the tag ***Lab15***. Contact List will change from empty and people found will have their names and details displayed. <br>
+   
+   3. Test case: `find t/Lab15 m/CS2103T` <br>
+      Expected: Finds all people with the tag ***Lab15*** or module ***CS2103T***. Contact List will change from empty and people found will have their names
+      and details displayed. <br><br>
+   
+   4. Test case: `find n/Alice t/Lab15 m/CS2103T` <br>
+         Expected: Finds all people with the name ***Alice***, tag ***Lab15***, or module ***CS2103T***. Contact List will change from empty and people found will have their names
+         and details displayed. <br><br>
+   
+3. Finding a person without specifying the prefix inputs. <br>
+
+   1. Prerequisites: List all persons using the `list` command. Multiple people in the list with at least one person
+      named **Alice**, one person taking the module **CS2103T** and one person having the tag **Lab15**. <br>
+
+   2. Test case: `find t/`
+      Expected: Returns an empty list with panel showing "0 persons listed". <br>
+   
+   3. Test case: `find n/`
+         Expected: Returns an empty list with panel showing "0 persons listed". <br>
+   
+   4. Test case: `find n/ m/`
+         Expected: Returns an empty list with panel showing "0 persons listed". <br>
+   
+   5. Test case: `find n/ m/ t/`
+         Expected: Returns an empty list with panel showing "0 persons listed". <br>
+   
+4. Finding a person with the wrong module input. <br>
+
+   1. Prerequisites: List all persons using the `list` command. Multiple people in the list with at least 
+   one person taking the module **CS2103T**. <br>
+
+   2. Test case: `find m/CSSS2103T`
+      Expected: Error details shown in the status message since the module prefix format is invalid.
+   
+   3. Test case: `find m/CS210345T`
+      Expected: Error details shown in the status message since the module prefix format is invalid.
+   
+   4. Test case: `find m/CS2103TIT`
+      Expected: Error details shown in the status message since the module prefix format is invalid.
+
+5. Incorrect `find` command usage. <br>
+
+   1. Test case: `find`
+      Expected: Error details shown in the status message since the command format is invalid.
+   
+   2. Test case: `find e/e12345`
+      Expected: Error details shown in the status message since the command format is invalid.
+   
+   3. Test case: `find Alice`
+      Expected: Error details shown in the status message since the command format is invalid.
+      
 ### Clearing all entries
 1. Prerequisites: Have multiple persons in your list.
 2. Type `show 1` to display the first person's assignment list.
