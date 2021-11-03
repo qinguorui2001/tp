@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_WITH_LIMIT;
 
 import java.util.List;
 
@@ -20,8 +21,7 @@ public class DeleteAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the specified person's assignment identified by the "
             + "index number used in the displayed assignment list.\n"
-            + "Parameters: "
-            + "INDEX (must be a positive integer)\n"
+            + "Parameters: " + MESSAGE_INVALID_INDEX_WITH_LIMIT + "\n"
             + "Example: " + COMMAND_WORD + " "
             + "1";
 
@@ -46,7 +46,7 @@ public class DeleteAssignmentCommand extends Command {
 
         Person personToRemoveAssignment = model.getActivePerson();
 
-        List<Assignment> assignmentList = model.getFilteredAssignmentList();
+        List<Assignment> assignmentList = model.getAssignmentList();
 
         if (targetAssignmentIndex.getZeroBased() >= assignmentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);

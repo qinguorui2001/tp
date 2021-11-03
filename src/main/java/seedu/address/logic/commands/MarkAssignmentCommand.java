@@ -10,6 +10,7 @@ import seedu.address.model.person.Person;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_WITH_LIMIT;
 
 /**
  * Marks an assignment to the person's assignment list.
@@ -20,12 +21,13 @@ public class MarkAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the specified person's assignment identified by the "
             + "index number used in the displayed assignment list.\n"
-            + "Parameters: "
-            + "INDEX (must be a positive integer)\n"
+            + "Parameters: " + MESSAGE_INVALID_INDEX_WITH_LIMIT + "\n"
             + "Example: " + COMMAND_WORD + " "
             + "1";
 
     public static final String MESSAGE_MARK_ASSIGNMENT_SUCCESS = "Marked Assignment: %1$s";
+    public static final String MESSAGE_ASSIGNMENT_ALREADY_COMPLETED =
+            "This assignment is already completed by the student!";
 
     private final Index targetAssignmentIndex;
 
@@ -46,13 +48,18 @@ public class MarkAssignmentCommand extends Command {
 
         Person personToRemoveAssignment = model.getActivePerson();
 
-        List<Assignment> assignmentList = model.getFilteredAssignmentList();
+        List<Assignment> assignmentList = model.getAssignmentList();
 
         if (targetAssignmentIndex.getZeroBased() >= assignmentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
         }
 
         Assignment assignmentToMark = assignmentList.get(targetAssignmentIndex.getZeroBased());
+
+        if (model.isAssignmentCompleted(assignmentToMark)) {
+            throw new CommandException(MESSAGE_ASSIGNMENT_ALREADY_COMPLETED);
+        }
+
         model.markAssignment(personToRemoveAssignment, assignmentToMark);
 
         return new CommandResult(String.format(MESSAGE_MARK_ASSIGNMENT_SUCCESS, assignmentToMark));

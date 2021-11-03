@@ -2,6 +2,19 @@
 layout: page
 title: Developer Guide
 ---
+--------------------------------------------------------------------------------------------------------------------
+## **Welcome to TA<sup>2</sup>!**
+
+Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop application designed for teaching assistants
+from the School of Computing (SOC) at the National University of Singapore (NUS) to manage student information and keep track of students' assignment submissions.
+ 
+If you are interested in contributing to TA<sup>2</sup>, this guide is designed to help you get started!
+There are a variety of ways to contribute to TA<sup>2</sup> such as coding, testing, improving the design of the interface and updating the documentation. 
+
+*Last Updated: 8 November 2021*
+
+--------------------------------------------------------------------------------------------------------------------
+
 * Table of Contents
 {:toc}
 
@@ -19,7 +32,7 @@ title: Developer Guide
 
 ## **Setting up, getting started**
 
-Refer to the guide [_Setting up and getting started_](SettingUp.md).
+To get started, check out this guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -294,13 +307,13 @@ A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. 
     * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
 
 
-### \[Proposed\] Undo/redo feature
+### Undo/redo feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#commitAddressBook()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
@@ -312,11 +325,11 @@ Step 1. The user launches the application for the first time. The `VersionedAddr
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `LogicManager` instance calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The same `LogicManager` instance calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -327,11 +340,6 @@ Step 3. The user executes `add n/David …​` to add a new person. The `add` co
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
 
 The following sequence diagram shows how the undo operation works:
 
@@ -470,7 +478,6 @@ completed assignments that they no longer want to view, **alternative 2** does t
 may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command 
 which allows the user to retrieve the desired assignments easily.
 
-### \[Proposed\] Data archiving
 ### Give feature
 The give command allows users to add the specified assignment to a particular person is stored in the model. 
 Person who already has the specified assignment will not have a duplicated assignment added to him. The
@@ -484,15 +491,21 @@ Step 1. The user executes `list` command to see the current list of persons.
 Step 2. The user executes `give n/Xiao m/CS2103 d/Assignment 1 by/ 03/11/2021` command to add assignment to Xiao in
 the specified module. When `Command#execute` is called, the `give n/...` command will filter out persons in the current
 displayed list with the module field `CS2103` and add the specified assignment to him if this person exists, and he does 
-not have the assignment.<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no 
-persons with the specified module field, it will return an error to the user. 
+not have the assignment.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no 
+persons with the specified module field, it will return an error to the user.
+
+</div>
 
 The following sequence diagram shows how the removeall command is executed:
 ![GiveSequenceDiagram](images/GiveSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
+   
+</div>
+   
 Step 3. The user executes `show 1` to check that the specified assignment has been added for persons in the specified
 module.
 
@@ -529,8 +542,11 @@ Step 1. The user executes `list` command to see the current list of persons.
 
 Step 2. The user executes `remove n/Xiao 1` command to remove the first assignment of a person. When `Command#execute`
 is called, the `remove n/...` command will filter out persons in the storage list with the name field `Xiao`and remove 
-the specified assignment if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source:
+the specified assignment if the person exists and has that assignment in assignment list.
+
+<div markdown="span" class="alert alert-info">:information_source:
 **Note:** If there are no persons with the specified module field or there are no persons who have this assignment, it will return an error to the user. 
+</div>
 
 The following sequence diagram shows how the remove command is executed:
 ![RemoveSequenceDiagram](images/RemoveSequenceDiagram.png)
@@ -538,6 +554,8 @@ The following sequence diagram shows how the remove command is executed:
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</div>
+  
 Step 3. The user executes `show 1` to check that the specified assignment has been removed for person in the specified
 module with that assignment.
 
@@ -573,15 +591,20 @@ Step 1. The user executes `list` command to see the current list of persons.
 
 Step 2. The user executes `done n/Xiao 1` command to mark the first assignment of a `Xiao` as done. When `Command#execute` is called,
 the `done n/...` command will filter out persons in the storage list with the name field `Xiao`and mark the specified assignment
-if the person exists and has that assignment in assignment list.<div markdown="span" class="alert alert-info">:information_source: 
-**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user. 
+if the person exists and has that assignment in assignment list.
 
+<div markdown="span" class="alert alert-info">:information_source: 
+**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user. 
+</div>
+   
 The following sequence diagram shows how the done command is executed:
 ![DoneSequenceDiagram](images/DoneSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</div>
+   
 Step 3. The user executes `show 1` to check that the specified assignment has been marked for person with specified
 name with that assignment.
 
@@ -605,8 +628,6 @@ The following activity diagram summarizes what happens when a user executes the 
   chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
   marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
-* 
-  _{Explain here how the data archiving feature will be implemented}_
 
 ### Find 
 The *find command* allows users to find specific people in their list, based on certain
@@ -643,11 +664,12 @@ below sequence diagram:
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
-div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
-The following activity diagram summarizes what happens when a user executes
-the *Find Command*:
+</div>
+   
+The following activity diagram summarizes what happens when a user executes the *Find Command*:
 
 ![FindActivityDiagram](images/FindActivityDiagram.png)
 
@@ -685,10 +707,10 @@ original command inputs.
 | Friendly Command                            | Corresponding Command                         |   Example Usages                                                         |                                                
 | ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
 | tmr                                         | sets the date to be tomorrow                  | give n/name d/description by/tmr                                        |
-| today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |                                                                        |
+| today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |                                                                        
 | week                                        | sets the date to be a week from now           | give n/name d/description by/week                                       |
 | mon                                         | sets the date to be the upcoming monday       | give n/name d/description by/mon                                        |
-| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |                                                                         |
+| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |                                                                         
 | wed                                         | sets the date to be the upcoming wednesday    | give n/name d/description by/wed                                        |
 | thu                                         | sets the date to be the upcoming thursday     | give n/name d/description by/thu                                        |
 | fri                                         | sets the date to be the upcoming friday       | give n/name d/description by/fri                                        | 
@@ -731,8 +753,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 #### [Proposed] Friendly Commands
 1. `find`
 
-#### [COMING SOON!!!]
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -741,7 +761,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
-* 
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -949,8 +968,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2. Should be able to hold up to 200 persons, each with 100 assignments, without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed (approximately 70 words per minute) for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. System should respond within 2 seconds of user request.
 5. Should be a single user product.
 6. Data should be stored in a human editable text file.

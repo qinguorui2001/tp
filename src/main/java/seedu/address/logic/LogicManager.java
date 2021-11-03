@@ -47,7 +47,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         if (!(command instanceof UndoCommand || command instanceof RedoCommand)) {
-            model.commitAddressBook(model.getVersionedAddressBook());
+            model.commitAddressBook();
         }
 
         try {
@@ -86,7 +86,7 @@ public class LogicManager implements Logic {
 
     @Override
     public ObservableList<Assignment> getFilteredAssignmentList() {
-        return model.getFilteredAssignmentList();
+        return model.getAssignmentList();
     }
 
 }

@@ -9,7 +9,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.VersionedAddressBook;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -148,6 +147,11 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
+        public boolean hasExistingEmail(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -164,6 +168,11 @@ public class AddAssignmentCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -208,7 +217,7 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public void updateFilteredAssignmentList(Person person) {
+        public void updateAssignmentList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -223,22 +232,22 @@ public class AddAssignmentCommandTest {
         }
 
         @Override
-        public void commitAddressBook(ReadOnlyAddressBook addressBook) {
+        public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public VersionedAddressBook getVersionedAddressBook() {
+        public boolean isAssignmentCompleted(Assignment assignment) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Assignment> getFilteredAssignmentList() {
+        public ObservableList<Assignment> getAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Assignment> getFilteredAssignmentList(Person person) {
+        public List<Assignment> getPersonAssignmentList(Person person) {
             throw new AssertionError("This method should not be called.");
         }
     }
