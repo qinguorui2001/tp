@@ -975,6 +975,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6. Data should be stored in a human editable text file.
 7. Data cannot be stored in DBMS. 
 8. Size of products should not exceed 100 MB.
+9. No broken links should be present.
+10. The user interface should be intuitive enough for users who are not IT-savvy.
+11. Commands should not be cumbersome to use.
 
 *{More to be added}*
 
