@@ -1055,7 +1055,7 @@ testers are expected to do more *exploratory* testing.
 1. Prerequisites: Have multiple persons in your list.
 2. Type `show 1` to display the first person's assignment list.
 3. Test Case: `clear`<br/>
-Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message.
+Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message. <br/><br/>![Clear Command Success Screen](images/ManualTestingClear.PNG)<br/><br/>
 
 ### Viewing Help
 1. Test Case: `help`<br/>
