@@ -1054,7 +1054,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `give 1 d/lab2 by/11/11/2021`<br>
       Expected: "lab2" assignment is appended to the first person's assignment list. Details of the added assignment will be 
-      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted in 
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by 
       due date with all pending assignments above completed ones.
    
    3. Test case: Repeat `give 1 d/lab2 by/11/11/2021` again.<br>
@@ -1063,7 +1063,7 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `give 2 d/lab2 by/20/12/2021`<br>
       Expected: "lab2" assignment is appended to second person's assignment list. Details of the added assignment will be
       shown in the status message. The assignment list panel will display **second** person's **pending and completed** 
-      assignments sorted in due date with all pending assignments above completed ones.
+      assignments sorted by due date with all pending assignments above completed ones.
   
 2. Giving an assignment while assignment list panel is empty.
 
@@ -1072,7 +1072,7 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `give 1 d/lab3 by/11/11/2021`<br>
        Expected: "lab3" assignment is appended to the first person's assignment list. Details of the added assignment will be
        shown in the status message. The assignment list panel will display the **first** person's **pending and completed** assignments
-       sorted in due date with all pending assignments above completed ones.
+       sorted by due date with all pending assignments above completed ones.
    
     3. Test case: `give x d/lab3 by/11/11/2021` (where x is a number larger than the number of people in the contact list)<br>
        Expected: No assignment is added into the assignment list panel. Error details shown in the status message since the index is invalid.
@@ -1090,7 +1090,7 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `remove 1`<br>
       Expected: The first assignment is removed in assignment list panel. Details of the removed assignment will be
-      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted in
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by
       due date with all pending assignments above completed ones.
 
    3. Test case: `remove x` (where x is a number larger than the number of assignments in the assignment list)<br>
@@ -1157,7 +1157,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is edited. Error details shown in the status message since the repeated email is not allowed.
    
    5. Test case: `edit 2 t/friend t/lab7`<br>
-      Expected: The first person's tag is replaced with tags called "friend" and "lab7".
+      Expected: The second person's tag is replaced with tags called "friend" and "lab7".
 
 2. Editing a person while no person is in the contact list.
 
@@ -1173,11 +1173,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Marking an assigment while all assignments of a person are being shown.
 
-   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are shown already.
+   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are already shown.
 
    2. Test case: `done 1`<br>
       Expected: The first assignment is marked as done in assignment list panel. Details of the marked assignment will be
-      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted in
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by
       due date with all pending assignments above completed ones.
 
    3. Test case: `done x` (where x is a number larger than the number of assignments in the assignment list)<br>
