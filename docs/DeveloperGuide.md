@@ -45,7 +45,9 @@ To get started, check out this guide [_Setting up and getting started_](SettingU
 
 ### Architecture
 
-<img src="images/ArchitectureDiagram.png" width="280" />
+<p align="center">
+  <img src="images/ArchitectureDiagram.png" width="280" />
+</p>
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -71,7 +73,9 @@ The rest of the App consists of four components.
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
-<img src="images/ArchitectureSequenceDiagram.png" width="574" />
+<p align="center">
+  <img src="images/ArchitectureSequenceDiagram.png" width="574" />
+</p>
 
 Each of the four main components (also shown in the diagram above),
 
@@ -80,7 +84,9 @@ Each of the four main components (also shown in the diagram above),
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
-<img src="images/ComponentManagers.png" width="300" />
+<p align="center">
+  <img src="images/ComponentManagers.png" width="300" />
+</p>
 
 The sections below give more details of each component.
 
@@ -107,7 +113,9 @@ The `UI` component,
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<p align="center">
+  <img src="images/LogicClassDiagram.png" width="550"/>
+</p>
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
@@ -124,7 +132,9 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
-<img src="images/ParserClasses.png" width="600"/>
+<p align="center">
+  <img src="images/ParserClasses.png" width="600"/>
+</p>
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
@@ -195,8 +205,9 @@ The cumulative list of all commands are:
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
-
+<p align="center">
+  <img src="images/ModelClassDiagram.png" width="450" />
+</p>
 
 The `Model` component,
 
@@ -207,8 +218,9 @@ The `Model` component,
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
+  <p align="center">
+    <img src="images/BetterModelClassDiagram.png" width="450" />
+  </p>
 </div>
 
 
@@ -216,7 +228,9 @@ The `Model` component,
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
-<img src="images/StorageClassDiagram.png" width="550" />
+<p align="center">
+  <img src="images/StorageClassDiagram.png" width="550" />
+</p>
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
@@ -247,30 +261,36 @@ Given below is an example usage scenario and how the show assignment mechanism b
 
 Step 1. The user launches the application for the first time. The `assignments` will be initialized with an empty list.
 
-![AssignmentState0](images/AssignmentState0.png)
+<p align="center">
+  <img src="images/AssignmentState0.png">
+</p>
 
 Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateFilterdAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
 This causes the `assignments` in `AddressBook` to be replaced with the 2nd person's assignment list.
 
-![AssignmentState1](images/AssignmentState1.png)
-
+<p align="center">
+  <img src="images/AssignmentState1.png">
+</p>
 
 Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getFilteredAssignmentList()` to input into the assignment panel of the `Ui`
 This results in the assignment list panel to display the assignments of the person.
 
-![AssignmentState2](images/AssignmentState2.png)
-
+<p align="center">
+  <img src="images/AssignmentState2.png">
+</p>
 
 Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
 The command will the call `Model#updateFilteredAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
 
-![AssignmentState3](images/AssignmentState3.png)
-
+<p align="center">
+  <img src="images/AssignmentState3.png">
+</p>
 
 Step 5. Step 3 is repeated to show the recent updated assignment list.
 
-![AssignmentState4](images/AssignmentState4.png)
-
+<p align="center">
+  <img src="images/AssignmentState4.png">
+</p>
 
 #### Design considerations:
 The assignment list of the specified person is stored in `AddressBook` rather than `ModelManger`
@@ -288,11 +308,15 @@ Next, the current available `Status` of `Assignment` are `PENDING` and `COMPLETE
 #### Related Implementation: UniqueAssignmentList
 A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. `Assignment` class extends `Comparable` interface for sorting purposes within a `UniqueAssignmentList`. Currently, only `AddressBook` and `Person` has a reference to `UniqueAssignmentList`.
 
-![Assignment class diagram](images/developerguide/implementation/AssignmentClassDiagram.png)
+<p align="center">
+  <img src="images/developerguide/implementation/AssignmentClassDiagram.png">
+</p>
 
 `UniqueAssignmentList#sort()` is a method responsible for sorting the list based on the `Status` and `DueDate` of the `Assignment`. The `UniqueAssignmentList` gives more importance to assignments that are pending than completed, and if both are pending, it will break the tie by choosing the assignment with an earlier due date.
 
-![Sorted Assignments within AddressBook](images/developerguide/implementation/SortedAssignments.png)
+<p align="center">
+  <img src="images/developerguide/implementation/SortedAssignments.png">
+</p>
 
 #### Design considerations:
 
@@ -323,15 +347,21 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+<p align="center">
+  <img src="images/UndoRedoState0.png">
+</p>
 
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `LogicManager` instance calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+<p align="center">
+  <img src="images/UndoRedoState1.png">
+</p>
 
 Step 3. The user executes `add n/David …​` to add a new person. The same `LogicManager` instance calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+<p align="center">
+  <img src="images/UndoRedoState2.png">
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
@@ -339,11 +369,15 @@ Step 3. The user executes `add n/David …​` to add a new person. The same `Lo
 
 Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
-![UndoRedoState3](images/UndoRedoState3.png)
+<p align="center">
+  <img src="images/UndoRedoState3.png">
+</p>
 
 The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+<p align="center">
+  <img src="images/UndoSequenceDiagram.png">
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -357,15 +391,21 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
-![UndoRedoState4](images/UndoRedoState4.png)
+<p align="center">
+  <img src="images/UndoRedoState4.png">
+</p>
 
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
-![UndoRedoState5](images/UndoRedoState5.png)
+<p align="center">
+  <img src="images/UndoRedoState5.png">
+</p>
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-<img src="images/CommitActivityDiagram.png" width="250" />
+<p align="center">
+  <img src="images/CommitActivityDiagram.png" width="250" />
+</p>
 
 #### Design considerations:
 
@@ -401,7 +441,9 @@ module field, it will return an error to the user.
 </div>
 
 The following sequence diagram shows how the giveall command is executed:
-![GiveallSequenceDiagram](images/GiveAllSequenceDiagram.png)
+<p align="center">
+  <img src="images/GiveAllSequenceDiagram.png">
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -413,7 +455,9 @@ module.
 
 The following activity diagram summarizes what happens when a user executes the giveall command:
 
-<img src="images/GiveAllActivityDiagram.png" width="250" />
+<p align="center">
+  <img src="images/GiveAllActivityDiagram.png" width="250" />
+</p>
 
 #### Design considerations:
 **Aspect: Adds assignment to persons in current displayed list or to all persons:**
@@ -447,6 +491,9 @@ When `Command#execute` is called, the `clean` command will get the assignment li
 remove all assignments with the completed status.
 
 The following sequence diagram shows how the clean command is executed:
+<p align="center">
+  <img src="images/CleanSequenceDiagram.png">
+</p>
 ![RemoveAllSequenceDiagram](images/CleanSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CleanAssignmentCommand` 
@@ -458,7 +505,9 @@ Step 3. The user executes `show 1` to check that all completed assignments has b
 
 The following activity diagram summarizes what happens when a user executes the clean command:
 
-<img src="images/CleanActivityDiagram.png" width="250" />
+<p align="center">
+  <img src="images/CleanActivityDiagram.png" width="250" />
+</p>
 
 #### Design considerations:
 **Aspect: Deletes completed assignments of person with assignments currently displayed or for all persons:**
@@ -499,7 +548,9 @@ persons with the specified module field, it will return an error to the user.
 </div>
 
 The following sequence diagram shows how the removeall command is executed:
-![GiveSequenceDiagram](images/GiveSequenceDiagram.png)
+<p align="center">
+  <img src="images/GiveSequenceDiagram.png">
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -549,7 +600,9 @@ the specified assignment if the person exists and has that assignment in assignm
 </div>
 
 The following sequence diagram shows how the remove command is executed:
-![RemoveSequenceDiagram](images/RemoveSequenceDiagram.png)
+<p align="center">
+  <img src="images/RemoveSequenceDiagram.png">
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -560,9 +613,9 @@ Step 3. The user executes `show 1` to check that the specified assignment has be
 module with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the remove command:
-
-<img src="images/RemoveActivityDiagram.png" width="250" />
-
+<p align="center">
+  <img src="images/RemoveActivityDiagram.png" width="250" />
+</p>
 #### Design considerations:
 **Aspect: Deletes assignment of a person in current displayed list or for any person in storage:**
 
@@ -598,7 +651,9 @@ if the person exists and has that assignment in assignment list.
 </div>
    
 The following sequence diagram shows how the done command is executed:
-![DoneSequenceDiagram](images/DoneSequenceDiagram.png)
+<p align="center">
+  <img src="images/DoneSequenceDiagram.png">
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAssignmentCommand` 
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -610,8 +665,9 @@ name with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the done command:
 
-<img src="images/DoneActivityDiagram.png" width="250" />
-![img_1.png](img_1.png)
+<p align="center">
+  <img src="images/DoneActivityDiagram.png" width="250" />
+</p>
 #### Design considerations:
 **Aspect: Marks assignment of a person in current displayed list as done or for any person in storage model:**
 
@@ -662,7 +718,9 @@ Given below is a more specific example of the command execution.
 The sequence of this command execution can be visualized using the
 below sequence diagram:
 
-![FindSequenceDiagram](images/FindSequenceDiagram.png)
+<p align="center">
+  <img src="images/FindSequenceDiagram.png">
+</p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -674,8 +732,6 @@ The following activity diagram summarizes what happens when a user executes the 
 <p align="center">
   <img src="images/FindActivityDiagram.png">
 </p>
-
-![FindActivityDiagram](images/FindActivityDiagram.png)" 
 
 #### Design considerations:
 **Aspect: Finding people based on OR criteria or AND criteria**
@@ -731,15 +787,19 @@ results actualized by the `Model` component.
 
 The following activity diagram shows the possible paths whilst a user adds an assignment:
 
-![AddAssignmentActivityDiagram](images/AddAssignmentActivityDiagram.png)
-
+<p align="center">
+  <img src="images/AddAssignmentActivityDiagram.png">
+</p>
 
 The following sequence diagram shows the logic sequence of an AddAssignment command execution:
 
-![AddAssignmentSequenceDiagram](images/AddAssignmentSequenceDiagram.png)
+<p align="center">
+  <img src="images/AddAssignmentSequenceDiagram.png">
+</p>
 
-div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 #### Design considerations:
 **Aspect: Rigidity in allowing users to add assignments correctly yet handle multiple short-form user inputs:**
