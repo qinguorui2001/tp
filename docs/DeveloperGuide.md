@@ -950,8 +950,11 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
+   
    2. Navigate to the folder using your command prompt.
+   
    3. Launch the jar file using the ```java -jar ta2.jar```. 
+   
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
 <br/><br />
 ![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
@@ -964,7 +967,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 1. Adding a person while all persons are being shown.
+
    1. Prerequisites: List all persons using the `list` command. Ensure there is no person named "Stephen Fallon" in the list before proceeding. 
+   
    2. Test case: `add n/Stephen Fallon m/CS2100 e/E1337123@u.nus.edu t/L21`<br>
    Expected: Appends added contact to your SoC contact list. Details of the added contact shown in the status message. The image below shows the result of this command on the contact list if you started with the 6 people from the sample data.<br /><br /> ![Manual Testing for Adding Person](images/ManualTestingAddingPerson.PNG) <br /><br />
    
@@ -972,23 +977,29 @@ testers are expected to do more *exploratory* testing.
    Expected: No person is added. Error details shown in the status message because the peron, "Stephen Fallon", already exists in the list.
    
 2. Adding a person with the same email as a person in the contact list.
+
    1. Prerequisites: Added "Stephen Fallon" in the previous test case. Ensure that there are no persons named "Ah Beng". If not, feel free to choose a different name that is not in the contact list.
-   2. Test case: `add n/Ah Beng m/CS2100 e/E1337144@u.nus.edu t/L30`<br>
+   
+   2. Test case: `add n/Ah Beng m/CS2100 e/E1337123@u.nus.edu t/L21`<br>
    Expected: No person is added. Error details shown in the status message because the email, "E1337144@u.nus.edu", already exists in the list.
+   
 3. Adding a person while only some persons are being shown.
-   1. Prerequisites: Ensure there is at least two persons in your contact list. Display a subset of persons using `find n/Stephen Fallon` command assuming Stephen Fallon is one of the persons in the contact list. Feel free to use the `find` command for any other persons in your contact list instead. Check that there are no persons named "Hawking Einstein" in your contact list.
+
+   1. Prerequisites: Ensure there are at least two persons in your contact list. Display a subset of persons using `find n/Stephen Fallon` command assuming Stephen Fallon is one of the persons in the contact list. Feel free to use the `find` command for any other persons in your contact list instead. Check that there are no persons named "Hawking Einstein" in your contact list.
 
    2. Test case: `add n/Hawking Einstein m/CS2100 e/E1337144@u.nus.edu t/L30`<br>
      Expected: "Hawking Einstein" contact information is appended to your SoC contact list. Details of the added contact will be shown in the status message. The SoC contact list will display **all** your contacts with "Hawking Einstein" appended to your contact list. 
    
 4. Adding a person with missing compulsory fields.
+
       1. Prerequisites: Ensure that no person in your contact list has the name "Steve Jobs".
-      1. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
+   
+      2. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
       Expected: No person is added. Error details shown in the status message due to invalid command format.
    
 ### Deleting a person
 
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -1001,7 +1012,8 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `delete x` (where x is larger than the list size) <br>
       Expected: No person is deleted. Error details shown in the status message because the index is invalid.
    
-2. Deleting a person while only some persons are being shown
+2. Deleting a person while only some persons are being shown.
+
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Select one person and search the name using the find command, e.g. `find n/Alex Yeoh`.
    
    2. Test case: `delete 1`<br>
@@ -1013,13 +1025,15 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `delete x` (where x is larger than the list size) <br>
       Expected: No person is deleted. Error details shown in the status message because the index is invalid.
    
-3. Deleting a person without specifying person's index parameter.
+4. Deleting a person without specifying person's index parameter.
    1. Other incorrect delete commands to try: `delete` <br>
       Expected: Error details shown in the status message since the command format is invalid.
    
 ### Clearing all entries
 1. Prerequisites: Have multiple persons in your list.
+
 2. Type `show 1` to display the first person's assignment list.
+
 3. Test case: `clear`<br/>
 Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message. <br/><br/>![Clear Command Success Screen](images/ManualTestingClear.PNG)<br/><br/>
 
@@ -1035,7 +1049,9 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 
 ### Listing all Persons
 1. Listing all persons when some persons are displayed.
+
    1. Prerequisites: Have multiple persons in contact list. Choose one of the person's name and use the `find` command to narrow the search to that person, e.g. `find n/Alex Yeoh` if "Alex Yeoh" is in your contact list.
+   
    2. Test case: `list` <br/>
    Expected: All persons will be shown in contact list. If you have any assignments displayed under Assignments, they will be cleared. Success message shown in the status message.
    
