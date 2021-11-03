@@ -38,7 +38,8 @@ Given below are my contributions to the project.
         * Did cosmetic tweaks to existing documentation of features `give`, `find`: [\#237](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/237)
     * Developer Guide:
         * Added documentation for the features of `find` [\#89](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/89)
-        * Updated documentation for the implementation of `give`, formerly named `a-add` [\#115](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/115) 
+        * Updated documentation for the implementation of `give`, formerly named `a-add` [\#115](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/115)
+        * Updated documentation for the **Logic** component.
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#130](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/130#discussion_r735115596)
