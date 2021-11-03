@@ -18,7 +18,7 @@
 * 
 ### For Users
 
-* If you are a new user or  wish to find out more about how to use TA <sup>2</sup>, head to our [**User Guide**](UserGuide.html)! 
+* If you are a new user or wish to find out more about how to use TA <sup>2</sup>, head to our [**User Guide**](UserGuide.html)! 
 
 ### For Developers
 
