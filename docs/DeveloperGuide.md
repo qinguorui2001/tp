@@ -139,7 +139,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects contained in a `UniquePersonList` object and `Assignment` objects contained in a `UniqueAssignmentList` object.
+* stores the versioned address book data which includes
+  * all 'Person' objects contained in a `UniquePersonList` object
+  * `Assignment` objects of the "active" `Person` object contained in a `UniqueAssignmentList` object.
+  * the "active" `Person` (the person whose assignments are stored in `UniqueAssignmentList` of `AddressBook`)
+  * the current predicate of the filtered person list
+  * the states of `ReadOnlyAddressBook`
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores the currently 'selected' `Assignment` objects of the "active" `Person` object as a separate _observable_ list which is exposed to outsiders as an unmodifiable `ObservableList<Assignment>` that can be 'observed' as well.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
@@ -225,7 +230,7 @@ A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. 
 
 `UniqueAssignmentList#sort()` is a method responsible for sorting the list based on the `Status` and `DueDate` of the `Assignment`. The `UniqueAssignmentList` gives more importance to assignments that are pending than completed, and if both are pending, it will break the tie by choosing the assignment with an earlier due date.
 
-![Sorted Assignments within AddressBook](images/developerguide/implementation/SortedAssignments.png)
+![Sorted Assignments within AddressBook](images/developerguide/implementation/SortedAssignments.PNG)
 
 #### Design considerations:
 
