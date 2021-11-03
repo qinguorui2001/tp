@@ -820,34 +820,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is`TA^2` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Find a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
-1. User requests to find a person with the specified keyword(s)
-2. TA<sup>2</sup> shows a list of persons with matching keyword(s)
+
+1. User enters a new person's information.
+2. TA<sup>2</sup> shows the person is added.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given command format is invalid, or the person's name or email is already in the list.
+
+    * 1a1. TA<sup>2</sup> shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC02 - Find a person**
+
+**MSS**
+1. User requests to find a person with the specified keyword(s).
+2. TA<sup>2</sup> shows a list of persons with matching keyword(s).
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The format of the command is invalid.
+  
   * 1a1. TA<sup>2</sup> shows an error message.
   
-    Use case resumes at step 1
+    Use case resumes at step 1.
+  
 * 2a. No persons match the specified keyword(s).
 
     Use case ends.
 
-**Use case: UC02 - Delete a person**
+**Use case: UC03 - Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  TA<sup>2</sup> shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  TA<sup>2</sup> deletes the person
+1.  User requests to list persons.
+2.  TA<sup>2</sup> shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  TA<sup>2</sup> deletes the person.
 
     Use case ends.
 
@@ -863,75 +882,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
-**Use case: UC03 - List all person in the address book**
-
-**MSS**
-
-1. User requests to list persons
-2. TA<sup>2</sup> shows a list of persons
-
-**Extensions**
-* 2a. The list is empty.
-  Use case ends.
-  
-  
-**Use case: UC05 - Add a person**
+**Use case: UC04 - Edit a person**
 
 **MSS**
+1. User requests to edit a person's name and email in the list.
+2. TA<sup>2</sup> shows that the person's information has been edited.
 
-1. User enters a new person's information
-2. TA<sup>2</sup> shows the person is added
-
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. The given command format is invalid.
+* 1a. The format of the command or the index is invalid, or there already exists a person with the same name and email.
 
-    * 1a1. TA<sup>2</sup> shows an error message related to invalid format.
+  * 1a1. TA<sup>2</sup> shows an error message.
 
-      Use case resumes at step 1.
-  
-* 1b. The added person is already in the list.
-
-    * 1b1. TA<sup>2</sup> requests to add another person.
-
-      Use case resumes at step 1.
-
-**Use case: UC06 - Add an assignment**
-
-**MSS**
-
-1. User enters the assignment information
-2. TA<sup>2</sup> shows the assignment information is added
-
-   Use case ends
-
-**Extensions**
-
-* 1a. The assignment information already exists in that person's assignment list.
-  
-    * 1a1. TA<sup>2</sup> shows message that the assignment already exists.
-  
-    Use case ends.
-
-* 1b. The given instruction format is invalid.
-
-    * 1b1 TA<sup>2</sup> shows an error message.
-  
     Use case resumes at step 1.
 
-**Use case: UC07 - Remove an assignment**
+
+**Use case: UC05 - Give an assignment**
 
 **MSS**
 
-1. User requests to list assignments of a person
-2. TA<sup>2</sup> shows a list of assignments
-3. User requests to delete a specific assignment in the list
-4. TA<sup>2</sup> deletes the assignment
+1. User enters the assignment information.
+2. TA<sup>2</sup> shows the assignment is added.
 
-   Use case ends
+   Use case ends.
+
+**Extensions**
+
+* 1a. The format of the command is invalid, or the assignment already exists in that person's assignment list.
+  
+    * 1a1. TA<sup>2</sup> shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC06 - Remove an assignment**
+
+**MSS**
+
+1. User requests to show assignments of a person.
+2. TA<sup>2</sup> shows a list of assignments.
+3. User requests to delete a specific assignment in the list.
+4. TA<sup>2</sup> deletes the assignment.
+
+   Use case ends.
 
 **Extensions**
 
@@ -945,15 +939,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC08 - Mark an assignment as done**
+**Use case: UC07 - Mark an assignment as done**
 
 **MSS**
 
-1. User requests to list assignments of a person
-2. User requests to mark a specific assignment in the list as done
-3. TA<sup>2</sup> shows the assignment is done
+1. User requests to list assignments of a person.
+2. User requests to mark a specific assignment in the list as done.
+3. TA<sup>2</sup> shows the assignment is done.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
@@ -961,13 +955,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2b. The given index is invalid.
+* 2b. The given index is invalid, or the assignment has already been mark completed.
 
     * 2b1. TA<sup>2</sup> shows an error message.
 
       Use case resumes at step 1.
   
-*{More to be added}*
 
 ### Non-Functional Requirements
 

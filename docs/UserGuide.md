@@ -52,9 +52,9 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
  * Result Message Box: Displays a success message if your command has been executed, or an error message if your command 
    has failed.
    
- * Contact List: Displays your student's relevant information. (Can be modified using `find`)
+ * Contact List Panel: Displays your student's relevant information. (Can be modified using `find`)
    
- * Assignment List: Displays a specified student's assignments. (Activated using `show`)
+ * Assignment List Panel: Displays a specified student's assignments. (Activated using `show`)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -281,7 +281,7 @@ Possible Usage:
 
 ### Showing a student’s assignments: `show`
 
-Shows the assignments of the specified student in the assignment list.
+Shows the assignments of the specified student in the assignment list panel.
 The assignment list is always sorted by status and date.
 
 Format: `show INDEX`
