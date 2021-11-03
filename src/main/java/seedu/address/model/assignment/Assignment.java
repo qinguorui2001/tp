@@ -2,7 +2,6 @@ package seedu.address.model.assignment;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -57,8 +56,11 @@ public class Assignment implements Comparable<Assignment> {
         }
 
         return otherAssignment != null
-                && otherAssignment.getDescription().toString().toLowerCase(Locale.ROOT)
-                .equals(getDescription().toString().toLowerCase(Locale.ROOT));
+                && otherAssignment.getDescription().equals(getDescription());
+    }
+
+    public boolean isSameDueDate(Assignment otherAssignment) {
+        return getDueDate().equals(otherAssignment.getDueDate());
     }
 
     public boolean isCompleted() {
@@ -110,6 +112,11 @@ public class Assignment implements Comparable<Assignment> {
                 : statusCompare;
     }
 
+    /**
+     * Creates another copy of this assignment object
+     *
+     * @return a separate object of the current assignment object
+     */
     public Assignment copyAssignment() {
         return new Assignment(description, dueDate, status);
     }

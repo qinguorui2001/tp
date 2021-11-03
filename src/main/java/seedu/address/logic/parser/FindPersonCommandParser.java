@@ -7,6 +7,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -40,6 +41,8 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
         String trimmedArgs = args.trim();
 
+        logger.info("Finding: " + trimmedArgs);
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
@@ -55,7 +58,7 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             logger.info("No module tags");
             return new FindPersonCommand(new NameContainsKeywordsPredicate(generateKeywords((trimmedArgs))));
         } else {
-            logger.info("Module tags with validation");
+            logger.info("Module tags with validation on " + trimmedArgs);
             store = generateKeywordsWithModuleChecking(trimmedArgs);
             return new FindPersonCommand(new NameContainsKeywordsPredicate(store));
         }
@@ -94,6 +97,13 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
      */
     private ArrayList<String> generateKeywordsWithModuleChecking(String args) throws ParseException {
         String[] splitByModule = args.split(PREFIX_MODULE.getPrefix());
+
+        logger.info("Split args: " + Arrays.toString(splitByModule));
+
+        if (splitByModule.length < 2 || allEmptyTags(splitByModule)) {
+            return new ArrayList<>();
+        }
+
         String moduleHalf = splitByModule[1];
         performValidation(moduleHalf.split(PREFIXES_SPACE)[0]);
 
@@ -109,6 +119,35 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
         }
+    }
+
+    /**
+     * Checks if the user inputs all empty tags.
+     *
+     * @param args user input arguments after splitting by m/ tag
+     * @return true if all tags are empty, false otherwise.
+     */
+    private boolean allEmptyTags(String[] args) {
+        String[] checkTags;
+        Pattern prefixesPattern = Pattern.compile(VALID_PREFIXES);
+        Matcher moduleMatcher;
+
+        for (String s : args) {
+            if (!s.equals("")) {
+                checkTags = s.trim().split(" ");
+                logger.info("Examining Tags in Arr: " + Arrays.toString(checkTags));
+                for (String tags : checkTags) {
+                    logger.info("Examining Tags: " + tags);
+                    moduleMatcher = prefixesPattern.matcher(tags);
+                    if (!moduleMatcher.find()) {
+                        logger.info("All tags are NOT empty");
+                        return false;
+                    }
+                }
+            }
+        }
+        logger.info("All tags are empty");
+        return true;
     }
 
     /**
@@ -131,12 +170,15 @@ public class FindPersonCommandParser implements Parser<FindPersonCommand> {
      */
     private void checkModuleValidity(String[] modules) throws ParseException {
 
+        logger.info("Checking module validity");
+
         Pattern pattern;
         Matcher matcher;
 
         pattern = Pattern.compile(VALIDATION_REGEX);
 
         for (String s : modules) {
+            logger.info("Validating " + s);
             matcher = pattern.matcher(s.toUpperCase(Locale.ROOT));
             if (!matcher.find() && !Objects.equals(s, "")) {
                 throw new ParseException(MESSAGE_CONSTRAINTS);

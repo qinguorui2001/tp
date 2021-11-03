@@ -57,11 +57,11 @@ public class VersionedAddressBook extends AddressBook {
     /**
      * Updates address book state list whenever a command is executed(except undo command).
      */
-    public void commitAddressBook(ReadOnlyAddressBook readOnlyAddressBook) {
+    public void commitAddressBook() {
         deleteElementsAfterPointer(currentStatePointer);
         currentStatePointer++;
         size = currentStatePointer + 1;
-        addressBookStateList.add(currentStatePointer, readOnlyAddressBook.copyAddressBook());
+        addressBookStateList.add(currentStatePointer, this.copyAddressBook());
     }
 
 

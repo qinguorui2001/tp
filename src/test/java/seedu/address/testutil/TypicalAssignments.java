@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import seedu.address.model.assignment.Assignment;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_CS1231S_TUTORIAL;
@@ -32,14 +28,6 @@ public class TypicalAssignments {
             .withDescription("Do CS2103 quiz week 7")
             .withDueDate("30/11/2022", "0819")
             .withPendingStatus().build();
-    public static final Assignment ASSIGNMENT_CS2100_TUTORIAL = new AssignmentBuilder()
-            .withDescription("Do CS2100 tutorial 4")
-            .withDueDate("5/10/2021", "2200")
-            .withPendingStatus().build();
-    public static final Assignment ASSIGNMENT_MA1521_TUTORIAL = new AssignmentBuilder()
-            .withDescription("Do MA1521 Tutorial 3")
-            .withDueDate("4/10/2020", "2100")
-            .withPendingStatus().build();
 
     // Manually added - Assignment's details found in {@code CommandTestUtil}
     public static final Assignment ASSIGNMENT_CS1231S_TUTORIAL = new AssignmentBuilder()
@@ -66,8 +54,4 @@ public class TypicalAssignments {
     // prevents instantiation
     private TypicalAssignments() {}
 
-    public static List<Assignment> getTypicalAssignments() {
-        return new ArrayList<>(Arrays.asList(ASSIGNMENT_MA1521_TUTORIAL, ASSIGNMENT_CS2100_TUTORIAL,
-                ASSIGNMENT_CS2103_QUIZ, ASSIGNMENT_CS1101S_MISSION));
-    }
 }

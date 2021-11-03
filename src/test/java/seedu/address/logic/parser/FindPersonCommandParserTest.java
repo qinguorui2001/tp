@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.FindPersonCommand;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -79,6 +80,31 @@ public class FindPersonCommandParserTest {
     }
 
     @Test
+    public void parse_emptyArgsTags_success() {
+
+        FindPersonCommand expectedFindCommandNone =
+                new FindPersonCommand(new NameContainsKeywordsPredicate(new ArrayList<>()));
+
+        // finding an empty prefix m/
+        assertParseSuccess(parser, "m/", expectedFindCommandNone);
+
+        // finding an empty prefix n/
+        assertParseSuccess(parser, "n/", expectedFindCommandNone);
+
+        // finding an empty prefix t/
+        assertParseSuccess(parser, "t/", expectedFindCommandNone);
+
+        // finding multiple empty prefixes m/ t/
+        assertParseSuccess(parser, "m/ t/", expectedFindCommandNone);
+
+        // finding multiple empty prefixes m/ n/
+        assertParseSuccess(parser, "m/ n/", expectedFindCommandNone);
+
+        // finding multiple empty prefixes m/ n/ t/
+        assertParseSuccess(parser, "m/ n/ t/", expectedFindCommandNone);
+    }
+
+    @Test
     public void parse_invalidArgs_returnsError() {
         // no prefix n/ or m/
         assertParseFailure(parser, "Alice Bob CS1101S",
@@ -101,5 +127,17 @@ public class FindPersonCommandParserTest {
         // random prefixes
         assertParseFailure(parser, "a/assignment",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
+
+        // invalid module input
+        assertParseFailure(parser, "m/CsSsSSsssSSsssSsSSSSS1000",
+                MESSAGE_CONSTRAINTS);
+
+        // invalid module input
+        assertParseFailure(parser, "m/GER1000000000000000000000000000",
+                MESSAGE_CONSTRAINTS);
+
+        // invalid module input with multiple valid tags
+        assertParseFailure(parser, "n/Alice t/Lab10 m/GEQqQQ100000EEE",
+                MESSAGE_CONSTRAINTS);
     }
 }

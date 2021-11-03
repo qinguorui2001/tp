@@ -36,6 +36,21 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with the same email to be added.
+     *
+     * @param toCheck Person to be added.
+     * @return true if list contains the same email, false otherwise.
+     */
+    public boolean containsEmail(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(n -> checkEmailPredicate(n, toCheck));
+    }
+
+    private boolean checkEmailPredicate(Person person, Person toCheck) {
+        return person.getEmail().equals(toCheck.getEmail());
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
