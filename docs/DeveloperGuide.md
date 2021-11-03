@@ -6,7 +6,7 @@ title: Developer Guide
 ## **Welcome to TA<sup>2</sup>!**
 
 Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop application designed for teaching assistants
-from the School of Computing (SOC) at the National University of Singapore (NUS) to manage student information and keep track of students' assignment submissions.
+from the School of Computing (SoC) at the National University of Singapore (NUS) to manage student information and keep track of students' assignment submissions.
  
 If you are interested in contributing to TA<sup>2</sup>, this guide is designed to help you get started!
 There are a variety of ways to contribute to TA<sup>2</sup> such as coding, testing, improving the design of the interface and updating the documentation. 
@@ -671,7 +671,11 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
    
 The following activity diagram summarizes what happens when a user executes the *Find Command*:
 
-![FindActivityDiagram](images/FindActivityDiagram.png)
+<p align="center">
+  <img src="images/FindActivityDiagram.png">
+</p>
+
+![FindActivityDiagram](images/FindActivityDiagram.png)" 
 
 #### Design considerations:
 **Aspect: Finding people based on OR criteria or AND criteria**
@@ -771,46 +775,47 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 **Target user**
 
-TA<sup>2</sup> is developed for Teaching Assistants(TA) and Professors in the School of Computing(SOC) at the National 
-University of Singapore(NUS).
+TA<sup>2</sup> is developed for Teaching Assistants (TA) in the School of Computing (SoC) at the National 
+University of Singapore (NUS).
 
 **Profile:**
-* has a need to manage student submissions
-* has a need to take note of student inquiries
-* has a need to organise information across modules
-* (for TAs) has a need to organise own tasks and tasks as a TA
-* has no time to organise information manually
+* has a need to consolidate and organise student information
+* has a need to manage student assignments
+* has little time to organise information manually
+* is familiar with using CLI applications
 * can type fast
  
 **Value proposition**
 
-TA<sup>2</sup> aims to help SOC TAs and professors by managing student submissions in an 
-efficient manner. Without the need to manually keep track of information in a separate document, they
-will be able to save more time. As users who are able to type fast, they will be able to manage module
-information(student submissions etc.) much faster than when using a mouse/GUI driven app.
+TA<sup>2</sup> offers a convenient way for SoC TAs to manage student assignments in an efficient manner.
+With TA<sup>2</sup>, they will no longer need to have to rely on inefficient workarounds like Excel or Notepad.
+As users who can type fast, they will be able to manage their students' information and allocated assignments much faster than when using a mouse/GUI driven app.
+
+TA<sup>2</sup> does not support management of assignments of a particular student across multiple modules (i.e. a student can only be under a single module).
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                  | I want to …​                               | So that I can…​                                                       |                                                
-| -------- | ------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------ |
-| `* * *`  | tutor for the first use                     | see all commands available                    | recall commands and use them properly when I forget how to use the app   |
-| `* * *`  | tutor                                       | add a new student or professor                |                                                                          |
-| `* * *`  | tutor                                       | delete a student or professor                 | remove entries that I no longer need                                     |
-| `* * *`  | tutor                                       | find a person by name or module               | locate details of persons without having to go through the entire list   |
-| `* * *`  | tutor                                       | assign tasks to students                      |                                                                          |
-| `* * *`  | tutor                                       | delete tasks assigned before                  | remove the outdated assignments for students                             |
-| `* * *`  | tutor                                       | mark students' tasks as done                  | record students' progress more easily                                    |
-| `* * *`  | tutor teaching online                       | access the web links used for teaching        | access information from teaching websites immediately                    |
-| `* * *`  | tutor for several modules                   | organize student data according to module     | manage my tasks of different modules in an organised manner              |
-| `* * *`  | student and tutor                           | organise my tasks in order of deadline        | manage my time better                                                    |
-| `* * *`  | easily frustrated tutor                     | search up contacts on the search bar fuss-free| save time used for fighting the app over syntax issues                   |
-| `* * *`  | tutor with many persons in the contact book | sort persons by name                          | locate a person easily                                                   |
-| `* * *`  | responsible tutor                           | track students' progress on their assignments | identify and reach out to those who need help                            |
-| `* * *`  | tutor                                       | list all students I am teaching               | ensure I added right and correct number of people before                 |
-| `* *`    | busy tutor                                  | list certain people I interacted frequently   | save time searching their name whenever I start app                      | 
-| `*`      | clumsy tutor                                | undo actions                                  | recover information that I accidentally delete                           |
+| Priority | As a …​                                 | I want to …​                                   | So that I can…​                                                           |                                                 
+| -------- | ------------------------------------------ | ------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `* * *`  | TA using TA<sup>2</sup> for the first time | see all commands available                        | recall commands and use them properly when I forget how to use the app       |
+| `* * *`  | TA                                         | add information of a student                      | -                                                                            |
+| `* * *`  | TA                                         | delete a student                                  | remove student entries that I no longer need                                 |
+| `* * *`  | TA                                         | find a person by name or module                   | locate details of persons without having to go through the entire list       |
+| `* * *`  | TA                                         | assign tasks to students                          | -                                                                            |
+| `* * *`  | TA                                         | delete tasks assigned before                      | remove the outdated assignments for students                                 |
+| `* * *`  | TA                                         | mark students' tasks as done                      | record students' progress more easily                                        |
+| `* * *`  | responsible TA                             | track students' progress on their assignments     | identify and reach out to those who need help                                |
+| `* * *`  | TA                                         | list all students I am teaching                   | ensure I added right and correct number of students                          |
+| `* * *`  | TA                                         | clear all student information in TA<sup>2</sup>   | use TA<sup>2</sup> over many semesters                                       |
+| `* *`    | TA for several modules                     | organize student assignments according to module  | manage assignments of students from different modules in an organised manner |
+| `* *`    | TA with many assignments to manage         | sort student assignments                          | easily see which assignments are not submitted yet                           |
+| `* *`    | TA with many students                      | sort persons by name                              | locate a person easily                                                       |
+| `* *`    | responsible TA                             | be notified when certain assignments are due soon | remind students who have not submitted their assignments yet                 |
+| `* *`    | clumsy TA                                  | undo actions                                      | recover information that I accidentally delete                               |
+| `*`      | TA teaching online                         | access the web links used for teaching            | access information from teaching websites immediately                        |
+| `*`      | busy TA                                    | list people whose information I access frequently | save time searching their name whenever I start the application              |
 
 *{More to be added}*
 
@@ -985,9 +990,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **e/**: Symbol for a requirement to state email address
 * **m/**: Symbol for a requirement to state the module
 * **n/**: Symbol for a requirement to state a name
-* **TA**: Abbreviation for the tutor
-* **UC**: Abbreviation for the use case
-* **SOC**: Abbreviation for the school of computing
+* **TA**: Abbreviation for tutor assistant 
+* **UC**: Abbreviation for use case
+* **SoC**: Abbreviation for School of Computing
+* **CLI**: Abbreviation for Command Line Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
