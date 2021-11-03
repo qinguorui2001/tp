@@ -1011,9 +1011,9 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Ensure there is at least two persons in your contact list. Display a subset of persons using `find n/Stephen Fallon` command assuming Stephen Fallon is one of the persons in the contact list. Feel free to use the `find` command for any other persons in your contact list instead. Check that there is no one named "Hawking Einstein" in your contact list.
 
    2. Test case: `add n/Hawking Einstein m/CS2100 e/E1337144@u.nus.edu t/L30`<br>
-     Expected: "Hawking Einstein" contact information is appended to your SoC contacts list. Details of the added contact will be shown in the status message. The SoC contacts list will display **all** your contacts with "Hawking Einstein" appended to your contacts list. <br/><br/>
+     Expected: "Hawking Einstein" contact information is appended to your SoC contact list. Details of the added contact will be shown in the status message. The SoC contact list will display **all** your contacts with "Hawking Einstein" appended to your contact list. <br/><br/>
 3. Adding a person with missing compulsory fields.
-      1. Prerequisites: Ensure that no person in your contacts list has the name "Steve Jobs".
+      1. Prerequisites: Ensure that no person in your contact list has the name "Steve Jobs".
       1. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
       Expected: No person is added. Error details shown in the status message due to invalid command format.
    
@@ -1068,11 +1068,11 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 Expected: The TA<sup>2</sup> window will close promptly.
 
 ### Listing all Persons
-1. Listing all persons when all persons are displayed.
-   1. Prerequisites: Have multiple persons in contacts list. Restart the application. The contacts list will display *all* persons.
+1. Listing all persons when some persons are displayed.
+   1. Prerequisites: Have multiple persons in contact list. Choose one of the person's name and use the `find` command to narrow the search to that person, e.g. `find n/Alex Yeoh` if "Alex Yeoh" is in your contact list.
    2. Test Case: `list` <br/>
-   Expected: The same persons will still be in contacts list.
-
+   Expected: All persons will be shown in contact list. If you have any assignments displayed under Assignments, they will be cleared. Success message shown in the status message.
+   
 ### Saving data
 
 1. Dealing with missing/corrupted data files
