@@ -41,12 +41,4 @@ deactivate ModelManger
 LogicManager ->[
 deactivate LogicManager
 
-
-
-
-
-
-
-
-
 @enduml
