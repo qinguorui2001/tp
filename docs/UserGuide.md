@@ -116,7 +116,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Extra spaces before and between names will be removed.
 
-* A student's `MODULE` must follow the format **XX[X]1111[X]**, where X is any letter, 1 is any number and values in square brackets are optional.<br>
+* A student's `MODULE` must follow the format as shown [here.](#module-naming-convention)
 
 * Only student's initials and module code will be capitalised on the displayed student list.<br>
 
@@ -178,8 +178,10 @@ Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 5. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-6. Prefix with empty keywords will return not match anyone. <br>
-   e.g. `find n/ m/ t/` will return 0 students.
+6. Prefixes with empty keywords will not match anyone. <br>
+   e.g. `find n/ m/ t/` will return 0 students
+
+7. Module codes must strictly follow the module naming convention shown [here.](#module-naming-convention)
 
 </div>
 
@@ -517,7 +519,7 @@ Action | Command | Format | Examples
 [Adding a student](#adding-a-student-add) | **add** | `add` `n/NAME e/EMAIL m/MODULE [t/TAG]…​` | `add n/James Ho m/CS2100 e/E7954753@u.nus.edu t/T25`
 [Finding students with matching input keywords](#finding-students-with-matching-input-keywords-find) | **find** | `find` `[n/NAME] [m/MODULE] [t/TAG]…​` | `find n/James Jake m/CS2100 t/T13`
 [Listing all students](#listing-all-students-list) | **list** | `list`
-[Deletng a student](#deleting-a-student-delete) | **delete** | `delete` `INDEX` | `delete 3`
+[Deleting a student](#deleting-a-student-delete) | **delete** | `delete` `INDEX` | `delete 3`
 [Editing a student](#editing-a-student-edit) | **edit** | `edit` `INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​` | `edit 2 n/James Lee e/E4853765@u.nus.edu`
 [Showing a student's assignments](#showing-a-students-assignments-show) | **show** | `show` `INDEX` | `show 2`
 [Giving an assignment to a student](#giving-an-assignment-to-a-student-give) | **give** | `give` `INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]` | `give 1 d/Lab1 by/ 21/8/2021,1600`
@@ -525,7 +527,7 @@ Action | Command | Format | Examples
 [Marking an assignment of a student](#marking-an-assignment-of-a-student-done) | **done** | `done` `INDEX` | `done 4`
 [Removing assignment of a student](#removing-an-assignment-of-a-student-remove) | **remove** | `remove` `INDEX` | `remove 10`
 [Removing completed assignments from all students](#removing-completed-assignments-from-all-students-clean) | **clean** | `clean`
-[Cleariing all entries](#clearing-all-entries-clear) | **clear** | `clear`
+[Clearing all entries](#clearing-all-entries-clear) | **clear** | `clear`
 [Undoing a command](#undoing-a-command-undo) | **undo** | `undo`
 [Redoing a command](#redoing-a-command-redo) | **redo** | `redo`
 [Exiting the program](#exiting-the-program-exit) | **exit** | `exit`
@@ -554,4 +556,9 @@ Action | Command | Format | Examples
 * `sat` - sets due date to the coming saturday.
 
 * `sun` - sets due date to the coming sunday.
+
+#### Module Naming Convention
+
+- The module format is **XX[X]1111[X]**, where X is any letter, 1 is any number and values in square brackets are optional.<br>
+
 --------------------------------------------------------------------------------------------------------------------
