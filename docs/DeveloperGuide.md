@@ -5,6 +5,7 @@ title: Developer Guide
 --------------------------------------------------------------------------------------------------------------------
 ## **Welcome to TA<sup>2</sup>!**
 {:.no_toc}
+
 Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop application designed for teaching assistants
 from the School of Computing (SoC) at the National University of Singapore (NUS) to manage student information and keep track of students' assignment submissions.
  
