@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_WITH_LIMIT;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ShowAssignmentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows the assignments assigned to the person identified by the "
             + "index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: " + MESSAGE_INVALID_INDEX_WITH_LIMIT + "\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SHOW_ASSIGNMENT_SUCCESS = "Showing assignments assigned to the person: %1$s";
