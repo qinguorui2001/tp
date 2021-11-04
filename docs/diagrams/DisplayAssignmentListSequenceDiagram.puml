@@ -10,7 +10,6 @@ participant ":ModelManager" as ModelManger MODEL_COLOR
 participant ":AddressBook" as AddressBook MODEL_COLOR
 end box
 
-
 [-> LogicManager : execute("show 2")
 activate LogicManager
 
@@ -22,18 +21,6 @@ activate AddressBook
 
 AddressBook -> ModelManger
 deactivate AddressBook
-
-ModelManger -> LogicManager
-deactivate ModelManger
-
-LogicManager ->[
-deactivate LogicManager
-
-[-> LogicManager : getFilteredAssignmentList()
-activate LogicManager
-
-LogicManager -> ModelManger : getAssignmentList()
-activate ModelManger
 
 ModelManger -> LogicManager
 deactivate ModelManger

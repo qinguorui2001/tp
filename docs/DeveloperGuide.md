@@ -188,7 +188,7 @@ Given below is an example usage scenario and how the show assignment mechanism b
 
 Step 1. The user launches the application for the first time. The `assignments` will be initialized with a `UniqueAssignmentList` that does not contain any `Assignment`.
 
-Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#FilterdAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
+Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
 This will then call `Addressbook#updateAssignmentList(person)`, causing the `assignments` in `AddressBook` to be replaced with the assignments in 2nd person's assignment list.
 
 The two object diagram below shows illustrates how the objects interacts and changes when a `show` command is executed.
@@ -196,13 +196,7 @@ The two object diagram below shows illustrates how the objects interacts and cha
 ![DisplayAssignmentObjectDiagram1](images/DisplayAssignmentObjectDiagram1.png))
 ![DisplayAssignmentObjectDiagram2](images/DisplayAssignmentObjectDiagram2.png))
 
-Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getAssignmentList()` to input into the assignment list panel of the `UI`
-This results in the assignment list panel to display the assignments of the 2nd person.
-
-Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
-The command will then call `Model#updateAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
-
-Step 5. Step 3 is repeated to display the recent updated assignment list.
+Step 3. When `assignments` is updated, the assignment list panel of the`Ui` will be updated accordingly since it is an observer of the `assignments` list in `Model`
 
 The sequence diagram below illustrates the interactions between the `Logic` and `Model` component, when an assignment command (e.g `show`, `give`, `done`, `remove`) is called.
 
@@ -214,17 +208,16 @@ The sequence diagram below illustrates the interactions between the `Logic` and 
 
 * **Alternative 1(current choice):** Displays assignment list next to the contact list panel in the same window.
 
-  * Pros: Allows for better grouping of assignment commands, so that commands are separated cleanly.<br>
-    e.g. `give`, `remove` are assignment commands while, `add`, `delete` is a student command.
+  * Pros: Allows you to do everything on one window.
 
-  * Cons: Commands that apply to both persons and assignments will become harder to manage. <br>
-    e.g. `undo`, `redo`.
+  * Cons: Commands that deal with persons and assignments need to be distinctly named as they share the same window.<br>
+  e.g. `add` person and `add` will have conflict.
 
 * **Alternative 2:** Displays assignment list on a new separate window.
 
-  * Pros: Allows user to resize and position the assignment list to suit their preferance.
+  * Pros: Allows you to cleanly segregate commands of assignments and persons because they are on different windows.
   
-  * Cons: Additional UI may lead to slower proccessing and execution.
+  * Cons: Additional UI may lead to slower processing and execution.
 
 ### Assignment Feature
 
