@@ -139,8 +139,8 @@ How the parsing works:
 The `Model` component,
 
 * stores the versioned address book data which includes
-  * all 'Person' objects contained in a `UniquePersonList` object
-  * `Assignment` objects of the "active" `Person` object contained in a `UniqueAssignmentList` object.
+  * all `Person` objects contained in a `UniquePersonList` object
+  * all `Assignment` objects of the "active" `Person` object contained in a `UniqueAssignmentList` object
   * the "active" `Person` (the person whose assignments are stored in `UniqueAssignmentList` of `AddressBook`)
   * the current predicate of the filtered person list
   * the states of `ReadOnlyAddressBook`
