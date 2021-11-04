@@ -1017,7 +1017,7 @@ testers are expected to do more *exploratory* testing.
    
    2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
+      
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message because index has to be a positive integer.
 
@@ -1027,7 +1027,188 @@ testers are expected to do more *exploratory* testing.
 4. Deleting a person without specifying person's index parameter.
    1. Other incorrect delete commands to try: `delete` <br>
       Expected: Error details shown in the status message since the command format is invalid.
+
+### Showing an assignment list
+
+1. Showing assignments while there are multiple people in the contact list.
+
+   1. Prerequisites: The current assignment list panel is empty.
+
+   2. Test case: `show 0`<br>
+      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
    
+   3. Test case: `show 1`<br>
+      Expected: The assignments of the first person in contact list are shown in assignment list panel.
+   
+   4. Test case: `show x` (x is any positive number greater than the number of people in the contact list.)<br>
+      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
+  
+2. Showing assignments while there is no person in the contact list.
+
+   1. Prerequisites: The current assignment list panel is empty.
+   
+   2. Test case: `show 1`<br>
+      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
+   
+3. Showing assignments with missing compulsory fields.
+
+   1. Prerequisites: The current assignment list panel is empty.
+   
+   2. Test case: `show`<br>
+     Expected: No assignments shown in assignment list panel. Error details shown in the status message since the format is invalid.
+   
+### Giving an assignment
+
+1. Giving an assigment while all assignments of a person are being shown.
+
+   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments are shown already.
+   
+   2. Test case: `give 1 d/lab2 by/11/11/2021`<br>
+      Expected: "lab2" assignment is appended to the first person's assignment list. Details of the added assignment will be 
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by 
+      due date with all pending assignments above completed ones.
+   
+   3. Test case: Repeat `give 1 d/lab2 by/11/11/2021` again.<br>
+      Expected: No assignment is added into the assignment list panel. Error details shown in the status message since no repeated assignments are allowed.
+   
+   4. Test case: `give 2 d/lab2 by/20/12/2021`<br>
+      Expected: "lab2" assignment is appended to second person's assignment list. Details of the added assignment will be
+      shown in the status message. The assignment list panel will display **second** person's **pending and completed** 
+      assignments sorted by due date with all pending assignments above completed ones.
+  
+2. Giving an assignment while assignment list panel is empty.
+
+    1. Prerequisites: There are multiple persons in the contact list.
+   
+    2. Test case: `give 1 d/lab3 by/11/11/2021`<br>
+       Expected: "lab3" assignment is appended to the first person's assignment list. Details of the added assignment will be
+       shown in the status message. The assignment list panel will display the **first** person's **pending and completed** assignments
+       sorted by due date with all pending assignments above completed ones.
+   
+    3. Test case: `give x d/lab3 by/11/11/2021` (where x is a number larger than the number of people in the contact list)<br>
+       Expected: No assignment is added into the assignment list panel. Error details shown in the status message since the index is invalid.
+   
+3. Giving an assignment while missing compulsory fields.
+
+    1.Test case: you can try `give`, `give d/lab3`, `give by/11/11/2021` and so on.<br>
+      Expected: No assignment is added into the assignment list panel. Error details shown in the status message since the format is invalid.
+
+### Removing an assignment
+
+1. Removing an assigment while all assignments of a person are being shown.
+
+   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are shown already.
+
+   2. Test case: `remove 1`<br>
+      Expected: The first assignment is removed in assignment list panel. Details of the removed assignment will be
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by
+      due date with all pending assignments above completed ones.
+
+   3. Test case: `remove x` (where x is a number larger than the number of assignments in the assignment list)<br>
+      Expected: No assignment is removed. Error details shown in the status message since the index is invalid.
+
+   4. Test case: `remove 0`<br>
+      Expected: No assignment is removed. Error details shown in the status message since the index is invalid.
+
+2. Removing an assignment while assignment list panel is empty.
+
+   1. Prerequisites: There are multiple persons in the contact list and no person's assignment list is shown.
+   
+   2. Test case: `remove 1`<br>
+      Expected: No assignment is removed. Error details shown in the status message since the index is invalid.
+ 
+3. Removing an assignment while missing compulsory fields.
+
+   1. Test case:`remove`<br>
+      Expected: No assignment is removed from the assignment list panel. Error details shown in the status message since the format is invalid.
+   
+###  Redoing a command
+   
+1. Redoing a command at the start of program.
+
+   1. Test case: `redo`<br>
+      Expected: Nothing is redone. Error details shown in the status message since no state can be redone.
+   
+2. Redoing a command after a `undo` command.
+
+   1. Test case: `redo`<br>
+      Expected: Recovers the effect of last `undo` command.
+   
+3. Redoing a command after a command except `undo`. 
+
+   1. Test case: `redo`<br>
+      Expected: Nothing is redone. Error details shown in the status message since no state can be redone.
+   
+### Undoing a command
+
+1. Undoing a command at the start of program.
+
+   1. Test case: `undo`<br>
+      Expected: Nothing is undone. Error details shown in the status message since no state can be undone.
+
+2. Undoing a command after entering some commands.
+
+   1. Test case: `undo`<br>
+      Expected: Retrieves the effect before conducting the last command (except `undo`).
+   
+### Editing a person
+
+1. Editing a person while all persons are being shown.
+
+   1. Prerequisites: There are multiple persons in the contact list (no person called "Alex" and no email named "15434@163.com").
+
+   2. Test case: `edit 1 n/Alex e/15434@163.com m/CS2100`<br>
+      Expected: The first person in the contact list is renamed as "Alex", and the email and module of this person changed accordingly to the given. 
+      Details of the edited person will be shown in the status message.
+   
+   3. Test case: `edit 2 n/Alex e/11465434@163.com m/CS2100` just after last test case.<br>
+      Expected: No person is edited. Error details shown in the status message since the repeated name is not allowed.
+   
+   4. Test case: `edit 2 n/Alex Yeoh e/15434@163.com m/CS2100` just after last test case.<br>
+      Expected: No person is edited. Error details shown in the status message since the repeated email is not allowed.
+   
+   5. Test case: `edit 2 t/friend t/lab7`<br>
+      Expected: The second person's tag is replaced with tags called "friend" and "lab7".
+
+2. Editing a person while no person is in the contact list.
+
+   1. Test case: `edit 1 n/Halo` or `edit 1 m/cs1111s` or any other combinations of optional fields.<br>
+      Expected: No person is edited. Error details shown in the status message since the index is invalid.
+
+3. Editing a person while missing compulsory fields.
+
+   1. Test case: You can try `edit` or `edit 1`<br>
+      Expected: No person is edited. Error details shown in the status message since the format is invalid.
+
+### Marking an assignment
+
+1. Marking an assigment while all assignments of a person are being shown.
+
+   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are already shown.
+
+   2. Test case: `done 1`<br>
+      Expected: The first assignment is marked as done in assignment list panel. Details of the marked assignment will be
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by
+      due date with all pending assignments above completed ones.
+
+   3. Test case: `done x` (where x is a number larger than the number of assignments in the assignment list)<br>
+      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+   4. Test case: `done 0`<br>
+      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+2. Marking an assignment while assignment list panel is empty.
+
+   1. Prerequisites: There are multiple persons in the contact list and no person's assignment list is shown.
+
+   2. Test case: `done 1`<br>
+      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+3. Marking an assignment while missing compulsory fields.
+
+   1. Test case:`done`<br>
+      Expected: No assignment is marked as completed in the assignment list panel. Error details shown in the status message since the format is invalid.
+      
 ### Clearing all entries
 1. Prerequisites: Have multiple persons in your list.
 
