@@ -1400,4 +1400,4 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
          * Copy the corrected `ta2.json` back to the data folder and start the application.
          * TA<sup>2</sup> will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
          in the wrong format, repeat the corrective action.
-         * Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/tasks.txt) for a sample data file in the correct format.
+         * Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/sampledata.json) for a sample data file in the correct format.
