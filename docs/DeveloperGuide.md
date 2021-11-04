@@ -1026,7 +1026,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **e/**: Symbol for a requirement to state email address
 * **m/**: Symbol for a requirement to state the module
 * **n/**: Symbol for a requirement to state a name
-* **TA**: Abbreviation for tutor assistant
+* **TA**: Abbreviation for teaching assistant
 * **UC**: Abbreviation for use case
 * **SoC**: Abbreviation for School of Computing
 * **CLI**: Abbreviation for Command Line Interface
