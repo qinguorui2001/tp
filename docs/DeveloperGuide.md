@@ -235,13 +235,12 @@ Step 5. Step 3 is repeated to show the recent updated assignment list.
   <img src="images/AssignmentState4.png">
 </p>
 
-#### Design considerations:
+#### Design considerations
 The assignment list of the specified person is stored in `AddressBook` rather than `ModelManger`
-
 
 ### Assignment Feature
 
-#### Current Implementation
+#### Implementation
 The `Assignment` class encapsulates the current Assignment feature and composes of `Description`, `Status` and `DueDate` class.
 
 It implements the operation `Assignment#isSameAssignment(Assignment assignment)` to check for duplicate assignments. Currently, assignments are similar if they have the same description and this check is case-insensitive. This is because each student is under one module and having a similarly named assignment within the same module is less likely.
@@ -261,7 +260,7 @@ A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. 
   <img src="images/developerguide/implementation/SortedAssignments.png">
 </p>
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How Status can be instantiated:**
 
@@ -350,7 +349,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   <img src="images/CommitActivityDiagram.png" width="250" />
 </p>
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -365,126 +364,9 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### Giveall feature
-The giveall command allows users to add the specified assignment to all persons in the same module. Persons who already 
-have the specified assignment will not have a duplicated assignment added to them. The command is abstracted as 
-`AddAssignmentToAllCommand` and extends `Command`. When the user inputs the command, `AddAssignmentToAllCommand#execute()` is called and returns a `CommandResult`.
-
-When `AddAssignmentToAllCommand#execute()` is called, `AddAssignmentToAllCommand` checks if any persons in `AddressBook` has the specified 
-assignment already. To avoid any inconsistencies in the specified assignment and any existing assignment with the same `Description`, 
-`AddAssignmentToAllCommand#execute()` calls `AddAssignmentToAllCommand#getAssignmentIfExists(List<Person> personListWithAssignment)` 
-to check if any persons contain an assignment with the same `Description` as the specified assignment. If such an assignment
-exists, a check is done to make sure that the `DueDate` field of the specified assignment and the existing assignment are
-the same. Additionally, the `Description` field of the added assignment will follow that of the existing assignment to 
-prevent any inconsistencies in letter cases. The assignment will then be added to all persons who do not have the assignment.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
-module field, it will return an error to the user. <br>
-Additionally, if all persons in the module already have the specified assignment,
-it will return an error to the user as well. 
-
-</div>
-
-Given below is an example usage scenario and how the `AddAssignmentToAllCommand` is executed.
-
-Step 1. The user executes `giveall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to add `Assignment 2` to all persons in
-the module `CS2100` for the first time. When `AddAssignmentToAllCommand#execute()` is called, `AddAssignmentToAllCommand` will filter out persons in `AddressBook` 
-with the module field `CS2100`. Since no persons have this assignment, it is added for all persons in `CS2100`. 
-
-Step 2. The user now decides to add another person in the module `CS2100` as this person was accidentally left out earlier.
-The user executes `add Alice Koh m/CS2100 e/e2716238@u.nus.edu` to add the person in.
-
-Step 3. The user wants to give this person the assignment he previously gave to the other persons in `CS2100`. The user
-executes `giveall m/CS2100 d/assignment 2 by/ 03/10/2021`. Like Step 1, when `AddAssignmentToAllCommand#execute()` is called,
-`AddAssignmentToAllCommand` will filter out persons in `AddressBook` with the module field `CS2100`. However, since 
-some persons in `CS2100` already have `Assignment 2`, the existing assignment will be returned when
-`AddAssignmentToAllCommand#getAssignmentIfExists(List<Person> personListWithAssignment)` is called. Since the `DueDate` of
-both the specified and existing assignment are `03/10/2021`, no error message will be thrown. `Assignment 2` will then be added
-for all persons in `CS2100` who does not have it yet. 
-
-The following sequence diagram shows how `giveall m/CS2100 d/assignment 2 by/ 03/10/2021` is executed:
-<p align="center">
-  <img src="images/GiveAllSequenceDiagram.png">
-</p>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand` 
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following activity diagram summarizes what happens when a user executes the giveall command:
-
-<p align="center">
-  <img src="images/GiveAllActivityDiagram.png" width="250" />
-</p>
-
-#### Design considerations:
-**Aspect: Adds assignment to persons in the specified module who are in the current displayed list or 
-to all persons in the specified module:**
-
-* **Alternative 1:** Adds assignment to persons in the specified module who are in the current displayed list
-    * Pros: Allows user to add assignment to a more specific group of persons
-    * Cons: User has to carry out `list` command first if addition of assignments is desired for all persons
-
-* **Alternative 2 (current choice):** Adds assignment to all persons in the specified module
-    * Pros: Allows user to add assignment to all persons even when some persons are not displayed in the list
-    * Cons: Less flexibility in terms of the choice of persons to add assignments to
-
-* Considering the fact that the `giveall` command is meant for users to add assignments to all persons in the specified 
-module, **alternative 2** was chosen as it meets this specification. Moreover, the existence of the 
-`give` command which allows users to add an assignment to a specific person suggests that the `giveall` command might 
-provide better utility for users if it allows for the addition of assignments to a bigger group of persons.
-
-### Clean feature
-The clean command allows users to remove all completed assignment from all persons.
-It is abstracted as `CleanAssignmentCommand` and extends `Command`. When the user inputs the command, 
-`Command#execute` is called and returns a `CommandResult`. 
-
-Given below is an example usage scenario and how the `CleanAssignmentCommand` is executed.
-
-Step 1. The user executes `list` command to see the current list of persons.
-
-Step 2. The user executes `clean` command to remove all the completed assignments.
-When `Command#execute` is called, the `clean` command will get the assignment list of all persons in the model and
-remove all assignments with the completed status.
-
-The following sequence diagram shows how the clean command is executed:
-<p align="center">
-  <img src="images/CleanSequenceDiagram.png">
-</p>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CleanAssignmentCommand` 
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Step 3. The user executes `show 1` to check that all completed assignments has been removed for the first person.
-
-The following activity diagram summarizes what happens when a user executes the clean command:
-
-<p align="center">
-  <img src="images/CleanActivityDiagram.png" width="250" />
-</p>
-
-#### Design considerations:
-**Aspect: Deletes completed assignments of person with assignments currently displayed or for all persons:**
-
-* **Alternative 1:** Deletes completed assignments of person with assignments currently displayed
-    * Pros: Allows for a safer delete of assignments
-    * Cons: User has to carry out `show INDEX` command for every person if deletion of assignments is desired for all persons
-
-* **Alternative 2(current choice):** Deletes completed assignment of all persons 
-    * Pros: Allows user to delete assignment of all persons without the need of additional commands
-    * Cons: Undesired deletion of assignment of persons not in displayed list may occur
-
-* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 2** is 
-chosen. When the list of persons increase to considerable numbers, deletion of completed assignments will require the user
-to input an additional command for each person. Bearing in mind that users make use of the `clean` command to remove
-completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
-may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command 
-which allows the user to retrieve the desired assignments easily.
-
 ### Give feature
+
+#### Implementation
 The give command allows users to add the specified assignment to a particular person is stored in the model. 
 Person who already has the specified assignment will not have a duplicated assignment added to him. The
 command is abstracted as `AddAssignmentCommand` and extends `Command`. When the user inputs the command,
@@ -522,7 +404,8 @@ The following activity diagram summarizes what happens when a user executes the 
 <p align="center">
   <img src="images/GiveActivityDiagram.png" width="250" />
 </p>
-#### Design considerations:
+
+#### Design considerations
 **Aspect: Adds an assignment to a person in current displayed list or to any other person in storage:**
 
 * **Alternative 1:** Add an assignment to a person in current displayed list
@@ -541,6 +424,8 @@ The following activity diagram summarizes what happens when a user executes the 
 
 
 ### Remove feature
+
+#### Implementation
 The remove command allows users to remove the specified assignment of a particular person in model.
 It is abstracted as `DeleteAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
@@ -574,7 +459,8 @@ The following activity diagram summarizes what happens when a user executes the 
 <p align="center">
   <img src="images/RemoveActivityDiagram.png" width="250" />
 </p>
-#### Design considerations:
+
+#### Design considerations
 **Aspect: Deletes assignment of a person in current displayed list or for any person in storage:**
 
 * **Alternative 1:** (current choice) Deletes assignment of a person in current displayed list
@@ -591,7 +477,132 @@ The following activity diagram summarizes what happens when a user executes the 
   deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
 
+### Giveall feature
+
+#### Implementation
+The giveall command allows users to add the specified assignment to all persons in the same module. Persons who already
+have the specified assignment will not have a duplicated assignment added to them. The command is abstracted as
+`AddAssignmentToAllCommand` and extends `Command`. When the user inputs the command, `AddAssignmentToAllCommand#execute()` is called and returns a `CommandResult`.
+
+When `AddAssignmentToAllCommand#execute()` is called, `AddAssignmentToAllCommand` checks if any persons in `AddressBook` has the specified
+assignment already. To avoid any inconsistencies in the specified assignment and any existing assignment with the same `Description`,
+`AddAssignmentToAllCommand#execute()` calls `AddAssignmentToAllCommand#getAssignmentIfExists(List<Person> personListWithAssignment)`
+to check if any persons contain an assignment with the same `Description` as the specified assignment. If such an assignment
+exists, a check is done to make sure that the `DueDate` field of the specified assignment and the existing assignment are
+the same. Additionally, the `Description` field of the added assignment will follow that of the existing assignment to
+prevent any inconsistencies in letter cases. The assignment will then be added to all persons who do not have the assignment.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified 
+module field, it will return an error to the user. <br>
+Additionally, if all persons in the module already have the specified assignment,
+it will return an error to the user as well. 
+
+</div>
+
+Given below is an example usage scenario and how the `AddAssignmentToAllCommand` is executed.
+
+Step 1. The user executes `giveall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to add `Assignment 2` to all persons in
+the module `CS2100` for the first time. When `AddAssignmentToAllCommand#execute()` is called, `AddAssignmentToAllCommand` will filter out persons in `AddressBook`
+with the module field `CS2100`. Since no persons have this assignment, it is added for all persons in `CS2100`.
+
+Step 2. The user now decides to add another person in the module `CS2100` as this person was accidentally left out earlier.
+The user executes `add Alice Koh m/CS2100 e/e2716238@u.nus.edu` to add the person in.
+
+Step 3. The user wants to give this person the assignment he previously gave to the other persons in `CS2100`. The user
+executes `giveall m/CS2100 d/assignment 2 by/ 03/10/2021`. Like Step 1, when `AddAssignmentToAllCommand#execute()` is called,
+`AddAssignmentToAllCommand` will filter out persons in `AddressBook` with the module field `CS2100`. However, since
+some persons in `CS2100` already have `Assignment 2`, the existing assignment will be returned when
+`AddAssignmentToAllCommand#getAssignmentIfExists(List<Person> personListWithAssignment)` is called. Since the `DueDate` of
+both the specified and existing assignment are `03/10/2021`, no error message will be thrown. `Assignment 2` will then be added
+for all persons in `CS2100` who does not have it yet.
+
+The following sequence diagram shows how `giveall m/CS2100 d/assignment 2 by/ 03/10/2021` is executed:
+<p align="center">
+  <img src="images/GiveAllSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the giveall command:
+
+<p align="center">
+  <img src="images/GiveAllActivityDiagram.png" width="300" height="350" />
+</p>
+
+#### Design considerations
+**Aspect: Adds assignment to persons in the specified module who are in the current displayed list or
+to all persons in the specified module:**
+
+* **Alternative 1:** Adds assignment to persons in the specified module who are in the current displayed list
+  * Pros: Allows user to add assignment to a more specific group of persons
+  * Cons: User has to carry out `list` command first if addition of assignments is desired for all persons
+
+* **Alternative 2 (current choice):** Adds assignment to all persons in the specified module
+  * Pros: Allows user to add assignment to all persons even when some persons are not displayed in the list
+  * Cons: Less flexibility in terms of the choice of persons to add assignments to
+
+* Considering the fact that the `giveall` command is meant for users to add assignments to all persons in the specified
+  module, **alternative 2** was chosen as it meets this specification. Moreover, the existence of the
+  `give` command which allows users to add an assignment to a specific person suggests that the `giveall` command might
+  provide better utility for users if it allows for the addition of assignments to a bigger group of persons.
+
+### Clean feature
+
+#### Implementation
+The clean command allows users to remove all completed assignment from all persons.
+It is abstracted as `CleanAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `CleanAssignmentCommand` is executed.
+
+Step 1. The user executes `list` command to see the current list of persons.
+
+Step 2. The user executes `clean` command to remove all the completed assignments.
+When `Command#execute` is called, the `clean` command will get the assignment list of all persons in the model and
+remove all assignments with the completed status.
+
+The following sequence diagram shows how the clean command is executed:
+<p align="center">
+  <img src="images/CleanSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CleanAssignmentCommand` 
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Step 3. The user executes `show 1` to check that all completed assignments has been removed for the first person.
+
+The following activity diagram summarizes what happens when a user executes the clean command:
+
+<p align="center">
+  <img src="images/CleanActivityDiagram.png" width="250" />
+</p>
+
+#### Design considerations
+**Aspect: Deletes completed assignments of person with assignments currently displayed or for all persons:**
+
+* **Alternative 1:** Deletes completed assignments of person with assignments currently displayed
+  * Pros: Allows for a safer delete of assignments
+  * Cons: User has to carry out `show INDEX` command for every person if deletion of assignments is desired for all persons
+
+* **Alternative 2(current choice):** Deletes completed assignment of all persons
+  * Pros: Allows user to delete assignment of all persons without the need of additional commands
+  * Cons: Undesired deletion of assignment of persons not in displayed list may occur
+
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 2** is
+  chosen. When the list of persons increase to considerable numbers, deletion of completed assignments will require the user
+  to input an additional command for each person. Bearing in mind that users make use of the `clean` command to remove
+  completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
+  may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command
+  which allows the user to retrieve the desired assignments easily.
+
 ### Done feature
+
+#### Implementation
 The done command allows users to mark the specified assignment of a particular person in model.
 It is abstracted as `MarkAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
@@ -626,7 +637,8 @@ The following activity diagram summarizes what happens when a user executes the 
 <p align="center">
   <img src="images/DoneActivityDiagram.png" width="250" />
 </p>
-#### Design considerations:
+
+#### Design considerations
 **Aspect: Marks assignment of a person in current displayed list as done or for any person in storage model:**
 
 * **Alternative 1:** (current choice) Marks assignment of a person in current displayed list
@@ -643,7 +655,9 @@ The following activity diagram summarizes what happens when a user executes the 
   marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
 
-### Find 
+### Find feature
+
+#### Implementation
 The *find command* allows users to find specific people in their list, based on certain
 matching criteria such as:
 
@@ -691,7 +705,7 @@ The following activity diagram summarizes what happens when a user executes the 
   <img src="images/FindActivityDiagram.png">
 </p>
 
-#### Design considerations:
+#### Design considerations
 **Aspect: Finding people based on OR criteria or AND criteria**
 
 * **Alternative 1 (current choice):** Allows user to find people based on **OR** criteria
@@ -759,7 +773,7 @@ The following sequence diagram shows the logic sequence of an AddAssignment comm
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-#### Design considerations:
+#### Design considerations
 **Aspect: Rigidity in allowing users to add assignments correctly yet handle multiple short-form user inputs:**
 
 * **Alternative 1 (current choice):** Allows users to add based on format and some *friendly* commands
@@ -1101,6 +1115,46 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete` <br>
       Expected: Error details shown in the status message since the command format is invalid.
    
+### Giving an assignment to all persons in a module
+
+1. Giving a new assignment to all persons in a module for the first time.
+   1. Prerequisites: Have multiple persons in the same module. Filter out the persons in this module, e.g. If these persons
+   are under the module "CS2100", execute `find m/CS2100` to see all persons in the module "CS2100". Ensure that none of these
+   persons have the assignment you wish to give using the `show` command.
+   2. Test case: `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
+   Expected: All persons in the module "CS2100" have "Assignment 1" with due date "10/10/2021" added into their assignment list.
+   Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons 
+   from the sample data and have executed the series of commands described above, you should be able to see the result of the 
+   command illustrated in the image below. Note that the image is displaying the assignment list of "Alex Yeoh" as `show 1` was executed.
+   ![Manual Testing for giveall command](images/ManualTestingGiveAll.png) <br>
+   
+   3. Test case: Repeat `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
+   Expected: No duplicated assignment should be added for all persons the module "CS2100". Error message will be shown
+   as all persons already have the specified assignment. The assignment list of persons should show the same assignments
+   as the one in the previous test case.
+
+2. Giving an assignment to some persons without the assignment.
+   1. Prerequisites: Start with the sample data and filter out the persons in the module "CS2100" by executing `find m/CS2100`.
+   The person "Roy Balakrishnan" will not have "Assignment 1", while other persons in "CS2100" will have this assignment.
+   Execute `show 1` to see the details of "Assignment 1" in the first person's assignment list.
+   2. Test case: `giveall m/CS2100 d/Assignment 1 by/ 11/11/2021, 1300` <br>
+   Expected: The specified assignment should not be added to "Roy Balakrishnan". Error message will be shown as the specified
+   assignment has a due date of "11/11/2021, 1300", but the due date of "Alex Yeoh" 's assignment is "15/09/2021, 1300".
+   3. Test case: `giveall m/CS2100 d/Assignment 1 by/ 15/09/2021, 0900` <br>
+   Expected: The specified assignment should not be added to "Roy Balakrishnan". Error message will be shown as the specified
+   assignment has a due date of "15/09/2021, 1300", but the due date of "Alex Yeoh" 's assignment is "15/09/2021, 0900".
+   4. Test case: `giveall m/CS2100 d/assignment 1 by/ 15/09/2021, 1300` <br>
+   Expected: The assignment "Assignment 1" with due date "15/09/2021, 1300" should be added to "Roy Balakrishnan". Note that
+   the letter "a" is capitalised as other persons' assignment is "Assignment 1" with a capitalised "a".
+   
+### Cleaning all completed assignments
+1. Prerequisites: Have a mix of completed and pending assignments for several persons. Execute `list` to see the list 
+of all persons.
+2. Test case: `clean` <br>
+Expected: All completed assignments are removed for all persons. The result of the command is shown in the image below.
+Note that the assignment panel is showing the assigment list of the first person as `show 1` was executed before `clean`.
+![Manual Testing for clean command](images/ManualTestingClean.png) <br>
+
 ### Clearing all entries
 1. Prerequisites: Have multiple persons in your list.
 2. Type `show 1` to display the first person's assignment list.
