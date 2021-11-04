@@ -11,7 +11,7 @@ from the School of Computing at the National University of Singapore to manage s
 
 TA<sup>2</sup> is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps!
 
-This user guide provides you with installation instructions, a comprehensive guide and summary on features of TA<sup>2</sup> and some FAQs.
+This user guide provides you with installation instructions, a comprehensive guide, summary on features of TA<sup>2</sup> and some FAQs.
 
 If you are a new user, check out the [Quick start](#Quick-start) section to help you get started with TA<sup>2</sup>.
 
@@ -46,7 +46,7 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 
     * **`show`**`1`: Displays the assignments of the first student in your assignment list.
     
-    * **`give`**`d/Assignment 1 m/CS2100 by/today`: Gives an assignment, `Assignment 1` with a deadline by tonight 11.59pm, to the first student in your contact list.
+    * **`give`**`d/Assignment 1 by/today`: Gives an assignment, `Assignment 1` with a deadline by tonight 11.59pm, to the first student in your contact list.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -67,7 +67,7 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 
  * Command Input Box: Type your commands here!
 
- * Result Message Box: Displays the result of your commands.
+ * Result Message Box: Displays the details of the result of your commands.
    
  * Contact List: Displays your list of students and their relevant information.
    
@@ -105,7 +105,9 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 
 ### Viewing help: `help`
 
-Shows a help window with a link directing you to the user guide. Alternatively, you can access this page by clicking the `Help` button in the top left corner.
+Shows a help window with a link directing you to the user guide. 
+
+Alternatively, you click the `Help` button in the top left corner or press `F1` on your keyboard to open up the help window.
 
 ![help message](images/helpMessage.png)
 
@@ -452,7 +454,7 @@ Examples:
 
 Possible Usage:
 
-* You can use `done` to mark assignments that have been submitted and track which student has not submitted yet.
+* YYou can use `done` to track completion status of an assignment among your students.
 
 ### Removing an assignment of a student: `remove`
 
