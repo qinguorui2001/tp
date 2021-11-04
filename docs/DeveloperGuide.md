@@ -831,24 +831,24 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a …​                                 | I want to …​                                   | So that I can…​                                                           |
 | -------- | ------------------------------------------ | ------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `* * *`  | TA using TA<sup>2</sup> for the first time | see all commands available                        | recall commands and use them properly when I forget how to use the app       |
-| `* * *`  | TA                                         | add information of a student                      | -                                                                            |
+| `* * *`  | TA                                         | add information of a student                      | view a student's information                                                 |
 | `* * *`  | TA                                         | delete a student                                  | remove student entries that I no longer need                                 |
 | `* * *`  | TA                                         | find a person by name or module                   | locate details of persons without having to go through the entire list       |
 | `* * *`  | TA                                         | assign tasks to students                          | -                                                                            |
-| `* * *`  | TA                                         | delete tasks assigned before                      | remove the outdated assignments for students                                 |
+| `* * *`  | TA                                         | delete tasks assigned before                      | remove assignments that I do not need to view anymore                        |
 | `* * *`  | TA                                         | mark students' tasks as done                      | record students' progress more easily                                        |
 | `* * *`  | responsible TA                             | track students' progress on their assignments     | identify and reach out to those who need help                                |
 | `* * *`  | TA                                         | list all students I am teaching                   | ensure I added right and correct number of students                          |
 | `* * *`  | TA                                         | clear all student information in TA<sup>2</sup>   | use TA<sup>2</sup> over many semesters                                       |
 | `* *`    | TA for several modules                     | organize student assignments according to module  | manage assignments of students from different modules in an organised manner |
-| `* *`    | TA with many assignments to manage         | sort student assignments                          | easily see which assignments are not submitted yet                           |
-| `* *`    | TA with many students                      | sort persons by name                              | locate a person easily                                                       |
+| `* *`    | TA with many students                      | organise my students in a systematic fashion      | locate a student easily                                                      |
 | `* *`    | responsible TA                             | be notified when certain assignments are due soon | remind students who have not submitted their assignments yet                 |
 | `* *`    | clumsy TA                                  | undo actions                                      | recover information that I accidentally delete                               |
 | `* * `   | TA                                         | assign a similar task to all students at once     | save time manually assigning one by one                                      |
 | `* * `   | TA                                         | remove all assignments that are completed         | save time manually removing each assignment one by one                       |
 | `*`      | TA teaching online                         | access the web links used for teaching            | access information from teaching websites immediately                        |
 | `*`      | busy TA                                    | list people whose information I access frequently | save time searching their name whenever I start the application              |
+| `*`      | TA with many assignments to manage         | see assignments that need my attention the most at the present moment | I can prioritise which assignment to attend to           |
 
 *{More to be added}*
 
@@ -1222,9 +1222,11 @@ testers are expected to do more *exploratory* testing.
 ### Giving an assignment to all persons in a module
 
 1. Giving a new assignment to all persons in a module
+
    1. Prerequisites: Have multiple persons in the same module. Filter out the persons in this module, e.g. If these persons
       are under the module "CS2100", execute `find m/CS2100` to see all persons in the module "CS2100". Ensure that none of these
       persons have the assignment you wish to give using the `show` command.
+
    2. Test case: `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
       Expected: All persons in the module "CS2100" have "Assignment 1" with due date "10/10/2021" added into their assignment list.
       Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons
@@ -1238,22 +1240,28 @@ testers are expected to do more *exploratory* testing.
       as the one in the previous test case.
 
 2. Giving an assignment to some persons without the assignment.
+
    1. Prerequisites: Start with the sample data and filter out the persons in the module "CS2100" by executing `find m/CS2100`.
       The person "Roy Balakrishnan" will not have "Assignment 1", while other persons in "CS2100" will have this assignment.
       Execute `show 1` to see the details of "Assignment 1" in the first person's assignment list.
+
    2. Test case: `giveall m/CS2100 d/Assignment 1 by/ 11/11/2021, 1300` <br>
       Expected: The specified assignment should not be added to "Roy Balakrishnan". Error message will be shown as the specified
       assignment has a due date of "11/11/2021, 1300", but the due date of "Alex Yeoh" 's assignment is "15/09/2021, 1300".
+
    3. Test case: `giveall m/CS2100 d/Assignment 1 by/ 15/09/2021, 0900` <br>
       Expected: The specified assignment should not be added to "Roy Balakrishnan". Error message will be shown as the specified
       assignment has a due date of "15/09/2021, 1300", but the due date of "Alex Yeoh" 's assignment is "15/09/2021, 0900".
+
    4. Test case: `giveall m/CS2100 d/assignment 1 by/ 15/09/2021, 1300` <br>
       Expected: The assignment "Assignment 1" with due date "15/09/2021, 1300" should be added to "Roy Balakrishnan". Note that
       the letter "a" is capitalised as other persons' assignment is "Assignment 1" with a capitalised "a".
 
 ### Cleaning all completed assignments
+
 1. Prerequisites: Have a mix of completed and pending assignments for several persons. Execute `list` to see the list
    of all persons.
+
 2. Test case: `clean` <br>
    Expected: All completed assignments are removed for all persons. The result of the command is shown in the image below.
    Note that the assignment panel is showing the assigment list of the first person as `show 1` was executed before `clean`.
