@@ -52,9 +52,9 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
  * Result Message Box: Displays a success message if your command has been executed, or an error message if your command 
    has failed.
    
- * Contact List Panel: Displays your student's relevant information. (Can be modified using `find`)
+ * Contact List: Displays your student's relevant information.
    
- * Assignment List Panel: Displays a specified student's assignments. (Activated using `show`)
+ * Assignment List: Displays a specified student's assignments. (Activated using `show`)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -280,12 +280,12 @@ Possible Usage:
 
 ### Showing a student’s assignments: `show`
 
-Shows the assignments of the specified student in the assignment list panel.
-The assignment list is always sorted by status and date.
+Shows the assignments of the specified student in the assignment list.
+The assignments are always sorted by status and date.
 
 Format: `show INDEX`
 
-* Shows the assignment list of the student at the specified `INDEX` of the displayed contact list.
+* Shows the assignments of the student at the specified `INDEX` of the displayed contact list.
 
 <div markdown="block" class="alert alert-info">
 
@@ -303,14 +303,14 @@ Examples:
 
 * The index refers to the index shown in the displayed student list.
 
-* `show 1` renders the first student’s assignment list on the assignment list panel (Shown in the image below). 
+* `show 1` renders the first student’s assignments on the assignment list (Shown in the image below). 
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
 Possible Usage: 
 
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
 
-### Giving assignments: `give` `giveall`
+### Giving assignment: `give` `giveall`
 
 #### Giving an assignment to a student: `give`
 
@@ -322,7 +322,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 :bulb: **Tip:**<br>
 
-* You can give assignments with due dates that has passed the current date of use.
+* You can give assignment with due dates that has passed the current date of use.
 
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
     
@@ -348,7 +348,7 @@ Possible Usage:
 
 #### Giving an assignment to all students in a module: `giveall`
 
-Adds an assignment with a deadline to all students in the specified module .
+Gives an assignment with a deadline to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
@@ -367,7 +367,7 @@ consistency of the due dates of the same assignment.
 
 :bulb: **Tip:**<br>
 
-* You can give assignments with due dates that has passed the current date of use.
+* You can give assignment with due dates that has passed the current date of use.
 
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
 
@@ -398,11 +398,11 @@ Format: `done INDEX`
 
 **:information_source: Note:**<br>
 
-* Assignments with pending status will have an orange tag.
+* Assignment with pending status will have an orange tag.
 
-* Assignments with completed status will have a green tag.
+* Assignment with completed status will have a green tag.
 
-* Remember to display the student's assignment list using [show](#showing-a-students-assignments-show) before using the done command!
+* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
 
 </div>
 
@@ -430,7 +430,7 @@ Examples:
 
 **:information_source: Note:**<br>
 
-Remember to display the student's assignment list using [show](#showing-a-students-assignments-show) before using the `remove` command!
+Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the `remove` command!
 
 </div>
 
