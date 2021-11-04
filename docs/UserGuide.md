@@ -15,32 +15,34 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have `Java 11` or later installed in your Computer.
 
-2. Download the latest `ta2.jar` from [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/releases/tag/v1.4).
+2. Download the latest `ta2.jar` release from [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/releases/tag/v1.4).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TA<sup>2</sup>.
 
-4. Double-click the file to start the app. The GUI similar to the one shown below should appear in a few seconds.
+4. Double-click the file to start the app. The window similar to the one shown below should appear in a few seconds.
    Note how the app contains some sample data.<br>
    ![Ui](images/userguide/ta^2_ui.png)
 
-5. Type the command in the command input box and press Enter to execute it. 
-   e.g. typing **`help`** and pressing Enter will open the help window.<br>
+
+6. You can try some commands by typing them in the command input box and press Enter to execute it.
+
    Some example commands you can try:
 
    * **`list`**: Lists all contacts.
 
    * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu`: Adds a student named `John Doe` with his/her relevant information into the contact list.
 
-   * **`giveall`**`d/Assignment 1 m/CS2100 by/31/12/2021, 1700`: Adds an assignment call  `Assignment 1` 
-     to the assignment list of all students in the contact list that are under the module `CS2100`.
+   * **`giveall`**`d/Assignment 1 m/CS2100 by/31/12/2021`: Adds an assignment call  `Assignment 1`, with deadline 2021, Dec 31,
+     to the assignment list of all students in the contact list who are under the module `CS2100`.
+
+8. Once you finished, and you don't want to keep these sample data. Try `clear` command to offer you a tidy and clean window, 
+   and the journey of using TA<sup>2</sup> officially starts!
 
    * **`clear`**: Deletes all contacts.
-
-   * **`exit`**: Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+   
+9. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
