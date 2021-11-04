@@ -74,11 +74,11 @@ public class AddAssignmentToAllCommand extends Command {
         List<Person> personListWithoutAssignment = filteredPersonList.get(0);
         List<Person> personListWithAssignment = filteredPersonList.get(1);
 
-        Assignment existingAssignment = getAssignmentIfExists(personListWithAssignment);
-
         if (personListWithoutAssignment.isEmpty()) {
             throw new CommandException(String.format(MESSAGE_ALL_HAS_ASSIGNMENT, module));
         }
+
+        Assignment existingAssignment = getAssignmentIfExists(personListWithAssignment);
 
         // Create a new assignment with the same description as the existing one
         // to prevent inconsistencies in letter cases

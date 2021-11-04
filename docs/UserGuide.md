@@ -45,7 +45,7 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
     * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu`: Adds a student named `John Doe` into your contact list.
 
     * **`show`**`1`: Displays the assignments of the first student in your assignment list.
-
+    
     * **`give`**`d/Assignment 1 m/CS2100 by/today`: Gives an assignment, `Assignment 1` with a deadline by tonight 11.59pm, to the first student in your contact list.
 
 <div markdown="span" class="alert alert-primary">
@@ -112,7 +112,7 @@ Shows a help window with a link directing you to the user guide. Alternatively, 
 Format: `help`
 
 Possible usage: 
-* The help window will direct you back to this user guide from TA<sup>2</sup> if you need details of the available feature.
+* The help window will direct you back to this user guide from TA<sup>2</sup> if you need details of any available features.
 
 ### Adding a student: `add`
 
@@ -126,7 +126,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Duplicate `NAME` is **not allowed**.
   
-    * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
+* e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
 
 * Extra spaces before and between names will be removed.
 
@@ -149,7 +149,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 * Duplicate `EMAIL` is **not allowed**.
 
     * e.g. `add e/E1234567@u.nus.edu` is not allowed if there is already a student with the same email.
-    
+
 * `TAG` can only accept alphanumeric characters.
 
 * A student can have any number of `TAG` (including 0).<br>
@@ -185,7 +185,7 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
 
-4. Each part of name separated by space will be match. <br> 
+4. Each part of name separated by space will be match. <br>
    e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`. <br>
    e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.
 
@@ -224,7 +224,7 @@ Examples:
 * `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of the requirements:
   have `david` or `alex` in their names, taking modules `cs1231` or `cs2103t` (Shown in the image below).
 ![result for 'find Example'](images/userguide/findExample.png)
-  
+
 Possible Usage:
 
 * You can use `find` to help you find a specific student.
@@ -241,7 +241,7 @@ Shows a list of all students in the contact list.
 
 Format: `list`
 
-Possible Usage: 
+Possible Usage:
 
 * After using `find` to filter the list, you can use `list` to reset the contact list to show all students.
 
@@ -256,7 +256,7 @@ Format: `delete INDEX`
 Examples:
 * `delete 2` deletes the second student in the contact list. (if 2nd student exists)
 
-Possible usage: 
+Possible usage:
 
 *  You can use `delete` to delete any student that you do not need to keep track anymore.
 
@@ -287,7 +287,7 @@ Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 :bulb: **Tip:**<br>
 
 * You can modify several parts of student information at the same time.
-  
+
 * If you wish to remove the tags for a student, simply type `t/` prefix without any parameters.
 </div>
 
@@ -299,7 +299,7 @@ Examples:
 
 * `edit 1 n/Brob n/New m/cs1101 m/cs1231s` changes first student's name in the displayed contact list to `New` and module to `cs1231s`.
 
-Possible Usage: 
+Possible Usage:
 
 * You can use `edit` to make changes to any typo in a student's information.
 
@@ -329,10 +329,10 @@ Examples:
 
 * The index refers to the index shown in the displayed student list.
 
-* `show 1` renders the first student’s assignment list on the assignment list panel (Shown in the image below). 
+* `show 1` renders the first student’s assignment list on the assignment list panel (Shown in the image below).
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
-Possible Usage: 
+Possible Usage:
 
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
 * You can look to the top of the assignment list to find out which assignments will be due soon or are overdue.
@@ -352,7 +352,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 :bulb: **Tip:**<br>
 
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
-    
+
 * If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
 
 * You can give assignments with due dates before today in case you wish to keep a record of old assignments.
@@ -374,12 +374,12 @@ Examples:
 * `give 2 d/Assignment 2 by/ 2/9/2021,1200` gives the second student displayed in your contact list an assignment of description `Assignment 2` with a deadline `22 Sep 2021, 12:00pm`.
 
 * If the current date is `1 Nov 2021` and it is a monday
-  
+
     * `give 1 d/Tutorial 3 by/mon` gives the first student displayed in your contact list an assignment of description `Tutorial 3` with a deadline `8 Nov 2021, 11:59pm`.
 
     * `give 2 d/Report 1 by/tue, 1800` gives the second student in your contact list an assignment of description `Report 1` with a deadline `2 Nov 2021, 11:59pm`.
 
-Possible Usage: 
+Possible Usage:
 
 * You can use `give` when there is an assignment that you want to give to selected students only.
 
@@ -424,7 +424,7 @@ Examples:
   of description `Assignment 2` with a deadline `15 Oct 2021, 01:00pm`.
 Possible Usage:
 
-*  You can use `giveall` instead of `give` when there is a module assignment, whereby all students under the module is required to submit. 
+*  You can use `giveall` instead of `give` when there is a module assignment, whereby all students under the module is required to submit.
 
 ### Marking an assignment of a student: `done`
 
@@ -464,7 +464,7 @@ Format: `remove INDEX`
 
 Examples:
 
-* `remove 10` deletes the 10th assignment in the displayed assignment list of a student. 
+* `remove 10` deletes the 10th assignment in the displayed assignment list of a student.
 
 <div markdown="block" class="alert alert-info">
 
@@ -497,6 +497,7 @@ Format: `clear`
 Possible Usage:
 
 * You can use `clear` if you no longer need to keep track of students after they have completed the module.
+
 
 ### Undoing a command: `undo`
 
@@ -534,7 +535,7 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 :exclamation:**Caution:**
 
 * If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
-</div> 
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 

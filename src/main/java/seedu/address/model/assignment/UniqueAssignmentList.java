@@ -136,19 +136,6 @@ public class UniqueAssignmentList implements Iterable<Assignment> {
         internalList.clear();
     }
 
-    /**
-     * Removes all completed assignments within the UniqueAssignmentList
-     */
-    public void cleanAssignments() {
-        UniqueAssignmentList newList = new UniqueAssignmentList();
-        for (Assignment assignment : internalList) {
-            if (!assignment.isCompleted()) {
-                newList.add(assignment);
-            }
-        }
-        this.setAssignments(newList);
-    }
-
     @Override
     public Iterator<Assignment> iterator() {
         return internalList.iterator();
