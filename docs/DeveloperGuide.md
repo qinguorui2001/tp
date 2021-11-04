@@ -189,9 +189,14 @@ Given below is an example usage scenario and how the show assignment mechanism b
 Step 1. The user launches the application for the first time. The `assignments` will be initialized with a `UniqueAssignmentList` that does not contain any `Assignment`.
 
 Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#FilterdAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
-This will then call `Addressbook#updateAssignmentList(person)`, causing the `assignments` in `AddressBook` to be replaced with the 2nd person's assignment list.
+This will then call `Addressbook#updateAssignmentList(person)`, causing the `assignments` in `AddressBook` to be replaced with the assignments in 2nd person's assignment list.
 
-Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getFilteredAssignmentList()` to input into the assignment list panel of the `UI`
+The two object diagram below shows illustrates how the objects interacts and changes when a `show` command is executed.
+
+![DisplayAssignmentObjectDiagram1](images/DisplayAssignmentObjectDiagram1.png))
+![DisplayAssignmentObjectDiagram2](images/DisplayAssignmentObjectDiagram2.png))
+
+Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getAssignmentList()` to input into the assignment list panel of the `UI`
 This results in the assignment list panel to display the assignments of the 2nd person.
 
 Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
@@ -200,6 +205,7 @@ The command will then call `Model#updateAssignmentList(person)` to get the recen
 Step 5. Step 3 is repeated to display the recent updated assignment list.
 
 The sequence diagram below illustrates the interactions between the `Logic` and `Model` component, when an assignment command (e.g `show`, `give`, `done`, `remove`) is called.
+
 ![DisplayAssignmentListSequenceDiagram](images/DisplayAssignmentListSequenceDiagram.png)
 
 #### Design considerations:
