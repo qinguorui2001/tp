@@ -1385,16 +1385,19 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 ### Saving data
 
 1. Data file `ta2.json` is missing. <br>
-   To simulate: Delete `ta2.json` file. <br>
-   Expected: TA<sup>2</sup> will start with sample data. <br>
+   1. To simulate: Delete `ta2.json` file. <br>
+   2. Expected: TA<sup>2</sup> will start with sample data. <br>
+
 2. Data file `ta2.json` in wrong format. <br>
-   To simulate: Remove a square bracket in the `ta2.json` file. <br>
-   Expected: TA<sup>2</sup> will start with no data. <br>
-   Corrective action: If you wish to start TA<sup>2</sup> afresh, just input commands as per normal and the existing
-   file will be overridden with the new data that you input. <br>
-   :exclamation: If you wish to retrieve your existing data, do not input any command.
-   Copy the current `ta2.json` file to another location before exiting TA<sup>2</sup>. Look through `ta2.json` and
-   correct any formatting issues. Copy the corrected `ta2.json` back to the data folder and start the application.
-   TA<sup>2</sup> will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
-   in the wrong format, repeat the corrective action.
-   Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/tasks.txt) for a sample data file in the correct format.
+   1. To simulate: Remove a square bracket in the `ta2.json` file. <br>
+   2. Expected: TA<sup>2</sup> will start with no data. <br>
+   3. Corrective action: 
+      1. If you wish to start TA<sup>2</sup> afresh, just input commands as per normal and the existing
+      file will be overridden with the new data that you input. <br>
+      2. :exclamation: If you wish to retrieve your existing data, do not input any command. <br>
+         * Copy the current `ta2.json` file to another location before exiting TA<sup>2</sup>.
+         * Look through `ta2.json` and correct any formatting issues.
+         * Copy the corrected `ta2.json` back to the data folder and start the application.
+         * TA<sup>2</sup> will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
+         in the wrong format, repeat the corrective action.
+         * Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/tasks.txt) for a sample data file in the correct format.
