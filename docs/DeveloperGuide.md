@@ -998,7 +998,6 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is added. Error details shown in the status message due to invalid command format.
    
 ### Deleting a person
-
 1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
