@@ -1179,10 +1179,13 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
    
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Missing/corrupted data files
+   1. Data file `ta2.json` is missing
+      To simulate: delete `ta2.json` file
+      Expected: TA<sup>2</sup> will start with sample data.
+   2. Data file `ta2.json` in wrong format
+      To simulate: remove 
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-2. _{ more test cases …​ }_
+2. 
 
 
