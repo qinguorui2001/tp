@@ -14,13 +14,6 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 
 *Last Updated: 8 November 2021*
 
---------------------------------------------------------------------------------------------------------------------
-
-## Table of Contents
-{:.no_toc}
-
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -204,52 +197,36 @@ Given below is an example usage scenario and how the show assignment mechanism b
 
 Step 1. The user launches the application for the first time. The `assignments` will be initialized with a `UniqueAssignmentList` that does not contain any `Assignment`.
 
-<<<<<<< HEAD
 Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
 This will then call `Addressbook#updateAssignmentList(person)`, causing the `assignments` in `AddressBook` to be replaced with the assignments in 2nd person's assignment list.
-=======
-<p align="center">
-  <img src="images/AssignmentState0.png">
-</p>
->>>>>>> master
+
 
 The two object diagram below shows illustrates how the objects interacts and changes when a `show` command is executed.
 
-<<<<<<< HEAD
-![DisplayAssignmentObjectDiagram1](images/DisplayAssignmentObjectDiagram1.png))
-![DisplayAssignmentObjectDiagram2](images/DisplayAssignmentObjectDiagram2.png))
+<p align="center">
+
+![DisplayAssignmentObjectDiagram1](images/DisplayAssignmentObjectDiagram1.png)
+
+![DisplayAssignmentObjectDiagram2](images/DisplayAssignmentObjectDiagram2.png)
+
+</p>
 
 Step 3. When `assignments` is updated, the assignment list panel of the`Ui` will be updated accordingly since it is an observer of the `assignments` list in `Model`
-=======
-<p align="center">
-  <img src="images/AssignmentState1.png">
-</p>
->>>>>>> master
 
 The sequence diagram below illustrates the interactions between the `Logic` and `Model` component, when an assignment command (e.g `show`, `give`, `done`, `remove`) is called.
 
-<<<<<<< HEAD
+<p align="center">
+
 ![DisplayAssignmentListSequenceDiagram](images/DisplayAssignmentListSequenceDiagram.png)
+
+</p>
 
 #### Design considerations:
 
 **Aspect: How the assignment list can be displayed:**
-=======
-<p align="center">
-  <img src="images/AssignmentState2.png">
-</p>
-
-Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
-The command will the call `Model#updateFilteredAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
-
-<p align="center">
-  <img src="images/AssignmentState3.png">
-</p>
->>>>>>> master
 
 * **Alternative 1(current choice):** Displays assignment list next to the contact list panel in the same window.
 
-<<<<<<< HEAD
   * Pros: Allows you to do everything on one window.
 
   * Cons: Commands that deal with persons and assignments need to be distinctly named as they share the same window.<br>
@@ -261,15 +238,6 @@ The command will the call `Model#updateFilteredAssignmentList(person)` to get th
   
   * Cons: Additional UI may lead to slower processing and execution.
 
-=======
-<p align="center">
-  <img src="images/AssignmentState4.png">
-</p>
-
-#### Design considerations
-The assignment list of the specified person is stored in `AddressBook` rather than `ModelManger`
-
->>>>>>> master
 ### Assignment Feature
 
 #### Implementation
@@ -919,14 +887,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 1a. The format of the command is invalid.
   
   * 1a1. TA<sup>2</sup> shows an error message.
-<<<<<<< HEAD
   
     Use case resumes at step 1.
   
-=======
-
-    Use case resumes at step 1
->>>>>>> master
 * 2a. No persons match the specified keyword(s).
 
     Use case ends.
@@ -960,38 +923,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. User requests to edit a person's name and email in the list.
 2. TA<sup>2</sup> shows that the person's information has been edited.
 
-<<<<<<< HEAD
    Use case ends.
-=======
-1. User requests to list persons
-2. TA<sup>2</sup> shows a list of persons
-
-**Extensions**
-* 2a. The list is empty.
-  Use case ends.
-
-
-**Use case: UC05 - Add a person**
-
-**MSS**
-
-1. User enters a new person's information
-2. TA<sup>2</sup> shows the person is added
-
-    Use case ends.
->>>>>>> master
 
 **Extensions**
 
 * 1a. The format of the command or the index is invalid, or there already exists a person with the same name and email.
 
-<<<<<<< HEAD
   * 1a1. TA<sup>2</sup> shows an error message.
-=======
-      Use case resumes at step 1.
-
-* 1b. The added person is already in the list.
->>>>>>> master
 
     Use case resumes at step 1.
 
@@ -1007,25 +945,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-<<<<<<< HEAD
 * 1a. The format of the command is invalid, or the assignment already exists in that person's assignment list.
-  
-    * 1a1. TA<sup>2</sup> shows an error message.
 
-      Use case resumes at step 1.
-=======
-* 1a. The assignment information already exists in that person's assignment list.
-
-    * 1a1. TA<sup>2</sup> shows message that the assignment already exists.
-
-    Use case ends.
-
-* 1b. The given instruction format is invalid.
-
-    * 1b1 TA<sup>2</sup> shows an error message.
+  * 1a1. TA<sup>2</sup> shows an error message.
 
     Use case resumes at step 1.
->>>>>>> master
 
 **Use case: UC06 - Remove an assignment**
 
@@ -1046,9 +970,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. TA<sup>2</sup> shows an error message.
+  * 3a1. TA<sup>2</sup> shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
 **Use case: UC07 - Mark an assignment as done**
 
@@ -1068,15 +992,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The given index is invalid, or the assignment has already been mark completed.
 
-    * 2b1. TA<sup>2</sup> shows an error message.
+  * 2b1. TA<sup>2</sup> shows an error message.
 
-      Use case resumes at step 1.
-<<<<<<< HEAD
-  
-=======
-
-*{More to be added}*
->>>>>>> master
+    Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
