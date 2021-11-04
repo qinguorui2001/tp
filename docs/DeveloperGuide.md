@@ -204,12 +204,10 @@ This will then call `Addressbook#updateAssignmentList(person)`, causing the `ass
 The two object diagram below shows illustrates how the objects interacts and changes when a `show` command is executed.
 
 <p align="center">
-
-![DisplayAssignmentObjectDiagram1](images/DisplayAssignmentObjectDiagram1.png)
-
-![DisplayAssignmentObjectDiagram2](images/DisplayAssignmentObjectDiagram2.png)
-
+<img src="images/DisplayAssignmentObjectDiagram1.png">
+<img src="images/DisplayAssignmentObjectDiagram2.png">
 </p>
+
 
 Step 3. When `assignments` is updated, the assignment list panel of the`Ui` will be updated accordingly since it is an observer of the `assignments` list in `Model`
 
@@ -217,7 +215,7 @@ The sequence diagram below illustrates the interactions between the `Logic` and 
 
 <p align="center">
 
-![DisplayAssignmentListSequenceDiagram](images/DisplayAssignmentListSequenceDiagram.png)
+<img src="images/DisplayAssignmentListSequenceDiagram.png">
 
 </p>
 
