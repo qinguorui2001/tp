@@ -16,12 +16,12 @@ the corresponding commands and TA<sup>2</sup> will manage all these for you! No 
 
 ## How is TA<sup>2</sup> different?
 
-TA<sup>2</sup> is optimised for use via a Command Line Interface(CLI) while still having the benefits of a Graphical User Interface(GUI). 
-This means that if you are able to type fast, TA<sup>2</sup> will be able to manage student submissions much faster than other applications 
-that require you to use your mouse often. TA<sup>2</sup> sorts all the information that you enter behind the scenes and 
-presents it to you in an organised manner when you ask for it. TA<sup>2</sup> eliminates the problem of information overload 
-when trying to manage immense amounts of information. No more trying to filter out information on your own, TA<sup>2</sup> 
-will do it for you. 
+TA<sup>2</sup> is optimised for use via a Command Line Interface(CLI) while still having the benefits of a Graphical User Interface(GUI).
+This means that if you are able to type fast, TA<sup>2</sup> will be able to manage student submissions much faster than other applications
+that require you to use your mouse often. TA<sup>2</sup> sorts all the information that you enter behind the scenes and
+presents it to you in an organised manner when you ask for it. TA<sup>2</sup> eliminates the problem of information overload
+when trying to manage immense amounts of information. No more trying to filter out information on your own, TA<sup>2</sup>
+will do it for you.
 
 ## For Users
 

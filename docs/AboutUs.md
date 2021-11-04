@@ -44,7 +44,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/yeo-yiheng.png" width="200px">
 
-[[github](http://github.com/yeo-yiheng)] 
+[[github](http://github.com/yeo-yiheng)]
 [[portfolio](team/yeo-yiheng.md)]
 
 * Role: Developer and Documentation
