@@ -22,7 +22,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 3. Copy the file to the folder you want to use as the _home folder_ for your TA<sup>2</sup>.
 
 4. Double-click the file to start the app. The window similar to the one shown below should appear in a few seconds.
-   Note how the app contains some sample data when you run the app for the first time.<br>
+   Note how the app contains some sample data.<br>
    ![Ui](images/userguide/ta^2_ui.png)
 
 
