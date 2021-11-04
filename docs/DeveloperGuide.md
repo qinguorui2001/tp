@@ -6,7 +6,6 @@ title: Developer Guide
 ## **Welcome to TA<sup>2</sup>!**
 {:.no_toc}
 
-
 Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop application designed for teaching assistants
 from the School of Computing (SoC) at the National University of Singapore (NUS) to manage student information and keep track of students' assignment submissions.
  
@@ -1048,8 +1047,11 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder.
+   
    2. Navigate to the folder using your command prompt.
+   
    3. Launch the jar file using the ```java -jar ta2.jar```. 
+   
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
 <br/><br />
 ![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
@@ -1062,7 +1064,9 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 1. Adding a person while all persons are being shown.
+
    1. Prerequisites: List all persons using the `list` command. Ensure there is no person named "Stephen Fallon" in the list before proceeding. 
+   
    2. Test case: `add n/Stephen Fallon m/CS2100 e/E1337123@u.nus.edu t/L21`<br>
    Expected: Appends added contact to your SoC contact list. Details of the added contact shown in the status message. The image below shows the result of this command on the contact list if you started with the 6 people from the sample data.<br /><br /> ![Manual Testing for Adding Person](images/ManualTestingAddingPerson.PNG) <br /><br />
    
@@ -1070,23 +1074,28 @@ testers are expected to do more *exploratory* testing.
    Expected: No person is added. Error details shown in the status message because the peron, "Stephen Fallon", already exists in the list.
    
 2. Adding a person with the same email as a person in the contact list.
+
    1. Prerequisites: Added "Stephen Fallon" in the previous test case. Ensure that there are no persons named "Ah Beng". If not, feel free to choose a different name that is not in the contact list.
-   2. Test case: `add n/Ah Beng m/CS2100 e/E1337144@u.nus.edu t/L30`<br>
+   
+   2. Test case: `add n/Ah Beng m/CS2100 e/E1337123@u.nus.edu t/L21`<br>
    Expected: No person is added. Error details shown in the status message because the email, "E1337144@u.nus.edu", already exists in the list.
+   
 3. Adding a person while only some persons are being shown.
-   1. Prerequisites: Ensure there is at least two persons in your contact list. Display a subset of persons using `find n/Stephen Fallon` command assuming Stephen Fallon is one of the persons in the contact list. Feel free to use the `find` command for any other persons in your contact list instead. Check that there are no persons named "Hawking Einstein" in your contact list.
+
+   1. Prerequisites: Ensure there are at least two persons in your contact list. Display a subset of persons using `find n/Stephen Fallon` command assuming Stephen Fallon is one of the persons in the contact list. Feel free to use the `find` command for any other persons in your contact list instead. Check that there are no persons named "Hawking Einstein" in your contact list.
 
    2. Test case: `add n/Hawking Einstein m/CS2100 e/E1337144@u.nus.edu t/L30`<br>
      Expected: "Hawking Einstein" contact information is appended to your SoC contact list. Details of the added contact will be shown in the status message. The SoC contact list will display **all** your contacts with "Hawking Einstein" appended to your contact list. 
    
 4. Adding a person with missing compulsory fields.
+
       1. Prerequisites: Ensure that no person in your contact list has the name "Steve Jobs".
-      1. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
+   
+      2. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
       Expected: No person is added. Error details shown in the status message due to invalid command format.
    
 ### Deleting a person
-
-1. Deleting a person while all persons are being shown
+1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
@@ -1099,65 +1108,251 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `delete x` (where x is larger than the list size) <br>
       Expected: No person is deleted. Error details shown in the status message because the index is invalid.
    
-2. Deleting a person while only some persons are being shown
+2. Deleting a person while only some persons are being shown.
+
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Select one person and search the name using the find command, e.g. `find n/Alex Yeoh`.
    
    2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
+      
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message because index has to be a positive integer.
 
    4. Test case: `delete x` (where x is larger than the list size) <br>
       Expected: No person is deleted. Error details shown in the status message because the index is invalid.
    
-3. Deleting a person without specifying person's index parameter.
+4. Deleting a person without specifying person's index parameter.
    1. Other incorrect delete commands to try: `delete` <br>
       Expected: Error details shown in the status message since the command format is invalid.
+
+### Showing an assignment list
+
+1. Showing assignments while there are multiple people in the contact list.
+
+   1. Prerequisites: The current assignment list panel is empty.
+
+   2. Test case: `show 0`<br>
+      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
    
+   3. Test case: `show 1`<br>
+      Expected: The assignments of the first person in contact list are shown in assignment list panel.
+   
+   4. Test case: `show x` (x is any positive number greater than the number of people in the contact list.)<br>
+      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
+  
+2. Showing assignments while there is no person in the contact list.
+
+   1. Prerequisites: The current assignment list panel is empty.
+   
+   2. Test case: `show 1`<br>
+      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
+   
+3. Showing assignments with missing compulsory fields.
+
+   1. Prerequisites: The current assignment list panel is empty.
+   
+   2. Test case: `show`<br>
+     Expected: No assignments shown in assignment list panel. Error details shown in the status message since the format is invalid.
+   
+### Giving an assignment
+
+1. Giving an assigment while all assignments of a person are being shown.
+
+   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments are shown already.
+   
+   2. Test case: `give 1 d/lab2 by/11/11/2021`<br>
+      Expected: "lab2" assignment is appended to the first person's assignment list. Details of the added assignment will be 
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by 
+      due date with all pending assignments above completed ones.
+   
+   3. Test case: Repeat `give 1 d/lab2 by/11/11/2021` again.<br>
+      Expected: No assignment is added into the assignment list panel. Error details shown in the status message since no repeated assignments are allowed.
+   
+   4. Test case: `give 2 d/lab2 by/20/12/2021`<br>
+      Expected: "lab2" assignment is appended to second person's assignment list. Details of the added assignment will be
+      shown in the status message. The assignment list panel will display **second** person's **pending and completed** 
+      assignments sorted by due date with all pending assignments above completed ones.
+  
+2. Giving an assignment while assignment list panel is empty.
+
+    1. Prerequisites: There are multiple persons in the contact list.
+   
+    2. Test case: `give 1 d/lab3 by/11/11/2021`<br>
+       Expected: "lab3" assignment is appended to the first person's assignment list. Details of the added assignment will be
+       shown in the status message. The assignment list panel will display the **first** person's **pending and completed** assignments
+       sorted by due date with all pending assignments above completed ones.
+   
+    3. Test case: `give x d/lab3 by/11/11/2021` (where x is a number larger than the number of people in the contact list)<br>
+       Expected: No assignment is added into the assignment list panel. Error details shown in the status message since the index is invalid.
+   
+3. Giving an assignment while missing compulsory fields.
+
+    1.Test case: you can try `give`, `give d/lab3`, `give by/11/11/2021` and so on.<br>
+      Expected: No assignment is added into the assignment list panel. Error details shown in the status message since the format is invalid.
+
+### Removing an assignment
+
+1. Removing an assigment while all assignments of a person are being shown.
+
+   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are shown already.
+
+   2. Test case: `remove 1`<br>
+      Expected: The first assignment is removed in assignment list panel. Details of the removed assignment will be
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by
+      due date with all pending assignments above completed ones.
+
+   3. Test case: `remove x` (where x is a number larger than the number of assignments in the assignment list)<br>
+      Expected: No assignment is removed. Error details shown in the status message since the index is invalid.
+
+   4. Test case: `remove 0`<br>
+      Expected: No assignment is removed. Error details shown in the status message since the index is invalid.
+
+2. Removing an assignment while assignment list panel is empty.
+
+   1. Prerequisites: There are multiple persons in the contact list and no person's assignment list is shown.
+   
+   2. Test case: `remove 1`<br>
+      Expected: No assignment is removed. Error details shown in the status message since the index is invalid.
+ 
+3. Removing an assignment while missing compulsory fields.
+
+   1. Test case:`remove`<br>
+      Expected: No assignment is removed from the assignment list panel. Error details shown in the status message since the format is invalid.
+
 ### Giving an assignment to all persons in a module
 
-1. Giving a new assignment to all persons in a module for the first time.
+1. Giving a new assignment to all persons in a module
    1. Prerequisites: Have multiple persons in the same module. Filter out the persons in this module, e.g. If these persons
-   are under the module "CS2100", execute `find m/CS2100` to see all persons in the module "CS2100". Ensure that none of these
-   persons have the assignment you wish to give using the `show` command.
+      are under the module "CS2100", execute `find m/CS2100` to see all persons in the module "CS2100". Ensure that none of these
+      persons have the assignment you wish to give using the `show` command.
    2. Test case: `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
-   Expected: All persons in the module "CS2100" have "Assignment 1" with due date "10/10/2021" added into their assignment list.
-   Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons 
-   from the sample data and have executed the series of commands described above, you should be able to see the result of the 
-   command illustrated in the image below. Note that the image is displaying the assignment list of "Alex Yeoh" as `show 1` was executed.
-   ![Manual Testing for giveall command](images/ManualTestingGiveAll.png) <br>
-   
+      Expected: All persons in the module "CS2100" have "Assignment 1" with due date "10/10/2021" added into their assignment list.
+      Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons
+      from the sample data and have executed the series of commands described above, you should be able to see the result of the
+      command illustrated in the image below. Note that the image is displaying the assignment list of "Alex Yeoh" as `show 1` was executed.
+      ![Manual Testing for giveall command](images/ManualTestingGiveAll.png) <br>
+
    3. Test case: Repeat `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
-   Expected: No duplicated assignment should be added for all persons the module "CS2100". Error message will be shown
-   as all persons already have the specified assignment. The assignment list of persons should show the same assignments
-   as the one in the previous test case.
+      Expected: No duplicated assignment should be added for all persons the module "CS2100". Error message will be shown
+      as all persons already have the specified assignment. The assignment list of persons should show the same assignments
+      as the one in the previous test case.
 
 2. Giving an assignment to some persons without the assignment.
    1. Prerequisites: Start with the sample data and filter out the persons in the module "CS2100" by executing `find m/CS2100`.
-   The person "Roy Balakrishnan" will not have "Assignment 1", while other persons in "CS2100" will have this assignment.
-   Execute `show 1` to see the details of "Assignment 1" in the first person's assignment list.
+      The person "Roy Balakrishnan" will not have "Assignment 1", while other persons in "CS2100" will have this assignment.
+      Execute `show 1` to see the details of "Assignment 1" in the first person's assignment list.
    2. Test case: `giveall m/CS2100 d/Assignment 1 by/ 11/11/2021, 1300` <br>
-   Expected: The specified assignment should not be added to "Roy Balakrishnan". Error message will be shown as the specified
-   assignment has a due date of "11/11/2021, 1300", but the due date of "Alex Yeoh" 's assignment is "15/09/2021, 1300".
+      Expected: The specified assignment should not be added to "Roy Balakrishnan". Error message will be shown as the specified
+      assignment has a due date of "11/11/2021, 1300", but the due date of "Alex Yeoh" 's assignment is "15/09/2021, 1300".
    3. Test case: `giveall m/CS2100 d/Assignment 1 by/ 15/09/2021, 0900` <br>
-   Expected: The specified assignment should not be added to "Roy Balakrishnan". Error message will be shown as the specified
-   assignment has a due date of "15/09/2021, 1300", but the due date of "Alex Yeoh" 's assignment is "15/09/2021, 0900".
+      Expected: The specified assignment should not be added to "Roy Balakrishnan". Error message will be shown as the specified
+      assignment has a due date of "15/09/2021, 1300", but the due date of "Alex Yeoh" 's assignment is "15/09/2021, 0900".
    4. Test case: `giveall m/CS2100 d/assignment 1 by/ 15/09/2021, 1300` <br>
-   Expected: The assignment "Assignment 1" with due date "15/09/2021, 1300" should be added to "Roy Balakrishnan". Note that
-   the letter "a" is capitalised as other persons' assignment is "Assignment 1" with a capitalised "a".
-   
+      Expected: The assignment "Assignment 1" with due date "15/09/2021, 1300" should be added to "Roy Balakrishnan". Note that
+      the letter "a" is capitalised as other persons' assignment is "Assignment 1" with a capitalised "a".
+
 ### Cleaning all completed assignments
-1. Prerequisites: Have a mix of completed and pending assignments for several persons. Execute `list` to see the list 
-of all persons.
+1. Prerequisites: Have a mix of completed and pending assignments for several persons. Execute `list` to see the list
+   of all persons.
 2. Test case: `clean` <br>
-Expected: All completed assignments are removed for all persons. The result of the command is shown in the image below.
-Note that the assignment panel is showing the assigment list of the first person as `show 1` was executed before `clean`.
-![Manual Testing for clean command](images/ManualTestingClean.png) <br>
+   Expected: All completed assignments are removed for all persons. The result of the command is shown in the image below.
+   Note that the assignment panel is showing the assigment list of the first person as `show 1` was executed before `clean`.
+   ![Manual Testing for clean command](images/ManualTestingClean.png) <br>
+
+###  Redoing a command
+   
+1. Redoing a command at the start of program.
+
+   1. Test case: `redo`<br>
+      Expected: Nothing is redone. Error details shown in the status message since no state can be redone.
+   
+2. Redoing a command after a `undo` command.
+
+   1. Test case: `redo`<br>
+      Expected: Recovers the effect of last `undo` command.
+   
+3. Redoing a command after a command except `undo`. 
+
+   1. Test case: `redo`<br>
+      Expected: Nothing is redone. Error details shown in the status message since no state can be redone.
+   
+### Undoing a command
+
+1. Undoing a command at the start of program.
+
+   1. Test case: `undo`<br>
+      Expected: Nothing is undone. Error details shown in the status message since no state can be undone.
+
+2. Undoing a command after entering some commands.
+
+   1. Test case: `undo`<br>
+      Expected: Retrieves the effect before conducting the last command (except `undo`).
+   
+### Editing a person
+
+1. Editing a person while all persons are being shown.
+
+   1. Prerequisites: There are multiple persons in the contact list (no person called "Alex" and no email named "15434@163.com").
+
+   2. Test case: `edit 1 n/Alex e/15434@163.com m/CS2100`<br>
+      Expected: The first person in the contact list is renamed as "Alex", and the email and module of this person changed accordingly to the given. 
+      Details of the edited person will be shown in the status message.
+   
+   3. Test case: `edit 2 n/Alex e/11465434@163.com m/CS2100` just after last test case.<br>
+      Expected: No person is edited. Error details shown in the status message since the repeated name is not allowed.
+   
+   4. Test case: `edit 2 n/Alex Yeoh e/15434@163.com m/CS2100` just after last test case.<br>
+      Expected: No person is edited. Error details shown in the status message since the repeated email is not allowed.
+   
+   5. Test case: `edit 2 t/friend t/lab7`<br>
+      Expected: The second person's tag is replaced with tags called "friend" and "lab7".
+
+2. Editing a person while no person is in the contact list.
+
+   1. Test case: `edit 1 n/Halo` or `edit 1 m/cs1111s` or any other combinations of optional fields.<br>
+      Expected: No person is edited. Error details shown in the status message since the index is invalid.
+
+3. Editing a person while missing compulsory fields.
+
+   1. Test case: You can try `edit` or `edit 1`<br>
+      Expected: No person is edited. Error details shown in the status message since the format is invalid.
+
+### Marking an assignment
+
+1. Marking an assigment while all assignments of a person are being shown.
+
+   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are already shown.
+
+   2. Test case: `done 1`<br>
+      Expected: The first assignment is marked as done in assignment list panel. Details of the marked assignment will be
+      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by
+      due date with all pending assignments above completed ones.
+
+   3. Test case: `done x` (where x is a number larger than the number of assignments in the assignment list)<br>
+      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+   4. Test case: `done 0`<br>
+      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+2. Marking an assignment while assignment list panel is empty.
+
+   1. Prerequisites: There are multiple persons in the contact list and no person's assignment list is shown.
+
+   2. Test case: `done 1`<br>
+      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+3. Marking an assignment while missing compulsory fields.
+
+   1. Test case:`done`<br>
+      Expected: No assignment is marked as completed in the assignment list panel. Error details shown in the status message since the format is invalid.
+   
+
 
 ### Clearing all entries
 1. Prerequisites: Have multiple persons in your list.
+
 2. Type `show 1` to display the first person's assignment list.
+
 3. Test case: `clear`<br/>
 Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message. <br/><br/>![Clear Command Success Screen](images/ManualTestingClear.PNG)<br/><br/>
 
@@ -1173,7 +1368,9 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 
 ### Listing all Persons
 1. Listing all persons when some persons are displayed.
+
    1. Prerequisites: Have multiple persons in contact list. Choose one of the person's name and use the `find` command to narrow the search to that person, e.g. `find n/Alex Yeoh` if "Alex Yeoh" is in your contact list.
+   
    2. Test case: `list` <br/>
    Expected: All persons will be shown in contact list. If you have any assignments displayed under Assignments, they will be cleared. Success message shown in the status message.
    
