@@ -550,7 +550,7 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TA<sup>2</sup> home folder.
 
 **Q**: How can I get the sample data back?<br>
-**A**: Close your TA<sup>2</sup> application. Go into the `data` folder in your _home folder_ for TA<sup>2</sup>, delete the _ta2.json_ file and start TA<sup>2</sup> again.    
+**A**: Close your TA<sup>2</sup> application. Go into the `data` folder in your _home folder_ for TA<sup>2</sup>, delete the `ta2.json` file and start TA<sup>2</sup> again.    
 
 --------------------------------------------------------------------------------------------------------------------
 
