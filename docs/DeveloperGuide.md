@@ -501,7 +501,7 @@ module with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the remove command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="300" height="500" />
+  <img src="images/RemoveActivityDiagram.png" width="400" height="500" />
 </p>
 
 #### Design considerations
