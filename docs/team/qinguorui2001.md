@@ -5,17 +5,34 @@ title: QIN GUORUI's Project Portfolio Page
 
 ### Project: TA<sup>2</sup>
 
-TA<sup>2</sup> is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+TA<sup>2</sup> is a desktop application designed for teaching assistants from the School of Computing (SoC) at the National University of Singapore (NUS) to manage student information and keep track of students’ assignment submissions.
 
 Given below are my contributions to the project.
 
 * **New Feature**: Added the ability to undo/redo previous commands.
     * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
     * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-    * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-    * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+    * Highlights: This enhancement affects existing commands and commands to be added in the future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+    * Credits: *{https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java}*
 
-* **New Feature**: Added a history command that allows the user to navigate to previous commands using up/down keys.
+* **New Feature**: Added the ability to add assignments into the student's assignment list.
+    * What it does: allows the user to add a specific assignment to a student. Newly added assignment will be immediately shown in the assignment list.
+    * Justification: This feature ensures the basic function of the product because tutors are responsible for allocating assignments to their students.
+    * Highlights: This enhancement affects commands to be added in the future. The implementation was straightforward as it refers to the command pattern from existing commands.
+    * Credits: *{no}*
+
+* **New Feature**: Added the ability to delete assignments from the student's assignment list.
+    * What it does: allows the user to delete a specific assignment from a student's assignments. Newly deleted assignment will be immediately removed from the assignment list.
+    * Justification: This feature ensures the basic function of the product because tutors are responsible for managing assignments for their students.
+    * Highlights: This enhancement affects commands to be added in the future. The implementation was straightforward as it refers to the command pattern from existing commands.
+    * Credits: *{no}*
+
+* **New Feature**: Added the ability to mark assignments as completed in the student's assignment list.
+  * What it does: allows the user to mark a specific assignment of a student as completed. Newly marked assignment will be immediately shown as `Completed` in the assignment list.
+  * Justification: This feature ensures the basic function of the product because tutors are responsible for marking assignments of their students.
+  * Highlights: This enhancement affects commands to be added in the future. The implementation was straightforward as it refers to the command pattern from existing commands.
+  * Credits: *{no}*
+
 
 * **Code contributed**: [RepoSense link]()
 
