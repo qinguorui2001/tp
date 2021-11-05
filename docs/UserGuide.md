@@ -434,7 +434,7 @@ Examples:
 
 * `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline `15 Oct 2021, 11:59pm`.
 
-* `giveall m/CS2100 d/Assignment 3 by/ 08/11/2021, 1300` gives all students of module CS2103T an assignment of description `Assignment 3` with a deadline `08 Nov 2021, 01:00pm` (Shown in the image below).
+* `giveall m/CS2100 d/Assignment 3 by/ 08/11/2021, 1300` gives all students of module CS2100 an assignment of description `Assignment 3` with a deadline `08 Nov 2021, 01:00pm` (Shown in the image below).
 <br><br>
 ![giveallResult'](images/userguide/giveallResult.png)
 <br>
