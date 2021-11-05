@@ -13,9 +13,9 @@ TA<sup>2</sup> is optimized for use via a **Command Line Interface (CLI)** while
 
 This user guide provides you with installation instructions, guide on features of TA<sup>2</sup> and some FAQs.
 
-If you are a new user, check out the [Quick start](#Quick-start) section to help you get started with TA<sup>2</sup>.
+If you are a new user, check out the [Quick start](#quick-start) section to help you get started with TA<sup>2</sup>.
 
-For advanced users, the [Command summary](#Command-summary) section gives you an overview of all the commands TA<sup>2</sup> offers.
+For advanced users, the [Command summary](#command-summary) section gives you an overview of all the commands TA<sup>2</sup> offers.
 
 *Last Updated: 8 November 2021*
 
@@ -35,9 +35,10 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 3. Copy the file to the folder you want to use as the _home folder_ for TA<sup>2</sup>.
 
 4. Double-click the file to start the app. The window similar to the one shown below should appear in a few seconds.
-   Note how the app contains some sample data.<br>
+   Note how the app contains some sample data.
+   <br><br>
    ![Ui](images/userguide/ta^2_ui.png)
-
+   <br><br>
 5. You can warm up with some commands by typing them in the command input box and pressing Enter to execute it.
 
    Some example commands you can try:
@@ -50,30 +51,30 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
     
     * **`give`**`d/Assignment 1 by/27/3/2022`: Gives an assignment, `Assignment 1` that is due by 27 Mar 2022 at  11.59pm, to the first student in your contact list.
 
-<div markdown="span" class="alert alert-primary">
+6. Refer to the [Features](#features) below for more details of each command.
 
-:bulb: **Tip:**<br>
-* If you are unsure about where the contact list, assignment list or command input box are, check out the [Ui Design](#UI-Design) section.
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**
+<br>
+* If you are unsure about where the contact list, assignment list or command input box are, check out the [Ui Design](#ui-design) section.
+
 </div>
 
-6. If you wish to start managing your students with TA<sup>2</sup>, use the `clear` command to remove all the sample data.
-
-    * **`clear`**: Deletes all contacts.
-
-7. Refer to the [Features](#features) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## UI Design
+
 ![UiExplanation](images/userguide/explainingUI.png)
+<br>
+ * **Command Input Box**: Type your commands here!
 
- * Command Input Box: Type your commands here!
-
- * Result Message Box: Displays the details of the result of your commands.
+ * **Result Message Box**: Displays the details of the result of your commands.
    
- * Contact List: Displays your list of students and their relevant information.
+ * **Contact List**: Displays your list of students and their relevant information.
    
- * Assignment List: Displays a specified student's assignments.
+ * **Assignment List**: Displays a specified student's assignments.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -111,7 +112,7 @@ unless otherwise mentioned in the command description. <br>
 Shows a help window with a link directing you to the user guide. 
 
 Alternatively, you click the `Help` button in the top left corner or press `F1` on your keyboard to open up the help window.
-
+<br><br>
 ![help message](images/helpMessage.png)
 
 Format: `help`
@@ -178,32 +179,33 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 **:information_source: Note:**<br>
 
-1. There should be **at least one** prefix.
+* There should be **at least one** prefix.
 
-2. Ordering of prefixes are not strict and presence of multiple keywords are acceptable.
+* Ordering of prefixes are not strict and presence of multiple keywords are acceptable.
 
-3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
+* Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
 
-4. Each part of name separated by space will be matched. <br>
+* Each part of name separated by space will be matched. <br>
    e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`. <br>
    e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.
 
-5. Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
+* Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-6. Prefixes with empty keywords will not match anyone. <br>
+* Prefixes with empty keywords will not match anyone. <br>
    e.g. `find n/ m/ t/` will return 0 students
 
-7. Module codes must strictly follow the module naming convention shown [here.](#module-naming-convention)
+* Module codes must strictly follow the module naming convention shown [here.](#module-naming-convention)
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
+**:bulb: Tip:**<br>
 
 * We can search for multiple fields. <br>
   e.g. `m/CS1101S CS2103T` or `m/CS1101S m/CS2103T` will return people who take either modules.
+  
 </div>
 
 Examples:
@@ -223,8 +225,10 @@ Examples:
 
 * `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of the requirements:
   have `david` or `alex` in their names, taking modules `cs1231` or `cs2103t` (Shown in the image below).
+  <br><br>
 ![result for 'find Example'](images/userguide/findExample.png)
-
+  <br>
+  
 Possible Usage:
 
 * You can use `find` to help you find a specific student.
@@ -276,19 +280,20 @@ Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
 * The index **must be a positive integer and must not exceed number of students displayed in your contact list** 1, 2, 3, ...(till the index of the last student)
 
-* If you have two identical prefixes with the edit command, only the last prefix will be used for the edit. (except for prefix t/)
+* If you have two identical prefixes with the `edit` command, only the last prefix will be used for the edit. (except for prefix t/)
 
 * Require **at least one** prefix to edit.
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
+**:bulb: Tip:**<br>
 
 * You can modify several parts of student information at the same time.
 
 * If you wish to remove the tags for a student, simply type `t/` prefix without any parameters.
+
 </div>
 
 Examples:
@@ -329,10 +334,11 @@ Examples:
 
 * The index refers to the index shown in the displayed student list.
 
-* `show 1` renders the first student’s assignments on the assignment list (Shown in the image below). 
-
+* `show 1` renders the first student’s assignments on the assignment list (Shown in the image below).
+  <br><br>
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
-
+  <br>
+  
 Possible Usage:
 
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
@@ -348,17 +354,6 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Gives the specified assignment to the student in the contact list at the specified `INDEX`.
 
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:**<br>
-
-* The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
-
-* If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
-
-* You can give assignments with due dates before today in case you wish to keep a record of old assignments.
-</div>
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
@@ -366,8 +361,20 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
   e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
 
-* Assignment descriptions are **case-insensitive**.
+* Assignment descriptions are **case-insensitive**.<br>
   e.g. `Assignment 2` is the same as `aSsignment 2`
+
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**<br>
+
+* The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
+
+* If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
+
+* You can give assignments with due dates before today in case you wish to keep a record of old assignments.
 
 </div>
 
@@ -377,7 +384,7 @@ Examples:
 
 * `give 2 d/Assignment 2 by/ 2/9/2021,1200` gives the second student displayed in your contact list an assignment of description `Assignment 2` with a deadline `22 Sep 2021, 12:00pm`.
 
-* If the current date is `1 Nov 2021` and it is a monday
+* If the current date is `1 Nov 2021` and it is a Monday
 
     * `give 1 d/Tutorial 3 by/mon` gives the first student displayed in your contact list an assignment of description `Tutorial 3` with a deadline `8 Nov 2021, 11:59pm`.
 
@@ -393,45 +400,50 @@ Gives an assignment to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-info">
 
-:bulb: **Tip:**<br>
+**:information_source: Note:**<br>
+
+* Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
+   e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
+
+* Assignment descriptions are **case-insensitive**.
+   e.g. `Assignment 2` is the same as `aSsignment 2`.
+
+* It is possible to give an assignment using `giveall` even if some students have the assignment already. Students who have the assignment will not receive a duplicate assignment.
+
+* If some students already have the assignment, executing `giveall` requires the due date to be similar to the pre-existing assignments. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**<br>
 
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
 
 * If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
 
 * You can give assignments with due dates before today in case you wish to keep a record of old assignments.
-</div>
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:**<br>
-
-1. Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-   e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
-
-2. Assignment descriptions are **case-insensitive**.
-   e.g. `Assignment 2` is the same as `aSsignment 2`.
-
-3. It is possible to give an assignment using `giveall` even if some students have the assignment already. Students who have the assignment will not receive a duplicate assignment.
-
-4. When using `giveall` in the situation stated in point 3, the specified assignment in the input needs to have the same due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
 </div>
 
 Examples:
 
-* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline `15 Oct 2021, 01:00pm`.
+* `giveall m/CS2100 d/Assignment 1 by/ 13/07/2021,1900` is an invalid input if some students of module CS2100 has the assignment
+  of description `Assignment 1` with a deadline `15 Jul 2021, 07:00pm`.
 
-* `giveall m/CS2103T d/iP by/ 02/09/2021` gives all students of module CS2103T an assignment of description `iP` with a deadline `2 Sep 2021, 11:59pm`.
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline `15 Oct 2021, 11:59pm`.
 
-* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` is an invalid input if some students of module CS2100 has the assignment
-  of description `Assignment 2` with a deadline `15 Oct 2021, 01:00pm`.
+* `giveall m/CS2100 d/Assignment 3 by/ 08/11/2021, 1300` gives all students of module CS2100 an assignment of description `Assignment 3` with a deadline `08 Nov 2021, 01:00pm` (Shown in the image below).
+<br><br>
+![giveallResult'](images/userguide/giveallResult.png)
+<br>
+
 Possible Usage:
 
 *  You can use `giveall` instead of `give` when there is a module assignment, where all students under the module is required to submit.
 
-### Marking an assignment of a student: `done`
+### Marking an assignment as completed: `done`
 
 Marks a specified assignment of a student as completed.
 
@@ -443,11 +455,13 @@ Format: `done INDEX`
 
 **:information_source: Note:**<br>
 
-* Assignments with `PENDING` status will have an orange tag.
+* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the `done` command!
 
-* Assignments with `COMPLETED` status will have a green tag.
+* Assignments with `PENDING` status will be colour-coded in orange.
 
-* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
+* Assignments with `COMPLETED` status will be colour-coded in green.
+<br><br>
+![colour_labels'](images/userguide/colour%20labels.png)
 
 </div>
 
@@ -469,7 +483,7 @@ Format: `remove INDEX`
 
 Examples:
 
-* `remove 10` deletes the 10th assignment in the displayed assignment list of a student.
+* `remove 10` removes the 10th assignment in the displayed assignment list of a student.
 
 <div markdown="block" class="alert alert-info">
 
@@ -536,7 +550,7 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 :exclamation:**Caution:**<br>
 
@@ -608,10 +622,12 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
 
 #### Friendly commands
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
-Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent and will be rightfully detected.
+**:bulb: Tip:**<br>
+
+Friendly commands are all **case-insensitive**. `TODAY` and `today` are equivalent and will be rightfully detected.<br>
+
 </div>
 
 
@@ -621,19 +637,19 @@ Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent a
 
 * `week` - sets due date to a week(7 days) from now.
 
-* `mon` - sets due date to the coming monday.
+* `mon` - sets due date to the coming Monday.
 
-* `tue` - sets due date to the coming tuesday.
+* `tue` - sets due date to the coming Tuesday.
 
-* `wed` - sets due date to the coming wednesday.
+* `wed` - sets due date to the coming Wednesday.
 
-* `thu` - sets due date to the coming thursday.
+* `thu` - sets due date to the coming Thursday.
 
-* `fri` - sets due date to the coming friday.
+* `fri` - sets due date to the coming Friday.
 
-* `sat` - sets due date to the coming saturday.
+* `sat` - sets due date to the coming Saturday.
 
-* `sun` - sets due date to the coming sunday.
+* `sun` - sets due date to the coming Sunday.
 
 
 --------------------------------------------------------------------------------------------------------------------

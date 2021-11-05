@@ -1,3 +1,4 @@
+
 ---
 layout: page
 title: Introducing to you: TA<sup>2</sup>
@@ -10,7 +11,7 @@ title: Introducing to you: TA<sup>2</sup>
 
 ## What is TA<sup>2</sup>?
 
-**Teaching Assistant's Assistant(TA<sup>2</sup>) is a desktop productivity application developed for teaching assistants to make their teaching journey smoother.**
+**Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop productivity application developed for teaching assistants to make their teaching journey smoother.**
 With TA<sup>2</sup>, you can manage student information and keep track of the status of their assignments. Just type in
 the corresponding commands and TA<sup>2</sup> will manage all these for you! No need to do all these manually!
 
@@ -25,15 +26,14 @@ will do it for you.
 
 ## For Users
 
-* If you are interested in using TA<sup>2</sup>, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start)
+* If you are interested in using TA<sup>2</sup>, head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html#quick-start)
   to get your hands on this application.
-* If you are unsure of how to use the application, the [**User Guide**](UserGuide.html) has a detailed walkthrough on its features.
+* If you are unsure of how to use the application, the [**User Guide**](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) has a detailed walk-through on its features.
 
 ## For Developers
 
-* If you are interested in developing TA<sup>2</sup>, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in developing TA<sup>2</sup>, the [**Developer Guide**](https://ay2122s1-cs2103t-t13-2.github.io/tp/DeveloperGuide.html) is a good place to start.
 
-<br/><br/>
 **Acknowledgements**
 
 * **This application is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).**

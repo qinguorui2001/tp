@@ -25,8 +25,11 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 
 * TA<sup>2</sup> is adapted from [AddressBook-Level3 (AB3)](https://github.com/nus-cs2103-AY2122S1/tp)
 * For the detailed documentation of  AddressBook-Level3 project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [TemporalAdjusters](https://docs.oracle.com/javase/8/docs/api/java/time/temporal/TemporalAdjusters.html)
+* Code reused: 
+  * [Valid date regex](https://stackoverflow.com/questions/4374185/regular-expression-match-to-test-for-a-valid-year)
+  * [Delete elements after pointer](https://stackoverflow.com/questions/11530276/how-do-i-implement-a-simple-undo-redo-for-actions-in-java)
+  * [Removing extra whitespaces within String](https://stackoverflow.com/questions/2932392/java-how-to-replace-2-or-more-spaces-with-single-space-in-string-and-delete-lead)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -59,7 +62,7 @@ Given below is a quick overview of main components and how they interact with ea
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#Common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
@@ -105,7 +108,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Assignment` object residing in the `Model`.
 
 ### Logic component
 
@@ -141,7 +144,6 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -151,18 +153,16 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the versioned address book data which includes
+  * all `Person` objects contained in a `UniquePersonList` object
+  * all `Assignment` objects of the "active" `Person` object contained in a `UniqueAssignmentList` object
+  * the "active" `Person` (the person whose assignments are stored in `UniqueAssignmentList` of `AddressBook`)
+  * the current predicate of the filtered person list
+  * the states of `ReadOnlyAddressBook`
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Assignment` objects of the "active" `Person` object as a separate _observable_ list which is exposed to outsiders as an unmodifiable `ObservableList<Assignment>` that can be 'observed' as well.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-  <p align="center">
-    <img src="images/BetterModelClassDiagram.png" width="450" />
-  </p>
-</div>
-
 
 ### Storage component
 
@@ -292,7 +292,7 @@ Operations that may change the person whose assignments are displayed will use t
 The `delete` command is one of the commands that may affect the assignment list displayed. Since `Person` objects and their `Assignments` share a whole-part relationship, when a `Person` object is deleted, their list of `Assignment` should be deleted as well. Hence, if a particular `Person` object is the `activePerson`, the `UniqueAssignmentList` in `AddressBook` should be cleared of `Assignment` objects belonging to that `Person` if he/she is deleted. Below is an activity diagram to illustrate this point.
 
 <p align="center">
-  <img src="images/UpdateAssignmentListActivityDiagram.png.png" alt="Update assignment list activity diagram when person is deleted">
+  <img src="images/UpdateAssignmentListActivityDiagram.png" alt="Update assignment list activity diagram when person is deleted">
 </p>
 
 **Aspect: How undo & redo executes:**
@@ -407,12 +407,10 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 ### Give feature
 
 #### Implementation
-The give command allows users to add the specified assignment to a particular person is stored in the model.
+The `give` command allows users to add the specified assignment to a particular person is stored in the model.
 Person who already has the specified assignment will not have a duplicated assignment added to him. The
 command is abstracted as `AddAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
@@ -431,7 +429,8 @@ persons with the specified module field, it will return an error to the user.
 
 </div>
 
-The following sequence diagram shows how the removeall command is executed:
+The following sequence diagram shows how the `give` command is executed:
+
 <p align="center">
   <img src="images/GiveSequenceDiagram.png">
 </p>
@@ -444,10 +443,10 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 Step 3. The user executes `show 1` to check that the specified assignment has been added for persons in the specified
 module.
 
-The following activity diagram summarizes what happens when a user executes the give command:
+The following activity diagram summarizes what happens when a user executes the `give` command:
 
 <p align="center">
-  <img src="images/GiveActivityDiagram.png" width="250" />
+  <img src="images/GiveActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -461,7 +460,7 @@ The following activity diagram summarizes what happens when a user executes the 
     * Pros: Allows user to add assignment to a particular person even when he is not visible in the list
     * Cons: Might take longer to execute
 
-* Considering the fact that the give command is meant for users to add assignments to any person in model,
+* Considering the fact that the `give` command is meant for users to add assignments to any person in model,
 * **Alternative 2** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for
   persons who already have the assignment.
   **Alternative 1** requires an additional command `list` to ensure the displayed list contains all persons before adding
@@ -471,7 +470,7 @@ The following activity diagram summarizes what happens when a user executes the 
 ### Remove feature
 
 #### Implementation
-The remove command allows users to remove the specified assignment of a particular person in model.
+The `remove` command allows users to remove the specified assignment of a particular person in model.
 It is abstracted as `DeleteAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
 
@@ -487,7 +486,7 @@ the specified assignment if the person exists and has that assignment in assignm
 **Note:** If there are no persons with the specified module field or there are no persons who have this assignment, it will return an error to the user.
 </div>
 
-The following sequence diagram shows how the remove command is executed:
+The following sequence diagram shows how the `remove` command is executed:
 <p align="center">
   <img src="images/RemoveSequenceDiagram.png">
 </p>
@@ -500,9 +499,9 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 Step 3. The user executes `show 1` to check that the specified assignment has been removed for person in the specified
 module with that assignment.
 
-The following activity diagram summarizes what happens when a user executes the remove command:
+The following activity diagram summarizes what happens when a user executes the `remove` command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="250" />
+  <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
 </p>
 
 #### Design considerations
@@ -517,7 +516,7 @@ The following activity diagram summarizes what happens when a user executes the 
     * Cons: User may not be certain about which person's assignment to delete if several of them has completed assignment
     and likely to remember the wrong person name if the current person displayed list is not shown
 
-* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 1** is
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions, **alternative 1** is
   chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the
   deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
@@ -525,7 +524,7 @@ The following activity diagram summarizes what happens when a user executes the 
 ### Giveall feature
 
 #### Implementation
-The giveall command allows users to add the specified assignment to all persons in the same module. Persons who already
+The `giveall` command allows users to add the specified assignment to all persons in the same module. Persons who already
 have the specified assignment will not have a duplicated assignment added to them. The command is abstracted as
 `AddAssignmentToAllCommand` and extends `Command`. When the user inputs the command, `AddAssignmentToAllCommand#execute()` is called and returns a `CommandResult`.
 
@@ -571,10 +570,10 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes the giveall command:
+The following activity diagram summarizes what happens when a user executes the `giveall` command:
 
 <p align="center">
-  <img src="images/GiveAllActivityDiagram.png" width="300" height="350" />
+  <img src="images/GiveAllActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -597,7 +596,7 @@ to all persons in the specified module:**
 ### Clean feature
 
 #### Implementation
-The clean command allows users to remove all completed assignment from all persons.
+The `clean` command allows users to remove all completed assignment from all persons.
 It is abstracted as `CleanAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
 
@@ -609,7 +608,7 @@ Step 2. The user executes `clean` command to remove all the completed assignment
 When `Command#execute` is called, the `clean` command will get the assignment list of all persons in the model and
 remove all assignments with the completed status.
 
-The following sequence diagram shows how the clean command is executed:
+The following sequence diagram shows how the `clean` command is executed:
 <p align="center">
   <img src="images/CleanSequenceDiagram.png">
 </p>
@@ -621,7 +620,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 Step 3. The user executes `show 1` to check that all completed assignments has been removed for the first person.
 
-The following activity diagram summarizes what happens when a user executes the clean command:
+The following activity diagram summarizes what happens when a user executes the `clean` command:
 
 <p align="center">
   <img src="images/CleanActivityDiagram.png" width="250" />
@@ -638,7 +637,7 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Allows user to delete assignment of all persons without the need of additional commands
   * Cons: Undesired deletion of assignment of persons not in displayed list may occur
 
-* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 2** is
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions, **alternative 2** is
   chosen. When the list of persons increase to considerable numbers, deletion of completed assignments will require the user
   to input an additional command for each person. Bearing in mind that users make use of the `clean` command to remove
   completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
@@ -648,7 +647,7 @@ The following activity diagram summarizes what happens when a user executes the 
 ### Done feature
 
 #### Implementation
-The done command allows users to mark the specified assignment of a particular person in model.
+The `done` command allows users to mark the specified assignment of a particular person in model.
 It is abstracted as `MarkAssignmentCommand` and extends `Command`. When the user inputs the command,
 `Command#execute` is called and returns a `CommandResult`.
 
@@ -664,7 +663,7 @@ if the person exists and has that assignment in assignment list.
 **Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user.
 </div>
 
-The following sequence diagram shows how the done command is executed:
+The following sequence diagram shows how the `done` command is executed:
 <p align="center">
   <img src="images/DoneSequenceDiagram.png">
 </p>
@@ -677,10 +676,10 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 Step 3. The user executes `show 1` to check that the specified assignment has been marked for person with specified
 name with that assignment.
 
-The following activity diagram summarizes what happens when a user executes the done command:
+The following activity diagram summarizes what happens when a user executes the `done` command:
 
 <p align="center">
-  <img src="images/DoneActivityDiagram.png" width="250" />
+  <img src="images/DoneActivityDiagram.png" width="600" height="550" />
 </p>
 
 #### Design considerations
@@ -703,7 +702,7 @@ The following activity diagram summarizes what happens when a user executes the 
 ### Find feature
 
 #### Implementation
-The `find command` allows users to find specific people in their list, based on certain
+The `find` command allows users to find specific people in their list, based on certain
 matching criteria such as:
 
 1. Name
@@ -715,7 +714,7 @@ The command is represented by the `find` keyword.
 This allows users to specify their list and cut down on the amount of information displayed,
 selectively choosing those that the users would only like to see.
 
-The `FindCommand` is a subclass of the `Command` class. Once the user enters the `find`
+The `find` Command is a subclass of the *Command* class. Once the user enters the `find`
 keyword, the `LogicManager` class will execute the command and pass the
 input to the `AddressBookParser` class to parse the given input.
 
@@ -744,7 +743,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes the `FindCommand`:
+The following activity diagram summarizes what happens when a user executes the `find` command:
 
 <p align="center">
   <img src="images/FindActivityDiagram.png">
@@ -766,7 +765,65 @@ The following activity diagram summarizes what happens when a user executes the 
   being returned.
 
 #### [Proposed] Find Extension
-1. Allow finding to have both specificity and flexibility
+**Allow finding to have both specificity and flexibility**
+
+**Proposed Implementation**
+
+In order to create the option for the users to select the type of find they are trying to 
+execute, be it specific or flexible, such a functionality is implemented in the following way:
+
+The proposed find extension to allow specificity and flexibility can be implemented by altering 
+how the`FindCommandParser` class works. Users are required to specify an extra parameter to denote
+the type of find they are trying to execute.
+
+This extra parameter will be **-S** and **-F** to represent specific and flexible respectively. 
+
+An example command call:
+- `find -s n/Bryan m/CS1101S` to find all people named Bryan who are enrolled in CS1101S
+  - Bryan Loh enrolled in module CS1101s will be listed.
+  - Bryan Tan enrolled in module CS1231S will not be listed.
+
+This can be facilitated by splitting the `FindPersonCommand` into two subtypes: `FindSpecificPersonCommand`
+and `FindAllPersonCommand`.
+
+With the separation of the commands, two new classes to test for keywords have to be created, namely the
+`PersonContainsAllKeywordsPredicate` and `PersonContainsAnyKeywordPredicate`. These two classes will then
+extend the `PersonContainsKeywordPredicate` class which implements the `Predicate<T>` interface, 
+and then override the methods stipulated by the interface.
+
+This way, `FindSpecificPersonCommand` instantiates the `PersonContainsAllKeywordsPredicate` class whilst
+`FindAllPersonCommand` instantiates the `PersonContainsAnyKeywordPredicate` class.
+
+Given below is the partial class diagram of how the logic behind the new find command works:
+
+<p align="center">
+  <img src="images/ImprovedFindDiagram.png">
+</p>
+
+The following is the activity diagram for a specific find command execution:
+
+<p align="center">
+  <img src="images/ImprovedSpecificFindActivityDiagram.png">
+</p>
+
+The following is the activity diagram for a flexible find command execution:
+
+<p align="center">
+  <img src="images/ImprovedFlexibleFindActivityDiagram.png">
+</p>
+
+#### Design considerations
+
+**Aspect: How the different find commands can be implemented.
+
+* **Alternative 1 (current choice):** Create subclasses to handle the different kinds of behaviour of `Find`.
+  * Pros: Easy to extend classes and implement different functionalities 
+  * Cons: User has to input more prefixes to specify the command
+
+* **Alternative 2:** Have the parser identify the different find commands without extra prefixes 
+  * Pros: User can use the find command as per usual without extra prefixes / inputs
+  * Cons: Requires the application to recognize a lot of different user inputs which could mean 
+  different kinds of find, which is unfeasible to implement considering the time given
 
 
 ### Friendlier Command Inputs
@@ -777,6 +834,17 @@ very little flexibility to our users in an event they make a mistake.
 Here are the commands that currently support a *friendly* input command:
 1. `give`
 2. `giveall`
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+
+The `give` and `giveall` command classes will not create "`Give`" classes but instead:
+
+The `give` command results in the creation of the `AddAssignmentCommandParser` class whilst the `giveall` command results 
+in the creation of the `AddAssignmentToAllCommandParser`. 
+
+</div>
+
 
 The `give` command has the sole purpose of adding a single assignment to an individual in the list.
 
@@ -790,13 +858,13 @@ original command inputs.
 | tmr                                         | sets the date to be tomorrow                  | give n/name d/description by/tmr                                        |
 | today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |
 | week                                        | sets the date to be a week from now           | give n/name d/description by/week                                       |
-| mon                                         | sets the date to be the upcoming monday       | give n/name d/description by/mon                                        |
-| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |
-| wed                                         | sets the date to be the upcoming wednesday    | give n/name d/description by/wed                                        |
-| thu                                         | sets the date to be the upcoming thursday     | give n/name d/description by/thu                                        |
-| fri                                         | sets the date to be the upcoming friday       | give n/name d/description by/fri                                        |
-| sat                                         | sets the date to be the upcoming saturday     | give n/name d/description by/sat                                        |
-| sun                                         | sets the date to be the upcoming sunday       | give n/name d/description by/sun                                        |
+| mon                                         | sets the date to be the upcoming Monday       | give n/name d/description by/mon                                        |
+| tue                                         | sets the date to be the upcoming Tuesday      | give n/name d/description by/tue                                        |
+| wed                                         | sets the date to be the upcoming Wednesday    | give n/name d/description by/wed                                        |
+| thu                                         | sets the date to be the upcoming Thursday     | give n/name d/description by/thu                                        |
+| fri                                         | sets the date to be the upcoming Friday       | give n/name d/description by/fri                                        |
+| sat                                         | sets the date to be the upcoming Saturday     | give n/name d/description by/sat                                        |
+| sun                                         | sets the date to be the upcoming Sunday       | give n/name d/description by/sun                                        |
 
 When the user enters a command with the *friendly* command input, the `AddressBookParser` class will recognize the command
 and parse the entered command. 
@@ -819,13 +887,13 @@ Finally, the results are then actualized by the `Model` component.
 The following activity diagram shows the possible paths whilst a user adds an assignment using `give`:
 
 <p align="center">
-  <img src="images/AddAssignmentActivityDiagram.png">
+  <img src="images/GiveActivityDiagram.png">
 </p>
 
 The following sequence diagram shows the logic sequence of an `AddAssignment` command execution:
 
 <p align="center">
-  <img src="images/GiveSequenceDiagram.png">
+  <img src="images/GiveFriendlySequenceDiagram.png">
 </p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for AddAssignmentCommand
@@ -842,7 +910,7 @@ The following activity diagram shows the possible paths whilst a user adds an as
 The following sequence diagram shows the logic sequence of an `AddAssignmentToAll` command execution:
 
 <p align="center">
-  <img src="images/GiveAllSequenceDiagram.png">
+  <img src="images/GiveAllFriendlySequenceDiagram.png">
 </p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
@@ -865,6 +933,8 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 #### [Proposed] Friendly Commands
 1. `find`
+
+(more aspects and details of implementation to come)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -928,7 +998,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy TA                                    | list people whose information I access frequently | save time searching their name whenever I start the application              |
 | `*`      | TA with many assignments to manage         | see assignments that need my attention the most at the present moment | I can prioritise which assignment to attend to           |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -1055,21 +1124,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list assignments of a person.
-2. User requests to mark a specific assignment in the list as done.
-3. TA<sup>2</sup> shows the assignment is done.
+1. User requests to show assignments of a person.
+2. TA<sup>2</sup> shows a list of assignments.
+3. User requests to mark a specific assignment in the list as done.
+4. TA<sup>2</sup> shows the assignment is done.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The assignment doesn't exist in the assignment list.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 2b. The given index is invalid, or the assignment has already been mark completed.
+* 3b. The given index is invalid, or the assignment has already been mark completed.
 
-  * 2b1. TA<sup>2</sup> shows an error message.
+  * 3b1. TA<sup>2</sup> shows an error message.
 
     Use case resumes at step 1.
 
@@ -1087,12 +1157,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 10. The user interface should be intuitive enough for users who are not IT-savvy.
 11. Commands should not be cumbersome to use.
 
-*{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Person**: Synonymous with student as of v1.4
 * **e/**: Symbol for a requirement to state email address
 * **m/**: Symbol for a requirement to state the module
 * **n/**: Symbol for a requirement to state a name
@@ -1123,7 +1192,6 @@ testers are expected to do more *exploratory* testing.
    3. Launch the jar file using the ```java -jar ta2.jar```.
 
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
-<br/><br />
 ![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
 2. Saving window preferences
 
@@ -1133,6 +1201,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 ### Adding a person
+
 1. Adding a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Ensure there is no person named "Stephen Fallon" in the list before proceeding.
@@ -1165,6 +1234,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is added. Error details shown in the status message due to invalid command format.
 
 ### Deleting a person
+
 1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
@@ -1479,7 +1549,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking an assignment
 
-1. Marking an assigment while all assignments of a person are being shown.
+1. Marking an assignment while all assignments of a person are being shown.
 
    1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are already shown.
 
@@ -1509,24 +1579,30 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Clearing all entries
+
 1. Prerequisites: Have multiple persons in your list.
 
 2. Type `show 1` to display the first person's assignment list.
 
 3. Test case: `clear`<br/>
-Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message. <br/><br/>![Clear Command Success Screen](images/ManualTestingClear.PNG)<br/><br/>
+Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message.
+
+![Clear Command Success Screen](images/ManualTestingClear.PNG)
 
 ### Viewing Help
+
 1. Test case: `help`<br/>
-   Expected: Pops up a help window as shown in the image below. Success message shown in the status message. <br/><br/>
-![Help window](images/ManualTestingViewingHelp.PNG)<br/><br/>
+   Expected: Pops up a help window as shown in the image below. Success message shown in the status message. 
+![Help window](images/ManualTestingViewingHelp.PNG)
 2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of TA<sup>2</sup>.
 
 ### Exiting the Program
+
 1. Test case: `exit` <br/>
    Expected: The TA<sup>2</sup> window will close promptly.
 
 ### Listing all Persons
+
 1. Listing all persons when some persons are displayed.
 
    1. Prerequisites: Have multiple persons in contact list. Choose one of the person's name and use the `find` command to narrow the search to that person, e.g. `find n/Alex Yeoh` if "Alex Yeoh" is in your contact list.
@@ -1541,7 +1617,7 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
    1. To simulate: Delete `ta2.json` file. <br>
    
    2. Expected: TA<sup>2</sup> will start with sample data. <br>
-
+   
 2. Data file `ta2.json` in wrong format. <br>
 
    1. To simulate: Remove a square bracket in the `ta2.json` file. <br>

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
@@ -110,7 +111,7 @@ public interface Model {
 
     void addAssignment(Person person, Assignment toAdd);
 
-    void addAllAssignment(List<Person> personList, Assignment toAdd);
+    void addAllAssignments(List<Person> personList, Assignment toAdd);
 
     void deleteAssignment(Person person, Assignment toDelete);
 
@@ -129,4 +130,6 @@ public interface Model {
     void commitAddressBook();
 
     boolean isAssignmentCompleted(Assignment assignment);
+
+    Assignment getAssignmentInList(Index targetAssignmentIndex) throws CommandException;
 }

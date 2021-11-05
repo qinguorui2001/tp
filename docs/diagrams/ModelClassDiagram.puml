@@ -8,13 +8,13 @@ Package Model <<Rectangle>>{
 Interface ReadOnlyAddressBook <<Interface>>
 Interface ReadOnlyUserPrefs <<Interface>>
 Interface Model <<Interface>>
-Class AddressBook
+Class VersionedAddressBook
 Class ReadOnlyAddressBook
+Class AddressBook
 Class Model
 Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
-
 
 Class UniquePersonList
 Class UniqueAssignmentList
@@ -26,31 +26,36 @@ Class Assignment
 Class Description
 Class Status
 Class DueDate
+
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+AddressBook .up.--|> ReadOnlyAddressBook
+VersionedAddressBook -left-|> AddressBook
+VersionedAddressBook -left----> "1..~*" ReadOnlyAddressBook: manages state >
 
-ModelManager .up.|> Model
+ModelManager .up.-|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
-ModelManager -left-> "1" AddressBook
+ModelManager -left-> "1" VersionedAddressBook
 ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
+UserPrefs .up.-|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueAssignmentList
-UniqueAssignmentList --> "~* " Assignment: contains >
-AddressBook *--> "1" UniquePersonList
-UniquePersonList ----> "~* all" Person
-AddressBook -> "0..1 active " Person
+AddressBook *----> "    1" UniqueAssignmentList
+AddressBook *---> "1" UniquePersonList
+AddressBook -> "active 0..1" Person
+AddressBook -> "1" Person: stores filtered list predicate about >
 
-Person *--> "1" UniqueAssignmentList
+Person *--> " 1" UniqueAssignmentList
 Person *--> "1" Name
 Person *--> "1 " Email
 Person *--> "*" Tag
 
+UniquePersonList -down-> "all~*" Person
+
+UniqueAssignmentList ---> "~*" Assignment: contains >
 Assignment *-down-> "1" Description
 Assignment *-down-> "1" Status
 Assignment *-down-> "1" DueDate
@@ -58,7 +63,11 @@ Assignment .down.|> Comparable
 Status .down.|> Comparable
 DueDate .down.|> Comparable
 
+ModelManager ---->"~* filtered" Person
+ModelManager --->"~* observed" Assignment: observes >
 
+UserPrefs -[hidden]down-|>Person
 
-ModelManager -->" ~* filtered" Person
+UniqueAssignmentList -[hidden]right-|> Name
+AddressBook -[hidden]left-|>ReadOnlyAddressBook
 @enduml
