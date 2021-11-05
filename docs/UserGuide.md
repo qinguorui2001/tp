@@ -429,12 +429,16 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 Examples:
 
-* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline `15 Oct 2021, 01:00pm`.
+* `giveall m/CS2100 d/Assignment 1 by/ 13/07/2021,1900` is an invalid input if some students of module CS2100 has the assignment
+  of description `Assignment 1` with a deadline `15 Jul 2021, 07:00pm`.
 
-* `giveall m/CS2103T d/iP by/ 02/09/2021` gives all students of module CS2103T an assignment of description `iP` with a deadline `2 Sep 2021, 11:59pm`.
+* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021` gives all students of module CS2100 an assignment of description `Assignment 2` with a deadline `15 Oct 2021, 11:59pm`.
 
-* `giveall m/CS2100 d/Assignment 2 by/ 15/10/2021,1300` is an invalid input if some students of module CS2100 has the assignment
-  of description `Assignment 2` with a deadline `15 Oct 2021, 01:00pm`.
+* `giveall m/CS2100 d/Assignment 3 by/ 08/11/2021, 1300` gives all students of module CS2103T an assignment of description `Assignment 3` with a deadline `08 Nov 2021, 01:00pm` (Shown in the image below).
+<br><br>
+![giveallResult'](images/userguide/giveallResult.png)
+<br>
+
 Possible Usage:
 
 *  You can use `giveall` instead of `give` when there is a module assignment, where all students under the module is required to submit.
@@ -451,11 +455,13 @@ Format: `done INDEX`
 
 **:information_source: Note:**<br>
 
+* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
+
 * Assignments with `PENDING` status will be colour-coded in orange.
 
 * Assignments with `COMPLETED` status will be colour-coded in green.
-
-* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
+<br><br>
+![colour_labels'](images/userguide/colour%20labels.png)
 
 </div>
 
