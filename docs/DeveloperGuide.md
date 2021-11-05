@@ -422,7 +422,7 @@ persons with the specified module field, it will return an error to the user.
 
 </div>
 
-The following sequence diagram shows how the removeall command is executed:
+The following sequence diagram shows how the give command is executed:
 <p align="center">
   <img src="images/GiveSequenceDiagram.png">
 </p>
