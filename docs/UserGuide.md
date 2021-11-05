@@ -199,7 +199,7 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
 
@@ -286,7 +286,7 @@ Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
 
@@ -366,7 +366,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
 
@@ -415,7 +415,7 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 * If some students already have the assignment, executing `giveall` requires the due date to be similar to the pre-existing assignments. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
 </div>
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
 
@@ -550,7 +550,7 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">
+<div markdown="block" class="alert alert-warning">
 
 :exclamation:**Caution:**<br>
 
@@ -622,7 +622,7 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
 
 #### Friendly commands
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
 
