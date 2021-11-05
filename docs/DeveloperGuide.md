@@ -156,14 +156,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-  <p align="center">
-    <img src="images/BetterModelClassDiagram.png" width="450" />
-  </p>
-</div>
-
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -292,7 +284,7 @@ Operations that may change the person whose assignments are displayed will use t
 The `delete` command is one of the commands that may affect the assignment list displayed. Since `Person` objects and their `Assignments` share a whole-part relationship, when a `Person` object is deleted, their list of `Assignment` should be deleted as well. Hence, if a particular `Person` object is the `activePerson`, the `UniqueAssignmentList` in `AddressBook` should be cleared of `Assignment` objects belonging to that `Person` if he/she is deleted. Below is an activity diagram to illustrate this point.
 
 <p align="center">
-  <img src="images/UpdateAssignmentListActivityDiagram.png.png" alt="Update assignment list activity diagram when person is deleted">
+  <img src="images/UpdateAssignmentListActivityDiagram.png" alt="Update assignment list activity diagram when person is deleted">
 </p>
 
 **Aspect: How undo & redo executes:**
@@ -431,7 +423,7 @@ persons with the specified module field, it will return an error to the user.
 
 </div>
 
-The following sequence diagram shows how the removeall command is executed:
+The following sequence diagram shows how the give command is executed:
 <p align="center">
   <img src="images/GiveSequenceDiagram.png">
 </p>
@@ -447,7 +439,7 @@ module.
 The following activity diagram summarizes what happens when a user executes the give command:
 
 <p align="center">
-  <img src="images/GiveActivityDiagram.png" width="250" />
+  <img src="images/GiveActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -502,7 +494,7 @@ module with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the remove command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="250" />
+  <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
 </p>
 
 #### Design considerations
@@ -574,7 +566,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 The following activity diagram summarizes what happens when a user executes the giveall command:
 
 <p align="center">
-  <img src="images/GiveAllActivityDiagram.png" width="300" height="350" />
+  <img src="images/GiveAllActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -680,7 +672,7 @@ name with that assignment.
 The following activity diagram summarizes what happens when a user executes the done command:
 
 <p align="center">
-  <img src="images/DoneActivityDiagram.png" width="250" />
+  <img src="images/DoneActivityDiagram.png" width="600" height="550" />
 </p>
 
 #### Design considerations
