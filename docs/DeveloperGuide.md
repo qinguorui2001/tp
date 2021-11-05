@@ -127,7 +127,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: 
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -775,8 +776,12 @@ very little flexibility to our users in an event they make a mistake.
 
 Here are the commands that currently support a *friendly* input command:
 1. `give`
+2. `giveall`
 
 The `give` command has the sole purpose of adding a single assignment to an individual in the list.
+
+The `giveall` command has the sole purpose of adding a single assignment to all individuals under the same module in the list.
+
 The following table contains the new *friendly* commands that a user may provide, instead of the
 original command inputs.
 
@@ -793,15 +798,42 @@ original command inputs.
 | sat                                         | sets the date to be the upcoming saturday     | give n/name d/description by/sat                                        |
 | sun                                         | sets the date to be the upcoming sunday       | give n/name d/description by/sun                                        |
 
-When the user enters a *friendly* command, the `AddressBookParser` class will recognize the command
-to be an add assignment command. This triggers the `AddAssignmentParser#parse` method to be called with the
-user input arguments. From there, the `AddAssignmentParser` parses each individual argument
-token and for the *friendly* command, it will be recognized within the `DueDate` class as a date with
-a *friendly* command format. This then calls the Java `TemporalAdjusters` class to return a `LocalDate` instance
-that represents the desired *friendly* command input. From here, the `AddAssignmentCommand` class is then instantiated and
-results actualized by the `Model` component.
+When the user enters a command with the *friendly* command input, the `AddressBookParser` class will recognize the command
+and parse the entered command. 
 
-The following activity diagram shows the possible paths whilst a user adds an assignment:
+If the command the user chose is `give`, this triggers the `AddAssignmentCommandParser#parse` 
+method to be called with the user input arguments. If the command chosen is `giveall`, this
+triggers the `AddAssignmentToAllCommandParser#parse` method to be called instead. 
+
+
+From there, each individual argument token is parsed and for the *friendly* command, it will be 
+recognized within the `DueDate` class as a date with a *friendly* command format. This then calls 
+the Java library `TemporalAdjusters` class to return a `LocalDate` instance that represents the 
+desired *friendly* command input date. 
+
+From here, the `AddAssignmentCommand` class is then instantiated if the user command is `give`, or
+conversely, the `AddAssignmentToAllCommand` class. 
+
+Finally, the results are then actualized by the `Model` component.
+
+The following activity diagram shows the possible paths whilst a user adds an assignment using `give`:
+
+<p align="center">
+  <img src="images/AddAssignmentActivityDiagram.png">
+</p>
+
+The following sequence diagram shows the logic sequence of an AddAssignment command execution:
+
+<p align="center">
+  <img src="images/AddAssignmentSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div> <br>
+
+
+The following activity diagram shows the possible paths whilst a user adds an assignment using `giveall`:
 
 <p align="center">
   <img src="images/AddAssignmentActivityDiagram.png">
