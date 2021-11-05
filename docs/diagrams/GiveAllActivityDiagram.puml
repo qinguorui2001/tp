@@ -5,13 +5,24 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([persons in module without
-assignment present])
+if () then ([persons with specified
+module exists])
     :Get persons in module;
-    :Filter out those
+    if () then ([all persons have the
+    specified assignment])
+    :Show error message;
+    else ([else])
+    if () then ([some persons have the
+    specified assignment])
+    :Get details of
+    existing assignment;
+    else ([else])
+
+    endif
+    :Add assignment for those
     without assignment;
-    :Add assignment
-    for filtered persons;
+    endif
+
 else ([else])
     :Show error message;
 endif

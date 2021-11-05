@@ -49,6 +49,6 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    /** Returns an unmodifiable view of the filtered list of assignments */
-    ObservableList<Assignment> getFilteredAssignmentList();
+    /** Returns an unmodifiable view of the list of assignments */
+    ObservableList<Assignment> getAssignmentList();
 }

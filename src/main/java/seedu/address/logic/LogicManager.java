@@ -85,7 +85,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Assignment> getFilteredAssignmentList() {
+    public ObservableList<Assignment> getAssignmentList() {
         return model.getAssignmentList();
     }
 
