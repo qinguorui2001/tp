@@ -1055,21 +1055,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list assignments of a person.
-2. User requests to mark a specific assignment in the list as done.
-3. TA<sup>2</sup> shows the assignment is done.
+1. User requests to show assignments of a person.
+2. TA<sup>2</sup> shows a list of assignments.
+3. User requests to mark a specific assignment in the list as done.
+4. TA<sup>2</sup> shows the assignment is done.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The assignment doesn't exist in the assignment list.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 2b. The given index is invalid, or the assignment has already been mark completed.
+* 3b. The given index is invalid, or the assignment has already been mark completed.
 
-  * 2b1. TA<sup>2</sup> shows an error message.
+  * 3b1. TA<sup>2</sup> shows an error message.
 
     Use case resumes at step 1.
 

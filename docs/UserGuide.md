@@ -35,9 +35,10 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 3. Copy the file to the folder you want to use as the _home folder_ for TA<sup>2</sup>.
 
 4. Double-click the file to start the app. The window similar to the one shown below should appear in a few seconds.
-   Note how the app contains some sample data.<br>
+   Note how the app contains some sample data.
+   <br><br>
    ![Ui](images/userguide/ta^2_ui.png)
-
+   <br><br>
 5. You can warm up with some commands by typing them in the command input box and pressing Enter to execute it.
 
    Some example commands you can try:
@@ -52,8 +53,10 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
+**:bulb: Tip:**<br>
+
 * If you are unsure about where the contact list, assignment list or command input box are, check out the [Ui Design](#UI-Design) section.
+
 </div>
 
 6. If you wish to start managing your students with TA<sup>2</sup>, use the `clear` command to remove all the sample data.
@@ -65,8 +68,9 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 --------------------------------------------------------------------------------------------------------------------
 
 ## UI Design
-![UiExplanation](images/userguide/explainingUI.png)
 
+![UiExplanation](images/userguide/explainingUI.png)
+<br>
  * Command Input Box: Type your commands here!
 
  * Result Message Box: Displays the details of the result of your commands.
@@ -111,7 +115,7 @@ unless otherwise mentioned in the command description. <br>
 Shows a help window with a link directing you to the user guide. 
 
 Alternatively, you click the `Help` button in the top left corner or press `F1` on your keyboard to open up the help window.
-
+<br><br>
 ![help message](images/helpMessage.png)
 
 Format: `help`
@@ -200,10 +204,11 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
+**:bulb: Tip:**<br>
 
 * We can search for multiple fields. <br>
   e.g. `m/CS1101S CS2103T` or `m/CS1101S m/CS2103T` will return people who take either modules.
+  
 </div>
 
 Examples:
@@ -223,8 +228,10 @@ Examples:
 
 * `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of the requirements:
   have `david` or `alex` in their names, taking modules `cs1231` or `cs2103t` (Shown in the image below).
+  <br><br>
 ![result for 'find Example'](images/userguide/findExample.png)
-
+  <br>
+  
 Possible Usage:
 
 * You can use `find` to help you find a specific student.
@@ -284,11 +291,12 @@ Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
+**:bulb: Tip:**<br>
 
 * You can modify several parts of student information at the same time.
 
 * If you wish to remove the tags for a student, simply type `t/` prefix without any parameters.
+
 </div>
 
 Examples:
@@ -329,10 +337,11 @@ Examples:
 
 * The index refers to the index shown in the displayed student list.
 
-* `show 1` renders the first student’s assignments on the assignment list (Shown in the image below). 
-
+* `show 1` renders the first student’s assignments on the assignment list (Shown in the image below).
+  <br><br>
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
-
+  <br>
+  
 Possible Usage:
 
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
@@ -350,13 +359,14 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
+**:bulb: Tip:**<br>
 
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
 
 * If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
 
 * You can give assignments with due dates before today in case you wish to keep a record of old assignments.
+
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -395,13 +405,14 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
+**:bulb: Tip:**<br>
 
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
 
 * If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
 
 * You can give assignments with due dates before today in case you wish to keep a record of old assignments.
+
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -443,9 +454,9 @@ Format: `done INDEX`
 
 **:information_source: Note:**<br>
 
-* Assignments with `PENDING` status will have an orange tag.
+* Assignments with `PENDING` status will be colour coded in orange.
 
-* Assignments with `COMPLETED` status will have a green tag.
+* Assignments with `COMPLETED` status will be colour coded in green.
 
 * Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
 
@@ -610,8 +621,10 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**<br>
+**:bulb: Tip:**<br>
+
 Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent and will be rightfully detected.
+
 </div>
 
 
