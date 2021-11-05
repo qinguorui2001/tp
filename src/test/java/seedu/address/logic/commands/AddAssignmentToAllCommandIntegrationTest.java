@@ -82,7 +82,7 @@ class AddAssignmentToAllCommandIntegrationTest {
 
         assertCommandFailure(new AddAssignmentToAllCommand(validModule, assignmentWithDifferentDueDate), model,
                 String.format(AddAssignmentToAllCommand.MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE,
-                        amy.getAssignments().get(0).getDueDate(), assignmentWithDifferentDueDate.getDueDate()));
+                        assignmentWithDifferentDueDate.getDueDate(), amy.getAssignments().get(0).getDueDate()));
 
     }
 }
