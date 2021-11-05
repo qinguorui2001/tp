@@ -825,7 +825,7 @@ The following activity diagram shows the possible paths whilst a user adds an as
 The following sequence diagram shows the logic sequence of an `AddAssignment` command execution:
 
 <p align="center">
-  <img src="images/AddAssignmentSequenceDiagram.png">
+  <img src="images/GiveSequenceDiagram.png">
 </p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for AddAssignmentCommand
