@@ -3,7 +3,7 @@ layout: page
 title: Introducing to you: TA<sup>2</sup>
 ---
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
+[![Java CI](https://github.com/AY2122S1-CS2103T-T13-2/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103T-T13-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T13-2/tp/branch/master/graph/badge.svg?token=ZNAWJRYPEM)](https://codecov.io/gh/AY2122S1-CS2103T-T13-2/tp)
 
 ![Ui](images/Ui.png)

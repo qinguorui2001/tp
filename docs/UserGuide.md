@@ -134,7 +134,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Extra spaces before and between names will be removed.
 
-* A student's `MODULE` must follow the format as shown [here.](#module-naming-convention)
+* A student's `MODULE` must follow the format as shown [here](#module-naming-convention).
 
 * Only student's initials and module code will be capitalised on the displayed student list.<br>
 
@@ -142,13 +142,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
     * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.<br>
 
-* A student's `EMAIL` must follow the format:
-
-    * The whole `EMAIL` must have a **maximum of 320 characters**.
-    
-    * The local part (the characters before '@') is restricted to a **maximum of 64 characters**.
-      
-    * The domain name (the characters after '@') is restricted to a **maximum of 255 characters**.
+    * A student's `EMAIL` must follow the format as shown [here](#email-format).
 
 * Duplicate `EMAIL` is **not allowed**.
 
@@ -206,6 +200,7 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**<br>
+
 * We can search for multiple fields. <br>
   e.g. `m/CS1101S CS2103T` or `m/CS1101S m/CS2103T` will return people who take either modules.
 </div>
@@ -270,7 +265,7 @@ Modifies any part of the student's information.
 
 Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
-* Edits the student in the contact list at the specified `INDEX`.
+* Edits the student's relevant information at the specified `INDEX`.
 
 <div markdown="block" class="alert alert-info">
 
@@ -313,7 +308,7 @@ Shows the assignments of the specified student in your assignment list.
 
 Format: `show INDEX`
 
-* Shows the assignment list of the student at the specified `INDEX` of the displayed contact list.
+* Shows the assignments of the student at the specified `INDEX` of the displayed contact list.
 
 <div markdown="block" class="alert alert-info">
 
@@ -333,7 +328,8 @@ Examples:
 
 * The index refers to the index shown in the displayed student list.
 
-* `show 1` renders the first student’s assignment list on the assignment list panel (Shown in the image below).
+* `show 1` renders the first student’s assignments on the assignment list (Shown in the image below). 
+
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
 Possible Usage:
@@ -341,7 +337,7 @@ Possible Usage:
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
 * You can look to the top of the assignment list to find out which assignments will be due soon or are overdue.
 
-### Giving assignments: `give` `giveall`
+### Giving assignment: `give` `giveall`
 
 #### Giving an assignment to a student: `give`
 
@@ -366,8 +362,11 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 **:information_source: Note:**<br>
 
-* Assignments with similar descriptions that differ in the amount of whitespace between words are considered duplicate.<br>
-  e.g. `Assignment 2` is the same as `Assignment   2`.
+* Assignments with similar descriptions that differ in the amount of whitespace between words are **still** considered duplicate.<br>
+  e.g. `Assignment 2` is the same as `Assignment   2`
+
+* Assignment descriptions are **case-insensitive**.
+  e.g. `Assignment 2` is the same as `aSsignment 2`
 
 </div>
 
@@ -389,7 +388,7 @@ Possible Usage:
 
 #### Giving an assignment to all students in a module: `giveall`
 
-Adds an assignment to all students in the specified module .
+Gives an assignment with a deadline to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
@@ -408,14 +407,15 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 **:information_source: Note:**<br>
 
-1. It is possible to add an assignment using `giveall` even if some students have the assignment already. Students who have the
-   assignment will not receive a duplicate assignment.
-2. When using `giveall` in the situation stated in point 1, the specified assignment in the input needs to have the same
-   due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure
-   consistency of the due dates of the same assignment.
-3. Assignments with similar descriptions that differ in the amount of whitespace between words are considered duplicate.<br>
+1. Assignments with similar descriptions that differ in the amount of whitespace between words are **still** considered duplicate.<br>
    e.g. `Assignment 2` is the same as `Assignment   2`.
 
+2. Assignment descriptions are **case-insensitive**.
+   e.g. `Assignment 2` is the same as `aSsignment 2`.
+
+3. It is possible to give an assignment using `giveall` even if some students have the assignment already. Students who have the assignment will not receive a duplicate assignment.
+
+4. When using `giveall` in the situation stated in point 3, the specified assignment in the input needs to have the same due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
 </div>
 
 Examples:
@@ -428,7 +428,7 @@ Examples:
   of description `Assignment 2` with a deadline `15 Oct 2021, 01:00pm`.
 Possible Usage:
 
-*  You can use `giveall` instead of `give` when there is a module assignment, whereby all students under the module is required to submit.
+*  You can use `giveall` instead of `give` when there is a module assignment, where all students under the module is required to submit.
 
 ### Marking an assignment of a student: `done`
 
@@ -446,7 +446,7 @@ Format: `done INDEX`
 
 * Assignments with `COMPLETED` status will have a green tag.
 
-* Remember to display the student's assignment list using [show](#showing-a-students-assignment-list-show) before using the done command!
+* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
 
 </div>
 
@@ -474,7 +474,7 @@ Examples:
 
 **:information_source: Note:**<br>
 
-Remember to display the student's assignment list using [show](#showing-a-students-assignment-list-show) before using the `remove` command!
+Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the `remove` command!
 
 </div>
 
@@ -510,7 +510,7 @@ Undoes the last command entered.
 Format: `undo`
 
 * Undo all commands except for `undo` and `redo`.
-* At the start of the program, there is nothing to undo.
+* When you first start TA<sup>2</sup>, there is nothing to undo.
 
 ### Redoing a command: `redo`
 
@@ -536,7 +536,8 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
-:exclamation:**Caution:**
+
+:exclamation:**Caution:**<br>
 
 * If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
@@ -577,6 +578,33 @@ Action | Command | Format | Examples
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
+#### Module Naming Convention
+
+- The module format is **XX[X]1111[X]**, where X is any letter, 1 is any number and values in square brackets are optional.<br>
+
+#### Email format
+Emails should be of the format *local-part@domain* whereby the domain name is made up of domain labels.
+
+* The whole `EMAIL` must have a **maximum of 320 characters**.
+  
+* The local part should only contain alphanumeric characters and these special character `+ - . _`.
+
+* The local part must:
+    * has a **maximum of 64 characters**.
+    
+    * not start or end with any special characters.
+    
+    * not 2 consecutive special characters.
+    
+* The domain name must:
+    * has a **maximum of 255 characters**.
+    
+    * end with a domain label at least 2 characters long.
+    
+    * have each domain label start and end with alphanumeric characters.
+    
+    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
 #### Friendly commands
 
 * `today` - sets due date to tonight.
@@ -599,8 +627,5 @@ Action | Command | Format | Examples
 
 * `sun` - sets due date to the coming sunday.
 
-#### Module Naming Convention
-
-- The module format is **XX[X]1111[X]**, where X is any letter, 1 is any number and values in square brackets are optional.<br>
 
 --------------------------------------------------------------------------------------------------------------------
