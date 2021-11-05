@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 --------------------------------------------------------------------------------------------------------------------
-## **Welcome to TA<sup>2</sup>!**
+## **Welcome to TA<sup>2</sup>'s Developer Guide!**
 {:.no_toc}
 
 Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop application designed for teaching assistants
@@ -14,13 +14,6 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 
 *Last Updated: 8 November 2021*
 
---------------------------------------------------------------------------------------------------------------------
-
-## Table of Contents
-{:.no_toc}
-
-* Table of Contents
-{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -186,53 +179,59 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Show assignment list feature
+### Assignment list panel display feature
 
 #### Implementation
 
-The show assignment mechanism is facilitated by `AddressBook`, where the specified person's assignment list is stored internally under `assignments` This `assignments` is retrieved or updated by the following methods:
+The assignment list panel display mechanism is facilitated by `AddressBook`, where the specified person's assignment list is stored internally under `assignments` This `assignments` is retrieved or updated by the following methods:
 * `AddressBook#getAssignmentList()`
 * `AddressBook#updateAssignmentList(Person person)`  —  where `person` is the specified person.
 
-These methods are exposed in the `Model` interface as `Model#getFilteredAssignmentList()` and `Model#updateFilteredAssignmentList(Person person)` respectively.
+These methods are exposed in the `Model` interface as `Model#getAssignmentList()` and `Model#updateAssignmentList(Person person)` respectively.
+In addition, `Model` contains a field `assignmentsList` that points towards `assignment` in `AddressBook`. `assignmentsList` serve as connection for `Logic` to retrieve `assignments` to display.
 
 Given below is an example usage scenario and how the show assignment mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `assignments` will be initialized with an empty list.
+Step 1. The user launches the application for the first time. The `assignments` will be initialized with a `UniqueAssignmentList` that does not contain any `Assignment`.
+
+Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
+This will then call `Addressbook#updateAssignmentList(person)`, causing the `assignments` in `AddressBook` to be replaced with the assignments in 2nd person's assignment list.
+
+
+The two object diagram below shows illustrates how the objects interacts and changes when a `show` command is executed.
 
 <p align="center">
-  <img src="images/AssignmentState0.png">
+<img src="images/DisplayAssignmentObjectDiagram1.png">
+<img src="images/DisplayAssignmentObjectDiagram2.png">
 </p>
 
-Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateFilterdAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
-This causes the `assignments` in `AddressBook` to be replaced with the 2nd person's assignment list.
+
+Step 3. When `assignments` is updated, the assignment list panel of the`Ui` will be updated accordingly since it is an observer of the `assignments` list in `Model`
+
+The sequence diagram below illustrates the interactions between the `Logic` and `Model` component, when an assignment command (e.g `show`, `give`, `done`, `remove`) is called.
 
 <p align="center">
-  <img src="images/AssignmentState1.png">
+
+<img src="images/DisplayAssignmentListSequenceDiagram.png">
+
 </p>
 
-Step 3. When `assignments` is updated, it is retrieved by the `Logic` using `Model#getFilteredAssignmentList()` to input into the assignment panel of the `Ui`
-This results in the assignment list panel to display the assignments of the person.
+#### Design considerations:
 
-<p align="center">
-  <img src="images/AssignmentState2.png">
-</p>
+**Aspect: How the assignment list can be displayed:**
 
-Step 4. The user decides to modify the assignment list of the person by using either `give`, `done` or `remove` command. This will result in the assignment list in the person to be modified.
-The command will the call `Model#updateFilteredAssignmentList(person)` to get the recent updated assignment list to replace `assignments`.
+* **Alternative 1(current choice):** Displays assignment list next to the contact list panel in the same window.
 
-<p align="center">
-  <img src="images/AssignmentState3.png">
-</p>
+  * Pros: Allows you to do everything on one window.
 
-Step 5. Step 3 is repeated to show the recent updated assignment list.
+  * Cons: Commands that deal with persons and assignments need to be distinctly named as they share the same window.<br>
+  e.g. `add` person and `add` assignments will have conflict.
 
-<p align="center">
-  <img src="images/AssignmentState4.png">
-</p>
+* **Alternative 2:** Displays assignment list on a new separate window.
 
-#### Design considerations
-The assignment list of the specified person is stored in `AddressBook` rather than `ModelManger`
+  * Pros: Allows you to cleanly segregate commands of assignments and persons because they are on different windows.
+  
+  * Cons: Additional UI may lead to slower processing and execution.
 
 ### Assignment Feature
 
@@ -268,7 +267,49 @@ A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. 
     * Pros: Divides cleanly all the different types of status and intended behaviour and make it very easy to add new status with few adjustments by creating another subclass.
     * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
 
+### Keeping track on person whose assignments are displayed feature
 
+#### Implementation
+
+The `activePerson` field is a reference to a `Person` object within `UniquePersonList`, wrapped in an `Optional`, whose `Assignment` objects are stored in `UniqueAssignmentList` within `AddressBook`. It forms the bedrock of many commands that involves `Assignment` in `UniqueAssignmentList`.
+
+`activePerson` field is wrapped in an `Optional` because there is a possibility that there is no `activePerson`, which means that there is no `Person` object whose assignment list is currently stored in the `UniqueAssignmentList`.
+
+The `ModelManager` has a reference to the `VersionedAddressBook` which is a subclass of `AddressBook` and has the following accessors to `activePerson`:
+* `Model#hasActivePerson()` —  Checks the presence of active person.
+* `Model#getActivePerson()` —  Retrieves the active person if it exists to perform operations on the person's assignment list.
+
+Operations that may change the person whose assignments are displayed will use the above accessors before calling `Model#updateAssignmentList(Person person)` to change the target of `activePerson` to the `person` parameter, wrapped in an `Optional` if it exists in `UniquePersonList`. If not, `activePerson` will be updated to an empty `Optional` that means an absence of `activePerson`.
+
+The `delete` command is one of the commands that may affect the assignment list displayed. Since `Person` objects and their `Assignments` share a whole-part relationship, when a `Person` object is deleted, their list of `Assignment` should be deleted as well. Hence, if a particular `Person` object is the `activePerson`, the `UniqueAssignmentList` in `AddressBook` should be cleared of `Assignment` objects belonging to that `Person` if he/she is deleted. Below is an activity diagram to illustrate this point.
+
+<p align="center">
+  <img src="images/UpdateAssignmentListActivityDiagram.png.png" alt="Update assignment list activity diagram when person is deleted">
+</p>
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
+
+#### Design considerations
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice): use a reference to point to `person` whose assignments should be displayed**
+  * Pros: Easy to implement.
+  * Cons: Ignoring the property of `UniqueAssignmentList` that prevents duplicate `Assignment` from being stored, this method will be limited to displaying a particular person's assignments. Difficult to extend to displaying `Assignment` objects of multiple `Person` objects.
+
+* **Alternative 2:** `Person` class store an additional attribute `boolean isActivePerson`.
+  * Pros: Can toggle between multiple persons.
+  * Cons: `isActivePerson` may not be a suitable property of `Person` class since it may not be the responsibility of `Person` to remember whether it is the `activePerson`.
+  
 ### Undo/redo feature
 
 #### Implementation
@@ -851,34 +892,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is`TA^2` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Find a person**
+**Use case: UC01 - Add a person**
 
 **MSS**
-1. User requests to find a person with the specified keyword(s)
-2. TA<sup>2</sup> shows a list of persons with matching keyword(s)
+
+1. User enters a new person's information.
+2. TA<sup>2</sup> shows the person is added.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given command format is invalid, or the person's name or email is already in the list.
+
+    * 1a1. TA<sup>2</sup> shows an error message.
+
+      Use case resumes at step 1.
+
+**Use case: UC02 - Find a person**
+
+**MSS**
+1. User requests to find a person with the specified keyword(s).
+2. TA<sup>2</sup> shows a list of persons with matching keyword(s).
 
    Use case ends.
 
 **Extensions**
 
 * 1a. The format of the command is invalid.
+  
   * 1a1. TA<sup>2</sup> shows an error message.
-
-    Use case resumes at step 1
+  
+    Use case resumes at step 1.
+  
 * 2a. No persons match the specified keyword(s).
 
     Use case ends.
 
-**Use case: UC02 - Delete a person**
+**Use case: UC03 - Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  TA<sup>2</sup> shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  TA<sup>2</sup> deletes the person
+1.  User requests to list persons.
+2.  TA<sup>2</sup> shows a list of persons.
+3.  User requests to delete a specific person in the list.
+4.  TA<sup>2</sup> deletes the person.
 
     Use case ends.
 
@@ -894,75 +954,50 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-
-**Use case: UC03 - List all person in the address book**
-
-**MSS**
-
-1. User requests to list persons
-2. TA<sup>2</sup> shows a list of persons
-
-**Extensions**
-* 2a. The list is empty.
-  Use case ends.
-
-
-**Use case: UC05 - Add a person**
+**Use case: UC04 - Edit a person**
 
 **MSS**
+1. User requests to edit a person's name and email in the list.
+2. TA<sup>2</sup> shows that the person's information has been edited.
 
-1. User enters a new person's information
-2. TA<sup>2</sup> shows the person is added
-
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 1a. The given command format is invalid.
+* 1a. The format of the command or the index is invalid, or there already exists a person with the same name and email.
 
-    * 1a1. TA<sup>2</sup> shows an error message related to invalid format.
-
-      Use case resumes at step 1.
-
-* 1b. The added person is already in the list.
-
-    * 1b1. TA<sup>2</sup> requests to add another person.
-
-      Use case resumes at step 1.
-
-**Use case: UC06 - Add an assignment**
-
-**MSS**
-
-1. User enters the assignment information
-2. TA<sup>2</sup> shows the assignment information is added
-
-   Use case ends
-
-**Extensions**
-
-* 1a. The assignment information already exists in that person's assignment list.
-
-    * 1a1. TA<sup>2</sup> shows message that the assignment already exists.
-
-    Use case ends.
-
-* 1b. The given instruction format is invalid.
-
-    * 1b1 TA<sup>2</sup> shows an error message.
+  * 1a1. TA<sup>2</sup> shows an error message.
 
     Use case resumes at step 1.
 
-**Use case: UC07 - Remove an assignment**
+
+**Use case: UC05 - Give an assignment**
 
 **MSS**
 
-1. User requests to list assignments of a person
-2. TA<sup>2</sup> shows a list of assignments
-3. User requests to delete a specific assignment in the list
-4. TA<sup>2</sup> deletes the assignment
+1. User enters the assignment information.
+2. TA<sup>2</sup> shows the assignment is added.
 
-   Use case ends
+   Use case ends.
+
+**Extensions**
+
+* 1a. The format of the command is invalid, or the assignment already exists in that person's assignment list.
+
+  * 1a1. TA<sup>2</sup> shows an error message.
+
+    Use case resumes at step 1.
+
+**Use case: UC06 - Remove an assignment**
+
+**MSS**
+
+1. User requests to show assignments of a person.
+2. TA<sup>2</sup> shows a list of assignments.
+3. User requests to delete a specific assignment in the list.
+4. TA<sup>2</sup> deletes the assignment.
+
+   Use case ends.
 
 **Extensions**
 
@@ -972,19 +1007,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. TA<sup>2</sup> shows an error message.
+  * 3a1. TA<sup>2</sup> shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
-**Use case: UC08 - Mark an assignment as done**
+**Use case: UC07 - Mark an assignment as done**
 
 **MSS**
 
-1. User requests to list assignments of a person
-2. User requests to mark a specific assignment in the list as done
-3. TA<sup>2</sup> shows the assignment is done
+1. User requests to list assignments of a person.
+2. User requests to mark a specific assignment in the list as done.
+3. TA<sup>2</sup> shows the assignment is done.
 
-   Use case ends
+   Use case ends.
 
 **Extensions**
 
@@ -992,13 +1027,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-* 2b. The given index is invalid.
+* 2b. The given index is invalid, or the assignment has already been mark completed.
 
-    * 2b1. TA<sup>2</sup> shows an error message.
+  * 2b1. TA<sup>2</sup> shows an error message.
 
-      Use case resumes at step 1.
-
-*{More to be added}*
+    Use case resumes at step 1.
 
 ### Non-Functional Requirements
 
@@ -1389,16 +1422,31 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 ### Saving data
 
 1. Data file `ta2.json` is missing. <br>
-   Delete `ta2.json` file. <br>
-   Expected: TA<sup>2</sup> will start with sample data. <br>
+
+   1. To simulate: Delete `ta2.json` file. <br>
+   
+   2. Expected: TA<sup>2</sup> will start with sample data. <br>
+   
 2. Data file `ta2.json` in wrong format. <br>
-   To simulate: Remove a square bracket in the `ta2.json` file. <br>
-   Expected: TA<sup>2</sup> will start with no data. <br>
-   Corrective action: If you wish to start TA<sup>2</sup> afresh, just input commands as per normal and the existing
-   file will be overridden with the new data that you input. <br>
-   :exclamation: If you wish to retrieve your existing data, do not input any command.
-   Copy the current `ta2.json` file to another location before exiting TA<sup>2</sup>. Look through `ta2.json` and
-   correct any formatting issues. Copy the corrected `ta2.json` back to the data folder and start the application.
-   TA<sup>2</sup> will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
-   in the wrong format, repeat the corrective action.
-   Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/tasks.txt) for a sample data file in the correct format.
+
+   1. To simulate: Remove a square bracket in the `ta2.json` file. <br>
+   
+   2. Expected: TA<sup>2</sup> will start with no data. <br>
+   
+   3. Corrective action: 
+   
+      1. If you wish to start TA<sup>2</sup> afresh, just input commands as per normal and the existing
+      file will be overridden with the new data that you input. <br>
+      
+      2. :exclamation: If you wish to retrieve your existing data, do not input any command. <br>
+      
+         1. Copy the current `ta2.json` file to another location before exiting TA<sup>2</sup>.
+
+         2. Look through `ta2.json` and correct any formatting issues.
+
+         3. Copy the corrected `ta2.json` back to the data folder and start the application.
+
+         4. TA<sup>2</sup> will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
+         in the wrong format, repeat the corrective action.
+
+         5. Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/sampledata.json) for a sample data file in the correct format.
