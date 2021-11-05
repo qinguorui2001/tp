@@ -626,7 +626,7 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
 
 **:bulb: Tip:**<br>
 
-Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent and will be rightfully detected.<br>
+Friendly commands are all **case-insensitive**. `TODAY` and `today` are equivalent and will be rightfully detected.<br>
 
 </div>
 
