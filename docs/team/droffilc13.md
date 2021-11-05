@@ -11,14 +11,15 @@ Given below are my contributions to the project.
 
 * **New Feature**: Redesign the whole interface to accommodate assignments in TA<sup>2</sup>. 
   * What it does: Added the assignment list panel to view students' assignments. Design the assignment card. Wrote the backend code for the `Assignmenmt` class and most of its components.
-  * Justification: This feature is one of the main features that differentiates TA<sup>2</sup> from AB3 which this project was based on. It forms the foundation of future commands that manipulate assignments.
-  * Highlights: This enhancement forms the bedrock of what TA<sup>2</sup> is. Any future commands added will need assignments and assignment list panel to perform their operations.  This implementation is challenging because
+  * Justification: This feature is one of the main features that differentiates TA<sup>2</sup> from AB3 which this project is based on. It forms the foundation of future commands that manipulate assignments.
+  * Highlights: This enhancement forms the bedrock of what TA<sup>2</sup> is. Any future commands added will need assignments and assignment list panel to perform their operations.  This implementation is challenging because a lot of research and trial and error is needed to fit the panel in. Furthermore, 
 
 * **New Feature**: Redesign the whole interface to suit TA<sup>2</sup>
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
   * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}** **New Feature**: Redesign the whole interface to suit TA<sup>2</sup>
+* 
   * What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
   * Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
   * Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
