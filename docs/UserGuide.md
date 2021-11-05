@@ -388,7 +388,7 @@ Possible Usage:
 
 #### Giving an assignment to all students in a module: `giveall`
 
-Gives an assignment with a deadline to all students in the specified module .
+Gives an assignment to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
