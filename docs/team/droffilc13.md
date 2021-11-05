@@ -12,7 +12,7 @@ Given below are my contributions to the project.
 * **New Feature**: Redesign the whole interface to accommodate assignments in TA<sup>2</sup>. 
   * What it does: Added the assignment list panel to view students' assignments. Design the assignment card. Wrote the backend code for the `Assignmenmt` class and most of its components.
   * Justification: This feature is the main feature that differentiates TA<sup>2</sup> from AB3 which this project is based on. It forms the foundation for future commands that manipulate assignments.
-  * Highlights: This enhancement forms the bedrock of what TA<sup>2</sup> is. Any future commands added will need assignments and assignment list panel to perform their operations.  This implementation is challenging because a lot of research and trial and error to fit the panel and make sure it scales with the window. Also, analysis of how backend code is reflected on frontend is necessary to understand how they are linked.
+  * Highlights: This enhancement forms the bedrock of what TA<sup>2</sup> is. Any future commands added will need assignments and assignment list panel to perform their operations. This implementation is challenging because a lot of research and trial and error to fit the panel and make sure it scales with the window. Also, the analysis of how backend code is reflected on frontend is necessary to understand how they are linked.
 
 * **New Feature**: Update assignment list display upon successful execution of commands.
   * What it does: Bridge the outcome that happens at back end to front end. For example, deleting a student whose assignment is displayed should remove all his/her assignments in the assignment list panel as well.
