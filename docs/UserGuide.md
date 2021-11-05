@@ -17,6 +17,8 @@ If you are a new user, check out the [Quick start](#Quick-start) section to help
 
 For advanced users, the [Command summary](#Command-summary) section gives you an overview of all the commands TA<sup>2</sup> offers.
 
+*Last Updated: 8 November 2021*
+
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
