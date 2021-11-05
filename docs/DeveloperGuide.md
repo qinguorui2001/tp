@@ -763,7 +763,65 @@ The following activity diagram summarizes what happens when a user executes the 
   being returned.
 
 #### [Proposed] Find Extension
-1. Allow finding to have both specificity and flexibility
+**Allow finding to have both specificity and flexibility**
+
+**Proposed Implementation**
+
+In order to create the option for the users to select the type of find they are trying to 
+execute, be it specific or flexible, such a functionality is implemented in the following way:
+
+The proposed find extension to allow specificity and flexibility can be implemented by altering 
+how the`FindCommandParser` class works. Users are required to specify an extra parameter to denote
+the type of find they are trying to execute.
+
+This extra parameter will be **-S** and **-F** to represent specific and flexible respectively. 
+
+An example command call:
+- `find -s n/Bryan m/CS1101S` to find all people named Bryan who are enrolled in CS1101S
+  - Bryan Loh enrolled in module CS1101s will be listed.
+  - Bryan Tan enrolled in module CS1231S will not be listed.
+
+This can be facilitated by splitting the `FindPersonCommand` into two subtypes: `FindSpecificPersonCommand`
+and `FindAllPersonCommand`.
+
+With the separation of the commands, two new classes to test for keywords have to be created, namely the
+`PersonContainsAllKeywordsPredicate` and `PersonContainsAnyKeywordPredicate`. These two classes will then
+extend the `PersonContainsKeywordPredicate` class which implements the `Predicate<T>` interface, 
+and then override the methods stipulated by the interface.
+
+This way, `FindSpecificPersonCommand` instantiates the `PersonContainsAllKeywordsPredicate` class whilst
+`FindAllPersonCommand` instantiates the `PersonContainsAnyKeywordPredicate` class.
+
+Given below is the partial class diagram of how the logic behind the new find command works:
+
+<p align="center">
+  <img src="images/ImprovedFindDiagram.png">
+</p>
+
+The following is the activity diagram for a specific find command execution:
+
+<p align="center">
+  <img src="images/ImprovedSpecificFindActivityDiagram.png">
+</p>
+
+The following is the activity diagram for a flexible find command execution:
+
+<p align="center">
+  <img src="images/ImprovedFlexibleFindActivityDiagram.png">
+</p>
+
+#### Design considerations
+
+**Aspect: How the different find commands can be implemented.
+
+* **Alternative 1 (current choice):** Create subclasses to handle the different kinds of behaviour of `Find`.
+  * Pros: Easy to extend classes and implement different functionalities 
+  * Cons: User has to input more prefixes to specify the command
+
+* **Alternative 2:** Have the parser identify the different find commands without extra prefixes 
+  * Pros: User can use the find command as per usual without extra prefixes / inputs
+  * Cons: Requires the application to recognize a lot of different user inputs which could mean 
+  different kinds of find, which is unfeasible to implement considering the time given
 
 
 ### Friendlier Command Inputs
@@ -774,6 +832,17 @@ very little flexibility to our users in an event they make a mistake.
 Here are the commands that currently support a *friendly* input command:
 1. `give`
 2. `giveall`
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+
+The `give` and `giveall` command classes will not create "`Give`" classes but instead:
+
+The `give` command results in the creation of the `AddAssignmentCommandParser` class whilst the `giveall` command results 
+in the creation of the `AddAssignmentToAllCommandParser`. 
+
+</div>
+
 
 The `give` command has the sole purpose of adding a single assignment to an individual in the list.
 
@@ -816,13 +885,13 @@ Finally, the results are then actualized by the `Model` component.
 The following activity diagram shows the possible paths whilst a user adds an assignment using `give`:
 
 <p align="center">
-  <img src="images/AddAssignmentActivityDiagram.png">
+  <img src="images/GiveActivityDiagram.png">
 </p>
 
 The following sequence diagram shows the logic sequence of an `AddAssignment` command execution:
 
 <p align="center">
-  <img src="images/AddAssignmentSequenceDiagram.png">
+  <img src="images/GiveFriendlySequenceDiagram.png">
 </p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for AddAssignmentCommand
@@ -839,7 +908,7 @@ The following activity diagram shows the possible paths whilst a user adds an as
 The following sequence diagram shows the logic sequence of an `AddAssignmentToAll` command execution:
 
 <p align="center">
-  <img src="images/GiveAllSequenceDiagram.png">
+  <img src="images/GiveAllFriendlySequenceDiagram.png">
 </p>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
@@ -862,6 +931,8 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 #### [Proposed] Friendly Commands
 1. `find`
+
+(more aspects and details of implementation to come)
 
 --------------------------------------------------------------------------------------------------------------------
 
