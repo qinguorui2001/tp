@@ -16,11 +16,11 @@
 * Head to TA<sup>2</sup> [Project Website](https://ay2122s1-cs2103t-t13-2.github.io/tp/) for more information!
 ### For Users
 
-* If you are a new user or wish to find out more about how to use TA <sup>2</sup>, head to our [**User Guide**](UserGuide.html)! 
+* If you are a new user or wish to find out more about how to use TA <sup>2</sup>, head to our [**User Guide**](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html)! 
 
 ### For Developers
 
-* If you are interested in developing TA<sup>2</sup>, the [**Developer Guide**](DeveloperGuide.html) will bring you up to speed about the high level overview of the software and its current design choices!
+* If you are interested in developing TA<sup>2</sup>, the [**Developer Guide**](https://ay2122s1-cs2103t-t13-2.github.io/tp/DeveloperGuide.html) will bring you up to speed about the high level overview of the software and its current design choices!
 
 ## Acknowledgement
 * **This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).**
