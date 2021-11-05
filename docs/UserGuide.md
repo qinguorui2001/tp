@@ -48,7 +48,7 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 
     * **`show`**`1`: Displays the assignments of the first student in your assignment list.
     
-    * **`give`**`d/Assignment 1 by/today`: Gives an assignment, `Assignment 1` that is due by tonight 11.59pm, to the first student in your contact list.
+    * **`give`**`d/Assignment 1 by/27/3/2022`: Gives an assignment, `Assignment 1` that is due by 27 Mar 2022 at  11.59pm, to the first student in your contact list.
 
 <div markdown="span" class="alert alert-primary">
 
@@ -300,7 +300,7 @@ Examples:
 
 Possible Usage:
 
-* You can use `edit` to make changes to any typo in a student's information.
+* You can use `edit` to make changes to any mistakes in a student's information.
 
 ### Showing a student’s assignments: `show`
 
@@ -362,8 +362,8 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 **:information_source: Note:**<br>
 
-* Assignments with similar descriptions that differ in the amount of whitespace between words are **still** considered duplicate.<br>
-  e.g. `Assignment 2` is the same as `Assignment   2`
+* Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
+  e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
 
 * Assignment descriptions are **case-insensitive**.
   e.g. `Assignment 2` is the same as `aSsignment 2`
@@ -407,8 +407,8 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 **:information_source: Note:**<br>
 
-1. Assignments with similar descriptions that differ in the amount of whitespace between words are **still** considered duplicate.<br>
-   e.g. `Assignment 2` is the same as `Assignment   2`.
+1. Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
+   e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
 
 2. Assignment descriptions are **case-insensitive**.
    e.g. `Assignment 2` is the same as `aSsignment 2`.
@@ -456,7 +456,7 @@ Examples:
 
 Possible Usage:
 
-* YYou can use `done` to track completion status of an assignment among your students.
+* You can use `done` to track completion status of an assignment among your students.
 
 ### Removing an assignment of a student: `remove`
 
@@ -590,14 +590,14 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
 * The local part should only contain alphanumeric characters and these special character `+ - . _`.
 
 * The local part must:
-    * has a **maximum of 64 characters**.
+    * have a **maximum of 64 characters**.
     
     * not start or end with any special characters.
     
     * not 2 consecutive special characters.
     
 * The domain name must:
-    * has a **maximum of 255 characters**.
+    * have a **maximum of 255 characters**.
     
     * end with a domain label at least 2 characters long.
     
