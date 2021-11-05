@@ -502,7 +502,7 @@ module with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the remove command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="500" height="550" />
+  <img src="images/RemoveActivityDiagram.png" width="550" height="550" />
 </p>
 
 #### Design considerations
@@ -680,7 +680,7 @@ name with that assignment.
 The following activity diagram summarizes what happens when a user executes the done command:
 
 <p align="center">
-  <img src="images/DoneActivityDiagram.png" width="500" height="550" />
+  <img src="images/DoneActivityDiagram.png" width="550" height="550" />
 </p>
 
 #### Design considerations
