@@ -518,7 +518,7 @@ The following activity diagram summarizes what happens when a user executes the 
     * Cons: User may not be certain about which person's assignment to delete if several of them has completed assignment
     and likely to remember the wrong person name if the current person displayed list is not shown
 
-* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 1** is
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions, **alternative 1** is
   chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the
   deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
@@ -639,7 +639,7 @@ The following activity diagram summarizes what happens when a user executes the 
   * Pros: Allows user to delete assignment of all persons without the need of additional commands
   * Cons: Undesired deletion of assignment of persons not in displayed list may occur
 
-* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions,**alternative 2** is
+* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions, **alternative 2** is
   chosen. When the list of persons increase to considerable numbers, deletion of completed assignments will require the user
   to input an additional command for each person. Bearing in mind that users make use of the `clean` command to remove
   completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
