@@ -97,7 +97,8 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 
 * If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer more than 0 and less than 10,000.<br>
 
-* If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken,
+unless otherwise mentioned in the command description. <br>
   e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -132,7 +133,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
   
 * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
 
-* Extra spaces before and between names will be removed.
+* Extra spaces before, after, and between names will be removed.
 
 * A student's `MODULE` must follow the format as shown [here](#module-naming-convention).
 
@@ -148,7 +149,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
     * e.g. `add e/E1234567@u.nus.edu` is not allowed if there is already a student with the same email.
 
-* `TAG` can only accept alphanumeric characters.
+* `TAG` can only accept alphanumeric characters with no spaces in between.
 
 * A student can have any number of `TAG` (including 0).<br>
 
@@ -177,13 +178,13 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 **:information_source: Note:**<br>
 
-1. There should be at least one prefix.
+1. There should be **at least one** prefix.
 
 2. Ordering of prefixes are not strict and presence of multiple keywords are acceptable.
 
 3. Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
 
-4. Each part of name separated by space will be match. <br>
+4. Each part of name separated by space will be matched. <br>
    e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`. <br>
    e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.
 
@@ -606,6 +607,13 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
 #### Friendly commands
+
+<div markdown="span" class="alert alert-primary">
+
+:bulb: **Tip:**<br>
+Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent and will be rightfully detected.
+</div>
+
 
 * `today` - sets due date to tonight.
 
