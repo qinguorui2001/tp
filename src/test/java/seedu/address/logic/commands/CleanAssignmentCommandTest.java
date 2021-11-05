@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.*;
 import seedu.address.model.assignment.Assignment;
@@ -160,7 +161,7 @@ public class CleanAssignmentCommandTest {
         }
 
         @Override
-        public void addAllAssignment(List<Person> personList, Assignment toAdd) {
+        public void addAllAssignments(List<Person> personList, Assignment toAdd) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -201,6 +202,11 @@ public class CleanAssignmentCommandTest {
 
         @Override
         public boolean isAssignmentCompleted(Assignment assignment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Assignment getAssignmentInList(Index targetAssignmentIndex) throws CommandException {
             throw new AssertionError("This method should not be called.");
         }
 
