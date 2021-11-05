@@ -11,7 +11,7 @@ from the School of Computing at the National University of Singapore to manage s
 
 TA<sup>2</sup> is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps!
 
-This user guide provides you with installation instructions, a comprehensive guide, summary on features of TA<sup>2</sup> and some FAQs.
+This user guide provides you with installation instructions, guide on features of TA<sup>2</sup> and some FAQs.
 
 If you are a new user, check out the [Quick start](#Quick-start) section to help you get started with TA<sup>2</sup>.
 
@@ -46,7 +46,7 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 
     * **`show`**`1`: Displays the assignments of the first student in your assignment list.
     
-    * **`give`**`d/Assignment 1 by/today`: Gives an assignment, `Assignment 1` with a deadline by tonight 11.59pm, to the first student in your contact list.
+    * **`give`**`d/Assignment 1 by/today`: Gives an assignment, `Assignment 1` that is due by tonight 11.59pm, to the first student in your contact list.
 
 <div markdown="span" class="alert alert-primary">
 
