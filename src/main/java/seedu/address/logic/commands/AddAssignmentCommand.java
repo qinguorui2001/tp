@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_WITH_LIMIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DUEDATE;
 
@@ -33,8 +34,8 @@ public class AddAssignmentCommand extends Command {
                     + "sat - sets due date to the coming saturday\n"
                     + "sun - sets due date to the coming sunday\n";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an assignment to the person's assignment list. "
-            + "Parameters: INDEX (must be a positive integer)  "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an assignment to the person's assignment list.\n"
+            + "Parameters: " + MESSAGE_INVALID_INDEX_WITH_LIMIT + " "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_DUEDATE + "DUEDATE\n"
             + "Example: " + COMMAND_WORD + " 1 "
