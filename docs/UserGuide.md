@@ -412,7 +412,7 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * It is possible to give an assignment using `giveall` even if some students have the assignment already. Students who have the assignment will not receive a duplicate assignment.
 
-* When using `giveall` in the situation stated in point 3, the specified assignment in the input needs to have the same due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
+* If some students already have the assignment, executing `giveall` requires the due date to be similar to the pre-existing assignments. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
 </div>
 
 <div markdown="span" class="alert alert-primary">
@@ -451,9 +451,9 @@ Format: `done INDEX`
 
 **:information_source: Note:**<br>
 
-* Assignments with `PENDING` status will be colour coded in orange.
+* Assignments with `PENDING` status will be colour-coded in orange.
 
-* Assignments with `COMPLETED` status will be colour coded in green.
+* Assignments with `COMPLETED` status will be colour-coded in green.
 
 * Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
 
@@ -477,7 +477,7 @@ Format: `remove INDEX`
 
 Examples:
 
-* `remove 10` deletes the 10th assignment in the displayed assignment list of a student.
+* `remove 10` removes the 10th assignment in the displayed assignment list of a student.
 
 <div markdown="block" class="alert alert-info">
 
