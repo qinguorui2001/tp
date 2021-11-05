@@ -17,7 +17,7 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +43,7 @@ To get started, check out this guide [_Setting up and getting started_](SettingU
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T13-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -58,7 +58,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -95,13 +95,13 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -112,7 +112,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -130,7 +130,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: 
+**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -145,7 +146,7 @@ How the parsing works:
 
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <p align="center">
   <img src="images/ModelClassDiagram.png" width="450" />
@@ -168,7 +169,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <p align="center">
   <img src="images/StorageClassDiagram.png" width="550" />
@@ -181,7 +182,7 @@ The `Storage` component,
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -695,7 +696,7 @@ The following activity diagram summarizes what happens when a user executes the 
     * Cons: User may not be certain about which person's assignment to mark if several of them has completed assignment
       and likely to remember the wrong person name if the current person displayed list is not shown
 
-* Considering the fact that TA<sup>2</sup> is designed to be user-friendly in managing student submissions,**alternative 1** is
+* Considering the fact that TA<sup>2</sup> is designed to be user-friendly in managing student submissions, **alternative 1** is
   chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
   marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
@@ -720,7 +721,7 @@ keyword, the `LogicManager` class will execute the command and pass the
 input to the `AddressBookParser` class to parse the given input.
 
 From this class, a specific parser class known as the `FindPersonCommandParser`
-is created and used to parse the input based on the *find* specificity.
+is created and used to parse the input based on the `find` specificity.
 
 Next, the `FindPersonCommandParser` class returns a `FindPersonCommand` or
 an exception, depending on the validity of the command input. The
@@ -776,8 +777,12 @@ very little flexibility to our users in an event they make a mistake.
 
 Here are the commands that currently support a *friendly* input command:
 1. `give`
+2. `giveall`
 
 The `give` command has the sole purpose of adding a single assignment to an individual in the list.
+
+The `giveall` command has the sole purpose of adding a single assignment to all individuals under the same module in the list.
+
 The following table contains the new *friendly* commands that a user may provide, instead of the
 original command inputs.
 
@@ -794,29 +799,57 @@ original command inputs.
 | sat                                         | sets the date to be the upcoming saturday     | give n/name d/description by/sat                                        |
 | sun                                         | sets the date to be the upcoming sunday       | give n/name d/description by/sun                                        |
 
-When the user enters a *friendly* command, the `AddressBookParser` class will recognize the command
-to be an add assignment command. This triggers the `AddAssignmentParser#parse` method to be called with the
-user input arguments. From there, the `AddAssignmentParser` parses each individual argument
-token and for the *friendly* command, it will be recognized within the `DueDate` class as a date with
-a *friendly* command format. This then calls the Java `TemporalAdjusters` class to return a `LocalDate` instance
-that represents the desired *friendly* command input. From here, the `AddAssignmentCommand` class is then instantiated and
-results actualized by the `Model` component.
+When the user enters a command with the *friendly* command input, the `AddressBookParser` class will recognize the command
+and parse the entered command. 
 
-The following activity diagram shows the possible paths whilst a user adds an assignment:
+If the command the user chose is `give`, this triggers the `AddAssignmentCommandParser#parse` 
+method to be called with the user input arguments. If the command chosen is `giveall`, this
+triggers the `AddAssignmentToAllCommandParser#parse` method to be called instead. 
+
+
+From there, each individual argument token is parsed and for the *friendly* command, it will be 
+recognized within the `DueDate` class as a date with a *friendly* command format. This then calls 
+the Java library `TemporalAdjusters` class to return a `LocalDate` instance that represents the 
+desired *friendly* command input date. 
+
+From here, the `AddAssignmentCommand` class is then instantiated if the user command is `give`, or
+conversely, the `AddAssignmentToAllCommand` class. 
+
+Finally, the results are then actualized by the `Model` component.
+
+The following activity diagram shows the possible paths whilst a user adds an assignment using `give`:
 
 <p align="center">
   <img src="images/AddAssignmentActivityDiagram.png">
 </p>
 
-The following sequence diagram shows the logic sequence of an AddAssignment command execution:
+The following sequence diagram shows the logic sequence of an `AddAssignment` command execution:
 
 <p align="center">
   <img src="images/AddAssignmentSequenceDiagram.png">
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for AddAssignmentCommand
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div> <br>
+
+
+The following activity diagram shows the possible paths whilst a user adds an assignment using `giveall`:
+
+<p align="center">
+  <img src="images/GiveAllActivityDiagram.png">
+</p>
+
+The following sequence diagram shows the logic sequence of an `AddAssignmentToAll` command execution:
+
+<p align="center">
+  <img src="images/GiveAllSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
 
 #### Design considerations
 **Aspect: Rigidity in allowing users to add assignments correctly yet handle multiple short-form user inputs:**
@@ -1162,6 +1195,88 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete` <br>
       Expected: Error details shown in the status message since the command format is invalid.
 
+
+### Finding a person
+
+1. Finding a person while all people are being shown <br>
+
+   1. Prerequisites: List all persons using the `list` command. Multiple people in the list with at least one person 
+   named **Alice**, one person taking the module **CS2103T** and one person having the tag **Lab15**. <br>
+
+   2. Test case: `find n/Alice`<br>
+      Expected: Finds all people with the name ***Alice***. <br> Even if ***Alice*** is a first name or last name, the 
+   person will be found and their name and details are shown.
+
+   3. Test case: `find m/CS2103T`<br>
+      Expected: Finds all people taking the module ***CS2103T***. People found will have their names and details displayed. <br>
+
+   4. Test case: `find t/Lab15`
+      Expected: Finds all people with the tag ***Lab15***. People found will have their names and details displayed. <br>
+
+   5. Test case: `find n/Alice m/CS2103T` <br>
+      Expected: Finds all people with the name ***Alice*** or module ***CS2103T***. People found will have their names 
+   and details displayed. <br><br>
+
+2. Finding a person while only _**some people**_ OR _**none**_ are being shown
+
+   1. Prerequisites: Empty the display list by calling `find n/`. This returns an empty list as 0 people will be found. 
+   Ensure multiple people in the original list with at least one person named **Alice**, one person taking the module 
+   **CS2103T** and one person having the tag **Lab15**. <br>
+   
+   2. Test case: `find t/Lab15`
+      Expected: Finds all people with the tag ***Lab15***. Contact List will change from empty and people found will have their names and details displayed. <br>
+   
+   3. Test case: `find t/Lab15 m/CS2103T` <br>
+      Expected: Finds all people with the tag ***Lab15*** or module ***CS2103T***. Contact List will change from empty and people found will have their names
+      and details displayed. <br><br>
+   
+   4. Test case: `find n/Alice t/Lab15 m/CS2103T` <br>
+         Expected: Finds all people with the name ***Alice***, tag ***Lab15***, or module ***CS2103T***. Contact List will change from empty and people found will have their names
+         and details displayed. <br><br>
+   
+3. Finding a person without specifying the prefix inputs. <br>
+
+   1. Prerequisites: List all persons using the `list` command. Multiple people in the list with at least one person
+      named **Alice**, one person taking the module **CS2103T** and one person having the tag **Lab15**. <br>
+
+   2. Test case: `find t/`
+      Expected: Returns an empty list with panel showing "0 persons listed". <br>
+   
+   3. Test case: `find n/`
+         Expected: Returns an empty list with panel showing "0 persons listed". <br>
+   
+   4. Test case: `find n/ m/`
+         Expected: Returns an empty list with panel showing "0 persons listed". <br>
+   
+   5. Test case: `find n/ m/ t/`
+         Expected: Returns an empty list with panel showing "0 persons listed". <br>
+   
+4. Finding a person with the wrong module input. <br>
+
+   1. Prerequisites: List all persons using the `list` command. Multiple people in the list with at least 
+   one person taking the module **CS2103T**. <br>
+
+   2. Test case: `find m/CSSS2103T`
+      Expected: Error details shown in the status message since the module prefix format is invalid.
+   
+   3. Test case: `find m/CS210345T`
+      Expected: Error details shown in the status message since the module prefix format is invalid.
+   
+   4. Test case: `find m/CS2103TIT`
+      Expected: Error details shown in the status message since the module prefix format is invalid.
+
+5. Incorrect `find` command usage. <br>
+
+   1. Test case: `find`
+      Expected: Error details shown in the status message since the command format is invalid.
+   
+   2. Test case: `find e/e12345`
+      Expected: Error details shown in the status message since the command format is invalid.
+   
+   3. Test case: `find Alice`
+      Expected: Error details shown in the status message since the command format is invalid.
+      
+      
 ### Showing an assignment list
 
 1. Showing assignments while there are multiple people in the contact list.

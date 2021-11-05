@@ -104,7 +104,7 @@ public class AddAssignmentToAllCommand extends Command {
                     .getAssignment(toAdd.getDescription());
             if (!existingAssignment.isSameDueDate(toAdd)) {
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_ASSIGNMENT_DIFFERENT_DUE_DATE,
-                        existingAssignment.getDueDate(), toAdd.getDueDate()));
+                        toAdd.getDueDate(), existingAssignment.getDueDate()));
             }
             return existingAssignment;
         } else {
