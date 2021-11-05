@@ -292,7 +292,7 @@ Operations that may change the person whose assignments are displayed will use t
 The `delete` command is one of the commands that may affect the assignment list displayed. Since `Person` objects and their `Assignments` share a whole-part relationship, when a `Person` object is deleted, their list of `Assignment` should be deleted as well. Hence, if a particular `Person` object is the `activePerson`, the `UniqueAssignmentList` in `AddressBook` should be cleared of `Assignment` objects belonging to that `Person` if he/she is deleted. Below is an activity diagram to illustrate this point.
 
 <p align="center">
-  <img src="images/UpdateAssignmentListActivityDiagram.png.png" alt="Update assignment list activity diagram when person is deleted">
+  <img src="images/UpdateAssignmentListActivityDiagram.png" alt="Update assignment list activity diagram when person is deleted">
 </p>
 
 **Aspect: How undo & redo executes:**
@@ -447,7 +447,7 @@ module.
 The following activity diagram summarizes what happens when a user executes the give command:
 
 <p align="center">
-  <img src="images/GiveActivityDiagram.png" width="250" />
+  <img src="images/GiveActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -502,7 +502,7 @@ module with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the remove command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="500" height="500" />
+  <img src="images/RemoveActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -574,7 +574,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 The following activity diagram summarizes what happens when a user executes the giveall command:
 
 <p align="center">
-  <img src="images/GiveAllActivityDiagram.png" width="300" height="350" />
+  <img src="images/GiveAllActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -680,7 +680,7 @@ name with that assignment.
 The following activity diagram summarizes what happens when a user executes the done command:
 
 <p align="center">
-  <img src="images/DoneActivityDiagram.png" width="250" />
+  <img src="images/DoneActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
