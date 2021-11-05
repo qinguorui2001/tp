@@ -5,7 +5,7 @@ title: Clifford's Project Portfolio Page
 
 ### Project: TA<sup>2</sup>
 
-TA2 is a desktop application that offers Teaching Assistants (TA) from the School of Computing (SoC) at the National University of Singapore (NUS) a convenient and efficient way to manage student information and keep track of students' assignment submissions.
+TA<sup>2</sup> is a desktop application that offers Teaching Assistants (TA) from the School of Computing (SoC) at the National University of Singapore (NUS) a convenient and efficient way to manage student information and keep track of students' assignment submissions. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
