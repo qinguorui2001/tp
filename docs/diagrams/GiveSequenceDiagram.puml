@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("give n/...")
+[-> LogicManager : execute("give 2...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("give n/...")
+LogicManager -> AddressBookParser : parseCommand("give 2...")
 activate AddressBookParser
 
 create AddAssignmentCommandParser
@@ -26,7 +26,7 @@ activate AddAssignmentCommandParser
 AddAssignmentCommandParser --> AddressBookParser
 deactivate AddAssignmentCommandParser
 
-AddressBookParser -> AddAssignmentCommandParser : parse("n/... d/... by/...")
+AddressBookParser -> AddAssignmentCommandParser : parse("2 d/... by/...")
 activate AddAssignmentCommandParser
 
 create AddAssignmentCommand
