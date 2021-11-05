@@ -3,10 +3,23 @@ layout: page
 title: User Guide
 ---
 
-Teaching Assistant's Assistant (TA<sup>2</sup>) is a **desktop app designed for teaching assistants/tutors/professors
-from the School of Computing to help manage student contacts and keep track of students' assignment submissions. TA<sup>2</sup> is
-optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps.
+## **Welcome to TA<sup>2</sup>'s User Guide!**
+{:.no_toc}
+
+Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop app that offers a convenient way for teaching assistants
+from the School of Computing at the National University of Singapore to manage student contacts and keep track of students' assignment submissions.
+
+TA<sup>2</sup> is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps!
+
+This user guide provides you with installation instructions, guide on features of TA<sup>2</sup> and some FAQs.
+
+If you are a new user, check out the [Quick start](#Quick-start) section to help you get started with TA<sup>2</sup>.
+
+For advanced users, the [Command summary](#Command-summary) section gives you an overview of all the commands TA<sup>2</sup> offers.
+
+*Last Updated: 8 November 2021*
+
+--------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
 {:toc}
@@ -17,45 +30,50 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
 1. Ensure you have `Java 11` or later installed in your Computer.
 
-2. Download the latest `ta2.jar` release from [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/releases/tag/v1.4).
+2. Download the latest `ta2.jar` file from [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/releases/tag/v1.4).
 
-3. Copy the file to the folder you want to use as the _home folder_ for your TA<sup>2</sup>.
+3. Copy the file to the folder you want to use as the _home folder_ for TA<sup>2</sup>.
 
 4. Double-click the file to start the app. The window similar to the one shown below should appear in a few seconds.
    Note how the app contains some sample data.<br>
    ![Ui](images/userguide/ta^2_ui.png)
 
-5. You can try some commands by typing them in the command input box and press Enter to execute it.
+5. You can warm up with some commands by typing them in the command input box and pressing Enter to execute it.
 
    Some example commands you can try:
 
-   * **`list`**: Lists all contacts.
+    * **`list`**: Lists all of your contacts.
 
-   * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu`: Adds a student named `John Doe` with his/her relevant information into the contact list.
+    * **`add`**`n/John Doe m/CS2100 e/e1234567@u.nus.edu`: Adds a student named `John Doe` into your contact list.
 
-   * **`giveall`**`d/Assignment 1 m/CS2100 by/31/12/2021`: Adds an assignment call  `Assignment 1`, with deadline 2021, Dec 31,
-     to the assignment list of all students in the contact list who are under the module `CS2100`.
+    * **`show`**`1`: Displays the assignments of the first student in your assignment list.
+    
+    * **`give`**`d/Assignment 1 by/27/3/2022`: Gives an assignment, `Assignment 1` that is due by 27 Mar 2022 at  11.59pm, to the first student in your contact list.
 
-6. Once you finished, and you don't want to keep these sample data. Try `clear` command to offer you a tidy and clean window, 
-   and the journey of using TA<sup>2</sup> officially starts!
+<div markdown="span" class="alert alert-primary">
 
-   * **`clear`**: Deletes all contacts.
+:bulb: **Tip:**<br>
+* If you are unsure about where the contact list, assignment list or command input box are, check out the [Ui Design](#UI-Design) section.
+</div>
 
-7. Refer to the [Features](#features) below for details of each command.
+6. If you wish to start managing your students with TA<sup>2</sup>, use the `clear` command to remove all the sample data.
+
+    * **`clear`**: Deletes all contacts.
+
+7. Refer to the [Features](#features) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## UI Mockup
+## UI Design
 ![UiExplanation](images/userguide/explainingUI.png)
 
- * Command Input Box: The box to type in your commands.
+ * Command Input Box: Type your commands here!
 
- * Result Message Box: Displays a success message if your command has been executed, or an error message if your command
-   has failed.
+ * Result Message Box: Displays the details of the result of your commands.
    
- * Contact List: Displays your student's relevant information.
-
- * Assignment List: Displays a specified student's assignments. (Activated using `show`)
+ * Contact List: Displays your list of students and their relevant information.
+   
+ * Assignment List: Displays a specified student's assignments.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -77,7 +95,7 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be more than 0 and less than 10,000.<br>
+* If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer more than 0 and less than 10,000.<br>
 
 * If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
@@ -89,21 +107,20 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
 ### Viewing help: `help`
 
-Shows a help window with a link directing you to the user guide. Alternatively this can be access by clicking the `Help` button
-that can be found in the top left corner.
+Shows a help window with a link directing you to the user guide. 
+
+Alternatively, you click the `Help` button in the top left corner or press `F1` on your keyboard to open up the help window.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-Possible usage:
-* The help window can be useful if you would like to refer to the user guide for more details of the
-available features in TA<sup>2</sup>.
-
+Possible usage: 
+* The help window will direct you back to this user guide from TA<sup>2</sup> if you need details of any available features.
 
 ### Adding a student: `add`
 
-Adds a student to the contact list with the student's relevant information.
+Adds a student to your contact list with their relevant information.
 
 Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
@@ -112,8 +129,8 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 **:information_source: Note:**<br>
 
 * Duplicate `NAME` is **not allowed**.
-
-    * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in the contact list.
+  
+* e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
 
 * Extra spaces before and between names will be removed.
 
@@ -124,8 +141,8 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
     * e.g. `n/alex yeoh`, `n/DAVID LI` will be converted to `Alex Yeoh` and `David Li` respectively.<br>
 
     * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.<br>
-    
-* A student's `EMAIL` must follow the format as shown [here](#email-format).
+
+    * A student's `EMAIL` must follow the format as shown [here](#email-format).
 
 * Duplicate `EMAIL` is **not allowed**.
 
@@ -139,7 +156,9 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 Examples:
 * `add n/John Doe m/CS1010 e/e1234567@u.nus.edu`
+
 * `add n/Betsy Crowe e/e0234567@u.nus.edu m/CS2103T`
+
 * `add n/alex yeoh e/e1234123@u.nus.edu m/GEQ1000 t/T17`
 
 Possible Usage:
@@ -150,11 +169,9 @@ Possible Usage:
 
 ### Finding students with matching input keywords: `find`
 
-Displays the list of people who match any of the input keywords. The matching is based
-on an ***OR*** basis, where if a student matches at **least one keyword**, that student will
-be considered as matched and thus displayed.
+Filters and displays your contacts who match **at least one** of the input keywords.
 
-Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
+Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 <div markdown="block" class="alert alert-info">
 
@@ -189,15 +206,22 @@ Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 </div>
 
 Examples:
-* `find n/Bernice` returns the students with name of `Bernice`.
-* `find m/CS1101S` returns the students with module `CS1101S`.
+* `find n/Bernice` returns the students who have `Bernice` in their name.
+
+* `find m/CS1101S` returns the students taking module `CS1101S`.
+
 * `find t/Lab15` returns the students with the tag `Lab15`.
-* `find n/Bernice m/MA1521` returns the students with name of `Bernice` or study module `MA1521`.
-* `find m/CM1417 t/Group04` returns the students with module `CM1417` or with the tag `Group04`.
-* `find n/Evian m/CS2103T t/Group10` returns the students who at least satisfy one of the requirements: with the name `Evian`, study module`CS2103T` or with the tag `Group10`.
-* `find t/E34 n/Brian m/GEQ1000` returns the students who at least satisfy one of the requirements: with the name `Brian`, study module`GEQ1000` or with the tag `E34`.
+
+* `find n/Bernice m/MA1521` returns the students who have `Bernice` in their name or are taking module `MA1521`.
+
+* `find m/CS1231 t/Group04` returns the students taking module `CS1231` or with the tag `Group04`.
+
+* `find n/Evian m/CS2103T t/Group10` returns the students who match at least one of the requirements: have `Evian` in their name, taking module`CS2103T` or with the tag `Group10`.
+
+* `find t/E34 n/Brian m/GEQ1000` returns the students who match at least one of the requirements: have`Brian` in their name, taking module`GEQ1000` or with the tag `E34`.
+
 * `find n/alex david m/cs1231 cs2103t` returns the students who at least satisfy one of the requirements:
-  containing `david` or `alex` as separated parts of their names, study module`cs1231` or `cs2103t` (Shown in the image below).
+  have `david` or `alex` in their names, taking modules `cs1231` or `cs2103t` (Shown in the image below).
 ![result for 'find Example'](images/userguide/findExample.png)
 
 Possible Usage:
@@ -226,21 +250,20 @@ Deletes the specified student from the contact list.
 
 Format: `delete INDEX`
 
-* Deletes the student and its relevant information from the contact list at the specified `INDEX`.
+* Deletes the student from the contact list at the specified `INDEX`.
 
 Examples:
-* `list` followed by `delete 2` deletes the second student in the contact list. (if 2nd student exists).
-* `find n/Betsy` followed by `delete 1` deletes the first student in the resulted contact list after `find` command. (if the result is not empty)
+* `delete 2` deletes the second student in the contact list. (if 2nd student exists)
 
 Possible usage:
 
-*  You can use `delete` to delete any student and its relevant information that you do not want to keep.
+*  You can use `delete` to delete any student that you do not need to keep track anymore.
 
 ### Editing a student: `edit`
 
 Modifies any part of the student's information.
 
-Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]…​`
+Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
 * Edits the student's relevant information at the specified `INDEX`.
 
@@ -248,9 +271,9 @@ Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]…​`
 
 **:information_source: Note:**<br>
 
-* The index refers to the index number shown in the displayed contact list.
+* The index refers to the index number of the student in the displayed contact list.
 
-* The index **must be a positive integer within the number of students in the displayed contact list** 1, 2, 3, ...(till the index of the last student)​
+* The index **must be a positive integer and must not exceed number of students displayed in your contact list** 1, 2, 3, ...(till the index of the last student)
 
 * If you have two identical prefixes with the edit command, only the last prefix will be used for the edit. (except for prefix t/)
 
@@ -277,12 +300,11 @@ Examples:
 
 Possible Usage:
 
-* You can use `edit` to make any changes to a student's relevant information after you has mistyped any.
+* You can use `edit` to make changes to any mistakes in a student's information.
 
 ### Showing a student’s assignments: `show`
 
-Shows the assignments of the specified student in the assignment list.
-The assignments are always sorted by status and date.
+Shows the assignments of the specified student in your assignment list.
 
 Format: `show INDEX`
 
@@ -292,11 +314,13 @@ Format: `show INDEX`
 
 **:information_source: Note:**<br>
 
+The assignment list always sorted by date and status.
+
 * Assignments with `COMPLETED` status will be at the bottom of the list.<br>
 
 * Assignments with `PENDING` status will be at the top of the list.<br>
 
-* Assignments with the same status will be sorted by due date.<br>
+* Assignments with earlier due dates will be ranked higher within the same status.<br>
 
 </div>
 
@@ -311,26 +335,40 @@ Examples:
 Possible Usage:
 
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
+* You can look to the top of the assignment list to find out which assignments will be due soon or are overdue.
 
 ### Giving assignment: `give` `giveall`
 
 #### Giving an assignment to a student: `give`
 
-Gives an assignment with a deadline to the student specified by the index in the contact list.
+Gives an assignment to the student specified by the index in the contact list.
 
 Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
+
+* Gives the specified assignment to the student in the contact list at the specified `INDEX`.
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**<br>
 
-* You can give assignment with due dates that has passed the current date of use.
-
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
 
 * If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
+
+* You can give assignments with due dates before today in case you wish to keep a record of old assignments.
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
+  e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
+
+* Assignment descriptions are **case-insensitive**.
+  e.g. `Assignment 2` is the same as `aSsignment 2`
+
+</div>
 
 Examples:
 
@@ -350,30 +388,34 @@ Possible Usage:
 
 #### Giving an assignment to all students in a module: `giveall`
 
-Gives an assignment with a deadline to all students in the specified module .
+Gives an assignment to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:**<br>
-1. It is possible to add an assignment using `giveall` even if some students have the assignment already. Students who have the 
-assignment will not receive a duplicate assignment.
-2. When using `giveall` in the situation stated in point 1, the specified assignment in the input needs to have the same 
-due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure 
-consistency of the due dates of the same assignment.
-
-</div>
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**<br>
 
-* You can give assignment with due dates that has passed the current date of use.
-
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
 
 * If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
+
+* You can give assignments with due dates before today in case you wish to keep a record of old assignments.
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+1. Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
+   e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
+
+2. Assignment descriptions are **case-insensitive**.
+   e.g. `Assignment 2` is the same as `aSsignment 2`.
+
+3. It is possible to give an assignment using `giveall` even if some students have the assignment already. Students who have the assignment will not receive a duplicate assignment.
+
+4. When using `giveall` in the situation stated in point 3, the specified assignment in the input needs to have the same due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
 </div>
 
 Examples:
@@ -386,23 +428,23 @@ Examples:
   of description `Assignment 2` with a deadline `15 Oct 2021, 01:00pm`.
 Possible Usage:
 
-*  You can use `giveall` instead of `give` when there is a module assignment, whereby all students under the module is required to submit.
+*  You can use `giveall` instead of `give` when there is a module assignment, where all students under the module is required to submit.
 
 ### Marking an assignment of a student: `done`
 
-Marks a specified assignment's deadline of a student as completed.
+Marks a specified assignment of a student as completed.
 
 Format: `done INDEX`
 
-* Marks the assignment at the specified`INDEX` as completed in the displayed assignment list of a student.
+* Marks the assignment at the specified `INDEX` as completed in the displayed assignment list of a student.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
 
-* Assignment with pending status will have an orange tag.
+* Assignments with `PENDING` status will have an orange tag.
 
-* Assignment with completed status will have a green tag.
+* Assignments with `COMPLETED` status will have a green tag.
 
 * Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
 
@@ -414,7 +456,7 @@ Examples:
 
 Possible Usage:
 
-* You can use `done` to mark assignments that has been submitted, so you can keep track which student has not submitted yet.
+* You can use `done` to track completion status of an assignment among your students.
 
 ### Removing an assignment of a student: `remove`
 
@@ -422,7 +464,7 @@ Removes the specified assignment from a student.
 
 Format: `remove INDEX`
 
-* Removes the assignment at the specified`INDEX` in the displayed assignment list of a student.
+* Removes the assignment at the specified `INDEX` in the displayed assignment list of a student.
 
 Examples:
 
@@ -438,7 +480,7 @@ Remember to display the student's assignments using [show](#showing-a-students-a
 
 Possible Usage:
 
-* You can use `remove` when you have added an assignment to the wrong student.
+* You can use `remove` if you added an assignment to the wrong student.
 
 ### Removing completed assignments from all students: `clean`
 
@@ -448,7 +490,7 @@ Format: `clean`
 
 Possible Usage:
 
-* You can use `clean` to help remove all completed assignments to reduce clutter in the assignment list.
+* You can use `clean` to reduce clutter in the assignment list.
 
 ### Clearing all entries: `clear`
 
@@ -458,7 +500,8 @@ Format: `clear`
 
 Possible Usage:
 
-* You can use `clear` to remove and reset all data from TA<sup>2</sup> when you deem all the old data unnecessary.
+* You can use `clear` if you no longer need to keep track of students after they have completed the module.
+
 
 ### Undoing a command: `undo`
 
@@ -466,13 +509,8 @@ Undoes the last command entered.
 
 Format: `undo`
 
-<div markdown="span" class="alert alert-warning">
-
-:exclamation:**Caution:**<br>
-
 * Undo all commands except for `undo` and `redo`.
-* At the start of the program, you can not undo anything.
-</div>
+* When you first start TA<sup>2</sup>, there is nothing to undo.
 
 ### Redoing a command: `redo`
 
@@ -480,13 +518,8 @@ Recovers the effect of the last `undo` command.
 
 Format: `redo`
 
-<div markdown="span" class="alert alert-warning">
-
-:exclamation:**Caution:**<br>
-
 * Redo all commands except for `undo` and `redo`.
-* Once you enter a new command except for `undo` and `redo`, you can not redo anymore.
-</div>
+* Once you enter a new command except for undo and redo, there is nothing to redo.
 
 ### Exiting the program: `exit`
 
@@ -516,6 +549,9 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TA<sup>2</sup> home folder.
 
+**Q**: How can I get the sample data back?<br>
+**A**: Close your TA<sup>2</sup> application. Go into the `data` folder in your _home folder_ for TA<sup>2</sup>, delete the `ta2.json` file and start TA<sup>2</sup> again.    
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -524,7 +560,7 @@ Action | Command | Format | Examples
 ------------|--------|-----------|-------
 [Viewing help](#viewing-help-help) | **help** | `help`
 [Adding a student](#adding-a-student-add) | **add** | `add` `n/NAME e/EMAIL m/MODULE [t/TAG]…​` | `add n/James Ho m/CS2100 e/E7954753@u.nus.edu t/T25`
-[Finding students with matching input keywords](#finding-students-with-matching-input-keywords-find) | **find** | `find` `[n/NAME] [m/MODULE] [t/TAG]…​` | `find n/James Jake m/CS2100 t/T13`
+[Finding students with matching input keywords](#finding-students-with-matching-input-keywords-find) | **find** | `find` `[n/NAME]…​ [m/MODULE]…​ [t/TAG]…​` | `find n/James Jake m/CS2100 t/T13`
 [Listing all students](#listing-all-students-list) | **list** | `list`
 [Deleting a student](#deleting-a-student-delete) | **delete** | `delete` `INDEX` | `delete 3`
 [Editing a student](#editing-a-student-edit) | **edit** | `edit` `INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​` | `edit 2 n/James Lee e/E4853765@u.nus.edu`
