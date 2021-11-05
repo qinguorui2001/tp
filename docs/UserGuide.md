@@ -53,7 +53,7 @@ For advanced users, the [Command summary](#Command-summary) section gives you an
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**<br>
-* If you are unsure about where the contact list, assignment list or command input box are, check out the [Ui Design](#UI-Design) section.
+1. If you are unsure about where the contact list, assignment list or command input box are, check out the [Ui Design](#UI-Design) section.
 </div>
 
 6. If you wish to start managing your students with TA<sup>2</sup>, use the `clear` command to remove all the sample data.
@@ -202,8 +202,8 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 :bulb: **Tip:**<br>
 
-* We can search for multiple fields. <br>
-  e.g. `m/CS1101S CS2103T` or `m/CS1101S m/CS2103T` will return people who take either modules.
+1. We can search for multiple fields. <br>
+   e.g. `m/CS1101S CS2103T` or `m/CS1101S m/CS2103T` will return people who take either modules.
 </div>
 
 Examples:
@@ -286,9 +286,9 @@ Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
 :bulb: **Tip:**<br>
 
-* You can modify several parts of student information at the same time.
+1. You can modify several parts of student information at the same time.<br>
 
-* If you wish to remove the tags for a student, simply type `t/` prefix without any parameters.
+2. If you wish to remove the tags for a student, simply type `t/` prefix without any parameters.
 </div>
 
 Examples:
@@ -352,11 +352,11 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 :bulb: **Tip:**<br>
 
-* The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
+1. The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).<br>
 
-* If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
+2. If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.<br>
 
-* You can give assignments with due dates before today in case you wish to keep a record of old assignments.
+3. You can give assignments with due dates before today in case you wish to keep a record of old assignments.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -397,11 +397,11 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 :bulb: **Tip:**<br>
 
-* The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
+1. The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).<br>
 
-* If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
+2. If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.<br>
 
-* You can give assignments with due dates before today in case you wish to keep a record of old assignments.
+3. You can give assignments with due dates before today in case you wish to keep a record of old assignments.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -611,7 +611,7 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:**<br>
-Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent and will be rightfully detected.
+1. Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent and will be rightfully detected.
 </div>
 
 
