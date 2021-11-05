@@ -59,7 +59,7 @@ Given below is a quick overview of main components and how they interact with ea
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#Common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
@@ -105,7 +105,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Assignment` object residing in the `Model`.
 
 ### Logic component
 
@@ -141,7 +141,6 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -151,8 +150,14 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the versioned address book data which includes
+  * all `Person` objects contained in a `UniquePersonList` object
+  * all `Assignment` objects of the "active" `Person` object contained in a `UniqueAssignmentList` object
+  * the "active" `Person` (the person whose assignments are stored in `UniqueAssignmentList` of `AddressBook`)
+  * the current predicate of the filtered person list
+  * the states of `ReadOnlyAddressBook`
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Assignment` objects of the "active" `Person` object as a separate _observable_ list which is exposed to outsiders as an unmodifiable `ObservableList<Assignment>` that can be 'observed' as well.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -1115,7 +1120,6 @@ testers are expected to do more *exploratory* testing.
    3. Launch the jar file using the ```java -jar ta2.jar```.
 
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
-<br/><br />
 ![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
 2. Saving window preferences
 
@@ -1125,6 +1129,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 ### Adding a person
+
 1. Adding a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Ensure there is no person named "Stephen Fallon" in the list before proceeding.
@@ -1157,6 +1162,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is added. Error details shown in the status message due to invalid command format.
 
 ### Deleting a person
+
 1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
@@ -1471,7 +1477,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking an assignment
 
-1. Marking an assigment while all assignments of a person are being shown.
+1. Marking an assignment while all assignments of a person are being shown.
 
    1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are already shown.
 
@@ -1501,24 +1507,30 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Clearing all entries
+
 1. Prerequisites: Have multiple persons in your list.
 
 2. Type `show 1` to display the first person's assignment list.
 
 3. Test case: `clear`<br/>
-Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message. <br/><br/>![Clear Command Success Screen](images/ManualTestingClear.PNG)<br/><br/>
+Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message.
+
+![Clear Command Success Screen](images/ManualTestingClear.PNG)
 
 ### Viewing Help
+
 1. Test case: `help`<br/>
-   Expected: Pops up a help window as shown in the image below. Success message shown in the status message. <br/><br/>
-![Help window](images/ManualTestingViewingHelp.PNG)<br/><br/>
+   Expected: Pops up a help window as shown in the image below. Success message shown in the status message. 
+![Help window](images/ManualTestingViewingHelp.PNG)
 2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of TA<sup>2</sup>.
 
 ### Exiting the Program
+
 1. Test case: `exit` <br/>
    Expected: The TA<sup>2</sup> window will close promptly.
 
 ### Listing all Persons
+
 1. Listing all persons when some persons are displayed.
 
    1. Prerequisites: Have multiple persons in contact list. Choose one of the person's name and use the `find` command to narrow the search to that person, e.g. `find n/Alex Yeoh` if "Alex Yeoh" is in your contact list.
@@ -1533,7 +1545,7 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
    1. To simulate: Delete `ta2.json` file. <br>
    
    2. Expected: TA<sup>2</sup> will start with sample data. <br>
-
+   
 2. Data file `ta2.json` in wrong format. <br>
 
    1. To simulate: Remove a square bracket in the `ta2.json` file. <br>
