@@ -695,7 +695,7 @@ The following activity diagram summarizes what happens when a user executes the 
     * Cons: User may not be certain about which person's assignment to mark if several of them has completed assignment
       and likely to remember the wrong person name if the current person displayed list is not shown
 
-* Considering the fact that TA<sup>2</sup> is designed to be user-friendly in managing student submissions,**alternative 1** is
+* Considering the fact that TA<sup>2</sup> is designed to be user-friendly in managing student submissions, **alternative 1** is
   chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
   marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
@@ -703,7 +703,7 @@ The following activity diagram summarizes what happens when a user executes the 
 ### Find feature
 
 #### Implementation
-The *find command* allows users to find specific people in their list, based on certain
+The `find command` allows users to find specific people in their list, based on certain
 matching criteria such as:
 
 1. Name
@@ -715,12 +715,12 @@ The command is represented by the `find` keyword.
 This allows users to specify their list and cut down on the amount of information displayed,
 selectively choosing those that the users would only like to see.
 
-The *Find Command* is a subclass of the *Command* class. Once the user enters the `find`
+The `FindCommand` is a subclass of the `Command` class. Once the user enters the `find`
 keyword, the `LogicManager` class will execute the command and pass the
 input to the `AddressBookParser` class to parse the given input.
 
 From this class, a specific parser class known as the `FindPersonCommandParser`
-is created and used to parse the input based on the *find* specificity.
+is created and used to parse the input based on the `find` specificity.
 
 Next, the `FindPersonCommandParser` class returns a `FindPersonCommand` or
 an exception, depending on the validity of the command input. The
@@ -744,7 +744,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 </div>
 
-The following activity diagram summarizes what happens when a user executes the *Find Command*:
+The following activity diagram summarizes what happens when a user executes the `FindCommand`:
 
 <p align="center">
   <img src="images/FindActivityDiagram.png">
@@ -836,16 +836,16 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 The following activity diagram shows the possible paths whilst a user adds an assignment using `giveall`:
 
 <p align="center">
-  <img src="images/AddAssignmentActivityDiagram.png">
+  <img src="images/GiveAllActivityDiagram.png">
 </p>
 
-The following sequence diagram shows the logic sequence of an AddAssignment command execution:
+The following sequence diagram shows the logic sequence of an AddAssignmentToAll command execution:
 
 <p align="center">
-  <img src="images/AddAssignmentSequenceDiagram.png">
+  <img src="images/GiveAllSequenceDiagram.png">
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
