@@ -84,7 +84,7 @@ public class AddAssignmentToAllCommand extends Command {
         // to prevent inconsistencies in letter cases
         Assignment standardisedAssignment = new Assignment(existingAssignment.getDescription(),
                 toAdd.getDueDate(), toAdd.getStatus());
-        model.addAllAssignment(personListWithoutAssignment, standardisedAssignment);
+        model.addAllAssignments(personListWithoutAssignment, standardisedAssignment);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, module, standardisedAssignment));
     }

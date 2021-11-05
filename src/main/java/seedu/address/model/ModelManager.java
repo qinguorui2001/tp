@@ -12,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
@@ -144,7 +146,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addAllAssignment(List<Person> personList, Assignment toAdd) {
+    public void addAllAssignments(List<Person> personList, Assignment toAdd) {
         for (Person person: personList) {
             assert (!hasAssignment(person, toAdd));
             versionedAddressBook.addAssignment(person, toAdd);
@@ -179,6 +181,21 @@ public class ModelManager implements Model {
         return versionedAddressBook.isAssignmentCompleted(assignment);
     }
 
+    @Override
+    public Assignment getAssignmentInList(Index targetAssignmentIndex) throws CommandException {
+
+        if (!hasActivePerson()) {
+            throw new CommandException(Messages.MESSAGE_NO_ASSIGNMENT_LIST_DISPLAYED);
+        }
+
+        List<Assignment> assignmentList = getAssignmentList();
+
+        if (targetAssignmentIndex.getZeroBased() >= assignmentList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
+        }
+
+        return assignmentList.get(targetAssignmentIndex.getZeroBased());
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**

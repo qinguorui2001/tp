@@ -1,13 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assignment.Assignment;
 import seedu.address.model.person.Person;
-
-import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_WITH_LIMIT;
@@ -42,19 +39,9 @@ public class MarkAssignmentCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasActivePerson()) {
-            throw new CommandException(Messages.MESSAGE_NO_ASSIGNMENT_LIST_DISPLAYED);
-        }
+        Assignment assignmentToMark = model.getAssignmentInList(targetAssignmentIndex);
 
         Person personToRemoveAssignment = model.getActivePerson();
-
-        List<Assignment> assignmentList = model.getAssignmentList();
-
-        if (targetAssignmentIndex.getZeroBased() >= assignmentList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ASSIGNMENT_DISPLAYED_INDEX);
-        }
-
-        Assignment assignmentToMark = assignmentList.get(targetAssignmentIndex.getZeroBased());
 
         if (model.isAssignmentCompleted(assignmentToMark)) {
             throw new CommandException(MESSAGE_ASSIGNMENT_ALREADY_COMPLETED);

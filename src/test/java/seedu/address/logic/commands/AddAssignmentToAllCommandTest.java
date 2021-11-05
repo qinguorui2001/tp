@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -209,7 +210,7 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
-        public void addAllAssignment(List<Person> personList, Assignment toAdd) {
+        public void addAllAssignments(List<Person> personList, Assignment toAdd) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -259,6 +260,11 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
+        public Assignment getAssignmentInList(Index targetAssignmentIndex) throws CommandException {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Assignment> getAssignmentList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -286,7 +292,7 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
-        public void addAllAssignment(List<Person> personList, Assignment assignment) {
+        public void addAllAssignments(List<Person> personList, Assignment assignment) {
             requireNonNull(assignment);
             personList.get(0).getAssignments().add(assignment);
             personList.get(1).getAssignments().add(assignment);
@@ -334,7 +340,7 @@ public class AddAssignmentToAllCommandTest {
         }
 
         @Override
-        public void addAllAssignment(List<Person> personList, Assignment assignment) {
+        public void addAllAssignments(List<Person> personList, Assignment assignment) {
             requireNonNull(assignment);
             for (Person person : personList) {
                 boolean person1NoAssignment = person.equals(person1) && !hasAssignment(person1, assignment);

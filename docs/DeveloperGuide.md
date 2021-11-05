@@ -62,7 +62,7 @@ Given below is a quick overview of main components and how they interact with ea
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
-[**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
+[**`Commons`**](#Common-classes) represents a collection of classes used by multiple other components.
 
 The rest of the App consists of four components.
 
@@ -108,7 +108,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `Assignment` object residing in the `Model`.
 
 ### Logic component
 
@@ -144,7 +144,6 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -154,18 +153,16 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the versioned address book data which includes
+  * all `Person` objects contained in a `UniquePersonList` object
+  * all `Assignment` objects of the "active" `Person` object contained in a `UniqueAssignmentList` object
+  * the "active" `Person` (the person whose assignments are stored in `UniqueAssignmentList` of `AddressBook`)
+  * the current predicate of the filtered person list
+  * the states of `ReadOnlyAddressBook`
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the currently 'selected' `Assignment` objects of the "active" `Person` object as a separate _observable_ list which is exposed to outsiders as an unmodifiable `ObservableList<Assignment>` that can be 'observed' as well.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-  <p align="center">
-    <img src="images/BetterModelClassDiagram.png" width="450" />
-  </p>
-</div>
-
 
 ### Storage component
 
@@ -295,7 +292,7 @@ Operations that may change the person whose assignments are displayed will use t
 The `delete` command is one of the commands that may affect the assignment list displayed. Since `Person` objects and their `Assignments` share a whole-part relationship, when a `Person` object is deleted, their list of `Assignment` should be deleted as well. Hence, if a particular `Person` object is the `activePerson`, the `UniqueAssignmentList` in `AddressBook` should be cleared of `Assignment` objects belonging to that `Person` if he/she is deleted. Below is an activity diagram to illustrate this point.
 
 <p align="center">
-  <img src="images/UpdateAssignmentListActivityDiagram.png.png" alt="Update assignment list activity diagram when person is deleted">
+  <img src="images/UpdateAssignmentListActivityDiagram.png" alt="Update assignment list activity diagram when person is deleted">
 </p>
 
 **Aspect: How undo & redo executes:**
@@ -432,7 +429,8 @@ persons with the specified module field, it will return an error to the user.
 
 </div>
 
-The following sequence diagram shows how the `clean` command is executed:
+The following sequence diagram shows how the `give` command is executed:
+
 <p align="center">
   <img src="images/GiveSequenceDiagram.png">
 </p>
@@ -448,7 +446,7 @@ module.
 The following activity diagram summarizes what happens when a user executes the `give` command:
 
 <p align="center">
-  <img src="images/GiveActivityDiagram.png" width="250" />
+  <img src="images/GiveActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -503,7 +501,7 @@ module with that assignment.
 
 The following activity diagram summarizes what happens when a user executes the `remove` command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="250" />
+  <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
 </p>
 
 #### Design considerations
@@ -575,7 +573,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 The following activity diagram summarizes what happens when a user executes the `giveall` command:
 
 <p align="center">
-  <img src="images/GiveAllActivityDiagram.png" width="300" height="350" />
+  <img src="images/GiveAllActivityDiagram.png" width="500" height="550" />
 </p>
 
 #### Design considerations
@@ -681,7 +679,7 @@ name with that assignment.
 The following activity diagram summarizes what happens when a user executes the `done` command:
 
 <p align="center">
-  <img src="images/DoneActivityDiagram.png" width="250" />
+  <img src="images/DoneActivityDiagram.png" width="600" height="550" />
 </p>
 
 #### Design considerations
@@ -791,13 +789,13 @@ original command inputs.
 | tmr                                         | sets the date to be tomorrow                  | give n/name d/description by/tmr                                        |
 | today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |
 | week                                        | sets the date to be a week from now           | give n/name d/description by/week                                       |
-| mon                                         | sets the date to be the upcoming monday       | give n/name d/description by/mon                                        |
-| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |
-| wed                                         | sets the date to be the upcoming wednesday    | give n/name d/description by/wed                                        |
-| thu                                         | sets the date to be the upcoming thursday     | give n/name d/description by/thu                                        |
-| fri                                         | sets the date to be the upcoming friday       | give n/name d/description by/fri                                        |
-| sat                                         | sets the date to be the upcoming saturday     | give n/name d/description by/sat                                        |
-| sun                                         | sets the date to be the upcoming sunday       | give n/name d/description by/sun                                        |
+| mon                                         | sets the date to be the upcoming Monday       | give n/name d/description by/mon                                        |
+| tue                                         | sets the date to be the upcoming Tuesday      | give n/name d/description by/tue                                        |
+| wed                                         | sets the date to be the upcoming Wednesday    | give n/name d/description by/wed                                        |
+| thu                                         | sets the date to be the upcoming Thursday     | give n/name d/description by/thu                                        |
+| fri                                         | sets the date to be the upcoming Friday       | give n/name d/description by/fri                                        |
+| sat                                         | sets the date to be the upcoming Saturday     | give n/name d/description by/sat                                        |
+| sun                                         | sets the date to be the upcoming Sunday       | give n/name d/description by/sun                                        |
 
 When the user enters a command with the *friendly* command input, the `AddressBookParser` class will recognize the command
 and parse the entered command. 
@@ -929,7 +927,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy TA                                    | list people whose information I access frequently | save time searching their name whenever I start the application              |
 | `*`      | TA with many assignments to manage         | see assignments that need my attention the most at the present moment | I can prioritise which assignment to attend to           |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -1056,21 +1053,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list assignments of a person.
-2. User requests to mark a specific assignment in the list as done.
-3. TA<sup>2</sup> shows the assignment is done.
+1. User requests to show assignments of a person.
+2. TA<sup>2</sup> shows a list of assignments.
+3. User requests to mark a specific assignment in the list as done.
+4. TA<sup>2</sup> shows the assignment is done.
 
    Use case ends.
 
 **Extensions**
 
-* 2a. The assignment doesn't exist in the assignment list.
+* 2a. The list is empty.
 
   Use case ends.
 
-* 2b. The given index is invalid, or the assignment has already been mark completed.
+* 3b. The given index is invalid, or the assignment has already been mark completed.
 
-  * 2b1. TA<sup>2</sup> shows an error message.
+  * 3b1. TA<sup>2</sup> shows an error message.
 
     Use case resumes at step 1.
 
@@ -1123,7 +1121,6 @@ testers are expected to do more *exploratory* testing.
    3. Launch the jar file using the ```java -jar ta2.jar```.
 
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
-<br/><br />
 ![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
 2. Saving window preferences
 
@@ -1133,6 +1130,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 ### Adding a person
+
 1. Adding a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Ensure there is no person named "Stephen Fallon" in the list before proceeding.
@@ -1165,6 +1163,7 @@ testers are expected to do more *exploratory* testing.
       Expected: No person is added. Error details shown in the status message due to invalid command format.
 
 ### Deleting a person
+
 1. Deleting a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
@@ -1479,7 +1478,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Marking an assignment
 
-1. Marking an assigment while all assignments of a person are being shown.
+1. Marking an assignment while all assignments of a person are being shown.
 
    1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are already shown.
 
@@ -1509,24 +1508,30 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Clearing all entries
+
 1. Prerequisites: Have multiple persons in your list.
 
 2. Type `show 1` to display the first person's assignment list.
 
 3. Test case: `clear`<br/>
-Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message. <br/><br/>![Clear Command Success Screen](images/ManualTestingClear.PNG)<br/><br/>
+Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message.
+
+![Clear Command Success Screen](images/ManualTestingClear.PNG)
 
 ### Viewing Help
+
 1. Test case: `help`<br/>
-   Expected: Pops up a help window as shown in the image below. Success message shown in the status message. <br/><br/>
-![Help window](images/ManualTestingViewingHelp.PNG)<br/><br/>
+   Expected: Pops up a help window as shown in the image below. Success message shown in the status message. 
+![Help window](images/ManualTestingViewingHelp.PNG)
 2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of TA<sup>2</sup>.
 
 ### Exiting the Program
+
 1. Test case: `exit` <br/>
    Expected: The TA<sup>2</sup> window will close promptly.
 
 ### Listing all Persons
+
 1. Listing all persons when some persons are displayed.
 
    1. Prerequisites: Have multiple persons in contact list. Choose one of the person's name and use the `find` command to narrow the search to that person, e.g. `find n/Alex Yeoh` if "Alex Yeoh" is in your contact list.
@@ -1541,7 +1546,7 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
    1. To simulate: Delete `ta2.json` file. <br>
    
    2. Expected: TA<sup>2</sup> will start with sample data. <br>
-
+   
 2. Data file `ta2.json` in wrong format. <br>
 
    1. To simulate: Remove a square bracket in the `ta2.json` file. <br>
