@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("done n/...")
+[-> LogicManager : execute("done 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("done n/...")
+LogicManager -> AddressBookParser : parseCommand("done 1")
 activate AddressBookParser
 
 create MarkAssignmentCommandParser
@@ -26,7 +26,7 @@ activate MarkAssignmentCommandParser
 MarkAssignmentCommandParser --> AddressBookParser
 deactivate MarkAssignmentCommandParser
 
-AddressBookParser -> MarkAssignmentCommandParser : parse("n/...")
+AddressBookParser -> MarkAssignmentCommandParser : parse("1")
 activate MarkAssignmentCommandParser
 
 create MarkAssignmentCommand
