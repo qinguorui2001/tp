@@ -822,13 +822,13 @@ The following activity diagram shows the possible paths whilst a user adds an as
   <img src="images/AddAssignmentActivityDiagram.png">
 </p>
 
-The following sequence diagram shows the logic sequence of an AddAssignment command execution:
+The following sequence diagram shows the logic sequence of an `AddAssignment` command execution:
 
 <p align="center">
   <img src="images/AddAssignmentSequenceDiagram.png">
 </p>
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for AddAssignmentCommand
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div> <br>
 
@@ -839,7 +839,7 @@ The following activity diagram shows the possible paths whilst a user adds an as
   <img src="images/GiveAllActivityDiagram.png">
 </p>
 
-The following sequence diagram shows the logic sequence of an AddAssignmentToAll command execution:
+The following sequence diagram shows the logic sequence of an `AddAssignmentToAll` command execution:
 
 <p align="center">
   <img src="images/GiveAllSequenceDiagram.png">
@@ -848,6 +848,7 @@ The following sequence diagram shows the logic sequence of an AddAssignmentToAll
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
+
 
 #### Design considerations
 **Aspect: Rigidity in allowing users to add assignments correctly yet handle multiple short-form user inputs:**
