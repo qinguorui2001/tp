@@ -52,8 +52,8 @@ If you can type fast, TA<sup>2</sup> can get your contact and assignment managem
 
  * Result Message Box: Displays a success message if your command has been executed, or an error message if your command
    has failed.
-
- * Contact List: Displays your student's relevant information. (Can be modified using `find`)
+   
+ * Contact List: Displays your student's relevant information.
 
  * Assignment List: Displays a specified student's assignments. (Activated using `show`)
 
@@ -117,21 +117,15 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Extra spaces before and between names will be removed.
 
-* A student's `MODULE` must follow the format as shown [here.](#module-naming-convention)
+* A student's `MODULE` must follow the format as shown [here](#module-naming-convention).
 
 * Only student's initials and module code will be capitalised on the displayed student list.<br>
 
     * e.g. `n/alex yeoh`, `n/DAVID LI` will be converted to `Alex Yeoh` and `David Li` respectively.<br>
 
     * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.<br>
-
-* A student's `EMAIL` must follow the format:
-
-    * The whole `EMAIL` must have a **maximum of 320 characters**.
-
-    * The local part must have a **maximum of 64 characters**.
-
-    * The domain name must have a **maximum of 255 characters**.
+    
+* A student's `EMAIL` must follow the format as shown [here](#email-format).
 
 * Duplicate `EMAIL` is **not allowed**.
 
@@ -188,7 +182,8 @@ Format: `find [n/NAME] [m/MODULE] [t/TAG]...`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
+
 * We can search for multiple fields. <br>
   e.g. `m/CS1101S CS2103T` or `m/CS1101S m/CS2103T` will return people who take either modules.
 </div>
@@ -247,6 +242,8 @@ Modifies any part of the student's information.
 
 Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]…​`
 
+* Edits the student's relevant information at the specified `INDEX`.
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
@@ -263,7 +260,7 @@ Format: `edit INDEX [m/MODULE] [e/EMAIL] [t/TAG] [n/NAME]…​`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 
 * You can modify several parts of student information at the same time.
 
@@ -285,11 +282,11 @@ Possible Usage:
 ### Showing a student’s assignments: `show`
 
 Shows the assignments of the specified student in the assignment list.
-The assignment list is always sorted by status and date.
+The assignments are always sorted by status and date.
 
 Format: `show INDEX`
 
-* Shows the assignment list of the student at the specified `INDEX` of the displayed contact list.
+* Shows the assignments of the student at the specified `INDEX` of the displayed contact list.
 
 <div markdown="block" class="alert alert-info">
 
@@ -307,14 +304,15 @@ Examples:
 
 * The index refers to the index shown in the displayed student list.
 
-* `show 1` renders the first student’s assignment list on the assignment list panel (Shown in the image below).
+* `show 1` renders the first student’s assignments on the assignment list (Shown in the image below). 
+
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
 
 Possible Usage:
 
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
 
-### Giving assignments: `give` `giveall`
+### Giving assignment: `give` `giveall`
 
 #### Giving an assignment to a student: `give`
 
@@ -324,21 +322,15 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 
-* You can give assignments with due dates that has passed the current date of use.
+* You can give assignment with due dates that has passed the current date of use.
 
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
 
 * If time `[,HHmm]` is not specified, time will be set to `11:59 pm` by default.
 </div>
 
-**Note:**
-1. It is possible to add an assignment using `giveall` even if some students have the assignment already. Students who have the
-assignment will not receive a duplicate assignment.
-2. When using `giveall` in the situation stated in point 1, the specified assignment in the input needs to have the same
-due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure
-consistency of the due dates of the same assignment.
 
 Examples:
 
@@ -358,15 +350,26 @@ Possible Usage:
 
 #### Giving an assignment to all students in a module: `giveall`
 
-Adds an assignment with a deadline to all students in the specified module .
+Gives an assignment with a deadline to all students in the specified module .
 
 Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+1. It is possible to add an assignment using `giveall` even if some students have the assignment already. Students who have the 
+assignment will not receive a duplicate assignment.
+2. When using `giveall` in the situation stated in point 1, the specified assignment in the input needs to have the same 
+due date as the existing assignment. **The command will not be valid if the due date is different.** This is to ensure 
+consistency of the due dates of the same assignment.
+
+</div>
+
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 
-* You can give assignments with due dates that has passed the current date of use.
+* You can give assignment with due dates that has passed the current date of use.
 
 * The date `d/M/yyyy` can be replaced by [friendly commands](#friendly-commands).
 
@@ -397,11 +400,11 @@ Format: `done INDEX`
 
 **:information_source: Note:**<br>
 
-* Assignments with pending status will have an orange tag.
+* Assignment with pending status will have an orange tag.
 
-* Assignments with completed status will have a green tag.
+* Assignment with completed status will have a green tag.
 
-* Remember to display the student's assignment list using [show](#showing-a-students-assignment-list-show) before using the done command!
+* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
 
 </div>
 
@@ -429,7 +432,7 @@ Examples:
 
 **:information_source: Note:**<br>
 
-Remember to display the student's assignment list using [show](#showing-a-students-assignment-list-show) before using the `remove` command!
+Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the `remove` command!
 
 </div>
 
@@ -464,7 +467,8 @@ Undoes the last command entered.
 Format: `undo`
 
 <div markdown="span" class="alert alert-warning">
-:exclamation:**Caution:**
+
+:exclamation:**Caution:**<br>
 
 * Undo all commands except for `undo` and `redo`.
 * At the start of the program, you can not undo anything.
@@ -477,7 +481,8 @@ Recovers the effect of the last `undo` command.
 Format: `redo`
 
 <div markdown="span" class="alert alert-warning">
-:exclamation:**Caution:**
+
+:exclamation:**Caution:**<br>
 
 * Redo all commands except for `undo` and `redo`.
 * Once you enter a new command except for `undo` and `redo`, you can not redo anymore.
@@ -498,7 +503,8 @@ TA<sup>2</sup> data are saved in the hard disk automatically after any command t
 TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">
-:exclamation:**Caution:**
+
+:exclamation:**Caution:**<br>
 
 * If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
 </div>
@@ -536,6 +542,33 @@ Action | Command | Format | Examples
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
 
+#### Module Naming Convention
+
+- The module format is **XX[X]1111[X]**, where X is any letter, 1 is any number and values in square brackets are optional.<br>
+
+#### Email format
+Emails should be of the format *local-part@domain* whereby the domain name is made up of domain labels.
+
+* The whole `EMAIL` must have a **maximum of 320 characters**.
+  
+* The local part should only contain alphanumeric characters and these special character `+ - . _`.
+
+* The local part must:
+    * have a **maximum of 64 characters**.
+    
+    * not start or end with any special characters.
+    
+    * not 2 consecutive special characters.
+    
+* The domain name must:
+    * have a **maximum of 255 characters**.
+    
+    * end with a domain label at least 2 characters long.
+    
+    * have each domain label start and end with alphanumeric characters.
+    
+    * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
 #### Friendly commands
 
 * `today` - sets due date to tonight.
@@ -558,8 +591,5 @@ Action | Command | Format | Examples
 
 * `sun` - sets due date to the coming sunday.
 
-#### Module Naming Convention
-
-- The module format is **XX[X]1111[X]**, where X is any letter, 1 is any number and values in square brackets are optional.<br>
 
 --------------------------------------------------------------------------------------------------------------------
