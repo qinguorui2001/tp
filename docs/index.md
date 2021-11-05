@@ -1,4 +1,3 @@
-
 ---
 layout: page
 title: Introducing to you: TA<sup>2</sup>
@@ -26,13 +25,13 @@ will do it for you.
 
 ## For Users
 
-* If you are interested in using TA<sup>2</sup>, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start)
+* If you are interested in using TA<sup>2</sup>, head over to the [_Quick Start_ section of the **User Guide**](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html#quick-start)
   to get your hands on this application.
-* If you are unsure of how to use the application, the [**User Guide**](UserGuide.html) has a detailed walkthrough on its features.
+* If you are unsure of how to use the application, the [**User Guide**](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) has a detailed walk-through on its features.
 
 ## For Developers
 
-* If you are interested in developing TA<sup>2</sup>, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in developing TA<sup>2</sup>, the [**Developer Guide**](https://ay2122s1-cs2103t-t13-2.github.io/tp/DeveloperGuide.html) is a good place to start.
 
 **Acknowledgements**
 

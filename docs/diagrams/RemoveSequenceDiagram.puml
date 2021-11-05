@@ -13,10 +13,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("remove n/...")
+[-> LogicManager : execute("remove 1")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("remove n/...")
+LogicManager -> AddressBookParser : parseCommand("remove 1")
 activate AddressBookParser
 
 create DeleteAssignmentCommandParser
@@ -26,7 +26,7 @@ activate DeleteAssignmentCommandParser
 DeleteAssignmentCommandParser --> AddressBookParser
 deactivate DeleteAssignmentCommandParser
 
-AddressBookParser -> DeleteAssignmentCommandParser : parse("n/...")
+AddressBookParser -> DeleteAssignmentCommandParser : parse("1")
 activate DeleteAssignmentCommandParser
 
 create DeleteAssignmentCommand
