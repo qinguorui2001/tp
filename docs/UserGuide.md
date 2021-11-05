@@ -53,10 +53,10 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 
 6. Refer to the [Features](#features) below for more details of each command.
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="block" class="alert alert-primary">
 
-**:bulb: Tip:**<br>
-
+**:bulb: Tip:**
+<br>
 * If you are unsure about where the contact list, assignment list or command input box are, check out the [Ui Design](#ui-design) section.
 
 </div>
@@ -280,7 +280,7 @@ Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
 * The index **must be a positive integer and must not exceed number of students displayed in your contact list** 1, 2, 3, ...(till the index of the last student)
 
-* If you have two identical prefixes with the edit command, only the last prefix will be used for the edit. (except for prefix t/)
+* If you have two identical prefixes with the `edit` command, only the last prefix will be used for the edit. (except for prefix t/)
 
 * Require **at least one** prefix to edit.
 
@@ -443,7 +443,7 @@ Possible Usage:
 
 *  You can use `giveall` instead of `give` when there is a module assignment, where all students under the module is required to submit.
 
-### Marking an assignment of a student: `done`
+### Marking an assignment as completed: `done`
 
 Marks a specified assignment of a student as completed.
 
@@ -455,7 +455,7 @@ Format: `done INDEX`
 
 **:information_source: Note:**<br>
 
-* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the done command!
+* Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the `done` command!
 
 * Assignments with `PENDING` status will be colour-coded in orange.
 
@@ -626,7 +626,7 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
 
 **:bulb: Tip:**<br>
 
-Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent and will be rightfully detected.
+Friendly commands are all case-insensitive. `TODAY` and `today` are equivalent and will be rightfully detected.<br>
 
 </div>
 
