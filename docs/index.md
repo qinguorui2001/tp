@@ -1,4 +1,3 @@
-
 ---
 layout: page
 title: Introducing to you: TA<sup>2</sup>
