@@ -790,13 +790,13 @@ original command inputs.
 | tmr                                         | sets the date to be tomorrow                  | give n/name d/description by/tmr                                        |
 | today                                       | sets the date to be the current date          | give n/name d/description by/today                                      |
 | week                                        | sets the date to be a week from now           | give n/name d/description by/week                                       |
-| mon                                         | sets the date to be the upcoming monday       | give n/name d/description by/mon                                        |
-| tue                                         | sets the date to be the upcoming tuesday      | give n/name d/description by/tue                                        |
-| wed                                         | sets the date to be the upcoming wednesday    | give n/name d/description by/wed                                        |
-| thu                                         | sets the date to be the upcoming thursday     | give n/name d/description by/thu                                        |
-| fri                                         | sets the date to be the upcoming friday       | give n/name d/description by/fri                                        |
-| sat                                         | sets the date to be the upcoming saturday     | give n/name d/description by/sat                                        |
-| sun                                         | sets the date to be the upcoming sunday       | give n/name d/description by/sun                                        |
+| mon                                         | sets the date to be the upcoming Monday       | give n/name d/description by/mon                                        |
+| tue                                         | sets the date to be the upcoming Tuesday      | give n/name d/description by/tue                                        |
+| wed                                         | sets the date to be the upcoming Wednesday    | give n/name d/description by/wed                                        |
+| thu                                         | sets the date to be the upcoming Thursday     | give n/name d/description by/thu                                        |
+| fri                                         | sets the date to be the upcoming Friday       | give n/name d/description by/fri                                        |
+| sat                                         | sets the date to be the upcoming Saturday     | give n/name d/description by/sat                                        |
+| sun                                         | sets the date to be the upcoming Sunday       | give n/name d/description by/sun                                        |
 
 When the user enters a command with the *friendly* command input, the `AddressBookParser` class will recognize the command
 and parse the entered command. 
