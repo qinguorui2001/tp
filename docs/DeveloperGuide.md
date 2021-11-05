@@ -228,7 +228,7 @@ The sequence diagram below illustrates the interactions between the `Logic` and 
   * Pros: Allows you to do everything on one window.
 
   * Cons: Commands that deal with persons and assignments need to be distinctly named as they share the same window.<br>
-  e.g. `add` person and `add` will have conflict.
+  e.g. `add` person and `add` assignments will have conflict.
 
 * **Alternative 2:** Displays assignment list on a new separate window.
 
