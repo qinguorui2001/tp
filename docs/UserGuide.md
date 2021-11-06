@@ -96,7 +96,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer more than 0 and less than 10,000.<br>
+* If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer from 1 to 10000. <br>
 
 * If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken,
 unless otherwise mentioned in the command description. <br>
@@ -635,7 +635,7 @@ Friendly commands are all **case-insensitive**. `TODAY` and `today` are equivale
 
 * `tmr` - sets due date to tomorrow.
 
-* `week` - sets due date to a week(7 days) from now.
+* `week` - sets due date to a week (7 days) from now.
 
 * `mon` - sets due date to the coming Monday.
 
