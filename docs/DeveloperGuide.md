@@ -153,7 +153,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <p align="center">
-  <img src="images/ParserClasses.png" width="600"/>
+  <img src="images/ParserClasses.png" width="600" height="500" />
 </p>
 
 How the parsing works:
