@@ -3,7 +3,6 @@ layout: page
 title: Developer Guide
 ---
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## **Welcome to TA<sup>2</sup>'s Developer Guide!**
 {:.no_toc}
@@ -18,6 +17,8 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+## **Table of Contents**
 
 * Table of Contents
 {:toc}
@@ -98,6 +99,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -114,6 +117,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Assignment` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -149,6 +154,8 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -168,6 +175,8 @@ The `Model` component,
 * stores the currently 'selected' `Assignment` objects of the "active" `Person` object as a separate _observable_ list which is exposed to outsiders as an unmodifiable `ObservableList<Assignment>` that can be 'observed' as well.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -216,6 +225,7 @@ The two object diagram below shows illustrates how the objects interacts and cha
 
 <p align="center">
 <img src="images/DisplayAssignmentObjectDiagram1.png">
+<br>
 <img src="images/DisplayAssignmentObjectDiagram2.png">
 </p>
 
@@ -246,6 +256,8 @@ The sequence diagram below illustrates the interactions between the `Logic` and 
   * Pros: Allows you to cleanly segregate commands of assignments and persons because they are on different windows.
   
   * Cons: Additional UI may lead to slower processing and execution.
+
+<div style="page-break-after: always;"></div>
 
 ### Assignment Feature
 
@@ -280,6 +292,8 @@ A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. 
 * **Alternative 2:** Use a factory method to instantiate the different types of status
     * Pros: Divides cleanly all the different types of status and intended behaviour and make it very easy to add new status with few adjustments by creating another subclass.
     * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
+
+<div style="page-break-after: always;"></div>
 
 ### Keeping track on person whose assignments are displayed feature
 
@@ -323,7 +337,9 @@ The `delete` command is one of the commands that may affect the assignment list 
 * **Alternative 2:** `Person` class store an additional attribute `boolean isActivePerson`.
   * Pros: Can toggle between multiple persons.
   * Cons: `isActivePerson` may not be a suitable property of `Person` class since it may not be the responsibility of `Person` to remember whether it is the `activePerson`.
-  
+
+<div style="page-break-after: always;"></div>
+
 ### Undo/redo feature
 
 #### Implementation
@@ -413,6 +429,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+<div style="page-break-after: always;"></div>
+
 ### Give feature
 
 #### Implementation
@@ -472,6 +490,7 @@ The following activity diagram summarizes what happens when a user executes the 
   **Alternative 1** requires an additional command `list` to ensure the displayed list contains all persons before adding
   assignments, which means it is less convenient for users as they have to do extra work.
 
+<div style="page-break-after: always;"></div>
 
 ### Remove feature
 
@@ -526,6 +545,8 @@ The following activity diagram summarizes what happens when a user executes the 
   chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the
   deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
+
+<div style="page-break-after: always;"></div>
 
 ### Giveall feature
 
@@ -599,6 +620,8 @@ to all persons in the specified module:**
   `give` command which allows users to add an assignment to a specific person suggests that the `giveall` command might
   provide better utility for users if it allows for the addition of assignments to a bigger group of persons.
 
+<div style="page-break-after: always;"></div>
+
 ### Clean feature
 
 #### Implementation
@@ -649,6 +672,8 @@ The following activity diagram summarizes what happens when a user executes the 
   completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
   may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command
   which allows the user to retrieve the desired assignments easily.
+
+<div style="page-break-after: always;"></div>
 
 ### Done feature
 
@@ -704,6 +729,8 @@ The following activity diagram summarizes what happens when a user executes the 
   chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
   marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
+
+<div style="page-break-after: always;"></div>
 
 ### Find feature
 
@@ -770,6 +797,8 @@ The following activity diagram summarizes what happens when a user executes the 
   * Cons: Less error tolerant as one simple mistake can result in no matches
   being returned.
 
+<div style="page-break-after: always;"></div>
+
 #### [Proposed] Find Extension
 **Allow finding to have both specificity and flexibility**
 
@@ -831,6 +860,7 @@ The following is the activity diagram for a flexible find command execution:
   * Cons: Requires the application to recognize a lot of different user inputs which could mean 
   different kinds of find, which is unfeasible to implement considering the time given
 
+<div style="page-break-after: always;"></div>
 
 ### Friendlier Command Inputs
 In striving to adopt a more user-centric approach in command recognition, additional commands are
@@ -1008,6 +1038,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy TA                                    | list people whose information I access frequently | save time searching their name whenever I start the application              |
 | `*`      | TA with many assignments to manage         | see assignments that need my attention the most at the present moment | I can prioritise which assignment to attend to           |
 
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -1152,6 +1183,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3b1. TA<sup>2</sup> shows an error message.
 
     Use case resumes at step 1.
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
