@@ -6,7 +6,7 @@ title: Tao Jun's Project Portfolio Page
 ### Project: TA<sup>2</sup>
 
 TA<sup>2</sup> is a desktop application developed for Teaching Assistants (TA) from the School of Computing (SoC) at the
-National University of Singapore (NUS) to help them manage student information and keep track of students' assignment submissions. 
+National University of Singapore (NUS) to help them manage student information and keep track of students' assignment submissions.
 TA<sup>2</sup> primarily uses a Command Line Interface (CLI) for user interaction. This allows SoC TAs to fully utilise
 TA<sup>2</sup> as they are able to type fast.
 
