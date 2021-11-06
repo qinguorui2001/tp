@@ -20,11 +20,13 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 *Last Updated: 8 November 2021*
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -63,6 +65,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## UI Design
 
@@ -77,6 +80,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
  * **Assignment List**: Displays a specified student's assignments.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -558,6 +562,7 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -568,6 +573,7 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 **A**: Close your TA<sup>2</sup> application. Go into the `data` folder in your _home folder_ for TA<sup>2</sup>, delete the `ta2.json` file and start TA<sup>2</sup> again.    
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
@@ -591,6 +597,8 @@ Action | Command | Format | Examples
 [Exiting the program](#exiting-the-program-exit) | **exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Glossary
 
 #### Module Naming Convention
