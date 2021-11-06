@@ -6,7 +6,7 @@ title: QIN GUORUI's Project Portfolio Page
 ### Project: TA<sup>2</sup>
 
 TA<sup>2</sup> is a desktop application designed for teaching assistants from the School of Computing (SoC) at the National University of Singapore (NUS)
-to manage student information and keep track of students’ assignment submissions.The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
+to manage student information and keep track of students’ assignment submissions.The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
 
 Given below are my contributions to the project.
 
