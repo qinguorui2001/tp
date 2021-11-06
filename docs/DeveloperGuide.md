@@ -473,6 +473,8 @@ The following activity diagram summarizes what happens when a user executes the 
   <img src="images/GiveActivityDiagram.png" width="500" height="550" />
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 **Aspect: Adds an assignment to a person in current displayed list or to any other person in storage:**
 
@@ -528,6 +530,8 @@ The following activity diagram summarizes what happens when a user executes the 
 <p align="center">
   <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
 </p>
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations
 **Aspect: Deletes assignment of a person in current displayed list or for any person in storage:**
@@ -713,6 +717,8 @@ The following activity diagram summarizes what happens when a user executes the 
   <img src="images/DoneActivityDiagram.png" width="600" height="550" />
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 **Aspect: Marks assignment of a person in current displayed list as done or for any person in storage model:**
 
@@ -782,6 +788,8 @@ The following activity diagram summarizes what happens when a user executes the 
   <img src="images/FindActivityDiagram.png">
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 **Aspect: Finding people based on OR criteria or AND criteria**
 
@@ -846,6 +854,8 @@ The following is the activity diagram for a flexible find command execution:
 <p align="center">
   <img src="images/ImprovedFlexibleFindActivityDiagram.png">
 </p>
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations
 
@@ -1081,6 +1091,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC03 - Delete a person**
 
 **MSS**
@@ -1120,6 +1132,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC05 - Give an assignment**
 
@@ -1171,6 +1184,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. TA<sup>2</sup> shows the assignment is done.
 
    Use case ends.
+
+<div style="page-break-after: always;"></div>
 
 **Extensions**
 
