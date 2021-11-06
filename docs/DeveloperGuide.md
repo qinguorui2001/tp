@@ -13,7 +13,7 @@ from the School of Computing (SoC) at the National University of Singapore (NUS)
 If you are interested in contributing to TA<sup>2</sup>, this guide is designed to help you get started!
 There are a variety of ways to contribute to TA<sup>2</sup> such as coding, testing, improving the design of the interface and updating the documentation.
 
-*Last Updated: 8 November 2021* 1
+*Last Updated: 8 November 2021* 2
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -153,7 +153,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
 <p align="center">
-  <img src="images/ParserClasses.png" width="600" height="500" />
+  <img src="images/ParserClasses.png" width="600" height="400" />
 </p>
 
 How the parsing works:
