@@ -13,7 +13,7 @@ from the School of Computing (SoC) at the National University of Singapore (NUS)
 If you are interested in contributing to TA<sup>2</sup>, this guide is designed to help you get started!
 There are a variety of ways to contribute to TA<sup>2</sup> such as coding, testing, improving the design of the interface and updating the documentation.
 
-*Last Updated: 8 November 2021* 2
+*Last Updated: 8 November 2021* 3
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -231,11 +231,9 @@ This will then call `Addressbook#updateAssignmentList(person)`, causing the `ass
 The two object diagram below shows illustrates how the objects interacts and changes when a `show` command is executed.
 
 <p align="center">
-<img src="images/DisplayAssignmentObjectDiagram1.png">
-
-<div style="page-break-after: always;"></div>
+<img src="images/DisplayAssignmentObjectDiagram1.png" width="500" height="400" >
  
-<img src="images/DisplayAssignmentObjectDiagram2.png">
+<img src="images/DisplayAssignmentObjectDiagram2.png" width="500" height="400" >
 </p>
 
 
@@ -617,7 +615,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 The following activity diagram summarizes what happens when a user executes the `giveall` command:
 
 <p align="center">
-  <img src="images/GiveAllActivityDiagram.png" width="500" height="550" />
+  <img src="images/GiveAllActivityDiagram.png" width="450" height="450" />
 </p>
 
 #### Design considerations
@@ -967,6 +965,7 @@ The following sequence diagram shows the logic sequence of an `AddAssignment` co
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div> <br>
 
+<div style="page-break-after: always;"></div>
 
 The following activity diagram shows the possible paths whilst a user adds an assignment using `giveall`:
 
@@ -979,6 +978,8 @@ The following sequence diagram shows the logic sequence of an `AddAssignmentToAl
 <p align="center">
   <img src="images/GiveAllFriendlySequenceDiagram.png">
 </p>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -1272,8 +1273,8 @@ testers are expected to do more *exploratory* testing.
    3. Launch the jar file using the ```java -jar ta2.jar```.
 
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
-   5. 
-![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
+   5. <br>
+<img src="images/ManualTestingSampleData.png" width="450" height="450" /> <br /><br />
 2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
@@ -1384,7 +1385,7 @@ testers are expected to do more *exploratory* testing.
    
    3. Test case: `find t/Lab15 m/CS2103T` <br>
       Expected: Finds all people with the tag ***Lab15*** or module ***CS2103T***. Contact List will change from empty and people found will have their names
-      and details displayed. <br><br>
+      and details displayed. <br>
    
    4. Test case: `find n/Alice t/Lab15 m/CS2103T` <br>
          Expected: Finds all people with the name ***Alice***, tag ***Lab15***, or module ***CS2103T***. Contact List will change from empty and people found will have their names
@@ -1553,6 +1554,8 @@ testers are expected to do more *exploratory* testing.
       Expected: No duplicated assignment should be added for all persons the module "CS2100". Error message will be shown
       as all persons already have the specified assignment. The assignment list of persons should show the same assignments
       as the one in the previous test case.
+
+<img src="images/GiveActivityDiagram.png" width="500" height="550" />
 
 2. Giving an assignment to some persons without the assignment.
 
