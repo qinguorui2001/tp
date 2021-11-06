@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Welcome to TA<sup>2</sup>'s User Guide!**
 {:.no_toc}
@@ -20,11 +21,15 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 *Last Updated: 8 November 2021*
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick start
 
@@ -51,6 +56,8 @@ For advanced users, the [Command summary](#command-summary) section gives you an
     
     * **`give`**`d/Assignment 1 by/27/3/2022`: Gives an assignment, `Assignment 1` that is due by 27 Mar 2022 at  11.59pm, to the first student in your contact list.
 
+<div style="page-break-after: always;"></div>
+
 6. Refer to the [Features](#features) below for more details of each command.
 
 <div markdown="block" class="alert alert-primary">
@@ -63,6 +70,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## UI Design
 
@@ -77,6 +85,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
  * **Assignment List**: Displays a specified student's assignments.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -96,7 +105,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
-* If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer more than 0 and less than 10,000.<br>
+* If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer from 1 to 10,000. <br>
 
 * If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken,
 unless otherwise mentioned in the command description. <br>
@@ -106,6 +115,8 @@ unless otherwise mentioned in the command description. <br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Viewing help: `help`
 
@@ -119,6 +130,8 @@ Format: `help`
 
 Possible usage: 
 * The help window will direct you back to this user guide from TA<sup>2</sup> if you need details of any available features.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a student: `add`
 
@@ -156,6 +169,8 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `add n/John Doe m/CS1010 e/e1234567@u.nus.edu`
 
@@ -168,6 +183,8 @@ Possible Usage:
 * You can use `add` to add new students into the contact list when you receive new students.
 
 * `TAG` can be used to separate students by their tutorial group or to mark out students that require more attention.
+
+<div style="page-break-after: always;"></div>
 
 ### Finding students with matching input keywords: `find`
 
@@ -239,6 +256,8 @@ Possible Usage:
 
     * `TAG` if you use it to separate students by tutorial groups.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all students: `list`
 
 Shows a list of all students in the contact list.
@@ -263,6 +282,8 @@ Examples:
 Possible usage:
 
 *  You can use `delete` to delete any student that you do not need to keep track anymore.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a student: `edit`
 
@@ -308,6 +329,8 @@ Possible Usage:
 
 * You can use `edit` to make changes to any mistakes in a student's information.
 
+<div style="page-break-after: always;"></div>
+
 ### Showing a student’s assignments: `show`
 
 Shows the assignments of the specified student in your assignment list.
@@ -338,11 +361,15 @@ Examples:
   <br><br>
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
   <br>
+
+<div style="page-break-after: always;"></div>
   
 Possible Usage:
 
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
 * You can look to the top of the assignment list to find out which assignments will be due soon or are overdue.
+
+<div style="page-break-after: always;"></div>
 
 ### Giving assignment: `give` `giveall`
 
@@ -384,6 +411,8 @@ Examples:
 
 * `give 2 d/Assignment 2 by/ 2/9/2021,1200` gives the second student displayed in your contact list an assignment of description `Assignment 2` with a deadline `22 Sep 2021, 12:00pm`.
 
+<div style="page-break-after: always;"></div>
+
 * If the current date is `1 Nov 2021` and it is a Monday
 
     * `give 1 d/Tutorial 3 by/mon` gives the first student displayed in your contact list an assignment of description `Tutorial 3` with a deadline `8 Nov 2021, 11:59pm`.
@@ -415,6 +444,8 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 * If some students already have the assignment, executing `giveall` requires the due date to be similar to the pre-existing assignments. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
 </div>
 
+<div style="page-break-after: always;"></div>
+
 <div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
@@ -442,6 +473,8 @@ Examples:
 Possible Usage:
 
 *  You can use `giveall` instead of `give` when there is a module assignment, where all students under the module is required to submit.
+
+<div style="page-break-after: always;"></div>
 
 ### Marking an assignment as completed: `done`
 
@@ -472,6 +505,8 @@ Examples:
 Possible Usage:
 
 * You can use `done` to track completion status of an assignment among your students.
+
+<div style="page-break-after: always;"></div>
 
 ### Removing an assignment of a student: `remove`
 
@@ -507,6 +542,8 @@ Possible Usage:
 
 * You can use `clean` to reduce clutter in the assignment list.
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries: `clear`
 
 Clears all entries from TA<sup>2</sup>.
@@ -516,7 +553,6 @@ Format: `clear`
 Possible Usage:
 
 * You can use `clear` if you no longer need to keep track of students after they have completed the module.
-
 
 ### Undoing a command: `undo`
 
@@ -542,6 +578,8 @@ Exits the program.
 
 Format: `exit`
 
+<div style="page-break-after: always;"></div>
+
 ### Saving the data
 
 TA<sup>2</sup> data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -558,6 +596,7 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 
@@ -568,6 +607,7 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 **A**: Close your TA<sup>2</sup> application. Go into the `data` folder in your _home folder_ for TA<sup>2</sup>, delete the `ta2.json` file and start TA<sup>2</sup> again.    
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Command summary
 
@@ -591,6 +631,8 @@ Action | Command | Format | Examples
 [Exiting the program](#exiting-the-program-exit) | **exit** | `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Glossary
 
 #### Module Naming Convention
@@ -620,6 +662,8 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
     
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 
+<div style="page-break-after: always;"></div>
+
 #### Friendly commands
 
 <div markdown="block" class="alert alert-primary">
@@ -635,7 +679,7 @@ Friendly commands are all **case-insensitive**. `TODAY` and `today` are equivale
 
 * `tmr` - sets due date to tomorrow.
 
-* `week` - sets due date to a week(7 days) from now.
+* `week` - sets due date to a week (7 days) from now.
 
 * `mon` - sets due date to the coming Monday.
 

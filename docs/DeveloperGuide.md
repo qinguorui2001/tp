@@ -3,6 +3,7 @@ layout: page
 title: Developer Guide
 ---
 --------------------------------------------------------------------------------------------------------------------
+
 ## **Welcome to TA<sup>2</sup>'s Developer Guide!**
 {:.no_toc}
 
@@ -15,11 +16,15 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 *Last Updated: 8 November 2021*
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
+## **Table of Contents**
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -38,6 +43,7 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 To get started, check out this guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -55,6 +61,8 @@ To get started, check out this guide [_Setting up and getting started_](SettingU
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
+
+<div style="page-break-after: always;"></div>
 
 **Main components of the architecture**
 
@@ -85,6 +93,8 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <p align="center">
@@ -92,6 +102,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 </p>
 
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -110,6 +122,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` and `Assignment` object residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
@@ -125,6 +139,8 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+<div style="page-break-after: always;"></div>
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -143,6 +159,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -164,6 +182,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -182,6 +202,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -205,11 +226,15 @@ Step 1. The user launches the application for the first time. The `assignments` 
 Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
 This will then call `Addressbook#updateAssignmentList(person)`, causing the `assignments` in `AddressBook` to be replaced with the assignments in 2nd person's assignment list.
 
+<div style="page-break-after: always;"></div>
 
 The two object diagram below shows illustrates how the objects interacts and changes when a `show` command is executed.
 
 <p align="center">
 <img src="images/DisplayAssignmentObjectDiagram1.png">
+
+<div style="page-break-after: always;"></div>
+ 
 <img src="images/DisplayAssignmentObjectDiagram2.png">
 </p>
 
@@ -240,6 +265,8 @@ The sequence diagram below illustrates the interactions between the `Logic` and 
   * Pros: Allows you to cleanly segregate commands of assignments and persons because they are on different windows.
   
   * Cons: Additional UI may lead to slower processing and execution.
+
+<div style="page-break-after: always;"></div>
 
 ### Assignment Feature
 
@@ -274,6 +301,8 @@ A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. 
 * **Alternative 2:** Use a factory method to instantiate the different types of status
     * Pros: Divides cleanly all the different types of status and intended behaviour and make it very easy to add new status with few adjustments by creating another subclass.
     * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
+
+<div style="page-break-after: always;"></div>
 
 ### Keeping track on person whose assignments are displayed feature
 
@@ -317,7 +346,9 @@ The `delete` command is one of the commands that may affect the assignment list 
 * **Alternative 2:** `Person` class store an additional attribute `boolean isActivePerson`.
   * Pros: Can toggle between multiple persons.
   * Cons: `isActivePerson` may not be a suitable property of `Person` class since it may not be the responsibility of `Person` to remember whether it is the `activePerson`.
-  
+
+<div style="page-break-after: always;"></div>
+
 ### Undo/redo feature
 
 #### Implementation
@@ -359,6 +390,8 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 <p align="center">
   <img src="images/UndoRedoState3.png">
 </p>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how the undo operation works:
 
@@ -407,6 +440,8 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+<div style="page-break-after: always;"></div>
+
 ### Give feature
 
 #### Implementation
@@ -449,6 +484,8 @@ The following activity diagram summarizes what happens when a user executes the 
   <img src="images/GiveActivityDiagram.png" width="500" height="550" />
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 **Aspect: Adds an assignment to a person in current displayed list or to any other person in storage:**
 
@@ -466,6 +503,7 @@ The following activity diagram summarizes what happens when a user executes the 
   **Alternative 1** requires an additional command `list` to ensure the displayed list contains all persons before adding
   assignments, which means it is less convenient for users as they have to do extra work.
 
+<div style="page-break-after: always;"></div>
 
 ### Remove feature
 
@@ -504,6 +542,8 @@ The following activity diagram summarizes what happens when a user executes the 
   <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 **Aspect: Deletes assignment of a person in current displayed list or for any person in storage:**
 
@@ -520,6 +560,8 @@ The following activity diagram summarizes what happens when a user executes the 
   chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the
   deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
+
+<div style="page-break-after: always;"></div>
 
 ### Giveall feature
 
@@ -570,6 +612,8 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes the `giveall` command:
 
 <p align="center">
@@ -592,6 +636,8 @@ to all persons in the specified module:**
   module, **alternative 2** was chosen as it meets this specification. Moreover, the existence of the
   `give` command which allows users to add an assignment to a specific person suggests that the `giveall` command might
   provide better utility for users if it allows for the addition of assignments to a bigger group of persons.
+
+<div style="page-break-after: always;"></div>
 
 ### Clean feature
 
@@ -620,6 +666,8 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 Step 3. The user executes `show 1` to check that all completed assignments has been removed for the first person.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes the `clean` command:
 
 <p align="center">
@@ -643,6 +691,8 @@ The following activity diagram summarizes what happens when a user executes the 
   completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
   may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command
   which allows the user to retrieve the desired assignments easily.
+
+<div style="page-break-after: always;"></div>
 
 ### Done feature
 
@@ -682,6 +732,8 @@ The following activity diagram summarizes what happens when a user executes the 
   <img src="images/DoneActivityDiagram.png" width="600" height="550" />
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 **Aspect: Marks assignment of a person in current displayed list as done or for any person in storage model:**
 
@@ -698,6 +750,8 @@ The following activity diagram summarizes what happens when a user executes the 
   chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
   marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
   in **alternative 1**, it may take up much more time.
+
+<div style="page-break-after: always;"></div>
 
 ### Find feature
 
@@ -731,6 +785,8 @@ Given below is a more specific example of the command execution.
 2. The user executes `find n/alice`, causing a `FindPersonCommand` to be returned
 3. The Command#execute is called, which causes the list to update and reflect those whose names matches alice
 
+<div style="page-break-after: always;"></div>
+
 The sequence of this command execution can be visualized using the
 below sequence diagram:
 
@@ -749,6 +805,8 @@ The following activity diagram summarizes what happens when a user executes the 
   <img src="images/FindActivityDiagram.png">
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 **Aspect: Finding people based on OR criteria or AND criteria**
 
@@ -763,6 +821,8 @@ The following activity diagram summarizes what happens when a user executes the 
   if the user knows who is in mind
   * Cons: Less error tolerant as one simple mistake can result in no matches
   being returned.
+
+<div style="page-break-after: always;"></div>
 
 #### [Proposed] Find Extension
 **Allow finding to have both specificity and flexibility**
@@ -794,6 +854,8 @@ and then override the methods stipulated by the interface.
 This way, `FindSpecificPersonCommand` instantiates the `PersonContainsAllKeywordsPredicate` class whilst
 `FindAllPersonCommand` instantiates the `PersonContainsAnyKeywordPredicate` class.
 
+<div style="page-break-after: always;"></div>
+
 Given below is the partial class diagram of how the logic behind the new find command works:
 
 <p align="center">
@@ -812,6 +874,8 @@ The following is the activity diagram for a flexible find command execution:
   <img src="images/ImprovedFlexibleFindActivityDiagram.png">
 </p>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations
 
 **Aspect: How the different find commands can be implemented.
@@ -825,6 +889,7 @@ The following is the activity diagram for a flexible find command execution:
   * Cons: Requires the application to recognize a lot of different user inputs which could mean 
   different kinds of find, which is unfeasible to implement considering the time given
 
+<div style="page-break-after: always;"></div>
 
 ### Friendlier Command Inputs
 In striving to adopt a more user-centric approach in command recognition, additional commands are
@@ -884,6 +949,8 @@ conversely, the `AddAssignmentToAllCommand` class.
 
 Finally, the results are then actualized by the `Model` component.
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram shows the possible paths whilst a user adds an assignment using `give`:
 
 <p align="center">
@@ -937,6 +1004,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 (more aspects and details of implementation to come)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -947,6 +1015,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## **Appendix: Requirements**
 
@@ -971,6 +1040,8 @@ With TA<sup>2</sup>, they will no longer need to have to rely on inefficient wor
 As users who can type fast, they will be able to manage their students' information and allocated assignments much faster than when using a mouse/GUI driven app.
 
 TA<sup>2</sup> does not support management of assignments of a particular student across multiple modules (i.e. a student can only be under a single module).
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -998,6 +1069,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | busy TA                                    | list people whose information I access frequently | save time searching their name whenever I start the application              |
 | `*`      | TA with many assignments to manage         | see assignments that need my attention the most at the present moment | I can prioritise which assignment to attend to           |
 
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
@@ -1040,6 +1112,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC03 - Delete a person**
 
 **MSS**
@@ -1079,6 +1153,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 1.
 
+<div style="page-break-after: always;"></div>
 
 **Use case: UC05 - Give an assignment**
 
@@ -1120,6 +1195,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC07 - Mark an assignment as done**
 
 **MSS**
@@ -1142,6 +1219,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 3b1. TA<sup>2</sup> shows an error message.
 
     Use case resumes at step 1.
+
+<div style="page-break-after: always;"></div>
 
 ### Non-Functional Requirements
 
@@ -1171,6 +1250,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI**: Abbreviation for Command Line Interface
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -1192,6 +1272,7 @@ testers are expected to do more *exploratory* testing.
    3. Launch the jar file using the ```java -jar ta2.jar```.
 
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
+   5. 
 ![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
 2. Saving window preferences
 
@@ -1199,6 +1280,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a person
 
@@ -1233,6 +1316,8 @@ testers are expected to do more *exploratory* testing.
       2. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
       Expected: No person is added. Error details shown in the status message due to invalid command format.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown.
@@ -1264,7 +1349,8 @@ testers are expected to do more *exploratory* testing.
 4. Deleting a person without specifying person's index parameter.
    1. Other incorrect delete commands to try: `delete` <br>
       Expected: Error details shown in the status message since the command format is invalid.
-
+      
+<div style="page-break-after: always;"></div>
 
 ### Finding a person
 
@@ -1346,6 +1432,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `find Alice`
       Expected: Error details shown in the status message since the command format is invalid.
       
+<div style="page-break-after: always;"></div>
       
 ### Showing an assignment list
 
@@ -1375,6 +1462,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `show`<br>
      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the format is invalid.
+
+<div style="page-break-after: always;"></div>
 
 ### Giving an assignment
 
@@ -1412,6 +1501,8 @@ testers are expected to do more *exploratory* testing.
     1.Test case: you can try `give`, `give d/lab3`, `give by/11/11/2021` and so on.<br>
       Expected: No assignment is added into the assignment list panel. Error details shown in the status message since the format is invalid.
 
+<div style="page-break-after: always;"></div>
+
 ### Removing an assignment
 
 1. Removing an assigment while all assignments of a person are being shown.
@@ -1440,6 +1531,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case:`remove`<br>
       Expected: No assignment is removed from the assignment list panel. Error details shown in the status message since the format is invalid.
+
+<div style="page-break-after: always;"></div>
 
 ### Giving an assignment to all persons in a module
 
@@ -1479,6 +1572,8 @@ testers are expected to do more *exploratory* testing.
       Expected: The assignment "Assignment 1" with due date "15/09/2021, 1300" should be added to "Roy Balakrishnan". Note that
       the letter "a" is capitalised as other persons' assignment is "Assignment 1" with a capitalised "a".
 
+<div style="page-break-after: always;"></div>
+
 ### Cleaning all completed assignments
 
 1. Prerequisites: Have a mix of completed and pending assignments for several persons. Execute `list` to see the list
@@ -1488,6 +1583,8 @@ testers are expected to do more *exploratory* testing.
    Expected: All completed assignments are removed for all persons. The result of the command is shown in the image below.
    Note that the assignment panel is showing the assigment list of the first person as `show 1` was executed before `clean`.
    ![Manual Testing for clean command](images/ManualTestingClean.png) <br>
+
+<div style="page-break-after: always;"></div>
 
 ###  Redoing a command
 
@@ -1518,6 +1615,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `undo`<br>
       Expected: Retrieves the effect before conducting the last command (except `undo`).
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person
 
 1. Editing a person while all persons are being shown.
@@ -1546,6 +1645,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: You can try `edit` or `edit 1`<br>
       Expected: No person is edited. Error details shown in the status message since the format is invalid.
+
+<div style="page-break-after: always;"></div>
 
 ### Marking an assignment
 
@@ -1576,7 +1677,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case:`done`<br>
       Expected: No assignment is marked as completed in the assignment list panel. Error details shown in the status message since the format is invalid.
 
-
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries
 
@@ -1596,6 +1697,8 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 ![Help window](images/ManualTestingViewingHelp.PNG)
 2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of TA<sup>2</sup>.
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the Program
 
 1. Test case: `exit` <br/>
@@ -1609,6 +1712,8 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 
    2. Test case: `list` <br/>
    Expected: All persons will be shown in contact list. If you have any assignments displayed under Assignments, they will be cleared. Success message shown in the status message.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
