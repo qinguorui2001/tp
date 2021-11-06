@@ -1437,7 +1437,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Giving an assignment
 
-1. Giving an assigment while all assignments of a person are being shown.
+1. Giving an assignment while all assignments of a person are being shown.
 
    1. Prerequisites: There are multiple persons in the contact list and the first person's assignments are shown already.
 
@@ -1473,7 +1473,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Removing an assignment
 
-1. Removing an assigment while all assignments of a person are being shown.
+1. Removing an assignment while all assignments of a person are being shown.
 
    1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are shown already.
 
@@ -1545,7 +1545,7 @@ testers are expected to do more *exploratory* testing.
 
 2. Test case: `clean` <br>
    Expected: All completed assignments are removed for all persons. The result of the command is shown in the image below.
-   Note that the assignment panel is showing the assigment list of the first person as `show 1` was executed before `clean`.
+   Note that the assignment panel is showing the assignment list of the first person as `show 1` was executed before `clean`.
    ![Manual Testing for clean command](images/ManualTestingClean.png) <br>
 
 ###  Redoing a command
