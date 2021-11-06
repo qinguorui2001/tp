@@ -62,6 +62,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
+<div style="page-break-after: always;"></div>
+
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
@@ -90,6 +92,8 @@ Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+
+<div style="page-break-after: always;"></div>
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -135,6 +139,8 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+<div style="page-break-after: always;"></div>
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -220,12 +226,15 @@ Step 1. The user launches the application for the first time. The `assignments` 
 Step 2. The user inputs `show 2` command to display the 2nd person's assignment list in the address book. The `show` command will then call `Model#updateAssignmentList(person)`, whereby `person` variable is the 2nd person in the address book.
 This will then call `Addressbook#updateAssignmentList(person)`, causing the `assignments` in `AddressBook` to be replaced with the assignments in 2nd person's assignment list.
 
+<div style="page-break-after: always;"></div>
 
 The two object diagram below shows illustrates how the objects interacts and changes when a `show` command is executed.
 
 <p align="center">
 <img src="images/DisplayAssignmentObjectDiagram1.png">
-<br>
+
+<div style="page-break-after: always;"></div>
+ 
 <img src="images/DisplayAssignmentObjectDiagram2.png">
 </p>
 
@@ -381,6 +390,8 @@ Step 4. The user now decides that adding the person was a mistake, and decides t
 <p align="center">
   <img src="images/UndoRedoState3.png">
 </p>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows how the undo operation works:
 
@@ -601,6 +612,8 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes the `giveall` command:
 
 <p align="center">
@@ -652,6 +665,8 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 </div>
 
 Step 3. The user executes `show 1` to check that all completed assignments has been removed for the first person.
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram summarizes what happens when a user executes the `clean` command:
 
@@ -770,6 +785,8 @@ Given below is a more specific example of the command execution.
 2. The user executes `find n/alice`, causing a `FindPersonCommand` to be returned
 3. The Command#execute is called, which causes the list to update and reflect those whose names matches alice
 
+<div style="page-break-after: always;"></div>
+
 The sequence of this command execution can be visualized using the
 below sequence diagram:
 
@@ -836,6 +853,8 @@ and then override the methods stipulated by the interface.
 
 This way, `FindSpecificPersonCommand` instantiates the `PersonContainsAllKeywordsPredicate` class whilst
 `FindAllPersonCommand` instantiates the `PersonContainsAnyKeywordPredicate` class.
+
+<div style="page-break-after: always;"></div>
 
 Given below is the partial class diagram of how the logic behind the new find command works:
 
@@ -929,6 +948,8 @@ From here, the `AddAssignmentCommand` class is then instantiated if the user com
 conversely, the `AddAssignmentToAllCommand` class. 
 
 Finally, the results are then actualized by the `Model` component.
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram shows the possible paths whilst a user adds an assignment using `give`:
 
@@ -1174,6 +1195,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC07 - Mark an assignment as done**
 
 **MSS**
@@ -1184,8 +1207,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. TA<sup>2</sup> shows the assignment is done.
 
    Use case ends.
-
-<div style="page-break-after: always;"></div>
 
 **Extensions**
 
@@ -1251,6 +1272,7 @@ testers are expected to do more *exploratory* testing.
    3. Launch the jar file using the ```java -jar ta2.jar```.
 
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
+   5. 
 ![Sample data in TA<sup>2</sup>](images/ManualTestingSampleData.PNG) <br /><br />
 2. Saving window preferences
 
@@ -1258,6 +1280,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a person
 
@@ -1292,6 +1316,8 @@ testers are expected to do more *exploratory* testing.
       2. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
       Expected: No person is added. Error details shown in the status message due to invalid command format.
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown.
@@ -1323,7 +1349,8 @@ testers are expected to do more *exploratory* testing.
 4. Deleting a person without specifying person's index parameter.
    1. Other incorrect delete commands to try: `delete` <br>
       Expected: Error details shown in the status message since the command format is invalid.
-
+      
+<div style="page-break-after: always;"></div>
 
 ### Finding a person
 
@@ -1405,6 +1432,7 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `find Alice`
       Expected: Error details shown in the status message since the command format is invalid.
       
+<div style="page-break-after: always;"></div>
       
 ### Showing an assignment list
 
@@ -1434,6 +1462,8 @@ testers are expected to do more *exploratory* testing.
 
    2. Test case: `show`<br>
      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the format is invalid.
+
+<div style="page-break-after: always;"></div>
 
 ### Giving an assignment
 
@@ -1471,6 +1501,8 @@ testers are expected to do more *exploratory* testing.
     1.Test case: you can try `give`, `give d/lab3`, `give by/11/11/2021` and so on.<br>
       Expected: No assignment is added into the assignment list panel. Error details shown in the status message since the format is invalid.
 
+<div style="page-break-after: always;"></div>
+
 ### Removing an assignment
 
 1. Removing an assigment while all assignments of a person are being shown.
@@ -1499,6 +1531,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case:`remove`<br>
       Expected: No assignment is removed from the assignment list panel. Error details shown in the status message since the format is invalid.
+
+<div style="page-break-after: always;"></div>
 
 ### Giving an assignment to all persons in a module
 
@@ -1538,6 +1572,8 @@ testers are expected to do more *exploratory* testing.
       Expected: The assignment "Assignment 1" with due date "15/09/2021, 1300" should be added to "Roy Balakrishnan". Note that
       the letter "a" is capitalised as other persons' assignment is "Assignment 1" with a capitalised "a".
 
+<div style="page-break-after: always;"></div>
+
 ### Cleaning all completed assignments
 
 1. Prerequisites: Have a mix of completed and pending assignments for several persons. Execute `list` to see the list
@@ -1547,6 +1583,8 @@ testers are expected to do more *exploratory* testing.
    Expected: All completed assignments are removed for all persons. The result of the command is shown in the image below.
    Note that the assignment panel is showing the assigment list of the first person as `show 1` was executed before `clean`.
    ![Manual Testing for clean command](images/ManualTestingClean.png) <br>
+
+<div style="page-break-after: always;"></div>
 
 ###  Redoing a command
 
@@ -1577,6 +1615,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `undo`<br>
       Expected: Retrieves the effect before conducting the last command (except `undo`).
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person
 
 1. Editing a person while all persons are being shown.
@@ -1605,6 +1645,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: You can try `edit` or `edit 1`<br>
       Expected: No person is edited. Error details shown in the status message since the format is invalid.
+
+<div style="page-break-after: always;"></div>
 
 ### Marking an assignment
 
@@ -1635,7 +1677,7 @@ testers are expected to do more *exploratory* testing.
    1. Test case:`done`<br>
       Expected: No assignment is marked as completed in the assignment list panel. Error details shown in the status message since the format is invalid.
 
-
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries
 
@@ -1655,6 +1697,8 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 ![Help window](images/ManualTestingViewingHelp.PNG)
 2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of TA<sup>2</sup>.
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the Program
 
 1. Test case: `exit` <br/>
@@ -1668,6 +1712,8 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 
    2. Test case: `list` <br/>
    Expected: All persons will be shown in contact list. If you have any assignments displayed under Assignments, they will be cleared. Success message shown in the status message.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
