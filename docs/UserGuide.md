@@ -70,6 +70,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## UI Design
 
@@ -115,6 +116,8 @@ unless otherwise mentioned in the command description. <br>
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help: `help`
 
 Shows a help window with a link directing you to the user guide. 
@@ -127,6 +130,8 @@ Format: `help`
 
 Possible usage: 
 * The help window will direct you back to this user guide from TA<sup>2</sup> if you need details of any available features.
+
+<div style="page-break-after: always;"></div>
 
 ### Adding a student: `add`
 
@@ -356,6 +361,8 @@ Examples:
   <br><br>
   ![result for 'show assignment list'](images/userguide/showAssignmentListResult.png)
   <br>
+
+<div style="page-break-after: always;"></div>
   
 Possible Usage:
 
@@ -404,6 +411,8 @@ Examples:
 
 * `give 2 d/Assignment 2 by/ 2/9/2021,1200` gives the second student displayed in your contact list an assignment of description `Assignment 2` with a deadline `22 Sep 2021, 12:00pm`.
 
+<div style="page-break-after: always;"></div>
+
 * If the current date is `1 Nov 2021` and it is a Monday
 
     * `give 1 d/Tutorial 3 by/mon` gives the first student displayed in your contact list an assignment of description `Tutorial 3` with a deadline `8 Nov 2021, 11:59pm`.
@@ -434,6 +443,8 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * If some students already have the assignment, executing `giveall` requires the due date to be similar to the pre-existing assignments. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 <div markdown="block" class="alert alert-primary">
 
@@ -531,6 +542,8 @@ Possible Usage:
 
 * You can use `clean` to reduce clutter in the assignment list.
 
+<div style="page-break-after: always;"></div>
+
 ### Clearing all entries: `clear`
 
 Clears all entries from TA<sup>2</sup>.
@@ -540,8 +553,6 @@ Format: `clear`
 Possible Usage:
 
 * You can use `clear` if you no longer need to keep track of students after they have completed the module.
-
-<div style="page-break-after: always;"></div>
 
 ### Undoing a command: `undo`
 
@@ -566,6 +577,8 @@ Format: `redo`
 Exits the program.
 
 Format: `exit`
+
+<div style="page-break-after: always;"></div>
 
 ### Saving the data
 
