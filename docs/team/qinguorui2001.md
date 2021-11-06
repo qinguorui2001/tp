@@ -5,7 +5,8 @@ title: QIN GUORUI's Project Portfolio Page
 
 ### Project: TA<sup>2</sup>
 
-TA<sup>2</sup> is a desktop application designed for teaching assistants from the School of Computing (SoC) at the National University of Singapore (NUS) to manage student information and keep track of students’ assignment submissions.
+TA<sup>2</sup> is a desktop application designed for teaching assistants from the School of Computing (SoC) at the National University of Singapore (NUS)
+to manage student information and keep track of students’ assignment submissions.The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 20 kLoC.
 
 Given below are my contributions to the project.
 
@@ -18,19 +19,19 @@ Given below are my contributions to the project.
 * **New Feature**: Added the ability to add assignments into the student's assignment list.
     * What it does: Allows the user to add a specific assignment to a student. Newly added assignment will be immediately shown in the assignment list.
     * Justification: This feature ensures the basic function of the product because tutors are responsible for allocating assignments to their students.
-    * Highlights: This enhancement affects commands to be added in the future. The implementation was challenging as it involves the analysis of how it can 
+    * Highlights: This enhancement provides the basis for other features. (example: `giveall`) The implementation was challenging as it involves the analysis of how it can 
       respond to user input and manipulate the relationships with other classes like `Assignment` class.
 
 * **New Feature**: Added the ability to delete assignments from the student's assignment list.
     * What it does: Allows the user to delete a specific assignment from a student's assignments. Newly deleted assignment will be immediately removed from the assignment list.
     * Justification: This feature ensures the basic function of the product because tutors should be able to delete assignments which they wrongly assigned.
-    * Highlights: This enhancement affects commands to be added in the future. The implementation was challenging as it refers to the command pattern of existing commands, and 
+    * Highlights: This enhancement provides the basis for other features. (example: `clean`) The implementation was challenging as it refers to the command pattern of existing commands, and 
       it involves detailed analysis of current backend code to figure the pattern out.
 
 * **New Feature**: Added the ability to mark assignments as completed in the student's assignment list.
   * What it does: Allows the user to mark a specific assignment of a student as completed. Newly marked assignment will be immediately shown as `Completed` in the assignment list.
   * Justification: This feature ensures the basic function of the product because tutors are responsible for marking assignments of their students.
-  * Highlights: This enhancement affects commands to be added in the future. The implementation was challenging as it involves how the method in `Model` interface can finally change
+  * Highlights: The implementation was challenging as it involves how the method in `Model` interface can finally change
     the particular `Assignment` instance over a series of internal interactions between each component in `Model`.
   
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=qinguorui2001&tabRepo=AY2122S1-CS2103T-T13-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false)
