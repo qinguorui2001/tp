@@ -443,13 +443,13 @@ Given below is an example usage scenario and how the `AddAssignmentCommand` is e
 
 Step 1. The user executes `list` command to see the current list of persons.
 
-Step 2. The user executes `give n/Xiao m/CS2103 d/Assignment 1 by/ 03/11/2021` command to add assignment to Xiao in
-the specified module. When `Command#execute` is called, the `give n/...` command will filter out persons in the current
-displayed list with the module field `CS2103` and add the specified assignment to him if this person exists, and he does
-not have the assignment.
+Step 2. The user executes `give 2 d/Assignment 1 by/ 03/11/2021` command to add assignment to the first person in
+the specified module. When `Command#execute` is called, the `give 2...` command will filter out persons in the current
+displayed list with `INDEX` 2 and add the specified assignment to this person if he or she exists and does
+not have that assignment.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no
-persons with the specified module field, it will return an error to the user.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the person at the specified 
+`INDEX` does not exist, it will return an error to the user.
 
 </div>
 
@@ -464,33 +464,31 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 </div>
 
-Step 3. The user executes `show 1` to check that the specified assignment has been added for persons in the specified
-module.
-
 The following activity diagram summarizes what happens when a user executes the `give` command:
 
 <p align="center">
-  <img src="images/GiveActivityDiagram.png" width="500" height="550" />
+  <img src="images/GiveActivityDiagram.png" width="600" height="550" />
 </p>
 
 <div style="page-break-after: always;"></div>
 
 #### Design considerations
-**Aspect: Adds an assignment to a person in current displayed list or to any other person in storage:**
+**Aspect: Adds an assignment to a person in currently displayed list or to any other person in storage:**
 
-* **Alternative 1:** Add an assignment to a person in current displayed list
+* **Alternative 1 (current choice):** Add an assignment to a person in current displayed list.
     * Pros: If the displayed list is shorter, the addition of assignments will be faster.
-    * Cons: User has to carry out `list` command first if addition of assignment is desired for that person
+    * Cons: User has to carry out `list` command first if addition of assignment is desired for that person.
 
-* **Alternative 2 (current choice):** Add an assignment to any person in the storage
-    * Pros: Allows user to add assignment to a particular person even when he is not visible in the list
-    * Cons: Might take longer to execute
+* **Alternative 2:** Add an assignment to any person in the storage.
+    * Pros: Allows user to add assignment to a particular person even when he is not visible in the list.
+    * Cons: Might take longer to execute.
 
-* Considering the fact that the `give` command is meant for users to add assignments to any person in model,
-* **Alternative 2** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for
+* Considering the fact that the `give` command is meant for users to add assignments to visible persons in contact list,
+* **Alternative 1** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for
   persons who already have the assignment.
-  **Alternative 1** requires an additional command `list` to ensure the displayed list contains all persons before adding
-  assignments, which means it is less convenient for users as they have to do extra work.
+  **Alternative 1** requires an additional effort for user to ensure the person who he or she wants to give the assignment to
+  is actually stored in the contact list when the person is not in the currently displayed list but stored in contact list, which means mistakes 
+  about giving assignment to wrong person are likely to occur.
 
 <div style="page-break-after: always;"></div>
 
@@ -505,12 +503,12 @@ Given below is an example usage scenario and how the `DeleteAssignmentCommand` i
 
 Step 1. The user executes `list` command to see the current list of persons.
 
-Step 2. The user executes `remove n/Xiao 1` command to remove the first assignment of a person. When `Command#execute`
-is called, the `remove n/...` command will filter out persons in the storage list with the name field `Xiao`and remove
-the specified assignment if the person exists and has that assignment in assignment list.
+Step 2. The user executes `remove 1` command to remove the first assignment of a person whose assignments are currently displayed. When `Command#execute`
+is called, the `remove 1` command will filter out the assignment in the currently displayed assignment list with the `INDEX` 1 and remove
+the assignment if there is an assignment at that `INDEX` in assignment list.
 
 <div markdown="span" class="alert alert-info">:information_source:
-**Note:** If there are no persons with the specified module field or there are no persons who have this assignment, it will return an error to the user.
+**Note:** If currently displayed assignment list does not contain the assignment at specified `INDEX`, it will return an error to the user.
 </div>
 
 The following sequence diagram shows how the `remove` command is executed:
@@ -523,9 +521,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 </div>
 
-Step 3. The user executes `show 1` to check that the specified assignment has been removed for person in the specified
-module with that assignment.
-
 The following activity diagram summarizes what happens when a user executes the `remove` command:
 <p align="center">
   <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
@@ -534,16 +529,16 @@ The following activity diagram summarizes what happens when a user executes the 
 <div style="page-break-after: always;"></div>
 
 #### Design considerations
-**Aspect: Deletes assignment of a person in current displayed list or for any person in storage:**
+**Aspect: Deletes assignment of a person in currently displayed list or for any person in storage:**
 
-* **Alternative 1:** (current choice) Deletes assignment of a person in current displayed list
-    * Pros: Allows for a safer delete of assignments
-    * Cons: User has to carry out `list` command first if required person is not in the current displayed list
+* **Alternative 1:** (current choice) Deletes assignment of a person in the currently displayed list.
+    * Pros: Allows for a safer delete of assignments.
+    * Cons: User has to carry out `list` command first if required person is not in the current displayed list.
 
-* **Alternative 2:** Deletes assignment of any person with that name and assignment
-    * Pros: Allows user to delete assignment of a person without the need of additional commands
-    * Cons: User may not be certain about which person's assignment to delete if several of them has completed assignment
-    and likely to remember the wrong person name if the current person displayed list is not shown
+* **Alternative 2:** Deletes assignment of any person with that name and assignment.
+    * Pros: Allows user to delete assignment of a person without the need of additional commands.
+    * Cons: User may not be certain about which person's assignment to delete if several of them have completed the assignment
+    and likely to remember the wrong person name if the currently displayed contact list is not shown.
 
 * Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions, **alternative 1** is
   chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the
@@ -690,12 +685,12 @@ Given below is an example usage scenario and how the `MarkAssignmentCommand` is 
 
 Step 1. The user executes `list` command to see the current list of persons.
 
-Step 2. The user executes `done n/Xiao 1` command to mark the first assignment of a `Xiao` as done. When `Command#execute` is called,
-the `done n/...` command will filter out persons in the storage list with the name field `Xiao`and mark the specified assignment
-if the person exists and has that assignment in assignment list.
+Step 2. The user executes `done 1` command to mark the first assignment of the currently displayed assignment list as done. When `Command#execute` is called,
+the `done 1` command will filter out assignments with `INDEX` 1 and mark the specified assignment as completed
+if assignment of `INDEX` 1 exists in the currently displayed assignment list.
 
 <div markdown="span" class="alert alert-info">:information_source:
-**Note:** If there are no persons with the specified name field or there are no persons who have this assignment, it will return an error to the user.
+**Note:** If there is no assignment at that specified index, it will return an error to the user.
 </div>
 
 The following sequence diagram shows how the `done` command is executed:
@@ -708,9 +703,6 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 </div>
 
-Step 3. The user executes `show 1` to check that the specified assignment has been marked for person with specified
-name with that assignment.
-
 The following activity diagram summarizes what happens when a user executes the `done` command:
 
 <p align="center">
@@ -722,14 +714,15 @@ The following activity diagram summarizes what happens when a user executes the 
 #### Design considerations
 **Aspect: Marks assignment of a person in current displayed list as done or for any person in storage model:**
 
-* **Alternative 1:** (current choice) Marks assignment of a person in current displayed list
-    * Pros: Allows for a safer mark of assignments
-    * Cons: User has to carry out `list` command first if required person is not in the current displayed list
+* **Alternative 1:** (current choice) Marks assignment in current displayed assignment list.
+    * Pros: Allows for a safer mark of assignments.
+    * Cons: User has to carry out `list` command first if required person is not in the current displayed list, which is followed
+    by `show` command if assignments of required person are not shown.
 
-* **Alternative 2:** Marks assignment of any person with that name and assignment
-    * Pros: Allows user to mark assignment of a person without the need of additional commands
+* **Alternative 2:** Marks assignment of any person with that name and assignment.
+    * Pros: Allows user to mark assignment of a person without the need of additional commands.
     * Cons: User may not be certain about which person's assignment to mark if several of them has completed assignment
-      and likely to remember the wrong person name if the current person displayed list is not shown
+      and likely to remember the wrong person name if the current person displayed list is not shown.
 
 * Considering the fact that TA<sup>2</sup> is designed to be user-friendly in managing student submissions, **alternative 1** is
   chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
@@ -1223,6 +1216,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **e/**: Symbol for a requirement to state email address
 * **m/**: Symbol for a requirement to state the module
 * **n/**: Symbol for a requirement to state a name
+* **t/**: Symbol for a requirement to state a tag
 * **TA**: Abbreviation for teaching assistant
 * **UC**: Abbreviation for use case
 * **SoC**: Abbreviation for School of Computing
