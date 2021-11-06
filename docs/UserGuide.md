@@ -22,6 +22,8 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+## Table of Contents
+
 * Table of Contents
 {:toc}
 
@@ -53,6 +55,8 @@ For advanced users, the [Command summary](#command-summary) section gives you an
     
     * **`give`**`d/Assignment 1 by/27/3/2022`: Gives an assignment, `Assignment 1` that is due by 27 Mar 2022 at  11.59pm, to the first student in your contact list.
 
+<div style="page-break-after: always;"></div>
+
 6. Refer to the [Features](#features) below for more details of each command.
 
 <div markdown="block" class="alert alert-primary">
@@ -65,7 +69,6 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ## UI Design
 
@@ -160,6 +163,8 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `add n/John Doe m/CS1010 e/e1234567@u.nus.edu`
 
@@ -172,6 +177,8 @@ Possible Usage:
 * You can use `add` to add new students into the contact list when you receive new students.
 
 * `TAG` can be used to separate students by their tutorial group or to mark out students that require more attention.
+
+<div style="page-break-after: always;"></div>
 
 ### Finding students with matching input keywords: `find`
 
@@ -243,6 +250,8 @@ Possible Usage:
 
     * `TAG` if you use it to separate students by tutorial groups.
 
+<div style="page-break-after: always;"></div>
+
 ### Listing all students: `list`
 
 Shows a list of all students in the contact list.
@@ -267,6 +276,8 @@ Examples:
 Possible usage:
 
 *  You can use `delete` to delete any student that you do not need to keep track anymore.
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a student: `edit`
 
@@ -312,6 +323,8 @@ Possible Usage:
 
 * You can use `edit` to make changes to any mistakes in a student's information.
 
+<div style="page-break-after: always;"></div>
+
 ### Showing a student’s assignments: `show`
 
 Shows the assignments of the specified student in your assignment list.
@@ -347,6 +360,8 @@ Possible Usage:
 
 * You can use `show` to display the assignments of the student you would like to see and make modifications to.
 * You can look to the top of the assignment list to find out which assignments will be due soon or are overdue.
+
+<div style="page-break-after: always;"></div>
 
 ### Giving assignment: `give` `giveall`
 
@@ -447,6 +462,8 @@ Possible Usage:
 
 *  You can use `giveall` instead of `give` when there is a module assignment, where all students under the module is required to submit.
 
+<div style="page-break-after: always;"></div>
+
 ### Marking an assignment as completed: `done`
 
 Marks a specified assignment of a student as completed.
@@ -476,6 +493,8 @@ Examples:
 Possible Usage:
 
 * You can use `done` to track completion status of an assignment among your students.
+
+<div style="page-break-after: always;"></div>
 
 ### Removing an assignment of a student: `remove`
 
@@ -521,6 +540,7 @@ Possible Usage:
 
 * You can use `clear` if you no longer need to keep track of students after they have completed the module.
 
+<div style="page-break-after: always;"></div>
 
 ### Undoing a command: `undo`
 
@@ -627,6 +647,8 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
     * have each domain label start and end with alphanumeric characters.
     
     * have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+
+<div style="page-break-after: always;"></div>
 
 #### Friendly commands
 
