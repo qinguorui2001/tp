@@ -13,7 +13,7 @@ from the School of Computing (SoC) at the National University of Singapore (NUS)
 If you are interested in contributing to TA<sup>2</sup>, this guide is designed to help you get started!
 There are a variety of ways to contribute to TA<sup>2</sup> such as coding, testing, improving the design of the interface and updating the documentation.
 
-*Last Updated: 8 November 2021*
+*Last Updated: 8 November 2021* 1
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
