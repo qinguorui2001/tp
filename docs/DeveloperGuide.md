@@ -3,6 +3,8 @@ layout: page
 title: Developer Guide
 ---
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## **Welcome to TA<sup>2</sup>'s Developer Guide!**
 {:.no_toc}
 
@@ -15,11 +17,13 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 *Last Updated: 8 November 2021*
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Acknowledgements**
 
@@ -38,6 +42,7 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 To get started, check out this guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Design**
 
@@ -182,6 +187,7 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -937,6 +943,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 (more aspects and details of implementation to come)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
@@ -947,6 +954,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## **Appendix: Requirements**
 
@@ -971,6 +979,8 @@ With TA<sup>2</sup>, they will no longer need to have to rely on inefficient wor
 As users who can type fast, they will be able to manage their students' information and allocated assignments much faster than when using a mouse/GUI driven app.
 
 TA<sup>2</sup> does not support management of assignments of a particular student across multiple modules (i.e. a student can only be under a single module).
+
+<div style="page-break-after: always;"></div>
 
 ### User stories
 
@@ -1171,6 +1181,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **CLI**: Abbreviation for Command Line Interface
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
