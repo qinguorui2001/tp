@@ -19,6 +19,7 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 <div style="page-break-after: always;"></div>
 
 ## **Table of Contents**
+{:.no_toc}
 
 * Table of Contents
 {:toc}
