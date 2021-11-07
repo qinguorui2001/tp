@@ -1557,7 +1557,7 @@ testers are expected to do more *exploratory* testing.
       </p>
       <br>
 
-   4. Test case: Repeat `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
+   3. Test case: Repeat `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
       Expected: No duplicated assignment should be added for all persons the module "CS2100". Error message will be shown
       as all persons already have the specified assignment. The assignment list of persons should show the same assignments
       as the one in the previous test case.
