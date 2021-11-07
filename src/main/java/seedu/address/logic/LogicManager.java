@@ -46,7 +46,10 @@ public class LogicManager implements Logic {
 
         commandResult = command.execute(model);
 
-        if (!(command instanceof UndoCommand || command instanceof RedoCommand)) {
+        boolean canBeUndone = !(command instanceof UndoCommand || command instanceof RedoCommand
+                || command instanceof HelpCommand );
+
+        if (canBeUndone) {
             model.commitAddressBook();
         }
 

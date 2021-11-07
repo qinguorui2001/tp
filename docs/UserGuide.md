@@ -129,7 +129,7 @@ unless otherwise mentioned in the command description. <br>
 
 Shows a help window with a link directing you to the user guide. 
 
-Alternatively, you click the `Help` button in the top left corner or press `F1` on your keyboard to open up the help window.
+Alternatively, you can click the `Help` button in the top left corner or press `F1` on your keyboard to open up the help window.
 <br><br>
 ![help message](images/helpMessage.png)
 
@@ -567,7 +567,7 @@ Undoes the last command entered.
 
 Format: `undo`
 
-* Undo all commands except for `undo` and `redo`.
+* Undo all commands except for `undo`, `redo` and `help`.
 * When you first start **TA<sup>2</sup>**, there is nothing to undo.
 
 ### Redoing a command: `redo`
@@ -576,8 +576,8 @@ Recovers the effect of the last `undo` command.
 
 Format: `redo`
 
-* Redo all commands except for `undo` and `redo`.
-* Once you enter a new command except for undo and redo, there is nothing to redo.
+* Redo all commands except for `undo`, `redo` and `help`.
+* Once you enter a new command except for `undo`, `redo` and `help`, there is nothing to redo.
 
 ### Exiting the program: `exit`
 

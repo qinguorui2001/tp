@@ -7,7 +7,7 @@ title: Developer Guide
 ## **Welcome to TA<sup>2</sup>'s Developer Guide!**
 {:.no_toc}
 
-Teaching Assistant's Assistant (**TA<sup>2</sup>**) is a desktop application designed for teaching assistants
+**Teaching Assistant's Assistant (TA<sup>2</sup>)** is a desktop application designed for teaching assistants
 from the School of Computing (SoC) at the National University of Singapore (NUS) to manage student information and keep track of students' assignment submissions.
 
 If you are interested in contributing to **TA<sup>2</sup>**, this guide is designed to help you get started!
@@ -834,11 +834,11 @@ The following sequence diagram shows how the undo operation works:
 
 The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. When `redo` command executes `Model#redoAddressBook()` it will internally check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `help`. Commands that do not modify the address book, such as `help`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 <p align="center">
   <img src="images/UndoRedoState4.png">
@@ -853,7 +853,7 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <p align="center">
-  <img src="images/CommitActivityDiagram.png" width="250" />
+  <img src="images/CommitActivityDiagram.png" width="400" height="587"/>
 </p>
 
 #### Design considerations
