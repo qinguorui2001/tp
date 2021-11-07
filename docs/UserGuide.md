@@ -10,15 +10,15 @@ title: User Guide
 **Teaching Assistant's Assistant (**TA<sup>2</sup>**)** is a desktop app that offers a convenient way for teaching assistants
 from the School of Computing at the National University of Singapore to manage student contacts and keep track of students' assignment submissions.
 
-****TA<sup>2</sup>**** is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **TA<sup>2</sup>** can get your contact and assignment management tasks done faster than traditional GUI apps!
+**TA<sup>2</sup>** is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **TA<sup>2</sup>** can get your contact and assignment management tasks done faster than traditional GUI apps!
 
-This user guide provides you with installation instructions, guide on features of ****TA<sup>2</sup>**** and some FAQs.
+This user guide provides you with installation instructions, guide on features of **TA<sup>2</sup>** and some FAQs.
 
 Through this guide, you may encounter the following icons.
 
-* :exclamation: Caution: Warns you about potential unintended or undesirable behaviours. <br>
-* :information_source: Notes: Provides information that you are required to know. <br>
-* :bulb: Tip: Provides additional information that are good to know. <br>
+* **:exclamation: Caution:** Warns you about potential unintended or undesirable behaviours. <br>
+* **:information_source: Notes:** Provides information that you are required to know. <br>
+* **:bulb: Tip:** Provides additional information that are good to know. <br>
 
 If you are a new user, check out the [Quick start](#quick-start) section to help you get started with **TA<sup>2</sup>**.
 
