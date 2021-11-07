@@ -102,9 +102,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
   <img src="images/ComponentManagers.png" width="300" />
 </p>
 
-<div style="page-break-after: always;"></div>
-
 The sections below give more details of each component.
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -412,6 +412,7 @@ The two object diagram below shows illustrates how the objects interacts and cha
 <img src="images/DisplayAssignmentObjectDiagram2.png" width="500" height="400" >
 </p>
 
+<div style="page-break-after: always;"></div>
 
 Step 3. When `assignments` is updated, the assignment list panel of the`Ui` will be updated accordingly since it is an observer of the `assignments` list in `Model`
 
@@ -710,7 +711,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 The following activity diagram summarizes what happens when a user executes the `remove` command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="550" height="500" />
+  <img src="images/RemoveActivityDiagram.png" width="5300" height="480" />
 </p>
 
 #### Design considerations
@@ -1265,7 +1266,7 @@ testers are expected to do more *exploratory* testing.
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting **TA<sup>2</sup>**. <br>
 
    <p align="center">
-     <img src="images/ManualTestingSampleData.png" width="600" height="500">
+     <img src="images/ManualTestingSampleData.png" width="550" height="450">
    </p>
    <br>
 
@@ -1580,6 +1581,8 @@ testers are expected to do more *exploratory* testing.
      as all persons already have the specified assignment. The assignment list of persons should show the same assignments
      as the one in the previous test case.
 
+<div style="page-break-after: always;"></div>
+
 2. Giving an assignment to ***some*** persons without the assignment.
 
     1. Prerequisites: Start with the sample data and filter out the persons in the module ***CS2100*** by executing `find m/CS2100`.
@@ -1686,6 +1689,7 @@ testers are expected to do more *exploratory* testing.
 
 ![Clear Command Success Screen](images/ManualTestingClear.PNG)
 
+<div style="page-break-after: always;"></div>
 
 ### Undoing a command
 
@@ -1698,8 +1702,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `undo`<br>
       Expected: Retrieves the effect before conducting the last command (except `undo`).
-      
-<div style="page-break-after: always;"></div>
       
 ###  Redoing a command
 
