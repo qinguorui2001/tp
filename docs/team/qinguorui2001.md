@@ -45,10 +45,10 @@ Given below are my contributions to the project.
 * **Documentation**:
     * User Guide:
         * Updated the draft of quick start. [\#251](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/251)
-        * Added documentation for the features `give`, `done` and `remove` [\#56](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/56)
+        * Added documentation for the features `give`, `done`, `remove`, `undo` and `redo`. [\#56](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/56), [\#139](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/139)
         * Fixed bugs reported in PE dry run and improve the view of the guide. [\#210](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/210)
     * Developer Guide:
-        * Added implementation details of the `remove`, `give` and `done` feature. [\#120](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/120)
+        * Added implementation details of the `remove`, `give`, `undo`, `done` and `redo` feature. [\#120](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/120), [\#116](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/116)
         * Polished the non-functional requirements. [\#239](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/239)
         * Drafted user stories and glossary. [\#49](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/49)
         * Added use case for `give` feature. [\#69](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/69)
