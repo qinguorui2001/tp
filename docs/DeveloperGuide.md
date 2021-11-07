@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 --------------------------------------------------------------------------------------------------------------------
 
-## **Welcome to **TA<sup>2</sup>'s Developer Guide!**
+## **Welcome to TA<sup>2</sup>'s Developer Guide!**
 {:.no_toc}
 
 Teaching Assistant's Assistant (**TA<sup>2</sup>**) is a desktop application designed for teaching assistants
