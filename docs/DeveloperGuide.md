@@ -13,7 +13,7 @@ from the School of Computing (SoC) at the National University of Singapore (NUS)
 If you are interested in contributing to **TA<sup>2</sup>**, this guide is designed to help you get started!
 There are a variety of ways to contribute to **TA<sup>2</sup>** such as coding, testing, improving the design of the interface and updating the documentation.
 
-*Last Updated: 8 November 2021* 2
+*Last Updated: 8 November 2021* 
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -949,6 +949,8 @@ The following activity diagram shows the possible paths whilst a user adds an as
   <img src="images/GiveActivityDiagram.png">
 </p>
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows the logic sequence of an `AddAssignment` command execution:
 
 <p align="center">
@@ -958,6 +960,8 @@ The following sequence diagram shows the logic sequence of an `AddAssignment` co
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for AddAssignmentCommand
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div> <br>
+
+<div style="page-break-after: always;"></div>
 
 The following activity diagram shows the possible paths whilst a user adds an assignment using `giveall`:
 
