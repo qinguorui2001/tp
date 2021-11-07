@@ -5,17 +5,13 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([person in current contact list])
-    :Get person in module;
-    if () then ([person has specified assignment])
-         :Mark specified assignment as
-                 completed for person;
-    else ([else])
-         :Show assignment not exist error message;
-endif
+
+if () then ([assignment at specified index exists])
+      :Mark specified assignment as completed in
+      currently displayed assignment list;
+      :Sort assignment based on completed status;
 else ([else])
-    :Show person not exist
-          error message;
+      :Show assignment not exist error message;
 endif
 stop
 @enduml

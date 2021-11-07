@@ -1,9 +1,10 @@
 @startuml
 start
-:User adds an assignment to a specific person;
+:User executes give command;
 
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
+if () then ([person at the specified index exist])
 
 if () then ([person assignment list does not
 contain assignment])
@@ -14,6 +15,10 @@ contain assignment])
 else ([else])
     :Show duplicate assignment
                 error message;
+endif
+else ([else])
+    :Show no person match
+    error message;
 endif
 stop
 @enduml
