@@ -1544,7 +1544,7 @@ testers are expected to do more *exploratory* testing.
       persons have the assignment you wish to give using the `show` command.
 
    2. Test case: `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
-      Expected: All persons in the module "CS2100" have "Assignment 1" with due date "11/10/2021" added into their assignment list.
+      Expected: All persons in the module "CS2100" have "Assignment 3" with due date "11/10/2021" added into their assignment list.
       Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons
       from the sample data and have executed the series of commands described above, you should be able to see the result of the
       command illustrated in the image below. Note that the image is displaying the assignment list of "Alex Yeoh" as `show 1` was executed.
