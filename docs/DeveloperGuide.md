@@ -7,11 +7,11 @@ title: Developer Guide
 ## **Welcome to TA<sup>2</sup>'s Developer Guide!**
 {:.no_toc}
 
-Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop application designed for teaching assistants
+Teaching Assistant's Assistant (**TA<sup>2</sup>**) is a desktop application designed for teaching assistants
 from the School of Computing (SoC) at the National University of Singapore (NUS) to manage student information and keep track of students' assignment submissions.
 
-If you are interested in contributing to TA<sup>2</sup>, this guide is designed to help you get started!
-There are a variety of ways to contribute to TA<sup>2</sup> such as coding, testing, improving the design of the interface and updating the documentation.
+If you are interested in contributing to **TA<sup>2</sup>**, this guide is designed to help you get started!
+There are a variety of ways to contribute to **TA<sup>2</sup>** such as coding, testing, improving the design of the interface and updating the documentation.
 
 *Last Updated: 8 November 2021* 3
 
@@ -29,7 +29,7 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 
 ## **Acknowledgements**
 
-* TA<sup>2</sup> is adapted from [AddressBook-Level3 (AB3)](https://github.com/nus-cs2103-AY2122S1/tp)
+* **TA<sup>2</sup>** is adapted from [AddressBook-Level3 (AB3)](https://github.com/nus-cs2103-AY2122S1/tp)
 * For the detailed documentation of  AddressBook-Level3 project, see the **[Address Book Product Website](https://se-education.org/addressbook-level3)**.
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [TemporalAdjusters](https://docs.oracle.com/javase/8/docs/api/java/time/temporal/TemporalAdjusters.html)
 * Code reused: 
@@ -209,6 +209,180 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find feature
+
+#### Implementation
+The `find` command allows users to find specific people in their list, based on certain
+matching criteria such as:
+
+1. Name
+2. Module
+3. Tags
+
+The command is represented by the `find` keyword.
+
+This allows users to specify their list and cut down on the amount of information displayed,
+selectively choosing those that the users would only like to see.
+
+The `find` Command is a subclass of the *Command* class. Once the user enters the `find`
+keyword, the `LogicManager` class will execute the command and pass the
+input to the `AddressBookParser` class to parse the given input.
+
+From this class, a specific parser class known as the `FindPersonCommandParser`
+is created and used to parse the input based on the `find` specificity.
+
+Next, the `FindPersonCommandParser` class returns a `FindPersonCommand` or
+an exception, depending on the validity of the command input. The
+Command#execute is then called, returning a `CommandResult` class.
+
+Given below is a more specific example of the command execution.
+
+1. The user wants to find a specific person based on their name
+2. The user executes `find n/alice`, causing a `FindPersonCommand` to be returned
+3. The Command#execute is called, which causes the list to update and reflect those whose names matches alice
+
+<div style="page-break-after: always;"></div>
+
+The sequence of this command execution can be visualized using the
+below sequence diagram:
+
+<p align="center">
+  <img src="images/FindSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `find` command:
+
+<p align="center">
+  <img src="images/FindActivityDiagram.png">
+</p>
+
+<div style="page-break-after: always;"></div>
+
+#### Design considerations
+**Aspect: Finding people based on OR criteria or AND criteria**
+
+* **Alternative 1 (current choice):** Allows user to find people based on **OR** criteria
+  * Pros: Allows for a more flexible search, making it less error-prone
+  * Cons: Reduce efficiency of searching for specific people if large chunks of information
+    is returned
+
+* **Alternative 2:** Allow users to find people based on **AND** criteria
+  * Pros: Users can perform more powerful searching to suit their
+    requirements and criteria, thus possibly being more effective and efficient
+    if the user knows who is in mind
+  * Cons: Less error tolerant as one simple mistake can result in no matches
+    being returned.
+
+<div style="page-break-after: always;"></div>
+
+#### [Proposed] Find Extension
+**Allow finding to have both specificity and flexibility**
+
+**Proposed Implementation**
+
+In order to create the option for the users to select the type of find they are trying to
+execute, be it specific or flexible, such a functionality is implemented in the following way:
+
+The proposed find extension to allow specificity and flexibility can be implemented by altering
+how the`FindCommandParser` class works. Users are required to specify an extra parameter to denote
+the type of find they are trying to execute.
+
+This extra parameter will be **-S** and **-F** to represent specific and flexible respectively.
+
+An example command call:
+- `find -s n/Bryan m/CS1101S` to find all people named Bryan who are enrolled in CS1101S
+  - Bryan Loh enrolled in module CS1101s will be listed.
+  - Bryan Tan enrolled in module CS1231S will not be listed.
+
+This can be facilitated by splitting the `FindPersonCommand` into two subtypes: `FindSpecificPersonCommand`
+and `FindAllPersonCommand`.
+
+With the separation of the commands, two new classes to test for keywords have to be created, namely the
+`PersonContainsAllKeywordsPredicate` and `PersonContainsAnyKeywordPredicate`. These two classes will then
+extend the `PersonContainsKeywordPredicate` class which implements the `Predicate<T>` interface,
+and then override the methods stipulated by the interface.
+
+This way, `FindSpecificPersonCommand` instantiates the `PersonContainsAllKeywordsPredicate` class whilst
+`FindAllPersonCommand` instantiates the `PersonContainsAnyKeywordPredicate` class.
+
+<div style="page-break-after: always;"></div>
+
+Given below is the partial class diagram of how the logic behind the new find command works:
+
+<p align="center">
+  <img src="images/ImprovedFindDiagram.png">
+</p>
+
+The following is the activity diagram for a specific find command execution:
+
+<p align="center">
+  <img src="images/ImprovedSpecificFindActivityDiagram.png">
+</p>
+
+The following is the activity diagram for a flexible find command execution:
+
+<p align="center">
+  <img src="images/ImprovedFlexibleFindActivityDiagram.png">
+</p>
+
+<div style="page-break-after: always;"></div>
+
+#### Design considerations
+
+**Aspect: How the different find commands can be implemented**
+
+* **Alternative 1 (current choice):** Create subclasses to handle the different kinds of behaviour of `Find`.
+  * Pros: Easy to extend classes and implement different functionalities
+  * Cons: User has to input more prefixes to specify the command
+
+* **Alternative 2:** Have the parser identify the different find commands without extra prefixes
+  * Pros: User can use the find command as per usual without extra prefixes / inputs
+  * Cons: Requires the application to recognize a lot of different user inputs which could mean
+    different kinds of find, which is unfeasible to implement considering the time given
+    
+<div style="page-break-after: always;"></div>
+
+### Assignment Feature
+
+#### Implementation
+The `Assignment` class encapsulates the current Assignment feature and composes of `Description`, `Status` and `DueDate` class.
+
+It implements the operation `Assignment#isSameAssignment(Assignment assignment)` to check for duplicate assignments. Currently, assignments are similar if they have the same description and this check is case-insensitive. This is because each student is under one module and having a similarly named assignment within the same module is less likely.
+
+Next, the current available `Status` of `Assignment` are `PENDING` and `COMPLETED`. Since the type of `Status` are fixed, the `Status` class contains an `enumeration StatusType` to store the valid values. The use of static methods `Status#createCompletedStatus()` and `Status#createPendingStatus()` initialises the `COMPLETED Status` and `PENDING Status` respectively. Meanwhile, the constructor, `Status(StatusType value)`, is set to private to prevent instantiation through inheritance.
+
+#### Related Implementation: UniqueAssignmentList
+A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. `Assignment` class extends `Comparable` interface for sorting purposes within a `UniqueAssignmentList`. Currently, only `AddressBook` and `Person` has a reference to `UniqueAssignmentList`.
+
+<p align="center">
+  <img src="images/developerguide/implementation/AssignmentClassDiagram.png">
+</p>
+
+`UniqueAssignmentList#sort()` is a method responsible for sorting the list based on the `Status` and `DueDate` of the `Assignment`. The `UniqueAssignmentList` gives more importance to assignments that are pending than completed, and if both are pending, it will break the tie by choosing the assignment with an earlier due date.
+
+<p align="center">
+  <img src="images/developerguide/implementation/SortedAssignments.png">
+</p>
+
+#### Design considerations
+
+**Aspect: How Status can be instantiated:**
+
+* **Alternative 1 (current choice):** Instantiate Status using static methods with enumerations to store the fixed values
+  * Pros: Easy to implement.
+  * Cons: May become harder to update if there are more types of status with different types of behaviour
+
+* **Alternative 2:** Use a factory method to instantiate the different types of status
+  * Pros: Divides cleanly all the different types of status and intended behaviour and make it very easy to add new status with few adjustments by creating another subclass.
+  * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
+
+<div style="page-break-after: always;"></div>
+
 ### Assignment list panel display feature
 
 #### Implementation
@@ -264,43 +438,7 @@ The sequence diagram below illustrates the interactions between the `Logic` and 
   * Pros: Allows you to cleanly segregate commands of assignments and persons because they are on different windows.
   
   * Cons: Additional UI may lead to slower processing and execution.
-
-<div style="page-break-after: always;"></div>
-
-### Assignment Feature
-
-#### Implementation
-The `Assignment` class encapsulates the current Assignment feature and composes of `Description`, `Status` and `DueDate` class.
-
-It implements the operation `Assignment#isSameAssignment(Assignment assignment)` to check for duplicate assignments. Currently, assignments are similar if they have the same description and this check is case-insensitive. This is because each student is under one module and having a similarly named assignment within the same module is less likely.
-
-Next, the current available `Status` of `Assignment` are `PENDING` and `COMPLETED`. Since the type of `Status` are fixed, the `Status` class contains an `enumeration StatusType` to store the valid values. The use of static methods `Status#createCompletedStatus()` and `Status#createPendingStatus()` initialises the `COMPLETED Status` and `PENDING Status` respectively. Meanwhile, the constructor, `Status(StatusType value)`, is set to private to prevent instantiation through inheritance.
-
-#### Related Implementation: UniqueAssignmentList
-A `UniqueAssignmentList` stores a list of `Assignment` and prevents duplicates. `Assignment` class extends `Comparable` interface for sorting purposes within a `UniqueAssignmentList`. Currently, only `AddressBook` and `Person` has a reference to `UniqueAssignmentList`.
-
-<p align="center">
-  <img src="images/developerguide/implementation/AssignmentClassDiagram.png">
-</p>
-
-`UniqueAssignmentList#sort()` is a method responsible for sorting the list based on the `Status` and `DueDate` of the `Assignment`. The `UniqueAssignmentList` gives more importance to assignments that are pending than completed, and if both are pending, it will break the tie by choosing the assignment with an earlier due date.
-
-<p align="center">
-  <img src="images/developerguide/implementation/SortedAssignments.png">
-</p>
-
-#### Design considerations
-
-**Aspect: How Status can be instantiated:**
-
-* **Alternative 1 (current choice):** Instantiate Status using static methods with enumerations to store the fixed values
-    * Pros: Easy to implement.
-    * Cons: May become harder to update if there are more types of status with different types of behaviour
-
-* **Alternative 2:** Use a factory method to instantiate the different types of status
-    * Pros: Divides cleanly all the different types of status and intended behaviour and make it very easy to add new status with few adjustments by creating another subclass.
-    * Cons: The code length is very long due to all the subclasses of status and may not be optimal for Status class with very few status types.
-
+  
 <div style="page-break-after: always;"></div>
 
 ### Keeping track on person whose assignments are displayed feature
@@ -345,6 +483,309 @@ The `delete` command is one of the commands that may affect the assignment list 
 * **Alternative 2:** `Person` class store an additional attribute `boolean isActivePerson`.
   * Pros: Can toggle between multiple persons.
   * Cons: `isActivePerson` may not be a suitable property of `Person` class since it may not be the responsibility of `Person` to remember whether it is the `activePerson`.
+
+<div style="page-break-after: always;"></div>
+
+### Give feature
+
+#### Implementation
+The `give` command allows users to add the specified assignment to a particular person is stored in the model.
+Person who already has the specified assignment will not have a duplicated assignment added to him. The
+command is abstracted as `AddAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `AddAssignmentCommand` is executed.
+
+Step 1. The user executes `list` command to see the current list of persons.
+
+Step 2. The user executes `give 2 d/Assignment 1 by/ 03/11/2021` command to add assignment to the second person in
+the specified module. When `Command#execute` is called, the `give 2...` command will filter out persons in the current
+displayed list with `INDEX` 2 and add the specified assignment to this person if he or she exists and does
+not have that assignment.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the person at the specified 
+`INDEX` does not exist, it will return an error to the user.
+
+</div>
+
+The following sequence diagram shows how the `give` command is executed:
+
+<p align="center">
+  <img src="images/GiveSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `give` command:
+
+<p align="center">
+  <img src="images/GiveActivityDiagram.png" width="600" height="550" />
+</p>
+
+<div style="page-break-after: always;"></div>
+
+#### Design considerations
+**Aspect: Adds an assignment to a person in the currently displayed list or to any other person in storage:**
+
+* **Alternative 1 (current choice):** Add an assignment to a person in the currently displayed list.
+  * Pros: If the displayed list is shorter, the addition of assignments will be faster.
+  * Cons: User has to ensure that the desired person is displayed on the displayed contact list first before adding of assignment.
+
+* **Alternative 2:** Add an assignment to any person in the storage.
+  * Pros: Allows user to add assignment to a particular person even when he is not visible in the list.
+  * Cons: Might take longer to execute.
+
+* Considering the fact that the `give` command is meant for users to add assignments to visible persons in contact list,
+* **Alternative 1** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for
+  persons who already have the assignment.
+  **Alternative 1** requires an additional effort for user to ensure the person who the user want to give the assignment
+  to is actually stored in the contact list but not displayed, which may lead to the user giving assignments to the wrong person.
+
+<div style="page-break-after: always;"></div>
+
+### Giveall feature
+
+#### Implementation
+The `giveall` command allows users to add the specified assignment to all persons in the same module. Persons who already
+have the specified assignment will not have a duplicated assignment added to them. The command is abstracted as
+`AddAssignmentToAllCommand` and extends `Command`. When the user inputs the command, `AddAssignmentToAllCommand#execute()` is called and returns a `CommandResult`.
+
+When `AddAssignmentToAllCommand#execute()` is called, `AddAssignmentToAllCommand` checks if any persons in `AddressBook` has the specified
+assignment already. To avoid any inconsistencies in the specified assignment and any existing assignment with the same `Description`,
+`AddAssignmentToAllCommand#execute()` calls `AddAssignmentToAllCommand#getAssignmentIfExists(List<Person> personListWithAssignment)`
+to check if any persons contain an assignment with the same `Description` as the specified assignment. If such an assignment
+exists, a check is done to make sure that the `DueDate` field of the specified assignment and the existing assignment are
+the same. Additionally, the `Description` field of the added assignment will follow that of the existing assignment to
+prevent any inconsistencies in letter cases. The assignment will then be added to all persons who do not have the assignment.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified
+module field, it will return an error to the user. <br>
+Additionally, if all persons in the module already have the specified assignment,
+it will return an error to the user as well.
+
+</div>
+
+Given below is an example usage scenario and how the `AddAssignmentToAllCommand` is executed.
+
+Step 1. The user executes `giveall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to add `Assignment 2` to all persons in
+the module `CS2100` for the first time. When `AddAssignmentToAllCommand#execute()` is called, `AddAssignmentToAllCommand` will filter out persons in `AddressBook`
+with the module field `CS2100`. Since no persons have this assignment, it is added for all persons in `CS2100`.
+
+Step 2. The user now decides to add another person in the module `CS2100` as this person was accidentally left out earlier.
+The user executes `add Alice Koh m/CS2100 e/e2716238@u.nus.edu` to add the person in.
+
+Step 3. The user wants to give this person the assignment he previously gave to the other persons in `CS2100`. The user
+executes `giveall m/CS2100 d/assignment 2 by/ 03/10/2021`. Like Step 1, when `AddAssignmentToAllCommand#execute()` is called,
+`AddAssignmentToAllCommand` will filter out persons in `AddressBook` with the module field `CS2100`. However, since
+some persons in `CS2100` already have `Assignment 2`, the existing assignment will be returned when
+`AddAssignmentToAllCommand#getAssignmentIfExists(List<Person> personListWithAssignment)` is called. Since the `DueDate` of
+both the specified and existing assignment are `03/10/2021`, no error message will be thrown. `Assignment 2` will then be added
+for all persons in `CS2100` who does not have it yet.
+
+The following sequence diagram shows how `giveall m/CS2100 d/assignment 2 by/ 03/10/2021` is executed:
+<p align="center">
+  <img src="images/GiveAllSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+The following activity diagram summarizes what happens when a user executes the `giveall` command:
+
+<p align="center">
+  <img src="images/GiveAllActivityDiagram.png" width="450" height="450" />
+</p>
+
+#### Design considerations
+**Aspect: Adds assignment to persons in the specified module who are in the currently displayed list or
+to all persons in the specified module:**
+
+* **Alternative 1:** Adds assignment to persons in the specified module who are in the currently displayed list
+  * Pros: Allows user to add assignment to a more specific group of persons
+  * Cons: User has to carry out `list` command first if addition of assignments is desired for all persons
+
+* **Alternative 2 (current choice):** Adds assignment to all persons in the specified module
+  * Pros: Allows user to add assignment to all persons even when some persons are not displayed in the list
+  * Cons: Less flexibility in terms of the choice of persons to add assignments to
+
+* Considering the fact that the `giveall` command is meant for users to add assignments to all persons in the specified
+  module, **alternative 2** was chosen as it meets this specification. Moreover, the existence of the
+  `give` command which allows users to add an assignment to a specific person suggests that the `giveall` command might
+  provide better utility for users if it allows for the addition of assignments to a bigger group of persons.
+
+<div style="page-break-after: always;"></div>
+
+### Done feature
+
+#### Implementation
+The `done` command allows users to mark the specified assignment of a particular person in model.
+It is abstracted as `MarkAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `MarkAssignmentCommand` is executed.
+
+Step 1. The user executes `list` command to see the current list of persons.
+
+Step 2. The user executes `done 1` command to mark the first assignment of the currently displayed assignment list as done. When `Command#execute` is called,
+the `done 1` command will filter out assignments with `INDEX` 1 and mark the specified assignment as completed
+if assignment of `INDEX` 1 exists in the currently displayed assignment list.
+
+<div markdown="span" class="alert alert-info">:information_source:
+**Note:** If there is no assignment at that specified index, it will return an error to the user.
+</div>
+
+The following sequence diagram shows how the `done` command is executed:
+<p align="center">
+  <img src="images/DoneSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAssignmentCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `done` command:
+
+<p align="center">
+  <img src="images/DoneActivityDiagram.png" width="600" height="550" />
+</p>
+
+<div style="page-break-after: always;"></div>
+
+#### Design considerations
+**Aspect: Marks assignment of a person in the currently displayed list as done or for any person in storage model:**
+
+* **Alternative 1:** (current choice) Marks assignment in the currently displayed assignment list as completed.
+  * Pros: Allows for a safer mark of assignments.
+  * Cons: User has to ensure that the desired assignment is displayed on the displayed assignment list first before marking the assignment as completed.
+
+* **Alternative 2:** Marks an assignment as completed of the specified person, by in putting the name with the command.
+  * Pros: Allows user to mark assignment of a person without the need of additional commands.
+  * Cons: User may not be certain about which person's assignment to mark if several of them has completed assignment
+    and likely to remember the wrong person name if the current person displayed list is not shown.
+
+* Considering the fact that **TA<sup>2</sup>** is designed to be user-friendly in managing student submissions, **alternative 1** is
+  chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
+  marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
+  in **alternative 1**, it may take up much more time.
+
+<div style="page-break-after: always;"></div>
+
+### Remove feature
+
+#### Implementation
+The `remove` command allows users to remove the specified assignment of a particular person in model.
+It is abstracted as `DeleteAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `DeleteAssignmentCommand` is executed.
+
+Step 1. The user executes `list` command to see the current list of persons.
+
+Step 2. The user executes `remove 1` command to remove the first assignment of a person whose assignments are currently displayed. When `Command#execute`
+is called, the `remove 1` command will filter out the assignment in the currently displayed assignment list with the `INDEX` 1 and remove
+the assignment if there is an assignment at that `INDEX` in assignment list.
+
+<div markdown="span" class="alert alert-info">:information_source:
+**Note:** If currently displayed assignment list does not contain the assignment at specified `INDEX`, it will return an error to the user.
+</div>
+
+The following sequence diagram shows how the `remove` command is executed:
+<p align="center">
+  <img src="images/RemoveSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAssignmentCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+The following activity diagram summarizes what happens when a user executes the `remove` command:
+<p align="center">
+  <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
+</p>
+
+<div style="page-break-after: always;"></div>
+
+#### Design considerations
+**Aspect: Deletes assignment of a person in the currently displayed list or for any person in storage:**
+
+* **Alternative 1:** (current choice) Deletes assignment of a person in the currently displayed list.
+  * Pros: Allows for a safer delete of assignments.
+  * Cons: User has to ensure that the desired assignment is displayed on the displayed assignment list first before deleting that assignment.
+
+* **Alternative 2:** Deletes the assignment of the specified person, by inputting their name with the command.
+  * Pros: Allows user to delete assignment of a person without the need of additional commands.
+  * Cons: User may not be certain about which person's assignment to delete if several of them have completed the assignment
+    and likely to remember the wrong person name if the currently displayed contact list is not shown.
+
+* Considering the fact that **TA<sup>2</sup>** is designed to be efficient in managing student submissions, **alternative 1** is
+  chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the
+  deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
+  in **alternative 1**, it may take up much more time.
+
+<div style="page-break-after: always;"></div>
+
+### Clean feature
+
+#### Implementation
+The `clean` command allows users to remove all completed assignment from all persons.
+It is abstracted as `CleanAssignmentCommand` and extends `Command`. When the user inputs the command,
+`Command#execute` is called and returns a `CommandResult`.
+
+Given below is an example usage scenario and how the `CleanAssignmentCommand` is executed.
+
+Step 1. The user executes `list` command to see the current list of persons.
+
+Step 2. The user executes `clean` command to remove all the completed assignments.
+When `Command#execute` is called, the `clean` command will get the assignment list of all persons in the model and
+remove all assignments with the completed status.
+
+The following sequence diagram shows how the `clean` command is executed:
+<p align="center">
+  <img src="images/CleanSequenceDiagram.png">
+</p>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CleanAssignmentCommand`
+should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+Step 3. The user executes `show 1` to check that all completed assignments has been removed for the first person.
+
+<div style="page-break-after: always;"></div>
+
+The following activity diagram summarizes what happens when a user executes the `clean` command:
+
+<p align="center">
+  <img src="images/CleanActivityDiagram.png" width="250" />
+</p>
+
+#### Design considerations
+**Aspect: Deletes completed assignments of person with assignments currently displayed or for all persons:**
+
+* **Alternative 1:** Deletes completed assignments of person with assignments currently displayed
+  * Pros: Allows for a safer delete of assignments
+  * Cons: User has to carry out `show INDEX` command for every person if deletion of assignments is desired for all persons
+
+* **Alternative 2(current choice):** Deletes completed assignment of all persons
+  * Pros: Allows user to delete assignment of all persons without the need of additional commands
+  * Cons: Undesired deletion of assignment of persons not in displayed list may occur
+
+* Considering the fact that **TA<sup>2</sup>** is designed to be efficient in managing student submissions, **alternative 2** is
+  chosen. When the list of persons increase to considerable numbers, deletion of completed assignments will require the user
+  to input an additional command for each person. Bearing in mind that users make use of the `clean` command to remove
+  completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
+  may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command
+  which allows the user to retrieve the desired assignments easily.
+
 
 <div style="page-break-after: always;"></div>
 
@@ -438,447 +879,7 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-<div style="page-break-after: always;"></div>
-
-### Give feature
-
-#### Implementation
-The `give` command allows users to add the specified assignment to a particular person is stored in the model.
-Person who already has the specified assignment will not have a duplicated assignment added to him. The
-command is abstracted as `AddAssignmentCommand` and extends `Command`. When the user inputs the command,
-`Command#execute` is called and returns a `CommandResult`.
-
-Given below is an example usage scenario and how the `AddAssignmentCommand` is executed.
-
-Step 1. The user executes `list` command to see the current list of persons.
-
-Step 2. The user executes `give 2 d/Assignment 1 by/ 03/11/2021` command to add assignment to the second person in
-the specified module. When `Command#execute` is called, the `give 2...` command will filter out persons in the current
-displayed list with `INDEX` 2 and add the specified assignment to this person if he or she exists and does
-not have that assignment.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the person at the specified 
-`INDEX` does not exist, it will return an error to the user.
-
-</div>
-
-The following sequence diagram shows how the `give` command is executed:
-
-<p align="center">
-  <img src="images/GiveSequenceDiagram.png">
-</p>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentCommand`
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following activity diagram summarizes what happens when a user executes the `give` command:
-
-<p align="center">
-  <img src="images/GiveActivityDiagram.png" width="600" height="550" />
-</p>
-
-<div style="page-break-after: always;"></div>
-
-#### Design considerations
-**Aspect: Adds an assignment to a person in the currently displayed list or to any other person in storage:**
-
-* **Alternative 1 (current choice):** Add an assignment to a person in the currently displayed list.
-    * Pros: If the displayed list is shorter, the addition of assignments will be faster.
-    * Cons: User has to ensure that the desired person is displayed on the displayed contact list first before adding of assignment.
-
-* **Alternative 2:** Add an assignment to any person in the storage.
-    * Pros: Allows user to add assignment to a particular person even when he is not visible in the list.
-    * Cons: Might take longer to execute.
-
-* Considering the fact that the `give` command is meant for users to add assignments to visible persons in contact list,
-* **Alternative 1** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for
-  persons who already have the assignment.
-  **Alternative 1** requires an additional effort for user to ensure the person who the user want to give the assignment
-  to is actually stored in the contact list but not displayed, which may lead to the user giving assignments to the wrong person.
-
-<div style="page-break-after: always;"></div>
-
-### Remove feature
-
-#### Implementation
-The `remove` command allows users to remove the specified assignment of a particular person in model.
-It is abstracted as `DeleteAssignmentCommand` and extends `Command`. When the user inputs the command,
-`Command#execute` is called and returns a `CommandResult`.
-
-Given below is an example usage scenario and how the `DeleteAssignmentCommand` is executed.
-
-Step 1. The user executes `list` command to see the current list of persons.
-
-Step 2. The user executes `remove 1` command to remove the first assignment of a person whose assignments are currently displayed. When `Command#execute`
-is called, the `remove 1` command will filter out the assignment in the currently displayed assignment list with the `INDEX` 1 and remove
-the assignment if there is an assignment at that `INDEX` in assignment list.
-
-<div markdown="span" class="alert alert-info">:information_source:
-**Note:** If currently displayed assignment list does not contain the assignment at specified `INDEX`, it will return an error to the user.
-</div>
-
-The following sequence diagram shows how the `remove` command is executed:
-<p align="center">
-  <img src="images/RemoveSequenceDiagram.png">
-</p>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteAssignmentCommand`
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following activity diagram summarizes what happens when a user executes the `remove` command:
-<p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
-</p>
-
-<div style="page-break-after: always;"></div>
-
-#### Design considerations
-**Aspect: Deletes assignment of a person in the currently displayed list or for any person in storage:**
-
-* **Alternative 1:** (current choice) Deletes assignment of a person in the currently displayed list.
-    * Pros: Allows for a safer delete of assignments.
-    * Cons: User has to ensure that the desired assignment is displayed on the displayed assignment list first before deleting that assignment.
-
-* **Alternative 2:** Deletes the assignment of the specified person, by inputting their name with the command.
-    * Pros: Allows user to delete assignment of a person without the need of additional commands.
-    * Cons: User may not be certain about which person's assignment to delete if several of them have completed the assignment
-    and likely to remember the wrong person name if the currently displayed contact list is not shown.
-
-* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions, **alternative 1** is
-  chosen. The potential undesired deletion of assignments in **alternative 2** means the user has to manually recover the
-  deleted assignment by adding the assignment again. Compared to the additional time taken to execute the `list` command
-  in **alternative 1**, it may take up much more time.
-
-<div style="page-break-after: always;"></div>
-
-### Giveall feature
-
-#### Implementation
-The `giveall` command allows users to add the specified assignment to all persons in the same module. Persons who already
-have the specified assignment will not have a duplicated assignment added to them. The command is abstracted as
-`AddAssignmentToAllCommand` and extends `Command`. When the user inputs the command, `AddAssignmentToAllCommand#execute()` is called and returns a `CommandResult`.
-
-When `AddAssignmentToAllCommand#execute()` is called, `AddAssignmentToAllCommand` checks if any persons in `AddressBook` has the specified
-assignment already. To avoid any inconsistencies in the specified assignment and any existing assignment with the same `Description`,
-`AddAssignmentToAllCommand#execute()` calls `AddAssignmentToAllCommand#getAssignmentIfExists(List<Person> personListWithAssignment)`
-to check if any persons contain an assignment with the same `Description` as the specified assignment. If such an assignment
-exists, a check is done to make sure that the `DueDate` field of the specified assignment and the existing assignment are
-the same. Additionally, the `Description` field of the added assignment will follow that of the existing assignment to
-prevent any inconsistencies in letter cases. The assignment will then be added to all persons who do not have the assignment.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If there are no persons with the specified
-module field, it will return an error to the user. <br>
-Additionally, if all persons in the module already have the specified assignment,
-it will return an error to the user as well.
-
-</div>
-
-Given below is an example usage scenario and how the `AddAssignmentToAllCommand` is executed.
-
-Step 1. The user executes `giveall m/CS2100 d/Assignment 2 by/ 03/10/2021` command to add `Assignment 2` to all persons in
-the module `CS2100` for the first time. When `AddAssignmentToAllCommand#execute()` is called, `AddAssignmentToAllCommand` will filter out persons in `AddressBook`
-with the module field `CS2100`. Since no persons have this assignment, it is added for all persons in `CS2100`.
-
-Step 2. The user now decides to add another person in the module `CS2100` as this person was accidentally left out earlier.
-The user executes `add Alice Koh m/CS2100 e/e2716238@u.nus.edu` to add the person in.
-
-Step 3. The user wants to give this person the assignment he previously gave to the other persons in `CS2100`. The user
-executes `giveall m/CS2100 d/assignment 2 by/ 03/10/2021`. Like Step 1, when `AddAssignmentToAllCommand#execute()` is called,
-`AddAssignmentToAllCommand` will filter out persons in `AddressBook` with the module field `CS2100`. However, since
-some persons in `CS2100` already have `Assignment 2`, the existing assignment will be returned when
-`AddAssignmentToAllCommand#getAssignmentIfExists(List<Person> personListWithAssignment)` is called. Since the `DueDate` of
-both the specified and existing assignment are `03/10/2021`, no error message will be thrown. `Assignment 2` will then be added
-for all persons in `CS2100` who does not have it yet.
-
-The following sequence diagram shows how `giveall m/CS2100 d/assignment 2 by/ 03/10/2021` is executed:
-<p align="center">
-  <img src="images/GiveAllSequenceDiagram.png">
-</p>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-<div style="page-break-after: always;"></div>
-
-The following activity diagram summarizes what happens when a user executes the `giveall` command:
-
-<p align="center">
-  <img src="images/GiveAllActivityDiagram.png" width="450" height="450" />
-</p>
-
-#### Design considerations
-**Aspect: Adds assignment to persons in the specified module who are in the currently displayed list or
-to all persons in the specified module:**
-
-* **Alternative 1:** Adds assignment to persons in the specified module who are in the currently displayed list
-  * Pros: Allows user to add assignment to a more specific group of persons
-  * Cons: User has to carry out `list` command first if addition of assignments is desired for all persons
-
-* **Alternative 2 (current choice):** Adds assignment to all persons in the specified module
-  * Pros: Allows user to add assignment to all persons even when some persons are not displayed in the list
-  * Cons: Less flexibility in terms of the choice of persons to add assignments to
-
-* Considering the fact that the `giveall` command is meant for users to add assignments to all persons in the specified
-  module, **alternative 2** was chosen as it meets this specification. Moreover, the existence of the
-  `give` command which allows users to add an assignment to a specific person suggests that the `giveall` command might
-  provide better utility for users if it allows for the addition of assignments to a bigger group of persons.
-
-<div style="page-break-after: always;"></div>
-
-### Clean feature
-
-#### Implementation
-The `clean` command allows users to remove all completed assignment from all persons.
-It is abstracted as `CleanAssignmentCommand` and extends `Command`. When the user inputs the command,
-`Command#execute` is called and returns a `CommandResult`.
-
-Given below is an example usage scenario and how the `CleanAssignmentCommand` is executed.
-
-Step 1. The user executes `list` command to see the current list of persons.
-
-Step 2. The user executes `clean` command to remove all the completed assignments.
-When `Command#execute` is called, the `clean` command will get the assignment list of all persons in the model and
-remove all assignments with the completed status.
-
-The following sequence diagram shows how the `clean` command is executed:
-<p align="center">
-  <img src="images/CleanSequenceDiagram.png">
-</p>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `CleanAssignmentCommand`
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-Step 3. The user executes `show 1` to check that all completed assignments has been removed for the first person.
-
-<div style="page-break-after: always;"></div>
-
-The following activity diagram summarizes what happens when a user executes the `clean` command:
-
-<p align="center">
-  <img src="images/CleanActivityDiagram.png" width="250" />
-</p>
-
-#### Design considerations
-**Aspect: Deletes completed assignments of person with assignments currently displayed or for all persons:**
-
-* **Alternative 1:** Deletes completed assignments of person with assignments currently displayed
-  * Pros: Allows for a safer delete of assignments
-  * Cons: User has to carry out `show INDEX` command for every person if deletion of assignments is desired for all persons
-
-* **Alternative 2(current choice):** Deletes completed assignment of all persons
-  * Pros: Allows user to delete assignment of all persons without the need of additional commands
-  * Cons: Undesired deletion of assignment of persons not in displayed list may occur
-
-* Considering the fact that TA<sup>2</sup> is designed to be efficient in managing student submissions, **alternative 2** is
-  chosen. When the list of persons increase to considerable numbers, deletion of completed assignments will require the user
-  to input an additional command for each person. Bearing in mind that users make use of the `clean` command to remove
-  completed assignments that they no longer want to view, **alternative 2** does this job more efficiently. Although there
-  may be completed assignments that users want to keep in the list which they accidentally delete, there is the `undo` command
-  which allows the user to retrieve the desired assignments easily.
-
-<div style="page-break-after: always;"></div>
-
-### Done feature
-
-#### Implementation
-The `done` command allows users to mark the specified assignment of a particular person in model.
-It is abstracted as `MarkAssignmentCommand` and extends `Command`. When the user inputs the command,
-`Command#execute` is called and returns a `CommandResult`.
-
-Given below is an example usage scenario and how the `MarkAssignmentCommand` is executed.
-
-Step 1. The user executes `list` command to see the current list of persons.
-
-Step 2. The user executes `done 1` command to mark the first assignment of the currently displayed assignment list as done. When `Command#execute` is called,
-the `done 1` command will filter out assignments with `INDEX` 1 and mark the specified assignment as completed
-if assignment of `INDEX` 1 exists in the currently displayed assignment list.
-
-<div markdown="span" class="alert alert-info">:information_source:
-**Note:** If there is no assignment at that specified index, it will return an error to the user.
-</div>
-
-The following sequence diagram shows how the `done` command is executed:
-<p align="center">
-  <img src="images/DoneSequenceDiagram.png">
-</p>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `MarkAssignmentCommand`
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following activity diagram summarizes what happens when a user executes the `done` command:
-
-<p align="center">
-  <img src="images/DoneActivityDiagram.png" width="600" height="550" />
-</p>
-
-<div style="page-break-after: always;"></div>
-
-#### Design considerations
-**Aspect: Marks assignment of a person in the currently displayed list as done or for any person in storage model:**
-
-* **Alternative 1:** (current choice) Marks assignment in the currently displayed assignment list as completed.
-    * Pros: Allows for a safer mark of assignments.
-    * Cons: User has to ensure that the desired assignment is displayed on the displayed assignment list first before marking the assignment as completed.
-
-* **Alternative 2:** Marks an assignment as completed of the specified person, by in putting the name with the command.
-    * Pros: Allows user to mark assignment of a person without the need of additional commands.
-    * Cons: User may not be certain about which person's assignment to mark if several of them has completed assignment
-      and likely to remember the wrong person name if the current person displayed list is not shown.
-
-* Considering the fact that TA<sup>2</sup> is designed to be user-friendly in managing student submissions, **alternative 1** is
-  chosen. The potential undesired mark of assignments in **alternative 2** means the user has to manually recover the
-  marked assignment by undoing and marking assignment again. Compared to the additional time taken to execute the `list` command
-  in **alternative 1**, it may take up much more time.
-
-<div style="page-break-after: always;"></div>
-
-### Find feature
-
-#### Implementation
-The `find` command allows users to find specific people in their list, based on certain
-matching criteria such as:
-
-1. Name
-2. Module
-3. Tags
-
-The command is represented by the `find` keyword.
-
-This allows users to specify their list and cut down on the amount of information displayed,
-selectively choosing those that the users would only like to see.
-
-The `find` Command is a subclass of the *Command* class. Once the user enters the `find`
-keyword, the `LogicManager` class will execute the command and pass the
-input to the `AddressBookParser` class to parse the given input.
-
-From this class, a specific parser class known as the `FindPersonCommandParser`
-is created and used to parse the input based on the `find` specificity.
-
-Next, the `FindPersonCommandParser` class returns a `FindPersonCommand` or
-an exception, depending on the validity of the command input. The
-Command#execute is then called, returning a `CommandResult` class.
-
-Given below is a more specific example of the command execution.
-
-1. The user wants to find a specific person based on their name
-2. The user executes `find n/alice`, causing a `FindPersonCommand` to be returned
-3. The Command#execute is called, which causes the list to update and reflect those whose names matches alice
-
-<div style="page-break-after: always;"></div>
-
-The sequence of this command execution can be visualized using the
-below sequence diagram:
-
-<p align="center">
-  <img src="images/FindSequenceDiagram.png">
-</p>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `FindPersonCommand`
-should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The following activity diagram summarizes what happens when a user executes the `find` command:
-
-<p align="center">
-  <img src="images/FindActivityDiagram.png">
-</p>
-
-<div style="page-break-after: always;"></div>
-
-#### Design considerations
-**Aspect: Finding people based on OR criteria or AND criteria**
-
-* **Alternative 1 (current choice):** Allows user to find people based on **OR** criteria
-  * Pros: Allows for a more flexible search, making it less error-prone
-  * Cons: Reduce efficiency of searching for specific people if large chunks of information
-  is returned
-
-* **Alternative 2:** Allow users to find people based on **AND** criteria
-  * Pros: Users can perform more powerful searching to suit their
-  requirements and criteria, thus possibly being more effective and efficient
-  if the user knows who is in mind
-  * Cons: Less error tolerant as one simple mistake can result in no matches
-  being returned.
-
-<div style="page-break-after: always;"></div>
-
-#### [Proposed] Find Extension
-**Allow finding to have both specificity and flexibility**
-
-**Proposed Implementation**
-
-In order to create the option for the users to select the type of find they are trying to 
-execute, be it specific or flexible, such a functionality is implemented in the following way:
-
-The proposed find extension to allow specificity and flexibility can be implemented by altering 
-how the`FindCommandParser` class works. Users are required to specify an extra parameter to denote
-the type of find they are trying to execute.
-
-This extra parameter will be **-S** and **-F** to represent specific and flexible respectively. 
-
-An example command call:
-- `find -s n/Bryan m/CS1101S` to find all people named Bryan who are enrolled in CS1101S
-  - Bryan Loh enrolled in module CS1101s will be listed.
-  - Bryan Tan enrolled in module CS1231S will not be listed.
-
-This can be facilitated by splitting the `FindPersonCommand` into two subtypes: `FindSpecificPersonCommand`
-and `FindAllPersonCommand`.
-
-With the separation of the commands, two new classes to test for keywords have to be created, namely the
-`PersonContainsAllKeywordsPredicate` and `PersonContainsAnyKeywordPredicate`. These two classes will then
-extend the `PersonContainsKeywordPredicate` class which implements the `Predicate<T>` interface, 
-and then override the methods stipulated by the interface.
-
-This way, `FindSpecificPersonCommand` instantiates the `PersonContainsAllKeywordsPredicate` class whilst
-`FindAllPersonCommand` instantiates the `PersonContainsAnyKeywordPredicate` class.
-
-<div style="page-break-after: always;"></div>
-
-Given below is the partial class diagram of how the logic behind the new find command works:
-
-<p align="center">
-  <img src="images/ImprovedFindDiagram.png">
-</p>
-
-The following is the activity diagram for a specific find command execution:
-
-<p align="center">
-  <img src="images/ImprovedSpecificFindActivityDiagram.png">
-</p>
-
-The following is the activity diagram for a flexible find command execution:
-
-<p align="center">
-  <img src="images/ImprovedFlexibleFindActivityDiagram.png">
-</p>
-
-<div style="page-break-after: always;"></div>
-
-#### Design considerations
-
-**Aspect: How the different find commands can be implemented**
-
-* **Alternative 1 (current choice):** Create subclasses to handle the different kinds of behaviour of `Find`.
-  * Pros: Easy to extend classes and implement different functionalities 
-  * Cons: User has to input more prefixes to specify the command
-
-* **Alternative 2:** Have the parser identify the different find commands without extra prefixes 
-  * Pros: User can use the find command as per usual without extra prefixes / inputs
-  * Cons: Requires the application to recognize a lot of different user inputs which could mean 
-  different kinds of find, which is unfeasible to implement considering the time given
-
+  
 <div style="page-break-after: always;"></div>
 
 ### Friendlier Command Inputs
@@ -1016,7 +1017,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 **Target user**
 
-TA<sup>2</sup> is developed for Teaching Assistants (TA) in the School of Computing (SoC) at the National
+**TA<sup>2</sup>** is developed for Teaching Assistants (TA) in the School of Computing (SoC) at the National
 University of Singapore (NUS).
 
 **Profile:**
@@ -1028,11 +1029,11 @@ University of Singapore (NUS).
 
 **Value proposition**
 
-TA<sup>2</sup> offers a convenient way for SoC TAs to manage student assignments in an efficient manner.
-With TA<sup>2</sup>, they will no longer need to have to rely on inefficient workarounds like Excel or Notepad.
+**TA<sup>2</sup>** offers a convenient way for SoC TAs to manage student assignments in an efficient manner.
+With **TA<sup>2</sup>**, they will no longer need to have to rely on inefficient workarounds like Excel or Notepad.
 As users who can type fast, they will be able to manage their students' information and allocated assignments much faster than when using a mouse/GUI driven app.
 
-TA<sup>2</sup> does not support management of assignments of a particular student across multiple modules (i.e. a student can only be under a single module).
+**TA<sup>2</sup>** does not support management of assignments of a particular student across multiple modules (i.e. a student can only be under a single module).
 
 <div style="page-break-after: always;"></div>
 
@@ -1042,7 +1043,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                 | I want to …​                                   | So that I can…​                                                           |
 | -------- | ------------------------------------------ | ------------------------------------------------- | ---------------------------------------------------------------------------- |
-| `* * *`  | TA using TA<sup>2</sup> for the first time | see all commands available                        | recall commands and use them properly when I forget how to use the app       |
+| `* * *`  | TA using **TA<sup>2</sup>** for the first time | see all commands available                        | recall commands and use them properly when I forget how to use the app       |
 | `* * *`  | TA                                         | add information of a student                      | view a student's information                                                 |
 | `* * *`  | TA                                         | delete a student                                  | remove student entries that I no longer need                                 |
 | `* * *`  | TA                                         | find a person by name or module                   | locate details of persons without having to go through the entire list       |
@@ -1051,7 +1052,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | TA                                         | mark students' tasks as done                      | record students' progress more easily                                        |
 | `* * *`  | responsible TA                             | track students' progress on their assignments     | identify and reach out to those who need help                                |
 | `* * *`  | TA                                         | list all students I am teaching                   | ensure I added right and correct number of students                          |
-| `* * *`  | TA                                         | clear all student information in TA<sup>2</sup>   | use TA<sup>2</sup> over many semesters                                       |
+| `* * *`  | TA                                         | clear all student information in **TA<sup>2</sup>**   | use **TA<sup>2</sup>** over many semesters                                       |
 | `* *`    | TA for several modules                     | organize student assignments according to module  | manage assignments of students from different modules in an organised manner |
 | `* *`    | TA with many students                      | organise my students in a systematic fashion      | locate a student easily                                                      |
 | `* *`    | responsible TA                             | be notified when certain assignments are due soon | remind students who have not submitted their assignments yet                 |
@@ -1073,7 +1074,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters a new person's information.
-2. TA<sup>2</sup> shows the person is added.
+2. **TA<sup>2</sup>** shows the person is added.
 
     Use case ends.
 
@@ -1081,7 +1082,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The given command format is invalid, or the person's name or email is already in the list.
 
-    * 1a1. TA<sup>2</sup> shows an error message.
+    * 1a1. **TA<sup>2</sup>** shows an error message.
 
       Use case resumes at step 1.
 
@@ -1089,7 +1090,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to find a person with the specified keyword(s).
-2. TA<sup>2</sup> shows a list of persons with matching keyword(s).
+2. **TA<sup>2</sup>** shows a list of persons with matching keyword(s).
 
    Use case ends.
 
@@ -1097,7 +1098,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The format of the command is invalid.
   
-  * 1a1. TA<sup>2</sup> shows an error message.
+  * 1a1. **TA<sup>2</sup>** shows an error message.
   
     Use case resumes at step 1.
   
@@ -1112,9 +1113,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to list persons.
-2.  TA<sup>2</sup> shows a list of persons.
+2.  **TA<sup>2</sup>** shows a list of persons.
 3.  User requests to delete a specific person in the list.
-4.  TA<sup>2</sup> deletes the person.
+4.  **TA<sup>2</sup>** deletes the person.
 
     Use case ends.
 
@@ -1126,7 +1127,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. TA<sup>2</sup> shows an error message.
+    * 3a1. **TA<sup>2</sup>** shows an error message.
 
       Use case resumes at step 2.
 
@@ -1134,7 +1135,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 1. User requests to edit a person's name and email in the list.
-2. TA<sup>2</sup> shows that the person's information has been edited.
+2. **TA<sup>2</sup>** shows that the person's information has been edited.
 
    Use case ends.
 
@@ -1142,7 +1143,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The format of the command or the index is invalid, or there already exists a person with the same name and email.
 
-  * 1a1. TA<sup>2</sup> shows an error message.
+  * 1a1. **TA<sup>2</sup>** shows an error message.
 
     Use case resumes at step 1.
 
@@ -1153,7 +1154,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters the assignment information.
-2. TA<sup>2</sup> shows the assignment is added.
+2. **TA<sup>2</sup>** shows the assignment is added.
 
    Use case ends.
 
@@ -1161,7 +1162,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The format of the command is invalid, or the assignment already exists in that person's assignment list.
 
-  * 1a1. TA<sup>2</sup> shows an error message.
+  * 1a1. **TA<sup>2</sup>** shows an error message.
 
     Use case resumes at step 1.
 
@@ -1170,9 +1171,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to show assignments of a person.
-2. TA<sup>2</sup> shows a list of assignments.
+2. **TA<sup>2</sup>** shows a list of assignments.
 3. User requests to delete a specific assignment in the list.
-4. TA<sup>2</sup> deletes the assignment.
+4. **TA<sup>2</sup>** deletes the assignment.
 
    Use case ends.
 
@@ -1184,7 +1185,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-  * 3a1. TA<sup>2</sup> shows an error message.
+  * 3a1. **TA<sup>2</sup>** shows an error message.
 
     Use case resumes at step 2.
 
@@ -1195,9 +1196,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to show assignments of a person.
-2. TA<sup>2</sup> shows a list of assignments.
+2. **TA<sup>2</sup>** shows a list of assignments.
 3. User requests to mark a specific assignment in the list as done.
-4. TA<sup>2</sup> shows the assignment is done.
+4. **TA<sup>2</sup>** shows the assignment is done.
 
    Use case ends.
 
@@ -1209,7 +1210,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The given index is invalid, or the assignment has already been mark completed.
 
-  * 3b1. TA<sup>2</sup> shows an error message.
+  * 3b1. **TA<sup>2</sup>** shows an error message.
 
     Use case resumes at step 1.
 
@@ -1265,10 +1266,10 @@ testers are expected to do more *exploratory* testing.
 
    3. Launch the jar file using the ```java -jar ta2.jar```.
 
-   4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>. <br>
+   4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting **TA<sup>2</sup>**. <br>
 
    <p align="center">
-     <img src="images/ManualTestingSampleData.png" width="670" height="450">
+     <img src="images/ManualTestingSampleData.png" width="660" height="450">
    </p>
    <br>
 
@@ -1278,6 +1279,13 @@ testers are expected to do more *exploratory* testing.
 
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+      
+### Viewing Help
+
+1. Test case: `help`<br/>
+   Expected: Pops up a help window as shown in the image below. Success message shown in the status message.
+   ![Help window](images/ManualTestingViewingHelp.PNG)
+2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of **TA<sup>2</sup>**.
 
 <div style="page-break-after: always;"></div>
 
@@ -1319,42 +1327,6 @@ testers are expected to do more *exploratory* testing.
       2. Some invalid formats of `add` command you can try are `add`, `add m/cs2100 n/Steve Jobs` and `add n/Steve Jobs`. <br/>
       Expected: No person is added. Error details shown in the status message due to invalid command format.
 
-<div style="page-break-after: always;"></div>
-
-### Deleting a person
-
-1. Deleting a person while ***all*** persons are being shown.
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message because index has to be a positive integer.
-
-   4. Test case: `delete x` (where x is larger than the list size) <br>
-      Expected: No person is deleted. Error details shown in the status message because the index is invalid.
-
-2. Deleting a person while only ***some*** persons are being shown.
-
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Select one person and search 
-   the name using the find command, e.g. `find n/Alex Yeoh`.
-
-   2. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
-   3. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message because index has to be a positive integer.
-
-   4. Test case: `delete x` (where x is larger than the list size) <br>
-      Expected: No person is deleted. Error details shown in the status message because the index is invalid.
-
-3. Deleting a person ***without*** specifying person's index parameter.
-
-   1. Other incorrect delete commands to try: `delete` <br>
-      Expected: Error details shown in the status message since the command format is invalid.
-      
 <div style="page-break-after: always;"></div>
 
 ### Finding a person
@@ -1438,34 +1410,112 @@ testers are expected to do more *exploratory* testing.
       Expected: Error details shown in the status message since the command format is invalid.
       
 <div style="page-break-after: always;"></div>
-      
+
+### Listing all Persons
+
+1. Listing ***all*** persons when ***some*** persons are displayed.
+
+    1. Prerequisites: Have multiple persons in contact list. Choose one of the person's name and use the `find` command to narrow the search to that person, e.g. `find n/Alex Yeoh` if "Alex Yeoh" is in your contact list.
+
+    2. Test case: `list` <br/>
+     Expected: All persons will be shown in contact list. If you have any assignments displayed under Assignments, they will be cleared. Success message shown in the status message.
+
+<div style="page-break-after: always;"></div>
+
+### Deleting a person
+
+1. Deleting a person while ***all*** persons are being shown.
+
+  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+  2. Test case: `delete 1`<br>
+     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+  3. Test case: `delete 0`<br>
+     Expected: No person is deleted. Error details shown in the status message because index has to be a positive integer.
+
+  4. Test case: `delete x` (where x is larger than the list size) <br>
+     Expected: No person is deleted. Error details shown in the status message because the index is invalid.
+
+2. Deleting a person while only ***some*** persons are being shown.
+
+  1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Select one person and search
+     the name using the find command, e.g. `find n/Alex Yeoh`.
+
+  2. Test case: `delete 1`<br>
+     Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
+
+  3. Test case: `delete 0`<br>
+     Expected: No person is deleted. Error details shown in the status message because index has to be a positive integer.
+
+  4. Test case: `delete x` (where x is larger than the list size) <br>
+     Expected: No person is deleted. Error details shown in the status message because the index is invalid.
+
+3. Deleting a person ***without*** specifying person's index parameter.
+
+  1. Other incorrect delete commands to try: `delete` <br>
+     Expected: Error details shown in the status message since the command format is invalid.
+     
+<div style="page-break-after: always;"></div>
+
+### Editing a person
+
+1. Editing a person while ***all*** persons are being shown.
+
+    1. Prerequisites: There are multiple persons in the contact list (no person called ***Alex*** and no email named ***15434@163.com***).
+
+    2. Test case: `edit 1 n/Alex e/15434@163.com m/CS2100`<br>
+     Expected: The first person in the contact list is renamed as ***Alex***, and the email and module of this person changed accordingly to the given.
+     Details of the edited person will be shown in the status message.
+
+    3. Test case: `edit 2 n/Alex e/11465434@163.com m/CS2100` just after last test case.<br>
+     Expected: No person is edited. Error details shown in the status message since the repeated name is not allowed.
+
+    4. Test case: `edit 2 n/Alex Yeoh e/15434@163.com m/CS2100` just after last test case.<br>
+     Expected: No person is edited. Error details shown in the status message since the repeated email is not allowed.
+
+    5. Test case: `edit 2 t/friend t/lab7`<br>
+     Expected: The second person's tag is replaced with tags called ***friend*** and ***lab7***.
+
+2. Editing a person while ***no*** person is in the contact list.
+
+    1. Test case: `edit 1 n/Halo` or `edit 1 m/cs1111s` or any other combinations of optional fields.<br>
+     Expected: No person is edited. Error details shown in the status message since the index is invalid.
+
+3. Editing a person while ***missing*** compulsory fields.
+
+    1. Test case: You can try `edit` or `edit 1`<br>
+     Expected: No person is edited. Error details shown in the status message since the format is invalid.
+
+<div style="page-break-after: always;"></div>
+
 ### Showing an assignment list
 
 1. Showing assignments while there are ***multiple*** people in the contact list.
 
-   1. Prerequisites: The current assignment list panel is empty.
+    1. Prerequisites: The current assignment list panel is empty.
 
-   2. Test case: `show 0`<br>
-      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
+    2. Test case: `show 0`<br>
+     Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
 
-   3. Test case: `show 1`<br>
-      Expected: The assignments of the first person in contact list are shown in assignment list panel.
+    3. Test case: `show 1`<br>
+     Expected: The assignments of the first person in contact list are shown in assignment list panel.
 
-   4. Test case: `show x` (x is any positive number greater than the number of people in the contact list.)<br>
-      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
+    4. Test case: `show x` (x is any positive number greater than the number of people in the contact list.)<br>
+     Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
 
 2. Showing assignments while there is ***no person*** in the contact list.
 
-   1. Prerequisites: The current assignment list panel is empty.
+    1. Prerequisites: The current assignment list panel is empty.
 
-   2. Test case: `show 1`<br>
-      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
+    2. Test case: `show 1`<br>
+     Expected: No assignments shown in assignment list panel. Error details shown in the status message since the index is invalid.
 
 3. Showing assignments while ***missing*** compulsory fields.
 
-   1. Prerequisites: The current assignment list panel is empty.
+    1. Prerequisites: The current assignment list panel is empty.
 
-   2. Test case: `show`<br>
+    2. Test case: `show`<br>
      Expected: No assignments shown in assignment list panel. Error details shown in the status message since the format is invalid.
 
 <div style="page-break-after: always;"></div>
@@ -1508,6 +1558,81 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
+### Giving an assignment to all persons in a module
+
+1. Giving a new assignment to ***all*** persons in a module
+
+    1. Prerequisites: Have multiple persons in the same module. Filter out the persons in this module, e.g. If these persons
+     are under the module ***CS2100***, execute `find m/CS2100` to see all persons in the module ***CS2100***. Ensure that none of these
+     persons have the assignment you wish to give using the `show` command.
+
+    2. Test case: `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
+
+     Expected: All persons in the module "CS2100" have "Assignment 3" with due date "11/10/2021" added into their assignment list.
+     Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons
+     from the sample data and have executed the series of commands described above, you should be able to see the result of the
+     command illustrated in the image below. Note that the image is displaying the assignment list of "Alex Yeoh" as `show 1` was executed.
+     <p align="center">
+       <img src="images/ManualTestingGiveAll.png">
+     </p>
+     <br>
+
+    3. Test case: Repeat `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
+     Expected: No duplicated assignment should be added for all persons the module ***CS2100***. Error message will be shown
+     as all persons already have the specified assignment. The assignment list of persons should show the same assignments
+     as the one in the previous test case.
+
+2. Giving an assignment to ***some*** persons without the assignment.
+
+    1. Prerequisites: Start with the sample data and filter out the persons in the module ***CS2100*** by executing `find m/CS2100`.
+     The person ***Roy Balakrishnan*** will not have ***Assignment 1***, while other persons in ***CS2100*** will have this assignment.
+     Execute `show 1` to see the details of ***Assignment 1*** in the first person's assignment list.
+
+    2. Test case: `giveall m/CS2100 d/Assignment 1 by/ 11/11/2021, 1300` <br>
+     Expected: The specified assignment should not be added to ***Roy Balakrishnan***. Error message will be shown as the specified
+     assignment has a due date of ***11/11/2021, 1300***, but the due date of ***Alex Yeoh*** 's assignment is ***15/09/2021, 1300***.
+
+    3. Test case: `giveall m/CS2100 d/Assignment 1 by/ 15/09/2021, 0900` <br>
+     Expected: The specified assignment should not be added to ***Roy Balakrishnan***. Error message will be shown as the specified
+     assignment has a due date of ***15/09/2021, 1300***, but the due date of ***Alex Yeoh*** 's assignment is ***15/09/2021, 0900***.
+
+    4. Test case: `giveall m/CS2100 d/assignment 1 by/ 15/09/2021, 1300` <br>
+     Expected: The assignment ***Assignment 1*** with due date ***15/09/2021, 1300*** should be added to ***Roy Balakrishnan***. Note that
+     the letter ***a*** is capitalised as other persons' assignment is ***Assignment 1*** with a capitalised ***a***.
+
+<div style="page-break-after: always;"></div>
+
+### Marking an assignment
+
+1. Marking an assignment while ***all*** assignments of a person are being shown.
+
+    1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are already shown.
+
+    2. Test case: `done 1`<br>
+     Expected: The first assignment is marked as done in assignment list panel. Details of the marked assignment will be
+     shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by
+     due date with all pending assignments above completed ones.
+
+    3. Test case: `done x` (where x is a number larger than the number of assignments in the assignment list)<br>
+     Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+    4. Test case: `done 0`<br>
+     Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+2. Marking an assignment while assignment list panel is ***empty***.
+
+    1. Prerequisites: There are multiple persons in the contact list and no person's assignment list is shown.
+
+    2. Test case: `done 1`<br>
+     Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
+
+3. Marking an assignment while ***missing*** compulsory fields.
+
+    1. Test case:`done`<br>
+     Expected: No assignment is marked as completed in the assignment list panel. Error details shown in the status message since the format is invalid.
+
+<div style="page-break-after: always;"></div>
+
 ### Removing an assignment
 
 1. Removing an assignment while ***all*** assignments of a person are being shown.
@@ -1537,49 +1662,6 @@ testers are expected to do more *exploratory* testing.
    1. Test case:`remove`<br>
       Expected: No assignment is removed from the assignment list panel. Error details shown in the status message since the format is invalid.
 
-<div style="page-break-after: always;"></div>
-
-### Giving an assignment to all persons in a module
-
-1. Giving a new assignment to ***all*** persons in a module
-
-   1. Prerequisites: Have multiple persons in the same module. Filter out the persons in this module, e.g. If these persons
-      are under the module ***CS2100***, execute `find m/CS2100` to see all persons in the module ***CS2100***. Ensure that none of these
-      persons have the assignment you wish to give using the `show` command.
-
-   2. Test case: `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
-
-      Expected: All persons in the module "CS2100" have "Assignment 3" with due date "11/10/2021" added into their assignment list.
-      Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons
-      from the sample data and have executed the series of commands described above, you should be able to see the result of the
-      command illustrated in the image below. Note that the image is displaying the assignment list of "Alex Yeoh" as `show 1` was executed.
-      <p align="center">
-        <img src="images/ManualTestingGiveAll.png">
-      </p>
-      <br>
-
-   3. Test case: Repeat `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
-      Expected: No duplicated assignment should be added for all persons the module ***CS2100***. Error message will be shown
-      as all persons already have the specified assignment. The assignment list of persons should show the same assignments
-      as the one in the previous test case.
-
-2. Giving an assignment to ***some*** persons without the assignment.
-
-   1. Prerequisites: Start with the sample data and filter out the persons in the module ***CS2100*** by executing `find m/CS2100`.
-      The person ***Roy Balakrishnan*** will not have ***Assignment 1***, while other persons in ***CS2100*** will have this assignment.
-      Execute `show 1` to see the details of ***Assignment 1*** in the first person's assignment list.
-
-   2. Test case: `giveall m/CS2100 d/Assignment 1 by/ 11/11/2021, 1300` <br>
-      Expected: The specified assignment should not be added to ***Roy Balakrishnan***. Error message will be shown as the specified
-      assignment has a due date of ***11/11/2021, 1300***, but the due date of ***Alex Yeoh*** 's assignment is ***15/09/2021, 1300***.
-
-   3. Test case: `giveall m/CS2100 d/Assignment 1 by/ 15/09/2021, 0900` <br>
-      Expected: The specified assignment should not be added to ***Roy Balakrishnan***. Error message will be shown as the specified
-      assignment has a due date of ***15/09/2021, 1300***, but the due date of ***Alex Yeoh*** 's assignment is ***15/09/2021, 0900***.
-
-   4. Test case: `giveall m/CS2100 d/assignment 1 by/ 15/09/2021, 1300` <br>
-      Expected: The assignment ***Assignment 1*** with due date ***15/09/2021, 1300*** should be added to ***Roy Balakrishnan***. Note that
-      the letter ***a*** is capitalised as other persons' assignment is ***Assignment 1*** with a capitalised ***a***.
 
 <div style="page-break-after: always;"></div>
 
@@ -1595,6 +1677,30 @@ testers are expected to do more *exploratory* testing.
 
 <div style="page-break-after: always;"></div>
 
+### Clearing all entries
+
+1. Prerequisites: Have ***multiple*** persons in your list.
+
+2. Type `show 1` to display the first person's assignment list.
+
+3. Test case: `clear`<br/>
+   Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message.
+
+![Clear Command Success Screen](images/ManualTestingClear.PNG)
+
+
+### Undoing a command
+
+1. Undoing a command at the ***start*** of program.
+
+   1. Test case: `undo`<br>
+      Expected: Nothing is undone. Error details shown in the status message since no state can be undone.
+
+2. Undoing a command ***after*** entering some commands.
+
+   1. Test case: `undo`<br>
+      Expected: Retrieves the effect before conducting the last command (except `undo`).
+      
 ###  Redoing a command
 
 1. Redoing a command at the ***start*** of program.
@@ -1612,117 +1718,13 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `redo`<br>
       Expected: Nothing is redone. Error details shown in the status message since no state can be redone.
 
-### Undoing a command
-
-1. Undoing a command at the ***start*** of program.
-
-   1. Test case: `undo`<br>
-      Expected: Nothing is undone. Error details shown in the status message since no state can be undone.
-
-2. Undoing a command ***after*** entering some commands.
-
-   1. Test case: `undo`<br>
-      Expected: Retrieves the effect before conducting the last command (except `undo`).
-
-<div style="page-break-after: always;"></div>
-
-### Editing a person
-
-1. Editing a person while ***all*** persons are being shown.
-
-   1. Prerequisites: There are multiple persons in the contact list (no person called ***Alex*** and no email named ***15434@163.com***).
-
-   2. Test case: `edit 1 n/Alex e/15434@163.com m/CS2100`<br>
-      Expected: The first person in the contact list is renamed as ***Alex***, and the email and module of this person changed accordingly to the given.
-      Details of the edited person will be shown in the status message.
-
-   3. Test case: `edit 2 n/Alex e/11465434@163.com m/CS2100` just after last test case.<br>
-      Expected: No person is edited. Error details shown in the status message since the repeated name is not allowed.
-
-   4. Test case: `edit 2 n/Alex Yeoh e/15434@163.com m/CS2100` just after last test case.<br>
-      Expected: No person is edited. Error details shown in the status message since the repeated email is not allowed.
-
-   5. Test case: `edit 2 t/friend t/lab7`<br>
-      Expected: The second person's tag is replaced with tags called ***friend*** and ***lab7***.
-
-2. Editing a person while ***no*** person is in the contact list.
-
-   1. Test case: `edit 1 n/Halo` or `edit 1 m/cs1111s` or any other combinations of optional fields.<br>
-      Expected: No person is edited. Error details shown in the status message since the index is invalid.
-
-3. Editing a person while ***missing*** compulsory fields.
-
-   1. Test case: You can try `edit` or `edit 1`<br>
-      Expected: No person is edited. Error details shown in the status message since the format is invalid.
-
-<div style="page-break-after: always;"></div>
-
-### Marking an assignment
-
-1. Marking an assignment while ***all*** assignments of a person are being shown.
-
-   1. Prerequisites: There are multiple persons in the contact list and the first person's assignments (at least one assignment) are already shown.
-
-   2. Test case: `done 1`<br>
-      Expected: The first assignment is marked as done in assignment list panel. Details of the marked assignment will be
-      shown in the status message. The assignment list panel will display **pending and completed** assignments sorted by
-      due date with all pending assignments above completed ones.
-
-   3. Test case: `done x` (where x is a number larger than the number of assignments in the assignment list)<br>
-      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
-
-   4. Test case: `done 0`<br>
-      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
-
-2. Marking an assignment while assignment list panel is ***empty***.
-
-   1. Prerequisites: There are multiple persons in the contact list and no person's assignment list is shown.
-
-   2. Test case: `done 1`<br>
-      Expected: No assignment is marked. Error details shown in the status message since the index is invalid.
-
-3. Marking an assignment while ***missing*** compulsory fields.
-
-   1. Test case:`done`<br>
-      Expected: No assignment is marked as completed in the assignment list panel. Error details shown in the status message since the format is invalid.
-
-<div style="page-break-after: always;"></div>
-
-### Clearing all entries
-
-1. Prerequisites: Have ***multiple*** persons in your list.
-
-2. Type `show 1` to display the first person's assignment list.
-
-3. Test case: `clear`<br/>
-Expected: All contacts will be deleted from the list. Assignment list panel will be cleared. Success message shown in the status message.
-
-![Clear Command Success Screen](images/ManualTestingClear.PNG)
-
-### Viewing Help
-
-1. Test case: `help`<br/>
-   Expected: Pops up a help window as shown in the image below. Success message shown in the status message. 
-![Help window](images/ManualTestingViewingHelp.PNG)
-2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of TA<sup>2</sup>.
-
 <div style="page-break-after: always;"></div>
 
 ### Exiting the Program
 
 1. Test case: `exit` <br/>
-   Expected: The TA<sup>2</sup> window will close promptly.
-
-### Listing all Persons
-
-1. Listing ***all*** persons when ***some*** persons are displayed.
-
-   1. Prerequisites: Have multiple persons in contact list. Choose one of the person's name and use the `find` command to narrow the search to that person, e.g. `find n/Alex Yeoh` if "Alex Yeoh" is in your contact list.
-
-   2. Test case: `list` <br/>
-   Expected: All persons will be shown in contact list. If you have any assignments displayed under Assignments, they will be cleared. Success message shown in the status message.
-
-<div style="page-break-after: always;"></div>
+   Expected: The **TA<sup>2</sup>** window will close promptly.
+   
 
 ### Saving data
 
@@ -1730,28 +1732,28 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 
    1. Prerequisites: To simulate, delete `ta2.json` file. <br>
    
-   2. Expected: TA<sup>2</sup> will start with sample data. <br>
+   2. Expected: **TA<sup>2</sup>** will start with sample data. <br>
    
 2. Data file `ta2.json` in ***wrong format***. <br>
 
    1. Prerequisites: To simulate, remove a square bracket in the `ta2.json` file. <br>
    
-   2. Expected: TA<sup>2</sup> will start with no data. <br>
+   2. Expected: **TA<sup>2</sup>** will start with no data. <br>
    
    3. Corrective action: 
    
-      1. If you wish to start TA<sup>2</sup> afresh, just input commands as per normal and the existing
+      1. If you wish to start **TA<sup>2</sup>** afresh, just input commands as per normal and the existing
       file will be overridden with the new data that you input. <br>
       
       2. If you wish to retrieve your existing data, do not input any command. <br>
       
-           1. Copy the current `ta2.json` file to another location before exiting TA<sup>2</sup>.
+           1. Copy the current `ta2.json` file to another location before exiting **TA<sup>2</sup>**.
 
            2. Look through `ta2.json` and correct any formatting issues.
 
            3. Copy the corrected `ta2.json` back to the data folder and start the application.
 
-           4. TA<sup>2</sup> will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
+           4. **TA<sup>2</sup>** will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
            in the wrong format, repeat the corrective action.
 
            5. Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/sampledata.json) for a sample data file in the correct format.
