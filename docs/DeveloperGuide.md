@@ -463,22 +463,11 @@ The `delete` command is one of the commands that may affect the assignment list 
   <img src="images/UpdateAssignmentListActivityDiagram.png" alt="Update assignment list activity diagram when person is deleted">
 </p>
 
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
 #### Design considerations
 
-**Aspect: How undo & redo executes:**
+**Aspect: How to keep track of the person whose assignment list is displayed:**
 
-* **Alternative 1 (current choice): use a reference to point to `person` whose assignments should be displayed**
+* **Alternative 1 (current choice): use a reference to point to person whose assignments should be displayed**
   * Pros: Easy to implement.
   * Cons: Ignoring the property of `UniqueAssignmentList` that prevents duplicate `Assignment` from being stored, this method will be limited to displaying a particular person's assignments. Difficult to extend to displaying `Assignment` objects of multiple `Person` objects.
 
