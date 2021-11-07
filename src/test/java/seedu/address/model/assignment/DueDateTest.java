@@ -88,13 +88,27 @@ class DueDateTest {
         assertFalse(DueDate.isValidDueDate("111/188/2021*")); // contains invalid day and month
         assertFalse(DueDate.isValidDueDate("11/11/2021 1444")); // no comma but space between time and date
         assertFalse(DueDate.isValidDueDate("11/11/2021,744")); // invalid format for time
-        assertFalse(DueDate.isValidDueDate("11/11/2023, 744")); // spacing after comma
+        assertFalse(DueDate.isValidDueDate("00/11/2023,0744")); // invalid day
+        assertFalse(DueDate.isValidDueDate("-1/11/2023,0744")); // invalid day
+        assertFalse(DueDate.isValidDueDate("11/00/2023,0744")); // invalid month
+        assertFalse(DueDate.isValidDueDate("11/-1/2023,0744")); // invalid month
+        assertFalse(DueDate.isValidDueDate("11/11/0000,0744")); // invalid year
+        assertFalse(DueDate.isValidDueDate("11/11/-0001,0744")); // invalid year
+        assertFalse(DueDate.isValidDueDate("31/04/2021,0744")); // invalid day for april
+        assertFalse(DueDate.isValidDueDate("31/06/2021,0744")); // invalid day for june
+        assertFalse(DueDate.isValidDueDate("31/09/2021,0744")); // invalid day for september
+        assertFalse(DueDate.isValidDueDate("31/11/2021,0744")); // invalid day for november
+        assertFalse(DueDate.isValidDueDate("29/02/2021,0744")); // invalid day for non-leap year
+        assertFalse(DueDate.isValidDueDate("31/02/2021,0744")); // invalid day for non-leap year
 
         // valid dueDate
         assertTrue(DueDate.isValidDueDate("11/11/2021")); // date only
         assertTrue(DueDate.isValidDueDate("02/02/2011,1650")); // prefix 0 for day and month
         assertTrue(DueDate.isValidDueDate("11/1/2021,1541")); // single digit for month
         assertTrue(DueDate.isValidDueDate("1/11/2021,1400")); // single digit for day
+        assertTrue(DueDate.isValidDueDate("29/02/2024,2100")); // leap year
+        assertTrue(DueDate.isValidDueDate("29/2/2064,2100")); // leap year
+
     }
 
     @Test
