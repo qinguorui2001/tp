@@ -1561,8 +1561,10 @@ testers are expected to do more *exploratory* testing.
       Expected: No duplicated assignment should be added for all persons the module "CS2100". Error message will be shown
       as all persons already have the specified assignment. The assignment list of persons should show the same assignments
       as the one in the previous test case.
-
-<img src="images/GiveActivityDiagram.png" width="500" height="550" />
+      <p align="center">
+        <img src="images/GiveActivityDiagram.png" width="500" height="550" />
+      </p>
+      <br>
 
 2. Giving an assignment to some persons without the assignment.
 
