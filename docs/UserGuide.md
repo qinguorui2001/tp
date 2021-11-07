@@ -24,6 +24,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 <div style="page-break-after: always;"></div>
 
 ## Table of Contents
+{:.no_toc}
 
 * Table of Contents
 {:toc}
