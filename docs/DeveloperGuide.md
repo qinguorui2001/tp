@@ -850,6 +850,8 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
   <img src="images/UndoRedoState5.png">
 </p>
 
+<div style="page-break-after: always;"></div>
+
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <p align="center">
