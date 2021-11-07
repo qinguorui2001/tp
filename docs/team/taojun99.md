@@ -6,7 +6,7 @@ title: Tao Jun's Project Portfolio Page
 ### Project: TA<sup>2</sup>
 
 TA<sup>2</sup> is a desktop application developed for Teaching Assistants (TA) from the School of Computing (SoC) at the
-National University of Singapore (NUS) to help them manage student information and keep track of students' assignment submissions. 
+National University of Singapore (NUS) to help them manage student information and keep track of students' assignment submissions.
 TA<sup>2</sup> primarily uses a Command Line Interface (CLI) for user interaction. This allows SoC TAs to fully utilise
 TA<sup>2</sup> as they are able to type fast.
 
@@ -33,11 +33,14 @@ Given below are my contributions to the project.
   displayed assignment list does not change to reduce confusion for the user.
   * Credits: This feature is implemented as `CleanAssignmentCommand` and follows the structure of other classes which
   extends the `Command` class.
+<br>
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=taojun&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2021-09-17&tabOpen=true&tabType=authorship&tabAuthor=TaoJun99&tabRepo=AY2122S1-CS2103T-T13-2%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code&authorshipIsBinaryFileTypeChecked=false)
 
-* **Project management**:
-  * Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+* **Contribution to team-based tasks**:
+  * Documenting value proposition and target user profile in Developer Guide
+  * Updating content of the homepage of project website
+  * Fixing format issues of Developer Guide page in project website
 
 * **Enhancements to existing features**:
   * Modified the storage component to be able to read, write and save assignments as Jackson format. (Pull request [\#70](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/70))
@@ -48,3 +51,4 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added implementation details of the `giveall` and `clean` feature. (Pull request [\#254](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/254))
     * Added manual testing details on `giveall` and `clean` commands. (Pull request [\#254](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/254))
+    * Added manual testing details on saving data to data file. (Pull request [\#254](https://github.com/AY2122S1-CS2103T-T13-2/tp/pull/254))

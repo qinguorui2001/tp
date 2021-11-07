@@ -30,6 +30,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 <div style="page-break-after: always;"></div>
 
 ## Table of Contents
+{:.no_toc}
 
 * Table of Contents
 {:toc}
@@ -392,7 +393,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 **:information_source: Note:**<br>
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-  e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
+  e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
 
 * Assignment descriptions are **case-insensitive**.<br>
   e.g. `Assignment 2` is the same as `aSsignment 2`
@@ -440,7 +441,7 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 **:information_source: Note:**<br>
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-   e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
+   e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
 
 * Assignment descriptions are **case-insensitive**.
    e.g. `Assignment 2` is the same as `aSsignment 2`.
