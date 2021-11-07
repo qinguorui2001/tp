@@ -13,7 +13,7 @@ from the School of Computing (SoC) at the National University of Singapore (NUS)
 If you are interested in contributing to **TA<sup>2</sup>**, this guide is designed to help you get started!
 There are a variety of ways to contribute to **TA<sup>2</sup>** such as coding, testing, improving the design of the interface and updating the documentation.
 
-*Last Updated: 8 November 2021* 5
+*Last Updated: 8 November 2021* 6
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -711,7 +711,7 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 The following activity diagram summarizes what happens when a user executes the `remove` command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="5300" height="480" />
+  <img src="images/RemoveActivityDiagram.png" width="500" height="450" />
 </p>
 
 #### Design considerations
@@ -1571,17 +1571,17 @@ testers are expected to do more *exploratory* testing.
      Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons
      from the sample data and have executed the series of commands described above, you should be able to see the result of the
      command illustrated in the image below. Note that the image is displaying the assignment list of "Alex Yeoh" as `show 1` was executed.
-     <p align="center">
-       <img src="images/ManualTestingGiveAll.png">
-     </p>
-     <br>
+       <p align="center">
+        <img src="images/ManualTestingGiveAll.png">
+       </p>
+       <br>
 
     3. Test case: Repeat `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
      Expected: No duplicated assignment should be added for all persons the module ***CS2100***. Error message will be shown
      as all persons already have the specified assignment. The assignment list of persons should show the same assignments
      as the one in the previous test case.
 
-<div style="page-break-after: always;"></div>
+   <div style="page-break-after: always;"></div>
 
 2. Giving an assignment to ***some*** persons without the assignment.
 
