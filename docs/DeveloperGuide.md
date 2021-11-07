@@ -13,7 +13,7 @@ from the School of Computing (SoC) at the National University of Singapore (NUS)
 If you are interested in contributing to **TA<sup>2</sup>**, this guide is designed to help you get started!
 There are a variety of ways to contribute to **TA<sup>2</sup>** such as coding, testing, improving the design of the interface and updating the documentation.
 
-*Last Updated: 8 November 2021* 1
+*Last Updated: 8 November 2021* 2
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -924,13 +924,14 @@ original command inputs.
 | sat                                         | sets the date to be the upcoming Saturday     | give n/name d/description by/sat                                        |
 | sun                                         | sets the date to be the upcoming Sunday       | give n/name d/description by/sun                                        |
 
+<div style="page-break-after: always;"></div>
+
 When the user enters a command with the *friendly* command input, the `AddressBookParser` class will recognize the command
 and parse the entered command. 
 
 If the command the user chose is `give`, this triggers the `AddAssignmentCommandParser#parse` 
 method to be called with the user input arguments. If the command chosen is `giveall`, this
 triggers the `AddAssignmentToAllCommandParser#parse` method to be called instead. 
-
 
 From there, each individual argument token is parsed and for the *friendly* command, it will be 
 recognized within the `DueDate` class as a date with a *friendly* command format. This then calls 
@@ -941,8 +942,6 @@ From here, the `AddAssignmentCommand` class is then instantiated if the user com
 conversely, the `AddAssignmentToAllCommand` class. 
 
 Finally, the results are then actualized by the `Model` component.
-
-<div style="page-break-after: always;"></div>
 
 The following activity diagram shows the possible paths whilst a user adds an assignment using `give`:
 
@@ -1283,7 +1282,11 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `help`<br/>
    Expected: Pops up a help window as shown in the image below. Success message shown in the status message.
+   <br>
+   <br>
    ![Help window](images/helpMessage.png)
+   <br>
+   <br>
 2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of **TA<sup>2</sup>**.
 
 <div style="page-break-after: always;"></div>
