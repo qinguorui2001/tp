@@ -4,7 +4,7 @@ title: User Guide
 ---
 --------------------------------------------------------------------------------------------------------------------
 
-## **Welcome to **TA<sup>2</sup>**'s User Guide!**
+## **Welcome to TA<sup>2</sup>'s User Guide!**
 {:.no_toc}
 
 **Teaching Assistant's Assistant (**TA<sup>2</sup>**)** is a desktop app that offers a convenient way for teaching assistants
