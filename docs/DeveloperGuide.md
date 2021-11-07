@@ -1276,7 +1276,7 @@ testers are expected to do more *exploratory* testing.
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>. <br>
 
    <p align="center">
-     <img src="images/ManualTestingSampleData.png" width="450" height="450">
+     <img src="images/ManualTestingSampleData.png" width="670" height="450">
    </p>
    <br>
 
@@ -1570,10 +1570,6 @@ testers are expected to do more *exploratory* testing.
       Expected: No duplicated assignment should be added for all persons the module ***CS2100***. Error message will be shown
       as all persons already have the specified assignment. The assignment list of persons should show the same assignments
       as the one in the previous test case.
-      <p align="center">
-        <img src="images/GiveActivityDiagram.png" width="500" height="550" />
-      </p>
-      <br>
 
 2. Giving an assignment to ***some*** persons without the assignment.
 
