@@ -4,19 +4,25 @@ title: User Guide
 ---
 --------------------------------------------------------------------------------------------------------------------
 
-## **Welcome to TA<sup>2</sup>'s User Guide!**
+## **Welcome to **TA<sup>2</sup>**'s User Guide!**
 {:.no_toc}
 
-Teaching Assistant's Assistant (TA<sup>2</sup>) is a desktop app that offers a convenient way for teaching assistants
+**Teaching Assistant's Assistant (**TA<sup>2</sup>**)** is a desktop app that offers a convenient way for teaching assistants
 from the School of Computing at the National University of Singapore to manage student contacts and keep track of students' assignment submissions.
 
-TA<sup>2</sup> is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, TA<sup>2</sup> can get your contact and assignment management tasks done faster than traditional GUI apps!
+****TA<sup>2</sup>**** is optimized for use via a **Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, **TA<sup>2</sup>** can get your contact and assignment management tasks done faster than traditional GUI apps!
 
-This user guide provides you with installation instructions, guide on features of TA<sup>2</sup> and some FAQs.
+This user guide provides you with installation instructions, guide on features of ****TA<sup>2</sup>**** and some FAQs.
 
-If you are a new user, check out the [Quick start](#quick-start) section to help you get started with TA<sup>2</sup>.
+Through this guide, you may encounter the following icons.
 
-For advanced users, the [Command summary](#command-summary) section gives you an overview of all the commands TA<sup>2</sup> offers.
+* :exclamation: Caution: Warns you about potential unintended or undesirable behaviours. <br>
+* :information_source: Notes: Provides information that you are required to know. <br>
+* :bulb: Tip: Provides additional information that are good to know. <br>
+
+If you are a new user, check out the [Quick start](#quick-start) section to help you get started with **TA<sup>2</sup>**.
+
+For advanced users, the [Command summary](#command-summary) section gives you an overview of all the commands **TA<sup>2</sup>** offers.
 
 *Last Updated: 8 November 2021*
 
@@ -24,6 +30,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 <div style="page-break-after: always;"></div>
 
 ## Table of Contents
+{:.no_toc}
 
 * Table of Contents
 {:toc}
@@ -37,7 +44,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 
 2. Download the latest `ta2.jar` file from [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/releases/tag/v1.4).
 
-3. Copy the file to the folder you want to use as the _home folder_ for TA<sup>2</sup>.
+3. Copy the file to the folder you want to use as the _home folder_ for **TA<sup>2</sup>**.
 
 4. Double-click the file to start the app. The window similar to the one shown below should appear in a few seconds.
    Note how the app contains some sample data.
@@ -129,7 +136,7 @@ Alternatively, you click the `Help` button in the top left corner or press `F1` 
 Format: `help`
 
 Possible usage: 
-* The help window will direct you back to this user guide from TA<sup>2</sup> if you need details of any available features.
+* The help window will direct you back to this user guide from **TA<sup>2</sup>** if you need details of any available features.
 
 <div style="page-break-after: always;"></div>
 
@@ -386,7 +393,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 **:information_source: Note:**<br>
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-  e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
+  e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
 
 * Assignment descriptions are **case-insensitive**.<br>
   e.g. `Assignment 2` is the same as `aSsignment 2`
@@ -434,7 +441,7 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 **:information_source: Note:**<br>
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-   e.g. `Assignment 2` is the same as `Assignment   2` but "Assignment 2" is **not** the same as "Assignment2"
+   e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
 
 * Assignment descriptions are **case-insensitive**.
    e.g. `Assignment 2` is the same as `aSsignment 2`.
@@ -534,7 +541,7 @@ Possible Usage:
 
 ### Removing completed assignments from all students: `clean`
 
-Removes all completed assignments from all students in TA<sup>2</sup>.
+Removes all completed assignments from all students in **TA<sup>2</sup>**.
 
 Format: `clean`
 
@@ -546,7 +553,7 @@ Possible Usage:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from TA<sup>2</sup>.
+Clears all entries from **TA<sup>2</sup>**.
 
 Format: `clear`
 
@@ -561,7 +568,7 @@ Undoes the last command entered.
 Format: `undo`
 
 * Undo all commands except for `undo` and `redo`.
-* When you first start TA<sup>2</sup>, there is nothing to undo.
+* When you first start **TA<sup>2</sup>**, there is nothing to undo.
 
 ### Redoing a command: `redo`
 
@@ -582,17 +589,17 @@ Format: `exit`
 
 ### Saving the data
 
-TA<sup>2</sup> data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+**TA<sup>2</sup>** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
+**TA<sup>2</sup>** data are saved as a JSON file `[JAR file location]/data/ta2.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="block" class="alert alert-warning">
 
 :exclamation:**Caution:**<br>
 
-* If your changes to the data file make its format invalid, TA<sup>2</sup> will discard all data and start with an empty data file at the next run.
+* If your changes to the data file make its format invalid, **TA<sup>2</sup>** will discard all data and start with an empty data file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -601,10 +608,10 @@ TA<sup>2</sup> data are saved as a JSON file `[JAR file location]/data/ta2.json`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TA<sup>2</sup> home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous **TA<sup>2</sup>** home folder.
 
 **Q**: How can I get the sample data back?<br>
-**A**: Close your TA<sup>2</sup> application. Go into the `data` folder in your _home folder_ for TA<sup>2</sup>, delete the `ta2.json` file and start TA<sup>2</sup> again.    
+**A**: Close your **TA<sup>2</sup>** application. Go into the `data` folder in your _home folder_ for **TA<sup>2</sup>**, delete the `ta2.json` file and start **TA<sup>2</sup>** again.    
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>

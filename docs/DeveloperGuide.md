@@ -19,6 +19,7 @@ There are a variety of ways to contribute to TA<sup>2</sup> such as coding, test
 <div style="page-break-after: always;"></div>
 
 ## **Table of Contents**
+{:.no_toc}
 
 * Table of Contents
 {:toc}
@@ -1272,9 +1273,12 @@ testers are expected to do more *exploratory* testing.
 
    3. Launch the jar file using the ```java -jar ta2.jar```.
 
-   4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>.
-   5. <br>
-<img src="images/ManualTestingSampleData.png" width="450" height="450" /> <br /><br />
+   4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting TA<sup>2</sup>. <br>
+
+   <p align="center">
+     <img src="images/ManualTestingSampleData.png" width="450" height="450">
+   </p>
+   <br>
 
 2. Saving window preferences
 
@@ -1552,11 +1556,15 @@ testers are expected to do more *exploratory* testing.
       persons have the assignment you wish to give using the `show` command.
 
    2. Test case: `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
-      Expected: All persons in the module ***CS2100*** have ***Assignment 1*** with due date ***10/10/2021*** added into their assignment list.
+
+      Expected: All persons in the module "CS2100" have "Assignment 3" with due date "11/10/2021" added into their assignment list.
       Execute `show INDEX` command to check that all persons have this assignment in their assignment list. If you started with the 6 persons
       from the sample data and have executed the series of commands described above, you should be able to see the result of the
-      command illustrated in the image below. Note that the image is displaying the assignment list of ***Alex Yeoh*** as `show 1` was executed.
-      ![Manual Testing for giveall command](images/ManualTestingGiveAll.png) <br>
+      command illustrated in the image below. Note that the image is displaying the assignment list of "Alex Yeoh" as `show 1` was executed.
+      <p align="center">
+        <img src="images/ManualTestingGiveAll.png">
+      </p>
+      <br>
 
    3. Test case: Repeat `giveall m/CS2100 d/Assignment 3 by/ 11/11/2021` <br>
       Expected: No duplicated assignment should be added for all persons the module ***CS2100***. Error message will be shown
@@ -1730,13 +1738,13 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
 
 1. Data file `ta2.json` is ***missing***. <br>
 
-   1. To simulate: Delete `ta2.json` file. <br>
+   1. Prerequisites: To simulate, delete `ta2.json` file. <br>
    
    2. Expected: TA<sup>2</sup> will start with sample data. <br>
    
 2. Data file `ta2.json` in ***wrong format***. <br>
 
-   1. To simulate: Remove a square bracket in the `ta2.json` file. <br>
+   1. Prerequisites: To simulate, remove a square bracket in the `ta2.json` file. <br>
    
    2. Expected: TA<sup>2</sup> will start with no data. <br>
    
@@ -1745,15 +1753,15 @@ Expected: All contacts will be deleted from the list. Assignment list panel will
       1. If you wish to start TA<sup>2</sup> afresh, just input commands as per normal and the existing
       file will be overridden with the new data that you input. <br>
       
-      2. :exclamation: If you wish to retrieve your existing data, do not input any command. <br>
+      2. If you wish to retrieve your existing data, do not input any command. <br>
       
-         1. Copy the current `ta2.json` file to another location before exiting TA<sup>2</sup>.
+           1. Copy the current `ta2.json` file to another location before exiting TA<sup>2</sup>.
 
-         2. Look through `ta2.json` and correct any formatting issues.
+           2. Look through `ta2.json` and correct any formatting issues.
 
-         3. Copy the corrected `ta2.json` back to the data folder and start the application.
+           3. Copy the corrected `ta2.json` back to the data folder and start the application.
 
-         4. TA<sup>2</sup> will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
-         in the wrong format, repeat the corrective action.
+           4. TA<sup>2</sup> will display all the data normally if `ta2.json` is in the correct format. If `ta2.json` is still
+           in the wrong format, repeat the corrective action.
 
-         5. Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/sampledata.json) for a sample data file in the correct format.
+           5. Refer [here](https://github.com/AY2122S1-CS2103T-T13-2/tp/blob/master/bin/data/sampledata.json) for a sample data file in the correct format.
