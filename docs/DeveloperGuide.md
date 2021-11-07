@@ -13,7 +13,7 @@ from the School of Computing (SoC) at the National University of Singapore (NUS)
 If you are interested in contributing to **TA<sup>2</sup>**, this guide is designed to help you get started!
 There are a variety of ways to contribute to **TA<sup>2</sup>** such as coding, testing, improving the design of the interface and updating the documentation.
 
-*Last Updated: 8 November 2021* 9
+*Last Updated: 8 November 2021* 
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -1281,7 +1281,7 @@ testers are expected to do more *exploratory* testing.
 
 1. Test case: `help`<br/>
    Expected: Pops up a help window as shown in the image below. Success message shown in the status message.
-   ![Help window](images/ManualTestingViewingHelp.PNG)
+   ![Help window](images/helpMessage.PNG)
 2. Click on the Copy URL button and paste the link in your web browser. <br/>Expected: URL leads you to the [user guide](https://ay2122s1-cs2103t-t13-2.github.io/tp/UserGuide.html) of **TA<sup>2</sup>**.
 
 <div style="page-break-after: always;"></div>
