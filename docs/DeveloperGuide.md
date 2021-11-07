@@ -13,7 +13,7 @@ from the School of Computing (SoC) at the National University of Singapore (NUS)
 If you are interested in contributing to **TA<sup>2</sup>**, this guide is designed to help you get started!
 There are a variety of ways to contribute to **TA<sup>2</sup>** such as coding, testing, improving the design of the interface and updating the documentation.
 
-*Last Updated: 8 November 2021* 3
+*Last Updated: 8 November 2021* 4
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -102,9 +102,9 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
   <img src="images/ComponentManagers.png" width="300" />
 </p>
 
-The sections below give more details of each component.
-
 <div style="page-break-after: always;"></div>
+
+The sections below give more details of each component.
 
 ### UI component
 
@@ -407,7 +407,8 @@ The two object diagram below shows illustrates how the objects interacts and cha
 
 <p align="center">
 <img src="images/DisplayAssignmentObjectDiagram1.png" width="500" height="400" >
- 
+<br>
+<br> 
 <img src="images/DisplayAssignmentObjectDiagram2.png" width="500" height="400" >
 </p>
 
@@ -709,10 +710,8 @@ should end at the destroy marker (X) but due to a limitation of PlantUML, the li
 
 The following activity diagram summarizes what happens when a user executes the `remove` command:
 <p align="center">
-  <img src="images/RemoveActivityDiagram.png" width="600" height="550" />
+  <img src="images/RemoveActivityDiagram.png" width="550" height="500" />
 </p>
-
-<div style="page-break-after: always;"></div>
 
 #### Design considerations
 **Aspect: Deletes assignment of a person in the currently displayed list or for any person in storage:**
@@ -958,13 +957,13 @@ The following sequence diagram shows the logic sequence of an `AddAssignment` co
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div> <br>
 
-<div style="page-break-after: always;"></div>
-
 The following activity diagram shows the possible paths whilst a user adds an assignment using `giveall`:
 
 <p align="center">
   <img src="images/GiveAllActivityDiagram.png">
 </p>
+
+<div style="page-break-after: always;"></div>
 
 The following sequence diagram shows the logic sequence of an `AddAssignmentToAll` command execution:
 
@@ -972,12 +971,9 @@ The following sequence diagram shows the logic sequence of an `AddAssignmentToAl
   <img src="images/GiveAllFriendlySequenceDiagram.png">
 </p>
 
-<div style="page-break-after: always;"></div>
-
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddAssignmentToAllCommand`
 should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
-
 
 #### Design considerations
 **Aspect: Rigidity in allowing users to add assignments correctly yet handle multiple short-form user inputs:**
@@ -1269,7 +1265,7 @@ testers are expected to do more *exploratory* testing.
    4. Expected: Shows the GUI with a set of sample contacts. No assignments are displayed under the Assignments panel. The window size may not be optimum. The image below is the window you will see upon starting **TA<sup>2</sup>**. <br>
 
    <p align="center">
-     <img src="images/ManualTestingSampleData.png" width="660" height="450">
+     <img src="images/ManualTestingSampleData.png" width="600" height="500">
    </p>
    <br>
 
@@ -1298,6 +1294,8 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `add n/Stephen Fallon m/CS2100 e/E1337123@u.nus.edu t/L21`<br>
    Expected: Appends added contact to your SoC contact list. Details of the added contact shown in the status message. The image below shows the result of 
    this command on the contact list if you started with the 6 people from the sample data.<br /><br /> ![Manual Testing for Adding Person](images/ManualTestingAddingPerson.PNG) <br /><br />
+
+<div style="page-break-after: always;"></div>
 
    3. Test case: Repeat `add n/Stephen Fallon m/CS2100 e/E1337123@u.nus.edu t/L21` again <br>
    Expected: No person is added. Error details shown in the status message because the peron, ***Stephen Fallon***, already exists in the list.
@@ -1701,6 +1699,8 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `undo`<br>
       Expected: Retrieves the effect before conducting the last command (except `undo`).
       
+<div style="page-break-after: always;"></div>
+      
 ###  Redoing a command
 
 1. Redoing a command at the ***start*** of program.
@@ -1718,13 +1718,12 @@ testers are expected to do more *exploratory* testing.
    1. Test case: `redo`<br>
       Expected: Nothing is redone. Error details shown in the status message since no state can be redone.
 
-<div style="page-break-after: always;"></div>
-
 ### Exiting the Program
 
 1. Test case: `exit` <br/>
    Expected: The **TA<sup>2</sup>** window will close promptly.
    
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
