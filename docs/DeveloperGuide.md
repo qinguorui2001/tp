@@ -443,7 +443,7 @@ Given below is an example usage scenario and how the `AddAssignmentCommand` is e
 
 Step 1. The user executes `list` command to see the current list of persons.
 
-Step 2. The user executes `give 2 d/Assignment 1 by/ 03/11/2021` command to add assignment to the first person in
+Step 2. The user executes `give 2 d/Assignment 1 by/ 03/11/2021` command to add assignment to the second person in
 the specified module. When `Command#execute` is called, the `give 2...` command will filter out persons in the current
 displayed list with `INDEX` 2 and add the specified assignment to this person if he or she exists and does
 not have that assignment.
@@ -473,11 +473,11 @@ The following activity diagram summarizes what happens when a user executes the 
 <div style="page-break-after: always;"></div>
 
 #### Design considerations
-**Aspect: Adds an assignment to a person in currently displayed list or to any other person in storage:**
+**Aspect: Adds an assignment to a person in the currently displayed list or to any other person in storage:**
 
-* **Alternative 1 (current choice):** Add an assignment to a person in current displayed list.
+* **Alternative 1 (current choice):** Add an assignment to a person in the currently displayed list.
     * Pros: If the displayed list is shorter, the addition of assignments will be faster.
-    * Cons: User has to carry out `list` command first if addition of assignment is desired for that person.
+    * Cons: User has to ensure that the desired person is displayed on the displayed contact list first before adding of assignment.
 
 * **Alternative 2:** Add an assignment to any person in the storage.
     * Pros: Allows user to add assignment to a particular person even when he is not visible in the list.
@@ -486,9 +486,8 @@ The following activity diagram summarizes what happens when a user executes the 
 * Considering the fact that the `give` command is meant for users to add assignments to visible persons in contact list,
 * **Alternative 1** was chosen as it meets this specification. Moreover, it will not duplicate the assignment for
   persons who already have the assignment.
-  **Alternative 1** requires an additional effort for user to ensure the person who he or she wants to give the assignment to
-  is actually stored in the contact list when the person is not in the currently displayed list but stored in contact list, which means mistakes 
-  about giving assignment to wrong person are likely to occur.
+  **Alternative 1** requires an additional effort for user to ensure the person who the user want to give the assignment
+  to is actually stored in the contact list but not displayed, which may lead to the user giving assignments to the wrong person.
 
 <div style="page-break-after: always;"></div>
 
@@ -529,13 +528,13 @@ The following activity diagram summarizes what happens when a user executes the 
 <div style="page-break-after: always;"></div>
 
 #### Design considerations
-**Aspect: Deletes assignment of a person in currently displayed list or for any person in storage:**
+**Aspect: Deletes assignment of a person in the currently displayed list or for any person in storage:**
 
 * **Alternative 1:** (current choice) Deletes assignment of a person in the currently displayed list.
     * Pros: Allows for a safer delete of assignments.
-    * Cons: User has to carry out `list` command first if required person is not in the current displayed list.
+    * Cons: User has to ensure that the desired assignment is displayed on the displayed assignment list first before deleting that assignment.
 
-* **Alternative 2:** Deletes assignment of any person with that name and assignment.
+* **Alternative 2:** Deletes the assignment of the specified person, by inputting their name with the command.
     * Pros: Allows user to delete assignment of a person without the need of additional commands.
     * Cons: User may not be certain about which person's assignment to delete if several of them have completed the assignment
     and likely to remember the wrong person name if the currently displayed contact list is not shown.
@@ -603,10 +602,10 @@ The following activity diagram summarizes what happens when a user executes the 
 </p>
 
 #### Design considerations
-**Aspect: Adds assignment to persons in the specified module who are in the current displayed list or
+**Aspect: Adds assignment to persons in the specified module who are in the currently displayed list or
 to all persons in the specified module:**
 
-* **Alternative 1:** Adds assignment to persons in the specified module who are in the current displayed list
+* **Alternative 1:** Adds assignment to persons in the specified module who are in the currently displayed list
   * Pros: Allows user to add assignment to a more specific group of persons
   * Cons: User has to carry out `list` command first if addition of assignments is desired for all persons
 
@@ -712,14 +711,13 @@ The following activity diagram summarizes what happens when a user executes the 
 <div style="page-break-after: always;"></div>
 
 #### Design considerations
-**Aspect: Marks assignment of a person in current displayed list as done or for any person in storage model:**
+**Aspect: Marks assignment of a person in the currently displayed list as done or for any person in storage model:**
 
-* **Alternative 1:** (current choice) Marks assignment in current displayed assignment list.
+* **Alternative 1:** (current choice) Marks assignment in the currently displayed assignment list as completed.
     * Pros: Allows for a safer mark of assignments.
-    * Cons: User has to carry out `list` command first if required person is not in the current displayed list, which is followed
-    by `show` command if assignments of required person are not shown.
+    * Cons: User has to ensure that the desired assignment is displayed on the displayed assignment list first before marking the assignment as completed.
 
-* **Alternative 2:** Marks assignment of any person with that name and assignment.
+* **Alternative 2:** Marks an assignment as completed of the specified person, by in putting the name with the command.
     * Pros: Allows user to mark assignment of a person without the need of additional commands.
     * Cons: User may not be certain about which person's assignment to mark if several of them has completed assignment
       and likely to remember the wrong person name if the current person displayed list is not shown.
