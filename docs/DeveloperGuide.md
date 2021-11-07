@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 --------------------------------------------------------------------------------------------------------------------
 
-## **Welcome to TA<sup>2</sup>'s Developer Guide!**
+## **Welcome to **TA<sup>2</sup>'s Developer Guide!**
 {:.no_toc}
 
 Teaching Assistant's Assistant (**TA<sup>2</sup>**) is a desktop application designed for teaching assistants
@@ -499,7 +499,7 @@ Given below is an example usage scenario and how the `AddAssignmentCommand` is e
 Step 1. The user executes `list` command to see the current list of persons.
 
 Step 2. The user executes `give 2 d/Assignment 1 by/ 03/11/2021` command to add assignment to the second person in
-the specified module. When `Command#execute` is called, the `give 2...` command will filter out persons in the current
+the specified module. When `Command#execute` is called, the `give 2...` command will filter out persons in the currently
 displayed list with `INDEX` 2 and add the specified assignment to this person if he or she exists and does
 not have that assignment.
 
