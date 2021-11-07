@@ -877,7 +877,7 @@ The following is the activity diagram for a flexible find command execution:
 
 #### Design considerations
 
-**Aspect: How the different find commands can be implemented.
+**Aspect: How the different find commands can be implemented**
 
 * **Alternative 1 (current choice):** Create subclasses to handle the different kinds of behaviour of `Find`.
   * Pros: Easy to extend classes and implement different functionalities 
