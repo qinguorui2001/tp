@@ -63,7 +63,7 @@ For advanced users, the [Command summary](#command-summary) section gives you an
     
     * **`give`**`d/Assignment 1 by/27/3/2022`: Gives an assignment, `Assignment 1` that is due by 27 Mar 2022 at  11.59pm, to the first student in your contact list.
 
-<div style="page-break-after: always;"></div>
+   <div style="page-break-after: always;"></div>
 
 6. Refer to the [Features](#features) below for more details of each command.
 
@@ -104,10 +104,10 @@ For advanced users, the [Command summary](#command-summary) section gives you an
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friends` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/T17` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friends`, `t/Leader t/friends` etc.
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/T17`, `t/T17 t/Group1` etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
@@ -127,9 +127,9 @@ unless otherwise mentioned in the command description. <br>
 
 ### Viewing help: `help`
 
-Shows a help window with a link directing you to the user guide. 
+Shows a help window with a link directing you to this user guide. 
 
-Alternatively, you can click the `Help` button in the top left corner or press `F1` on your keyboard to open up the help window.
+Alternatively, you can click the `Help` button in the top left corner or press `F1` on your keyboard to open up the help window (Shown in the image below).
 <br><br>
 ![help message](images/helpMessage.png)
 
@@ -152,7 +152,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Duplicate `NAME` is **not allowed**.
   
-* e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
+   * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
 
 * Extra spaces before, after, and between names will be removed.
 
@@ -210,14 +210,14 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 * Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
 
 * Each part of name separated by space will be matched. <br>
-   e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`. <br>
-   e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.
+   * e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`. <br>
+   * e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.
 
 * Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
-   e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+   * e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 * Prefixes with empty keywords will not match anyone. <br>
-   e.g. `find n/ m/ t/` will return 0 students
+   * e.g. `find n/ m/ t/` will return 0 students
 
 * Module codes must strictly follow the module naming convention shown [here.](#module-naming-convention)
 
@@ -228,7 +228,7 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 **:bulb: Tip:**<br>
 
 * We can search for multiple fields. <br>
-  e.g. `m/CS1101S CS2103T` or `m/CS1101S m/CS2103T` will return people who take either modules.
+  * e.g. `m/CS1101S CS2103T` or `m/CS1101S m/CS2103T` will return people who take either modules.
   
 </div>
 
@@ -393,10 +393,10 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 **:information_source: Note:**<br>
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-  e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
+  * e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
 
 * Assignment descriptions are **case-insensitive**.<br>
-  e.g. `Assignment 2` is the same as `aSsignment 2`
+  * e.g. `Assignment 2` is the same as `aSsignment 2`
 
 </div>
 
@@ -441,10 +441,10 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 **:information_source: Note:**<br>
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-   e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
+   * e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
 
-* Assignment descriptions are **case-insensitive**.
-   e.g. `Assignment 2` is the same as `aSsignment 2`.
+* Assignment descriptions are **case-insensitive**. <br>
+   * e.g. `Assignment 2` is the same as `aSsignment 2`.
 
 * It is possible to give an assignment using `giveall` even if some students have the assignment already. Students who have the assignment will not receive a duplicate assignment.
 
@@ -497,9 +497,11 @@ Format: `done INDEX`
 
 * Remember to display the student's assignments using [show](#showing-a-students-assignments-show) before using the `done` command!
 
-* Assignments with `PENDING` status will be colour-coded in orange.
+* Shown in the image below:
+   
+   * Assignments with `PENDING` status will be colour-coded in orange.
 
-* Assignments with `COMPLETED` status will be colour-coded in green.
+   * Assignments with `COMPLETED` status will be colour-coded in green.
 <br><br>
 ![colour_labels'](images/userguide/colour%20labels.png)
 
