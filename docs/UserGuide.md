@@ -243,8 +243,6 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
   
 </div>
 
-<div style="page-break-after: always;"></div>
-
 Examples:
 * `find n/Bernice` returns the students who have `Bernice` in their name.
 
