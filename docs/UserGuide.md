@@ -405,7 +405,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
    
-  * e.g. `Assignment 2` is the same as `Assignment <br> 2` but `Assignment 2` is **not** the same as `Assignment2`<br><br>
+  * e.g. `Assignment 2` is the same as <code> Assignment <em> &emsp; </em> 2</code> but `Assignment 2` is **not** the same as `Assignment2`<br><br>
 
 * Assignment descriptions are **case-insensitive**.<br>
    
@@ -574,28 +574,50 @@ Clears all entries from **TA<sup>2</sup>** contact list.
 
 Format: `clear`
 
+<div markdown="block" class="alert alert-warning">
+
+:exclamation:**Caution:**<br>
+
+* This command clears the entire contact list and you should only do so if you are sure to proceed with the command.
+   
+</div>
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**<br>
+
+* If you have wrongly cleared the contact list, you can use `undo` immediately to restore to the previous state.
+   
+</div>
+
 Possible Usage:
 
 * You can use `clear` if you no longer need to keep track of students after they have completed the module.
 
 ### Undoing a command: `undo`
 
-Undoes the last command entered.
+Undo the latest change made to **TA<sup>2</sup>**.
 
 Format: `undo`
 
-* Undo all commands except for `undo`, `redo` and `help`.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+
+* You **cannot** undo some commands such as `help`. The undo command will instead undo the previous change preceding the command that cannot be undone.
+   
 * When you first start **TA<sup>2</sup>**, there is nothing to undo.
+   
+* You can execute undo multiple times up until the point where you first launched the application.
+
+</div>
 
 ### Redoing a command: `redo`
 
-Recovers the effect of the last `undo` command.
+Recovers the latest change of the last `undo` command.
 
 Format: `redo`
-
-* Redo all commands except for `undo`, `redo` and `help`.
-* Once you enter a new command except for `undo`, `redo` and `help`, there is nothing to redo.
-
+   
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -675,7 +697,7 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
     
     * not start or end with any special characters.
     
-    * not 2 consecutive special characters.
+    * not contain 2 consecutive special characters.
     
 * The domain name must:
     * have a **maximum of 255 characters**.
