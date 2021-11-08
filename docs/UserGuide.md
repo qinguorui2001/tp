@@ -102,26 +102,26 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
    
-  * e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  * e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br><br>
 
 * Items in square brackets are optional.<br>
    
-  * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/T17` or as `n/John Doe`
+  * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/T17` or as `n/John Doe`<br><br>
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
    
-  * e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/T17`, `t/T17 t/Group1` etc.
+  * e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/T17`, `t/T17 t/Group1` etc.<br><br>
 
 * Parameters can be in any order.<br>
    
-  * e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
+  * e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.<br><br>
 
 * If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer from 1 to 10,000. <br>
 
 * If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken,
 unless otherwise mentioned in the command description. <br>
    
-  * e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
+  * e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.<br><br>
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
    
@@ -158,7 +158,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Duplicate `NAME` is **not allowed**.
   
-   * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
+   * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.<br><br>
 
 * Extra spaces before, after, and between names will be removed.
 
@@ -174,7 +174,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Duplicate `EMAIL` is **not allowed**.
 
-    * e.g. `add e/E1234567@u.nus.edu` is not allowed if there is already a student with the same email.
+    * e.g. `add e/E1234567@u.nus.edu` is not allowed if there is already a student with the same email.<br><br>
 
 * `TAG` can only accept alphanumeric characters with no spaces in between.
 
@@ -213,7 +213,8 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 * Ordering of prefixes are not strict and presence of multiple keywords are acceptable.
 
-* Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
+* Keywords are **case-insensitive** <br> 
+   * e.g. `cs1101s` will match `CS1101S`.
 
 * Each part of name separated by space will be matched. <br>
    
@@ -223,11 +224,11 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 
 * Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    
-   * e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.<br>
+   * e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.<br><br>
 
 * Prefixes with empty keywords will not match anyone. <br>
    
-   * e.g. `find n/ m/ t/` will return 0 students<br>
+   * e.g. `find n/ m/ t/` will return 0 students<br><br>
 
 * Module codes must strictly follow the module naming convention shown [here.](#module-naming-convention)
 
@@ -404,7 +405,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
    
-  * e.g. `Assignment 2` is the same as `Assignment &nbsp; &nbsp; &nbsp; 2` but `Assignment 2` is **not** the same as `Assignment2`<br>
+  * e.g. `Assignment 2` is the same as `Assignment &emsp; 2` but `Assignment 2` is **not** the same as `Assignment2`<br><br>
 
 * Assignment descriptions are **case-insensitive**.<br>
    
@@ -454,11 +455,11 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
    
-   * e.g. `Assignment 2` is the same as `Assignment &nbsp; &nbsp; &nbsp; 2` but `Assignment 2` is **not** the same as `Assignment2`<br>
+   * e.g. `Assignment 2` is the same as `Assignment &emsp; 2` but `Assignment 2` is **not** the same as `Assignment2`<br><br>
 
 * Assignment descriptions are **case-insensitive**. <br>
    
-   * e.g. `Assignment 2` is the same as `aSsignment 2`.<br>
+   * e.g. `Assignment 2` is the same as `aSsignment 2`.<br><br>
 
 * It is possible to give an assignment using `giveall` even if some students already have the assignment. Students who have the assignment will not receive a duplicate assignment.
 
@@ -493,7 +494,7 @@ Examples:
 
 Possible Usage:
 
-*  You can use `giveall` instead of `give` when there is a module assignment, where all students under the module is required to submit.
+*  You can use `giveall` instead of `give` when there is a module assignment, where all students under the same module is required to submit the same assignment.
 
 <div style="page-break-after: always;"></div>
 
@@ -527,7 +528,7 @@ Examples:
 
 Possible Usage:
 
-* You can use `done` to track completion status of an assignment among your students.
+* You can use `done` to track the completion status of an assignment among your students.
 
 <div style="page-break-after: always;"></div>
 
@@ -553,11 +554,11 @@ Remember to display the student's assignments using [show](#showing-a-students-a
 
 Possible Usage:
 
-* You can use `remove` if you added an assignment to the wrong student.
+* You can use `remove` if you have wrongly added an assignment to a student.
 
 ### Removing completed assignments from all students: `clean`
 
-Removes all completed assignments from all students in **TA<sup>2</sup>**.
+Removes all completed assignments from all students in your **TA<sup>2</sup>** contact list.
 
 Format: `clean`
 
@@ -569,7 +570,7 @@ Possible Usage:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from **TA<sup>2</sup>**.
+Clears all entries from **TA<sup>2</sup>** contact list.
 
 Format: `clear`
 
