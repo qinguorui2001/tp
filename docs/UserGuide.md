@@ -243,6 +243,8 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
   
 </div>
 
+<div style="page-break-after: always;"></div>
+
 Examples:
 * `find n/Bernice` returns the students who have `Bernice` in their name.
 
@@ -455,7 +457,7 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
    
-   * e.g. `Assignment 2` is the same as `Assignment&emsp;2` but `Assignment 2` is **not** the same as `Assignment2`<br><br>
+   * e.g. `Assignment 2` is the same as <code> Assignment <em> &emsp; </em> 2</code> but `Assignment 2` is **not** the same as `Assignment2`<br><br>
 
 * Assignment descriptions are **case-insensitive**. <br>
    
