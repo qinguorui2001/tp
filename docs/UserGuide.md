@@ -101,25 +101,31 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+   
+  * e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br>
 
 * Items in square brackets are optional.<br>
-  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/T17` or as `n/John Doe`.
+   
+  * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/T17` or as `n/John Doe`.<br>
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/T17`, `t/T17 t/Group1` etc.
+   
+  * e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/T17`, `t/T17 t/Group1` etc.<br>
 
 * Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
+   
+  * e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.<br>
 
 * If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer from 1 to 10,000. <br>
 
 * If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken,
 unless otherwise mentioned in the command description. <br>
-  e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
+   
+  * e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.<br>
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+   
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
 
 </div>
 
@@ -152,7 +158,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Duplicate `NAME` is **not allowed**.
   
-   * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
+   * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.<br>
 
 * Extra spaces before, after, and between names will be removed.
 
@@ -168,7 +174,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Duplicate `EMAIL` is **not allowed**.
 
-    * e.g. `add e/E1234567@u.nus.edu` is not allowed if there is already a student with the same email.
+    * e.g. `add e/E1234567@u.nus.edu` is not allowed if there is already a student with the same email.<br>
 
 * `TAG` can only accept alphanumeric characters with no spaces in between.
 
@@ -210,14 +216,18 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 * Keywords are **case-insensitive** <br> e.g. `cs1101s` will match `CS1101S`.
 
 * Each part of name separated by space will be matched. <br>
+   
    * e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`. <br>
-   * e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.
+   
+   * e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.<br>
 
 * Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
-   * e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+   
+   * e.g. `n/Hans Bo` will return `Hans Gruber`, `Bo Yang`.<br>
 
 * Prefixes with empty keywords will not match anyone. <br>
-   * e.g. `find n/ m/ t/` will return 0 students
+   
+   * e.g. `find n/ m/ t/` will return 0 students<br>
 
 * Module codes must strictly follow the module naming convention shown [here.](#module-naming-convention)
 
@@ -284,11 +294,11 @@ Format: `delete INDEX`
 * Deletes the student from the contact list at the specified `INDEX`.
 
 Examples:
-* `delete 2` deletes the second student in the contact list. (if 2nd student exists)
+* `delete 2` deletes the second student in the contact list (if 2nd student exists).
 
 Possible usage:
 
-*  You can use `delete` to delete any student that you do not need to keep track anymore.
+*  You can use `delete` to delete any student that you do not need to keep track of anymore.
 
 <div style="page-break-after: always;"></div>
 
@@ -306,9 +316,9 @@ Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
 * The index refers to the index number of the student in the displayed contact list.
 
-* The index **must be a positive integer and must not exceed number of students displayed in your contact list** 1, 2, 3, ...(till the index of the last student)
+* The index **must be a positive integer and must not exceed number of students displayed in your contact list** 1, 2, 3, ...(till the index of the last student).
 
-* If you have two identical prefixes with the `edit` command, only the last prefix will be used for the edit. (except for prefix t/)
+* If you have two identical prefixes with the `edit` command, only the last prefix will be used for the edit (except for prefix t/).
 
 * Require **at least one** prefix to edit.
 
@@ -318,7 +328,7 @@ Format: `edit INDEX [n/NAME] [m/MODULE] [e/EMAIL] [t/TAG]…​`
 
 **:bulb: Tip:**<br>
 
-* You can modify several parts of student information at the same time.
+* You can modify several parts of the student information at the same time.
 
 * If you wish to remove the tags for a student, simply type `t/` prefix without any parameters.
 
@@ -350,7 +360,7 @@ Format: `show INDEX`
 
 **:information_source: Note:**<br>
 
-The assignment list always sorted by date and status.
+The assignment list is always sorted by the date and status.
 
 * Assignments with `COMPLETED` status will be at the bottom of the list.<br>
 
@@ -393,10 +403,12 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 **:information_source: Note:**<br>
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-  * e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
+   
+  * e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`<br>
 
 * Assignment descriptions are **case-insensitive**.<br>
-  * e.g. `Assignment 2` is the same as `aSsignment 2`
+   
+  * e.g. `Assignment 2` is the same as `aSsignment 2`<br>
 
 </div>
 
@@ -441,10 +453,12 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 **:information_source: Note:**<br>
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
-   * e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`
+   
+   * e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`<br>
 
 * Assignment descriptions are **case-insensitive**. <br>
-   * e.g. `Assignment 2` is the same as `aSsignment 2`.
+   
+   * e.g. `Assignment 2` is the same as `aSsignment 2`.<br>
 
 * It is possible to give an assignment using `giveall` even if some students have the assignment already. Students who have the assignment will not receive a duplicate assignment.
 
