@@ -168,9 +168,9 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
     * e.g. `n/alex yeoh`, `n/DAVID LI` will be converted to `Alex Yeoh` and `David Li` respectively.<br>
 
-    * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.<br>
+    * e.g. `cs2100`, `GER1000t` will be converted to `CS2100` and `GER1000T` respectively.<br><br>
 
-    * A student's `EMAIL` must follow the format as shown [here](#email-format).
+ * A student's `EMAIL` must follow the format as shown [here](#email-format).
 
 * Duplicate `EMAIL` is **not allowed**.
 
@@ -214,13 +214,13 @@ Format: `find [n/NAME]…​ [m/MODULE]…​ [t/TAG]…​`
 * Ordering of prefixes are not strict and presence of multiple keywords are acceptable.
 
 * Keywords are **case-insensitive** <br> 
-   * e.g. `cs1101s` will match `CS1101S`.
+   * e.g. `cs1101s` will match `CS1101S`.<br><br>
 
 * Each part of name separated by space will be matched. <br>
    
    * e.g. `n/Hans` or `n/Bo` will both match `Hans Bo`. <br>
    
-   * e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.<br>
+   * e.g. `n/Sam` will match `Sam Tan` but not `Samuel Lee`.<br><br>
 
 * Students' names matching at least one keyword will be returned (i.e. `OR` search). <br>
    
@@ -405,7 +405,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
    
-  * e.g. `Assignment 2` is the same as `Assignment &emsp; 2` but `Assignment 2` is **not** the same as `Assignment2`<br><br>
+  * e.g. `Assignment 2` is the same as `Assignment <br> 2` but `Assignment 2` is **not** the same as `Assignment2`<br><br>
 
 * Assignment descriptions are **case-insensitive**.<br>
    
@@ -455,7 +455,7 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
    
-   * e.g. `Assignment 2` is the same as `Assignment &emsp; 2` but `Assignment 2` is **not** the same as `Assignment2`<br><br>
+   * e.g. `Assignment 2` is the same as `Assignment&emsp;2` but `Assignment 2` is **not** the same as `Assignment2`<br><br>
 
 * Assignment descriptions are **case-insensitive**. <br>
    
@@ -668,7 +668,7 @@ Emails should be of the format *local-part@domain* whereby the domain name is ma
 
 * The whole `EMAIL` must have a **maximum of 320 characters**.
   
-* The local part should only contain alphanumeric characters and these special character `+ - . _`.
+* The local part should only contain alphanumeric characters and these special characters `+ - . _`.
 
 * The local part must:
     * have a **maximum of 64 characters**.
