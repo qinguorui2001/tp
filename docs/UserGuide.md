@@ -102,30 +102,30 @@ For advanced users, the [Command summary](#command-summary) section gives you an
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
    
-  * e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.<br>
+  * e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
    
-  * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/T17` or as `n/John Doe`.<br>
+  * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/T17` or as `n/John Doe`
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
    
-  * e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/T17`, `t/T17 t/Group1` etc.<br>
+  * e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/T17`, `t/T17 t/Group1` etc.
 
 * Parameters can be in any order.<br>
    
-  * e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.<br>
+  * e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 
 * If a command requires `INDEX` as an input, only one input for `INDEX` is expected. `INDEX` **must** be an integer from 1 to 10,000. <br>
 
 * If a parameter is expected only once in the command, but you specify it multiple times, only the last occurrence of the parameter will be taken,
 unless otherwise mentioned in the command description. <br>
    
-  * e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.<br>
+  * e.g. if you specify `m/cs2103 m/cs2101`, only `m/cs2101` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
    
-  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.<br>
+  * e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
@@ -158,7 +158,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Duplicate `NAME` is **not allowed**.
   
-   * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.<br>
+   * e.g. `add n/Alex Yeoh...` is not allowed if there is already a student named Alex Yeoh in your contact list.
 
 * Extra spaces before, after, and between names will be removed.
 
@@ -174,7 +174,7 @@ Format: `add n/NAME e/EMAIL m/MODULE [t/TAG]…​`
 
 * Duplicate `EMAIL` is **not allowed**.
 
-    * e.g. `add e/E1234567@u.nus.edu` is not allowed if there is already a student with the same email.<br>
+    * e.g. `add e/E1234567@u.nus.edu` is not allowed if there is already a student with the same email.
 
 * `TAG` can only accept alphanumeric characters with no spaces in between.
 
@@ -404,7 +404,7 @@ Format: `give INDEX d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
    
-  * e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`<br>
+  * e.g. `Assignment 2` is the same as `Assignment &nbsp; &nbsp; &nbsp; 2` but `Assignment 2` is **not** the same as `Assignment2`<br>
 
 * Assignment descriptions are **case-insensitive**.<br>
    
@@ -436,7 +436,7 @@ Examples:
 
     * `give 1 d/Tutorial 3 by/mon` gives the first student displayed in your contact list an assignment of description `Tutorial 3` with a deadline `8 Nov 2021, 11:59pm`.
 
-    * `give 2 d/Report 1 by/tue, 1800` gives the second student in your contact list an assignment of description `Report 1` with a deadline `2 Nov 2021, 11:59pm`.
+    * `give 2 d/Report 1 by/tue, 1800` gives the second student in your contact list an assignment of description `Report 1` with a deadline `2 Nov 2021, 06:00pm`.
 
 Possible Usage:
 
@@ -454,13 +454,13 @@ Format: `giveall m/MODULE d/DESCRIPTION by/ d/M/yyyy [,HHmm]`
 
 * Assignments with similar descriptions with **excess** whitespace between words are still considered duplicate.<br>
    
-   * e.g. `Assignment 2` is the same as `Assignment   2` but `Assignment 2` is **not** the same as `Assignment2`<br>
+   * e.g. `Assignment 2` is the same as `Assignment &nbsp; &nbsp; &nbsp; 2` but `Assignment 2` is **not** the same as `Assignment2`<br>
 
 * Assignment descriptions are **case-insensitive**. <br>
    
    * e.g. `Assignment 2` is the same as `aSsignment 2`.<br>
 
-* It is possible to give an assignment using `giveall` even if some students have the assignment already. Students who have the assignment will not receive a duplicate assignment.
+* It is possible to give an assignment using `giveall` even if some students already have the assignment. Students who have the assignment will not receive a duplicate assignment.
 
 * If some students already have the assignment, executing `giveall` requires the due date to be similar to the pre-existing assignments. **The command will not be valid if the due date is different.** This is to ensure consistency of the due dates of the same assignment.
 </div>
